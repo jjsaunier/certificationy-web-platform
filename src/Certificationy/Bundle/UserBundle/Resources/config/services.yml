@@ -1,0 +1,7 @@
+parameters:
+    certificationy.user.provider.fosub_bridge.class: Certificationy\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
+
+services:
+    certificationy.user.provider.fosub_bridge:
+        class: %certificationy.user.provider.fosub_bridge.class%
+        arguments: [ @fos_user.user_manager, { github: githubID } ]
