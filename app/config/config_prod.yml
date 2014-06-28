@@ -1,7 +1,6 @@
 imports:
     - { resource: config.yml }
 
-#@TODO: I use redis in production, switch with Snc and Predis
 framework:
     validation:
         cache: apc
