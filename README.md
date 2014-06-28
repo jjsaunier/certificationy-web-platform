@@ -1,6 +1,8 @@
 Certificationy Web Platform
 ============================
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ProPheT777/certificationy-web-platform/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ProPheT777/certificationy-web-platform/?branch=master) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/fcf9e36d-0eb4-40c9-a1de-2d3fc13d27a9/mini.png)](https://insight.sensiolabs.com/projects/fcf9e36d-0eb4-40c9-a1de-2d3fc13d27a9)
+
 Provide web web platform of [eko/certificationy](https://github.com/eko/certificationy) project.
 The goal is to tain about the symfony certification [http://sensiolabs.com/en/symfony/certification.html](http://sensiolabs.com/en/symfony/certification.html)
 
