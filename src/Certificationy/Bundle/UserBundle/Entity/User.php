@@ -1,11 +1,11 @@
 <?php
 /**
-* This file is part of the Certificationy Web Platform.
-* (c) johann (johann_27@hotmail.fr)
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-**/
+ * This file is part of the Certificationy Web Platform.
+ * (c) Johann Saunier (johann_27@hotmail.fr)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ **/
 
 namespace Certificationy\Bundle\UserBundle\Entity;
 
@@ -34,25 +34,25 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="github_access_token", type="string", length=255)
+     * @ORM\Column(name="github_access_token", type="string", length=255, nullable=true)
      */
     private $githubAccessToken;
 
     /**
      * @var string
-     * @ORM\Column(name="real_name", type="string", length=255)
+     * @ORM\Column(name="real_name", type="string", length=255, nullable=true)
      */
     private $realName;
 
     /**
      * @var string
-     * @ORM\Column(name="avatar_url", type="string", length=255)
+     * @ORM\Column(name="avatar_url", type="string", length=255, nullable=true)
      */
     private $avatarUrl;
 
     /**
      * @var string
-     * @ORM\Column(name="gravatar_id", type="string", length=255)
+     * @ORM\Column(name="gravatar_id", type="string", length=255, nullable=true)
      */
     private $gravatarId;
 

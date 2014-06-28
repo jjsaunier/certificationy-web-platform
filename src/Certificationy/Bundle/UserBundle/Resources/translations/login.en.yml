@@ -1,0 +1,9 @@
+login:
+    title: "Sign in"
+    username:
+        placeholder: "Enter username"
+    password:
+        placeholder: "Password"
+    forgot_password: "forgot password"
+    github_connect: "Connect with Github"
+    registration: "Register new account"

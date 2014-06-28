@@ -5,3 +5,28 @@ services:
     certificationy.user.provider.fosub_bridge:
         class: %certificationy.user.provider.fosub_bridge.class%
         arguments: [ @fos_user.user_manager, { github: githubID } ]
+
+    certificationy.user.menu_builder:
+        class: Certificationy\Bundle\UserBundle\Menu\UserBuilder
+        arguments:
+            - @knp_menu.factory
+            - @translator
+            - @security.context
+
+    certificationy.user.menu:
+        class: Knp\Menu\MenuItem
+        factory_service: certificationy.user.menu_builder
+        factory_method: createUserMenu
+        arguments:
+            - @request
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: user }
+
+    certificationy.user.gravatar.extension:
+        class: Certificationy\Bundle\UserBundle\Twig\Extension\GravatarExtension
+        arguments:
+            - @security.context
+            - @fos_user.user_manager
+        tags:
+            -  { name: twig.extension }

@@ -19,11 +19,30 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~1.3",
-        "hwi/oauth-bundle": "~0.3"
+        "hwi/oauth-bundle": "~0.3",
+        "braincrafted/bootstrap-bundle": "~2.0",
+        "twbs/bootstrap": "3.0.*",
+        "jquery/jquery":  "1.10.*",
+        "knplabs/knp-paginator-bundle": "~2.3",
+        "knplabs/knp-menu-bundle": "~1.1",
+        "FortAwesome/Font-Awesome": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.10.2",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.10.2.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
@@ -34,7 +53,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -42,7 +62,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
         ]
     },
     "config": {

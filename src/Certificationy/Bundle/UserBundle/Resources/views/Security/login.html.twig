@@ -1,0 +1,44 @@
+{% extends "@CertificationyUser/layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Bootstrap social-->
+    <link href="{{ asset('css/bootstrap-social.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block title %}
+    {{ 'login.title'|trans({}, 'login') }}
+{% endblock %}
+
+{% block user_panel_title %}
+    <strong>{{ block('title') }}</strong>
+{% endblock %}
+
+{% block user_panel_content %}
+    <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+        <div class="form-group">
+            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="text" class="form-control" style="border-radius:0px"  id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'login.username.placeholder'|trans({}, 'login') }}">
+        </div>
+        <div class="form-group">
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}
+                <a href="{{ path('fos_user_resetting_request') }}">({{ 'login.forgot_password'|trans({}, 'login') }})</a>
+            </label>
+            <input type="password" class="form-control" style="border-radius:0px" id="password" name="_password" required="required" placeholder="{{ 'login.password.placeholder'|trans({}, 'login')}}">
+        </div>
+        <button type="submit" id="_submit" name="_submit" class="btn btn-sm btn-default">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+
+        <div style="border-top: 1px solid #999; padding-top:20px; margin-top: 20px;"  class="form-group">
+            <a href="{{ path('hwi_oauth_service_redirect', { service: 'github' }) }}" title="Connect with Github" class="btn btn-block btn-social btn-github">
+                <i class="fa fa-github"></i>
+                {{ 'login.github_connect'|trans({}, 'login') }}
+            </a>
+        </div>
+
+        <div style="border-top: 1px solid #999; padding-top:20px; margin-top: 20px;"  class="form-group">
+            <a href="{{ path('fos_user_registration_register') }}">{{ 'login.registration'|trans({}, 'login') }}</a>
+        </div>
+    </form>
+{% endblock user_panel_content %}

@@ -1,0 +1,13 @@
+{% extends "@CertificationyUser/layout.html.twig" %}
+
+{% block title %}
+    {{ 'reset.title'|trans({}, 'reset') }}
+{% endblock %}
+
+{% block user_panel_title %}
+    <strong>{{ block('title') }}</strong>
+{% endblock %}
+
+{% block user_panel_content %}
+    {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+{% endblock user_panel_content %}

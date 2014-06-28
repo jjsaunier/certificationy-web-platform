@@ -1,0 +1,4 @@
+homepage:
+    path: /
+    defaults:
+        _controller: certificationy.web.site_controller:indexAction

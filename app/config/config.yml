@@ -9,7 +9,7 @@ framework:
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
-    form:            ~
+    form: ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
     templating:
@@ -19,28 +19,119 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        # handler_id set to null will use default session handler from php.ini
+    session:
+        name: 'Certificationy'
+        cookie_domain: %domain%
         handler_id:  ~
     fragments:       ~
     http_method_override: true
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
+    debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'BraincraftedBootstrapBundle::layout.html.twig'
 
 # Assetic Configuration
 assetic:
-    debug:          "%kernel.debug%"
+    debug: "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
+    bundles: [ ]
     filters:
+        yui_js:
+            jar: '%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar'
+            apply_to: '\.js$'
+            preserve_comments: false
+        yui_css:
+            jar: '%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar'
+            apply_to: '\.css$'
+            preserve_comments: false
+        closure:
+             jar: '%kernel.root_dir%/Resources/java/compiler.jar'
+             apply_to: '\.js$'
+        less:
+            node: /usr/bin/nodejs
+            node_paths: [ /usr/lib/node_modules ]
+            apply_to: "\.less$"
         cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+    assets:
+        user_css:
+            inputs:
+                - @CertificationyUserBundle/Resources/private/less/user.less
+            filters:
+                - less
+                - yui_css
+            output: css/user.css
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/bootstrap.less
+                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
+            filters:
+                - less
+                - cssrewrite
+                - yui_css
+            output: css/bootstrap.css
+        font_awesome_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/fortawesome/font-awesome/less/font-awesome.less
+            filters:
+                - less
+                - cssrewrite
+                - yui_css
+            output: css/font-awesome.css
+        homepage_css:
+            inputs:
+                - @CertificationyWebBundle/Resources/private/less/homepage.less
+            filters:
+                - less
+                - yui_css
+                - cssrewrite
+            output:
+                css/homepage.css
+        bootstrap_theme_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/theme.less
+                - @CertificationyWebBundle/Resources/private/less/global.less
+            filters:
+                - less
+                - cssrewrite
+                - yui_css
+            output: css/bootstrap-theme.css
+        bootstrap_social_css:
+            inputs:
+                - @CertificationyWebBundle/Resources/private/less/bootstrap-social.less
+            filters:
+                - less
+                - yui_css
+            output: css/bootstrap-social.css
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/alert.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/button.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/carousel.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/collapse.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/modal.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tooltip.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/popover.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/scrollspy.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js
+                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
+            filters:
+                - yui_js
+                - closure
+            output: js/bootstrap.js
+        jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+            filters:
+                - yui_js
+                - closure
+            output: js/jquery.js
 
 # Doctrine Configuration
 doctrine:
@@ -52,10 +143,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
@@ -66,7 +153,7 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
+    delivery_address: no-reply@certificationy.com
 
 fos_user:
     db_driver: orm
@@ -84,13 +171,23 @@ hwi_oauth:
 
     resource_owners:
         github:
-            type:                github
-            client_id:           %github_client_id%
-            client_secret:       %github_client_secret%
-            scope:               "user:email"
+            type: github
+            client_id: %github_client_id%
+            client_secret: %github_client_secret%
+            scope: "user:email"
 
     fosub:
-        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
         username_iterations: 30
         properties:
             github: githubID
+
+braincrafted_bootstrap:
+    output_dir:
+    assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+    less_filter: less
+    auto_configure:
+        assetic: true
+        twig: true
+        knp_menu: true
+        knp_paginator: true

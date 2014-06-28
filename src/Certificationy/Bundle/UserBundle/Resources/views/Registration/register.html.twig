@@ -1,0 +1,13 @@
+{% extends "@CertificationyUser/layout.html.twig" %}
+
+{% block title %}
+    {{ 'registration.title'|trans({}, 'registration') }}
+{% endblock %}
+
+{% block user_panel_title %}
+    <strong>{{ block('title') }}</strong>
+{% endblock %}
+
+{% block user_panel_content %}
+    {{ include('@CertificationyUser/Registration/register_content.html.twig') }}
+{% endblock %}
