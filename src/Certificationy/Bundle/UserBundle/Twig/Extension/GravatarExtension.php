@@ -32,8 +32,7 @@ class GravatarExtension extends \Twig_Extension
     public function __construct(
         SecurityContext $securityContext,
         UserManager $userManager
-    )
-    {
+    ) {
         $this->securityContext = $securityContext;
         $this->userManager = $userManager;
     }
@@ -63,8 +62,7 @@ class GravatarExtension extends \Twig_Extension
         $defaultImage = 'www.locastic.com/no-gravatar-image.jpg';
 
         if (null === $user) {
-            if(
-                !$this->securityContext->getToken()->isAuthenticated()
+            if( !$this->securityContext->getToken()->isAuthenticated()
                 || $this->securityContext->getToken()->getUser() === 'anon.'
             ) {
                 return $defaultImage;
@@ -101,7 +99,8 @@ class GravatarExtension extends \Twig_Extension
      */
     protected function renderDefaultGravatar(User $user, $size)
     {
-        return sprintf('http://www.gravatar.com/avatar/%s&s=%s',
+        return sprintf(
+            'http://www.gravatar.com/avatar/%s&s=%s',
             md5(strtolower(trim($user->getEmailCanonical()))),
             $size
         );
