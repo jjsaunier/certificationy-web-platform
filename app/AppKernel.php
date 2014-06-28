@@ -17,11 +17,16 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
 
             //Other
             new FOS\UserBundle\FOSUserBundle(),
-            new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+
+            //Certificationy
+            new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
+            new Certificationy\Bundle\WebBundle\CertificationyWebBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

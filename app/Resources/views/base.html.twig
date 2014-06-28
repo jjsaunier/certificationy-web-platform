@@ -1,13 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block stylesheets %}
+            <!-- Bootstrap -->
+            <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+
+            <!-- Font Awesome -->
+            <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" media="screen">
+
+            <!-- Bootstrap Theme -->
+            <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet" media="screen">
+        {% endblock stylesheets %}
+
+        <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+        {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block menu %}
+            {{ include('CertificationyWebBundle:Menu:nav.html.twig') }}
+        {% endblock menu %}
+
+        {% block flashbag %}
+            {{ include('@BraincraftedBootstrap/flash.html.twig', { close: true } ) }}
+        {% endblock %}
+
+        {% block container %}
+            {% block wrapper %}
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+            {% endblock %}
+        {% endblock %}
+
+        {% block footer %}
+            <div class="footer">
+                <div class="container">
+                    {{ include('@CertificationyWeb/Site/footer.html.twig') }}
+                </div>
+            </div>
+        {% endblock %}
+
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+
+        {% block javascripts %}
+            <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+            <script src="{{ asset('js/jquery.js') }}"></script>
+
+            <!-- Include all JavaScripts, compiled by Assetic -->
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+
+            {% javascripts filter='yui_js, closure'
+                '@CertificationyWebBundle/Resources/public/js/scroll.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock javascripts %}
     </body>
 </html>

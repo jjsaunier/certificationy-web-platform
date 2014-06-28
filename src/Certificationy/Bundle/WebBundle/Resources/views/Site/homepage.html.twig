@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/homepage.css') }}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% include '@CertificationyWeb/Site/section/home/showcase.html.twig' %}
+        {% include '@CertificationyWeb/Site/section/home/showcase_products.html.twig' %}
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('ul#products a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show')
+        });
+    </script>
+{% endblock %}

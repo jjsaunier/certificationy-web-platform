@@ -19,3 +19,5 @@ parameters:
     use_assetic_controller: true
     github_client_id: key
     github_client_secret: key
+
+    domain: .certificationy.dev

@@ -1,0 +1,2 @@
+certificationy_site_routing:
+    resource: @CertificationyWebBundle/Resources/config/routing/site.yml

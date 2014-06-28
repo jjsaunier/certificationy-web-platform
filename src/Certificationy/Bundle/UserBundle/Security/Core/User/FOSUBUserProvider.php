@@ -1,11 +1,11 @@
 <?php
 /**
-* This file is part of the Certificationy Web platform.
-* (c) johann (johann_27@hotmail.fr)
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-**/
+ * This file is part of the Certificationy Web Platform.
+ * (c) Johann Saunier (johann_27@hotmail.fr)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ **/
 
 namespace Certificationy\Bundle\UserBundle\Security\Core\User;
 
@@ -66,8 +66,7 @@ class FOSUBUserProvider extends BaseClass
             $user->{$setterId}($data['id']);
             $user->{$setterToken}($response->getAccessToken());
 
-            //I have set all requested data with the user's username
-            //modify here with relevant data
+            //I have set all requested data with the user's username modify here with relevant data
             $user->setUsername($username);
             $user->setEmail($data['email']);
             $user->setPlainPassword($data['id']);
@@ -91,5 +90,4 @@ class FOSUBUserProvider extends BaseClass
 
         return $user;
     }
-
 }

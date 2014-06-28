@@ -31,3 +31,6 @@ hwi_oauth_connect:
 
 hwi_github_login:
     pattern: /login/check-github
+
+certificationy_web:
+    resource: @CertificationyWebBundle/Resources/config/routing.yml
