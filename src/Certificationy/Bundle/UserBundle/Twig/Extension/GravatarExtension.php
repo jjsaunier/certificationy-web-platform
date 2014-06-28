@@ -62,9 +62,7 @@ class GravatarExtension extends \Twig_Extension
         $defaultImage = 'www.locastic.com/no-gravatar-image.jpg';
 
         if (null === $user) {
-            if( !$this->securityContext->getToken()->isAuthenticated()
-                || $this->securityContext->getToken()->getUser() === 'anon.'
-            ) {
+            if (false === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
                 return $defaultImage;
             }
 

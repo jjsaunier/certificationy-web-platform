@@ -55,10 +55,7 @@ class UserBuilder
     {
         $menu = $this->factory->createItem('user');
 
-        if(
-            !$this->securityContext->getToken()->isAuthenticated()
-            || $this->securityContext->getToken()->getUser() === 'anon.'
-        ){
+        if (false === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             $menu->addChild('login', array(
                 'route' => 'fos_user_security_login',
                 'label' => $this->translator->trans('login', array(), 'menu')
