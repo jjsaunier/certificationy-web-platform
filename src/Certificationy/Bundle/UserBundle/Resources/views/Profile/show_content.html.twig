@@ -6,6 +6,9 @@
         {% if app.user == user %}
             <dt>{{ 'profile.email'|trans({}, 'profile')}}</dt>
             <dd>{{ user.email }}</dd>
+
+            <dt>{{ 'profile.real_name'|trans({}, 'profile')}}</dt>
+            <dd>{{ user.realName }}</dd>
         {% endif %}
     </dl>
 </div>

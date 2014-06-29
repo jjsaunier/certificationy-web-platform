@@ -1,2 +1,4 @@
 registration:
     title: "Registration"
+    form:
+        real_name: "Real name"

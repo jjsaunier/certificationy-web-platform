@@ -30,3 +30,8 @@ services:
             - @fos_user.user_manager
         tags:
             -  { name: twig.extension }
+
+    certificationy.user.registration_type:
+        class: Certificationy\Bundle\UserBundle\Form\Type\RegistrationType
+        tags:
+            - { name: form.type, alias: 'certificationy_user_registration' }

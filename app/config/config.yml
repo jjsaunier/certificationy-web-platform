@@ -156,6 +156,9 @@ swiftmailer:
     delivery_address: no-reply@certificationy.com
 
 fos_user:
+    registration:
+        form:
+            type: certificationy_user_registration
     db_driver: orm
     firewall_name: main
     user_class: Certificationy\Bundle\UserBundle\Entity\User
