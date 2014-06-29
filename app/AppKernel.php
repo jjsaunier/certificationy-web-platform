@@ -16,17 +16,17 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
 
             //Other
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
 
             //Certificationy
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
-            new Certificationy\Bundle\WebBundle\CertificationyWebBundle()
+            new Certificationy\Bundle\WebBundle\CertificationyWebBundle(),
+            new \Certificationy\Bundle\TrainBundle\CertificationyTrainBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
