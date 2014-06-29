@@ -15,8 +15,8 @@ security:
             logout: true
             anonymous: true
             oauth:
-                failure_path: /connect
-                login_path: /connect
+                failure_path: /login
+                login_path: /login
                 check_path: /connect
                 provider: fos_userbundle
                 resource_owners:
@@ -29,6 +29,7 @@ security:
         - { path: ^/connect$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/training, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
     role_hierarchy:

@@ -12,6 +12,7 @@ namespace Certificationy\Bundle\WebBundle\Controller;
 use Knp\Menu\MenuItem;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class AbstractController
@@ -22,7 +23,7 @@ class AbstractController
     protected $requestStack;
 
     /**
-     * @var RouterInterface
+     * @var UrlGeneratorInterface
      */
     protected $router;
 
@@ -47,7 +48,7 @@ class AbstractController
     /**
      * @param RouterInterface $router
      */
-    public function setRouter(RouterInterface $router)
+    public function setRouter(UrlGeneratorInterface $router)
     {
         $this->router = $router;
     }

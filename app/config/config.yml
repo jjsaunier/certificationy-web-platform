@@ -194,3 +194,6 @@ braincrafted_bootstrap:
         twig: true
         knp_menu: true
         knp_paginator: true
+
+certificationy_training:
+    data_path: %kernel.root_dir%/../src/Certificationy/Certification/Data

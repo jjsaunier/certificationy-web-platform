@@ -1,0 +1,23 @@
+parameters:
+
+services:
+    certificationy.training.menu_builder:
+        class: Certificationy\Bundle\TrainingBundle\Menu\TrainingBuilder
+        arguments:
+            - @knp_menu.factory
+            - @translator
+            - @security.context
+
+    certificationy.training.menu:
+        class: Knp\Menu\MenuItem
+        factory_service: certificationy.training.menu_builder
+        factory_method: createTrainingMenu
+        arguments:
+            - @request
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: training }
+
+    certificationy.training.training_controller:
+        class: Certificationy\Bundle\TrainingBundle\Controller\TrainingController
+        parent: certificationy.web.abstract_controller

@@ -5,6 +5,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    /**
+     * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface[]
+     */
     public function registerBundles()
     {
         $bundles = array(
@@ -26,7 +29,7 @@ class AppKernel extends Kernel
             //Certificationy
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
             new Certificationy\Bundle\WebBundle\CertificationyWebBundle(),
-            new \Certificationy\Bundle\TrainBundle\CertificationyTrainBundle()
+            new \Certificationy\Bundle\TrainingBundle\CertificationyTrainingBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -38,6 +41,9 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
+    /**
+     * @param LoaderInterface $loader
+     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
