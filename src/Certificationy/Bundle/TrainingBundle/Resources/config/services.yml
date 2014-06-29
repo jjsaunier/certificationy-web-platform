@@ -21,3 +21,10 @@ services:
     certificationy.training.training_controller:
         class: Certificationy\Bundle\TrainingBundle\Controller\TrainingController
         parent: certificationy.web.abstract_controller
+        arguments:
+            - @certificationy.training.certification_manager
+
+    certificationy.training.certification_manager:
+        class: Certificationy\Bundle\TrainingBundle\Manager\CertificationManager
+        arguments:
+            - %training_data_path%
