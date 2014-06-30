@@ -35,7 +35,7 @@ class Collector implements CollectorInterface
         $supplier = current(array_keys($resources));
         $this->resources = $this->resources + $resources[$supplier];
 
-        if(!in_array($supplier, $this->suppliers)){
+        if (!in_array($supplier, $this->suppliers)) {
             $this->suppliers[] = $supplier;
         }
     }
@@ -63,4 +63,4 @@ class Collector implements CollectorInterface
     {
         return $this->suppliers;
     }
-} 
+}

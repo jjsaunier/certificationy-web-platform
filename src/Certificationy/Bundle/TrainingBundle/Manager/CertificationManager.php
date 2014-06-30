@@ -94,7 +94,6 @@ class CertificationManager
         $dumper->dump('php'); //Cache
         $dumper->dump('sql');
         // ... Whatever
-
         return $certification;
     }
-} 
+}

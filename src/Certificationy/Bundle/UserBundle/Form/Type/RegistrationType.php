@@ -40,4 +40,4 @@ class RegistrationType extends AbstractType
     {
         return 'certificationy_user_registration';
     }
-} 
+}

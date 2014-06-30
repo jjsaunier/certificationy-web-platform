@@ -78,18 +78,18 @@ class Builder
     {
         $certification = static::createCertification();
 
-        foreach($this->collector->getResources() as $resource){
+        foreach ($this->collector->getResources() as $resource) {
             $resourceContent = $resource->getContent();
 
             $category = new Category();
             $category->setLabel($resourceContent['category']);
             $category->setName($resource->getName());
 
-            foreach($resourceContent['questions'] as $questionContent){
+            foreach ($resourceContent['questions'] as $questionContent) {
                 $question = new Question();
                 $question->setLabel($questionContent['question']);
 
-                foreach($questionContent['answers'] as $answerContent){
+                foreach ($questionContent['answers'] as $answerContent) {
                     $answer = new Answer();
                     $answer->setLabel($answerContent);
                     $answer->setExpected($answerContent['correct']);
@@ -112,16 +112,16 @@ class Builder
      */
     public function build()
     {
-        if(true === $this->initialized){
+        if (true === $this->initialized) {
             throw new \Exception('Build already done for this instance :(');
         }
 
         $this->initialized = true;
 
-        foreach($this->builderPass as $pass){
+        foreach ($this->builderPass as $pass) {
             $this->collector->addResources($pass->execute($this, $this->certificationContext));
         }
 
         return $this->normalize();
     }
-} 
+}

@@ -9,7 +9,6 @@
 
 namespace Certificationy\Component\Certification\Builder;
 
-
 use Certificationy\Component\Certification\Context\CertificationContext;
 
 interface BuilderPassInterface

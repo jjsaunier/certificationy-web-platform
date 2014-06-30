@@ -41,4 +41,4 @@ class TrainingController extends AbstractController
 
         return $response;
     }
-} 
+}

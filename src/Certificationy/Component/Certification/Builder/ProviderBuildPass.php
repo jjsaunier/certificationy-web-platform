@@ -36,10 +36,10 @@ class ProviderBuildPass implements BuilderPassInterface
     {
         $data = array();
 
-        foreach($this->providerRegistry->getProviders() as $provider){
+        foreach ($this->providerRegistry->getProviders() as $provider) {
             $data[$provider->getName()] = $provider->load();
         }
 
         return $data;
     }
-} 
+}

@@ -24,7 +24,7 @@ class Loader
     /**
      * @var integer
      */
-    static public $count;
+    public static $count;
 
     /**
      * Returns a new set of randomized questions
@@ -34,7 +34,7 @@ class Loader
      *
      * @return Set
      */
-    static public function init($number, array $categories)
+    public static function init($number, array $categories)
     {
         $data = self::prepareFromYaml($categories);
 
@@ -72,7 +72,7 @@ class Loader
      *
      * @return integer
      */
-    static public function count()
+    public static function count()
     {
         return self::$count ?: count(self::prepareFromYaml());
     }
@@ -84,7 +84,7 @@ class Loader
      *
      * @return array
      */
-    static protected function prepareFromYaml(array $categories = array())
+    protected static function prepareFromYaml(array $categories = array())
     {
         $files = Finder::create()->files()->in(__DIR__ . '/../data/')->name('*.yml');
 
@@ -113,12 +113,12 @@ class Loader
      *
      * @return array
      */
-    static public function getCategories()
+    public static function getCategories()
     {
         $categories = array();
         $files      = self::prepareFromYaml();
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $categories[] = $file['category'];
         }
 

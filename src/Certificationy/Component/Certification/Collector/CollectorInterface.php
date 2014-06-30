@@ -9,8 +9,7 @@
 
 namespace Certificationy\Component\Certification\Collector;
 
-
 interface CollectorInterface extends \Countable
 {
 
-} 
+}

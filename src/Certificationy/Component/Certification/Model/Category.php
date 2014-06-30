@@ -57,7 +57,7 @@ class Category
      */
     public function addQuestion(Question $question)
     {
-        if(null === $question->getCategory()){
+        if (null === $question->getCategory()) {
             $question->setCategory($this);
         }
 
@@ -77,7 +77,7 @@ class Category
      */
     public function setQuestions(ModelCollection $questions)
     {
-        foreach($questions as $question){
+        foreach ($questions as $question) {
             $this->addQuestion($question);
         }
     }
@@ -121,4 +121,4 @@ class Category
     {
         return $this->name;
     }
-} 
+}

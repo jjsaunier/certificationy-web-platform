@@ -70,4 +70,4 @@ class TrainingBuilder
 
         return $menu;
     }
-} 
+}

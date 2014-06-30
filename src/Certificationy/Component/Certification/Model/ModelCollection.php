@@ -182,6 +182,7 @@ class ModelCollection implements \Countable, \ArrayAccess
                 return true;
             }
         }
+
         return false;
     }
 
@@ -201,6 +202,7 @@ class ModelCollection implements \Countable, \ArrayAccess
         if (isset($this->_elements[$key])) {
             return $this->_elements[$key];
         }
+
         return null;
     }
 
@@ -242,6 +244,7 @@ class ModelCollection implements \Countable, \ArrayAccess
     public function add($value)
     {
         $this->_elements[] = $value;
+
         return true;
     }
 
@@ -318,4 +321,4 @@ class ModelCollection implements \Countable, \ArrayAccess
     {
         return array_slice($this->_elements, $offset, $length, true);
     }
-} 
+}

@@ -56,5 +56,3 @@ questions:
             - {value: 'function $foo() {...}',    correct: false}
             - {value: 'function %foo() {...}',    correct: false}
             - {value: 'function $$foo() {...}',   correct: false}
-            
-

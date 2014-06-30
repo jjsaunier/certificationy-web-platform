@@ -41,4 +41,4 @@ class ProviderRegistry
     {
         return $this->providers[$name];
     }
-} 
+}

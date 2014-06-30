@@ -36,7 +36,7 @@ class JsonProvider extends Provider
         $finder->files()->in($this->path);
         $resources = array();
 
-        foreach($finder as $file){
+        foreach ($finder as $file) {
             $filename = explode('.', $file->getFilename());
             $content = json_decode(file_get_contents($file->getRealPath()), true);
             $resources[] = new Resource($filename[0], $this->getName(), $content);
@@ -52,4 +52,4 @@ class JsonProvider extends Provider
     {
         return 'json';
     }
-} 
+}

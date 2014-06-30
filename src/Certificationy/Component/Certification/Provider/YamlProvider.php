@@ -37,7 +37,7 @@ class YamlProvider extends Provider
         $finder->files()->in($this->path);
         $resources = array();
 
-        foreach($finder as $file){
+        foreach ($finder as $file) {
             $filename = explode('.', $file->getFilename());
             $content = Yaml::parse(file_get_contents($file->getRealPath()));
             $resources[] = new Resource($filename[0], $this->getName(), $content);
@@ -53,4 +53,4 @@ class YamlProvider extends Provider
     {
         return 'yaml';
     }
-} 
+}

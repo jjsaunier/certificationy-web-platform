@@ -36,7 +36,7 @@ class Question
      */
     public function setAnswers(ModelCollection $answers)
     {
-        foreach($answers as $answer){
+        foreach ($answers as $answer) {
             $this->answers->addAnswer($answer);
         }
     }
@@ -62,7 +62,7 @@ class Question
      */
     public function addAnswer(Answer $answer)
     {
-        if(null === $answer->getQuestion()){
+        if (null === $answer->getQuestion()) {
             $answer->setQuestion($this);
         }
         $this->answers->add($answer);
@@ -99,4 +99,4 @@ class Question
     {
         return $this->label;
     }
-} 
+}

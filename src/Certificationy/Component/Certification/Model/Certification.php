@@ -26,7 +26,7 @@ class Certification
      */
     public function addCategory(Category $category)
     {
-        if(null === $category->getCertification()){
+        if (null === $category->getCertification()) {
             $category->setCertification($this);
         }
 
@@ -38,7 +38,7 @@ class Certification
      */
     public function setCategory(ModelCollection $categories)
     {
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $this->addCategory($category);
         }
     }

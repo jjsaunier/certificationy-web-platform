@@ -25,8 +25,8 @@ class CertificationyTrainingExtension extends Extension
         $configuration = new Configuration();
         $this->processConfiguration($configuration, $configs);
 
-        foreach($configs as $values){
-            foreach($values as $name => $value){
+        foreach ($configs as $values) {
+            foreach ($values as $name => $value) {
                 $container->setParameter('training_'.$name, $value);
             }
         }

@@ -9,7 +9,6 @@
 
 namespace Certificationy\Component\Certification\Collector;
 
-
 class Resource
 {
     /**
@@ -30,7 +29,7 @@ class Resource
     /**
      * @param string $name
      * @param string $type
-     * @param array $content
+     * @param array  $content
      */
     public function __construct($name, $type, Array $content)
     {
@@ -62,4 +61,4 @@ class Resource
     {
         return $this->content;
     }
-} 
+}

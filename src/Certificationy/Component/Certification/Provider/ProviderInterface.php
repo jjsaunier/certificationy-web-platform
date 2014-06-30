@@ -16,4 +16,4 @@ interface ProviderInterface
      */
     public function getName();
 
-} 
+}
