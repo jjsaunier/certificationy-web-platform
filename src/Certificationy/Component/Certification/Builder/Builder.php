@@ -9,11 +9,36 @@
 
 namespace Certificationy\Component\Certification\Builder;
 
+use Certificationy\Component\Certification\Collector\Collector;
+use Certificationy\Component\Certification\Collector\CollectorInterface;
+use Certificationy\Component\Certification\Context\CertificationContext;
+
 class Builder
 {
-    public function __construct()
-    {
+    /**
+     * @var BuilderPassInterface[]
+     */
+    protected $builderPass;
 
+    /**
+     * @var CollectorInterface
+     */
+    protected $collector;
+
+    /**
+     * @var CertificationContext
+     */
+    protected $certificationContext;
+
+    /**
+     * @param CertificationContext $certificationContext
+     * @param CollectorInterface   $collector
+     */
+    public function __construct(CertificationContext $certificationContext, CollectorInterface $collector = null)
+    {
+        $this->collector = null === $collector ? new Collector() : $collector;
+        $this->builderPass = array();
+        $this->certificationContext = $certificationContext;
     }
 
     public function addCategory()
@@ -31,13 +56,22 @@ class Builder
         return $this;
     }
 
-    public function addBuilderPass()
+    /**
+     * @param BuilderPassInterface $builderPass
+     *
+     * @return $this
+     */
+    public function addBuilderPass(BuilderPassInterface $builderPass)
     {
+        $this->builderPass[] = $builderPass;
+
         return $this;
     }
 
     public function build()
     {
-
+        foreach($this->builderPass as $pass){
+            $this->collector->addResources($pass->execute($this, $this->certificationContext));
+        }
     }
 } 

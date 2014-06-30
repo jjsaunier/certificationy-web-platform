@@ -7,15 +7,10 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Component\Certification\Provider;
+namespace Certificationy\Component\Certification\Collector;
 
-class Provider implements ProviderInterface
+
+interface CollectorInterface extends \Countable
 {
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'default';
-    }
-}
+
+} 

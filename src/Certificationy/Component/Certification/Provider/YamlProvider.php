@@ -9,6 +9,9 @@
 
 namespace Certificationy\Component\Certification\Provider;
 
+use Certificationy\Component\Certification\Collector\Resource;
+use Symfony\Component\Finder\Finder;
+
 class YamlProvider extends Provider
 {
     /**
@@ -24,8 +27,28 @@ class YamlProvider extends Provider
         $this->path = $path;
     }
 
+    /**
+     * @return Resource[]
+     */
     public function load()
     {
+        $finder = new Finder();
+        $finder->files()->in($this->path);
+        $resources = array();
 
+        foreach($finder as $file){
+            $filename = explode('.', $file->getFilename());
+            $resources[] = new Resource($filename[0], 'yaml');
+        }
+
+        return $resources;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'yaml';
     }
 } 

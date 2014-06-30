@@ -10,10 +10,15 @@
 namespace Certificationy\Component\Certification\Builder;
 
 
+use Certificationy\Component\Certification\Context\CertificationContext;
+
 interface BuilderPassInterface
 {
     /**
-     * @param Builder $builder
+     * @param Builder              $builder
+     * @param CertificationContext $certificationContext
+     *
+     * @return mixed
      */
-    public function build(Builder $builder);
+    public function execute(Builder $builder, CertificationContext $certificationContext);
 }

@@ -1,0 +1,20 @@
+{
+    "name": "certificationy/certification",
+    "description": "Create for real or training certification system",
+    "keywords": [ "Certification", "Training", "Examen" ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johann Saunier",
+            "email": "johann_27@hotmail.fr"
+        }
+    ],
+    "require":
+    {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": { "Certificationy\\Component\\Certification\\": "" }
+    }
+}

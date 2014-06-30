@@ -11,5 +11,9 @@ namespace Certificationy\Component\Certification\Provider;
 
 interface ProviderInterface
 {
+    /**
+     * @return string
+     */
+    public function getName();
 
 } 

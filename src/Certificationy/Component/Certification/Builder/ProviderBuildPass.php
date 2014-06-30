@@ -9,6 +9,7 @@
 
 namespace Certificationy\Component\Certification\Builder;
 
+use Certificationy\Component\Certification\Context\CertificationContext;
 use Certificationy\Component\Certification\Provider\ProviderRegistry;
 
 class ProviderBuildPass implements BuilderPassInterface
@@ -28,11 +29,17 @@ class ProviderBuildPass implements BuilderPassInterface
 
     /**
      * @param Builder $builder
+     *
+     * @return array
      */
-    public function build(Builder $builder)
+    public function execute(Builder $builder, CertificationContext $certificationContext)
     {
-        foreach($this->providerRegistry->getProviders() as $provider){
+        $data = array();
 
+        foreach($this->providerRegistry->getProviders() as $provider){
+            $data[$provider->getName()] = $provider->load();
         }
+
+        return $data;
     }
 } 
