@@ -16,9 +16,30 @@ class Category
      */
     protected $questions;
 
+    /**
+     * @var Certification
+     */
+    protected $certification;
+
     public function __construct()
     {
         $this->questions = new ModelCollection();
+    }
+
+    /**
+     * @param Certification $certification
+     */
+    public function setCertification(Certification $certification)
+    {
+        $this->certification = $certification;
+    }
+
+    /**
+     * @return Certification
+     */
+    public function getCertification()
+    {
+        return $this->certification;
     }
 
     /**
@@ -26,6 +47,10 @@ class Category
      */
     public function addQuestion(Question $question)
     {
+        if(null === $question->getCategory()){
+            $question->setCategory($this);
+        }
+
         $this->questions->add($question);
     }
 

@@ -26,6 +26,10 @@ class Certification
      */
     public function addCategory(Category $category)
     {
+        if(null === $category->getCertification()){
+            $category->setCertification($this);
+        }
+
         $this->categories->add($category);
     }
 

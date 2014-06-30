@@ -22,6 +22,11 @@ class Answer
     protected $expected;
 
     /**
+     * @var Question
+     */
+    protected $question;
+
+    /**
      * @param $value
      *  true => correct
      *  false => incorrect
@@ -30,5 +35,21 @@ class Answer
     public function evaluate($value)
     {
         return $value === $this->expected;
+    }
+
+    /**
+     * @return Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param Question $question
+     */
+    public function setQuestion(Question $question)
+    {
+        $this->question = $question;
     }
 }

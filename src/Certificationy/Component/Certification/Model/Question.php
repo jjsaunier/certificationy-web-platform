@@ -16,6 +16,11 @@ class Question
      */
     protected $answers;
 
+    /**
+     * @var Category
+     */
+    protected $category;
+
     public function __construct()
     {
         $this->answers = new ModelCollection();
@@ -32,10 +37,29 @@ class Question
     }
 
     /**
+     * @param Category $category
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
      * @param Answer $answer
      */
     public function addAnswer(Answer $answer)
     {
+        if(null === $answer->getQuestion()){
+            $answer->setQuestion($this);
+        }
         $this->answers->add($answer);
     }
 
