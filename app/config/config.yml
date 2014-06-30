@@ -196,4 +196,4 @@ braincrafted_bootstrap:
         knp_paginator: true
 
 certificationy_training:
-    data_path: %kernel.root_dir%/../src/Certificationy/Certification/Data/
+    data_path: %kernel.root_dir%/../src/Certificationy/Certification/Data

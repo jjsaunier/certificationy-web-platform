@@ -16,9 +16,15 @@ class Collector implements CollectorInterface
      */
     protected $resources;
 
+    /**
+     * @var string[]
+     */
+    protected $suppliers;
+
     public function __construct()
     {
         $this->resources = array();
+        $this->suppliers = array();
     }
 
     /**
@@ -26,8 +32,12 @@ class Collector implements CollectorInterface
      */
     public function addResources(Array $resources)
     {
-        var_dump($resources);
-        exit;
+        $supplier = current(array_keys($resources));
+        $this->resources = $this->resources + $resources[$supplier];
+
+        if(!in_array($supplier, $this->suppliers)){
+            $this->suppliers[] = $supplier;
+        }
     }
 
     /**
@@ -44,5 +54,13 @@ class Collector implements CollectorInterface
     public function count()
     {
         return count($this->resources);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSuppliers()
+    {
+        return $this->suppliers;
     }
 } 

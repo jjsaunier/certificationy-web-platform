@@ -29,43 +29,48 @@ class CertificationContext
     /**
      * @var int
      */
-    protected $certifiedScore;
+    protected $certificationScore;
+
+    /**
+     * @var string
+     */
+    protected $certificationLanguage;
 
     /**
      * @var int[]
      */
-    protected $certifiedThreshold;
+    protected $certificationThreshold;
 
     /**
      * @param int $certifiedScore
      */
-    public function setCertifiedScore($certifiedScore)
+    public function setCertificationScore($certifiedScore)
     {
-        $this->certifiedScore = $certifiedScore;
+        $this->certificationScore = $certifiedScore;
     }
 
     /**
      * @return int
      */
-    public function getCertifiedScore()
+    public function getCertificationScore()
     {
-        return $this->certifiedScore;
+        return $this->certificationScore;
     }
 
     /**
      * @param \int[] $certifiedThreshold
      */
-    public function setCertifiedThreshold($certifiedThreshold)
+    public function setCertificationThreshold($certifiedThreshold)
     {
-        $this->certifiedThreshold = $certifiedThreshold;
+        $this->certificationThreshold = $certifiedThreshold;
     }
 
     /**
      * @return \int[]
      */
-    public function getCertifiedThreshold()
+    public function getCertificationThreshold()
     {
-        return $this->certifiedThreshold;
+        return $this->certificationThreshold;
     }
 
     /**
@@ -114,5 +119,21 @@ class CertificationContext
     public function getNumberOfQuestion()
     {
         return $this->numberOfQuestion;
+    }
+
+    /**
+     * @param string $certificationLanguage
+     */
+    public function setCertificationLanguage($certificationLanguage)
+    {
+        $this->certificationLanguage = $certificationLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertificationLanguage()
+    {
+        return $this->certificationLanguage;
     }
 } 

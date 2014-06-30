@@ -13,6 +13,7 @@ use Certificationy\Component\Certification\Builder\Builder;
 use Certificationy\Component\Certification\Builder\ProviderBuildPass;
 use Certificationy\Component\Certification\Context\CertificationContext;
 use Certificationy\Component\Certification\Dumper\Dumper;
+use Certificationy\Component\Certification\Provider\JsonProvider;
 use Certificationy\Component\Certification\Provider\ProviderRegistry;
 use Certificationy\Component\Certification\Provider\YamlProvider;
 
@@ -31,6 +32,9 @@ class CertificationManager
         $this->dataPath = $dataPath;
     }
 
+    /**
+     * @return \Certificationy\Component\Certification\Model\Certification
+     */
     public function createCertification()
     {
         /**
@@ -41,8 +45,9 @@ class CertificationManager
          **/
         $certificationContext = new CertificationContext();
         $certificationContext->setNumberOfQuestion(100);
-        $certificationContext->setCertifiedScore(50);
-        $certificationContext->setCertifiedThreshold(
+        $certificationContext->setCertificationScore(50);
+        $certificationContext->setCertificationLanguage('en');
+        $certificationContext->setCertificationThreshold(
             array('newbie' => 30),
             array('beginner' => 45),
             array('not bad' => 50),
@@ -59,7 +64,8 @@ class CertificationManager
          * With CertificationBundle each provider is tagged service e.g : certification.provider
          */
         $providerRegistry = new ProviderRegistry();
-        $providerRegistry->addProvider(new YamlProvider($this->dataPath), 'file');
+        $providerRegistry->addProvider(new YamlProvider($this->dataPath.'/YAML'), 'yaml');
+        $providerRegistry->addProvider(new JsonProvider($this->dataPath.'/JSON'), 'json');
 
         /**
          * Setup our builder, he need context, and at to call builderPass for our Providers

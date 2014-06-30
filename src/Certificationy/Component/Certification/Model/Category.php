@@ -21,6 +21,16 @@ class Category
      */
     protected $certification;
 
+    /**
+     * @var string
+     */
+    protected $label;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
     public function __construct()
     {
         $this->questions = new ModelCollection();
@@ -78,5 +88,37 @@ class Category
     public function removeQuestion(Question $question)
     {
         $this->questions->removeElement($question);
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setLabel($name)
+    {
+        $this->label = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 } 

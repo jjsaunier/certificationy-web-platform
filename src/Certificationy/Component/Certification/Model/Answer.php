@@ -12,11 +12,6 @@ namespace Certificationy\Component\Certification\Model;
 class Answer
 {
     /**
-     * @var string
-     */
-    protected $value;
-
-    /**
      * @var bool
      */
     protected $expected;
@@ -25,6 +20,11 @@ class Answer
      * @var Question
      */
     protected $question;
+
+    /**
+     * @var string
+     */
+    protected $label;
 
     /**
      * @param $value
@@ -51,5 +51,37 @@ class Answer
     public function setQuestion(Question $question)
     {
         $this->question = $question;
+    }
+
+    /**
+     * @param boolean $expected
+     */
+    public function setExpected($expected)
+    {
+        $this->expected = $expected;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getExpected()
+    {
+        return $this->expected;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
     }
 }

@@ -11,9 +11,8 @@ namespace Certificationy\Component\Certification\Provider;
 
 use Certificationy\Component\Certification\Collector\Resource;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Yaml;
 
-class YamlProvider extends Provider
+class JsonProvider extends Provider
 {
     /**
      * @var string
@@ -39,7 +38,7 @@ class YamlProvider extends Provider
 
         foreach($finder as $file){
             $filename = explode('.', $file->getFilename());
-            $content = Yaml::parse(file_get_contents($file->getRealPath()));
+            $content = json_decode(file_get_contents($file->getRealPath()), true);
             $resources[] = new Resource($filename[0], $this->getName(), $content);
         }
 
@@ -51,6 +50,6 @@ class YamlProvider extends Provider
      */
     public function getName()
     {
-        return 'yaml';
+        return 'json';
     }
 } 

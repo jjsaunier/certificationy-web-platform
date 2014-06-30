@@ -21,6 +21,11 @@ class Question
      */
     protected $category;
 
+    /**
+     * @var string
+     */
+    protected $label;
+
     public function __construct()
     {
         $this->answers = new ModelCollection();
@@ -77,5 +82,21 @@ class Question
     public function removeAnswer(Answer $answer)
     {
         $this->answers->removeElement($answer);
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
     }
 } 

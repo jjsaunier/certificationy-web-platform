@@ -23,13 +23,20 @@ class Resource
     protected $name;
 
     /**
+     * @var array
+     */
+    protected $content;
+
+    /**
      * @param string $name
      * @param string $type
+     * @param array $content
      */
-    public function __construct($name, $type)
+    public function __construct($name, $type, Array $content)
     {
         $this->name = $name;
         $this->type = $type;
+        $this->content = $content;
     }
 
     /**
@@ -46,5 +53,13 @@ class Resource
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return array
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 } 

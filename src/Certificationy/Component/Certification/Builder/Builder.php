@@ -12,6 +12,10 @@ namespace Certificationy\Component\Certification\Builder;
 use Certificationy\Component\Certification\Collector\Collector;
 use Certificationy\Component\Certification\Collector\CollectorInterface;
 use Certificationy\Component\Certification\Context\CertificationContext;
+use Certificationy\Component\Certification\Model\Answer;
+use Certificationy\Component\Certification\Model\Category;
+use Certificationy\Component\Certification\Model\Certification;
+use Certificationy\Component\Certification\Model\Question;
 
 class Builder
 {
@@ -31,6 +35,11 @@ class Builder
     protected $certificationContext;
 
     /**
+     * @var bool
+     */
+    protected $initialized;
+
+    /**
      * @param CertificationContext $certificationContext
      * @param CollectorInterface   $collector
      */
@@ -39,21 +48,15 @@ class Builder
         $this->collector = null === $collector ? new Collector() : $collector;
         $this->builderPass = array();
         $this->certificationContext = $certificationContext;
+        $this->initialized = false;
     }
 
-    public function addCategory()
+    /**
+     * @return Certification
+     */
+    public static function createCertification()
     {
-        return $this;
-    }
-
-    public function addQuestion()
-    {
-        return $this;
-    }
-
-    public function addAnswer()
-    {
-        return $this;
+        return new Certification();
     }
 
     /**
@@ -68,10 +71,57 @@ class Builder
         return $this;
     }
 
+    /**
+     * @return Certification
+     */
+    protected function normalize()
+    {
+        $certification = static::createCertification();
+
+        foreach($this->collector->getResources() as $resource){
+            $resourceContent = $resource->getContent();
+
+            $category = new Category();
+            $category->setLabel($resourceContent['category']);
+            $category->setName($resource->getName());
+
+            foreach($resourceContent['questions'] as $questionContent){
+                $question = new Question();
+                $question->setLabel($questionContent['question']);
+
+                foreach($questionContent['answers'] as $answerContent){
+                    $answer = new Answer();
+                    $answer->setLabel($answerContent);
+                    $answer->setExpected($answerContent['correct']);
+
+                    $question->addAnswer($answer);
+                }
+
+                $category->addQuestion($question);
+            }
+
+            $certification->addCategory($category);
+        }
+
+        return $certification;
+    }
+
+    /**
+     * @return Certification
+     * @throws \Exception
+     */
     public function build()
     {
+        if(true === $this->initialized){
+            throw new \Exception('Build already done for this instance :(');
+        }
+
+        $this->initialized = true;
+
         foreach($this->builderPass as $pass){
             $this->collector->addResources($pass->execute($this, $this->certificationContext));
         }
+
+        return $this->normalize();
     }
 } 
