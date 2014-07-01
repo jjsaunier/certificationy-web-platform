@@ -16,12 +16,40 @@ class ProviderRegistry
      */
     protected $providers = array();
 
+    const OVERRIDE_STRATEGY = 1;
+    const IGNORE_STRATEGY = 2;
+    const EXCEPTION_STRATEGY = 3;
+
     /**
      * @param ProviderInterface $provider
      */
-    public function addProvider(ProviderInterface $provider, $name)
+    public function addProvider(ProviderInterface $provider, $providerName, $strategy = self::OVERRIDE_STRATEGY)
     {
-        $this->providers[$name] = $provider;
+        switch ($strategy) {
+            case static::OVERRIDE_STRATEGY:
+                $this->providers[$providerName] = $provider;
+            break;
+            case static::IGNORE_STRATEGY:
+                if (!$this->isRegister($providerName)) {
+                    $this->providers[$providerName] = $provider;
+                }
+            break;
+            case static::EXCEPTION_STRATEGY:
+                if ($this->isRegister($providerName)) {
+                    throw new \Exception(sprintf('Provider %s is already register', $providerName));
+                }
+            break;
+            default:
+                throw new \Exception(sprintf('Unknown strategy %s', $strategy));
+        }
+    }
+
+    /**
+     * @param ProviderInterface[] $providers
+     */
+    public function setProviders(Array $providers)
+    {
+        $this->providers = $providers;
     }
 
     /**
@@ -33,12 +61,37 @@ class ProviderRegistry
     }
 
     /**
-     * @param $name
-     * @TODO: Create exception
+     * @param  string              $name
      * @return ProviderInterface[]
      */
-    public function getProvider($name)
+    public function getProvider($providerName)
     {
-        return $this->providers[$name];
+        if (!$this->isRegister($providerName)) {
+            throw new \Exception(sprintf('Provider %s does not exist', $providerName));
+        }
+
+        return $this->providers[$providerName];
+    }
+
+    /**
+     * @param string $name
+     */
+    public function removeProvider($providerName)
+    {
+        if (!$this->isRegister($providerName)) {
+            throw new \Exception(sprintf('Provider %s does not exist', $providerName));
+        }
+
+        unset($this->providers[$providerName]);
+    }
+
+    /**
+     * @param $providerName
+     *
+     * @return bool
+     */
+    public function isRegister($providerName)
+    {
+        return isset($this->providers[$providerName]);
     }
 }

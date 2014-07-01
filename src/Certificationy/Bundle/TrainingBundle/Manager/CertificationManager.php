@@ -13,6 +13,7 @@ use Certificationy\Component\Certification\Builder\Builder;
 use Certificationy\Component\Certification\Builder\ProviderBuildPass;
 use Certificationy\Component\Certification\Context\CertificationContext;
 use Certificationy\Component\Certification\Dumper\Dumper;
+use Certificationy\Component\Certification\Dumper\Strategy\PhpDumpStrategy;
 use Certificationy\Component\Certification\Provider\JsonProvider;
 use Certificationy\Component\Certification\Provider\ProviderRegistry;
 use Certificationy\Component\Certification\Provider\YamlProvider;
@@ -47,15 +48,15 @@ class CertificationManager
         $certificationContext->setNumberOfQuestion(100);
         $certificationContext->setCertificationScore(50);
         $certificationContext->setCertificationLanguage('en');
-        $certificationContext->setCertificationThreshold(
-            array('newbie' => 30),
-            array('beginner' => 45),
-            array('not bad' => 50),
-            array('good' => 75),
-            array('very_good' => 85),
-            array('expert' => 95),
-            array('jesus_christ' => 100)
-        );
+        $certificationContext->setCertificationThreshold(array(
+                array('newbie' => 30),
+                array('beginner' => 45),
+                array('not_bad' => 50),
+                array('good' => 75),
+                array('very_good' => 85),
+                array('expert' => 95),
+                array('jesus_christ' => 100)
+        ));
 
         /**
          * Load different provider to retrieve our raw data from different place
@@ -88,11 +89,13 @@ class CertificationManager
          * Strategy implementation
          */
         $dumper = new Dumper($certification, $certificationContext);
-        $dumper->dump('pdf');
-        $dumper->dump('dropbox');
-        $dumper->dump('evernote');
+        $dumper->addStrategy(new PhpDumpStrategy());
+
+//        $dumper->dump('pdf');
+//        $dumper->dump('dropbox');
+//        $dumper->dump('evernote');
         $dumper->dump('php'); //Cache
-        $dumper->dump('sql');
+//        $dumper->dump('sql');
         // ... Whatever
         return $certification;
     }

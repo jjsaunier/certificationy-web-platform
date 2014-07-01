@@ -11,13 +11,22 @@ namespace Certificationy\Component\Certification\Dumper;
 
 use Certificationy\Component\Certification\Dumper\Strategy\DumperStrategyInterface;
 
-class Dumper extends AbstractDumper
+interface DumperInterface
 {
     /**
-     * @param DumperStrategyInterface $dumperStrategy
+     * @param DumperStrategyInterface $strategy
+     *
+     * @return mixed
      */
-    protected function doDump(DumperStrategyInterface $dumperStrategy)
-    {
+    public function addStrategy(DumperStrategyInterface $strategy);
 
-    }
+    /**
+     * @param string $strategyName
+     */
+    public function strategyIsEnabled($strategyName);
+
+    /**
+     * @param string $strategyName
+     */
+    public function dump($strategyName);
 }
