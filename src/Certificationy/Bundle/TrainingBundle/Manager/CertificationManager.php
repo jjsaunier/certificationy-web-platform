@@ -114,15 +114,12 @@ class CertificationManager
          * Case 2: Transform digital certification on physical certification.
          * Case 3: Cache
          */
-        $dumper = new PhpDumper($certification, $certificationContext, $this->kernelCacheDir);
+        $dumper = new PhpDumper($certification, $certificationContext, $this->kernelCacheDir); //Cache
+//        $dumper = new DropboxDumper($certification, $certificationContext, $this->kernelCacheDir);
+//        $dumper = new pdfDumper($certification, $certificationContext, $this->kernelCacheDir);
+//        $dumper = new sqlDumper($certification, $certificationContext, $this->kernelCacheDir);
+        $dumper->dump();
 
-//        $dumper->dump('pdf');
-//        $dumper->dump('dropbox');
-//        $dumper->dump('evernote');
-        $dumper->dump('php'); //Cache
-//        $dumper->dump('apc');
-//        $dumper->dump('sql');
-        // ... Whatever
         return $certification;
     }
 }
