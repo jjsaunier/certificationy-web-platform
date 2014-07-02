@@ -39,7 +39,7 @@ class Category
     /**
      * @param Certification $certification
      */
-    public function setCertification(Certification $certification)
+    public function setCertification(Certification $certification = null)
     {
         $this->certification = $certification;
     }
@@ -120,5 +120,19 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Category
+     */
+    public static function __set_state(Array $data)
+    {
+        $category = new Category();
+        $category->setLabel($data['label']);
+        $category->setName($data['name']);
+
+        return $category;
     }
 }

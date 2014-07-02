@@ -10,77 +10,45 @@
 namespace Certificationy\Component\Certification\Dumper;
 
 use Certificationy\Component\Certification\Context\CertificationContext;
-use Certificationy\Component\Certification\Dumper\Strategy\DumperStrategyInterface;
 use Certificationy\Component\Certification\Model\Certification;
 
-abstract class AbstractDumper implements DumperInterface
+abstract class AbstractDumper
 {
     /**
      * @var \Certificationy\Component\Certification\Model\Certification
      */
-    private $certification;
+    protected $certification;
 
     /**
      * @var \Certificationy\Component\Certification\Context\CertificationContext
      */
-    private $certificationContext;
-
-    /**
-     * @var DumperStrategyInterface[]
-     */
-    private $strategies;
+    protected $certificationContext;
 
     /**
      * @param Certification        $certification
      * @param CertificationContext $certificationContext
      */
-    public function __construct(Certification $certification, CertificationContext $certificationContext)
-    {
+    public function __construct(
+        Certification $certification,
+        CertificationContext $certificationContext
+    ) {
         $this->certification = $certification;
         $this->certificationContext = $certificationContext;
-        $this->strategies = array();
-    }
-
-    /**
-     * @param DumperStrategyInterface $strategy
-     */
-    public function addStrategy(DumperStrategyInterface $strategy)
-    {
-        $this->strategies[$strategy->getName()] = $strategy;
     }
 
     /**
      * @param string $strategyName
      */
-    public function strategyIsEnabled($strategyName)
+    public function dump()
     {
-        return isset($this->strategies[$strategyName]);
+        return $this->doDump();
     }
 
     /**
-     * @param string $strategyName
+     * @return mixed
      */
-    public function dump($strategyName)
+    protected function doDump()
     {
-        if (!$this->strategyIsEnabled($strategyName)) {
-            throw new \Exception(sprintf(
-                'Strategy %s is not available in [ %s ]',
-                $strategyName,
-                implode(', ', array_keys($this->strategies))));
-        }
-
-        $dumpStrategy = $this->strategies[$strategyName];
-        $dumpStrategy->setCertification($this->certification);
-        $dumpStrategy->setCertificationContext($this->certificationContext);
-
-        $this->doDump($dumpStrategy);
-    }
-
-    /**
-     * @param DumperStrategyInterface $dumperStrategy
-     */
-    protected function doDump(DumperStrategyInterface $dumperStrategy)
-    {
-
+        return '';
     }
 }

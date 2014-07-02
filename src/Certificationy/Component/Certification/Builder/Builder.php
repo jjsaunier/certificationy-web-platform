@@ -77,6 +77,7 @@ class Builder
     protected function normalize()
     {
         $certification = static::createCertification();
+        $certification->setContext($this->certificationContext);
 
         foreach ($this->collector->getResources() as $resource) {
             $resourceContent = $resource->getContent();
@@ -91,7 +92,7 @@ class Builder
 
                 foreach ($questionContent['answers'] as $answerContent) {
                     $answer = new Answer();
-                    $answer->setLabel($answerContent);
+                    $answer->setLabel($answerContent['value']);
                     $answer->setExpected($answerContent['correct']);
 
                     $question->addAnswer($answer);

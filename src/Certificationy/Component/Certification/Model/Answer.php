@@ -48,7 +48,7 @@ class Answer
     /**
      * @param Question $question
      */
-    public function setQuestion(Question $question)
+    public function setQuestion(Question $question = null)
     {
         $this->question = $question;
     }
@@ -83,5 +83,19 @@ class Answer
     public function getLabel()
     {
         return $this->label;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Answer
+     */
+    public static function __set_state(Array $data)
+    {
+        $answer = new Answer();
+        $answer->setExpected($data['expected']);
+        $answer->setLabel($data['label']);
+
+        return $answer;
     }
 }

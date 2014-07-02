@@ -14,7 +14,7 @@ namespace Certificationy\Component\Certification\Model;
  * @TODO: Remove useless method/implementation for us.
  * Light copy of ArrayCollection from Doctrine Project
  */
-class ModelCollection implements \Countable, \ArrayAccess
+class ModelCollection implements \Countable, \ArrayAccess, \IteratorAggregate
 {
     /**
      * An array containing the entries of this collection.
@@ -320,5 +320,15 @@ class ModelCollection implements \Countable, \ArrayAccess
     public function slice($offset, $length = null)
     {
         return array_slice($this->_elements, $offset, $length, true);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return ModelCollection
+     */
+    public static function __set_state(Array $data)
+    {
+        return new ModelCollection($data['_elements']);
     }
 }
