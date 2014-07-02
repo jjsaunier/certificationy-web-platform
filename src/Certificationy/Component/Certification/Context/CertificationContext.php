@@ -42,6 +42,24 @@ class CertificationContext
     protected $certificationThreshold;
 
     /**
+     * @var bool
+     */
+    protected $debug;
+
+    /**
+     * @vars string
+     */
+    protected $name;
+
+    /**
+     * @param string $name
+     */
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
      * @param int $certifiedScore
      */
     public function setCertificationScore($certifiedScore)
@@ -135,5 +153,48 @@ class CertificationContext
     public function getCertificationLanguage()
     {
         return $this->certificationLanguage;
+    }
+
+    /**
+     * @param boolean $debug
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getDebug()
+    {
+        return $this->debug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CertificationContext
+     */
+    public static function __set_state(Array $data)
+    {
+        $certificationContext = new CertificationContext($data['name']);
+        $certificationContext->setNumberOfQuestion($data['numberOfQuestion']);
+        $certificationContext->setExcludeCategory($data['excludeCategory']);
+        $certificationContext->setExcludeQuestion($data['excludeQuestion']);
+        $certificationContext->setCertificationScore($data['certificationScore']);
+        $certificationContext->setCertificationLanguage($data['certificationLanguage']);
+        $certificationContext->setCertificationThreshold($data['certificationThreshold']);
+        $certificationContext->setDebug($data['debug']);
+
+        return $certificationContext;
     }
 }

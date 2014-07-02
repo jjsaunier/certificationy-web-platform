@@ -37,14 +37,14 @@ class Question
     public function setAnswers(ModelCollection $answers)
     {
         foreach ($answers as $answer) {
-            $this->answers->addAnswer($answer);
+            $this->addAnswer($answer);
         }
     }
 
     /**
      * @param Category $category
      */
-    public function setCategory(Category $category)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
     }
@@ -98,5 +98,18 @@ class Question
     public function getLabel()
     {
         return $this->label;
+    }
+
+    /**
+     * @param array $data
+     * @return Question
+     */
+    public static function __set_state(Array $data)
+    {
+        $question = new Question();
+        $question->setAnswers($data['answers']);
+        $question->setLabel($data['label']);
+
+        return $question;
     }
 }

@@ -9,6 +9,8 @@
 
 namespace Certificationy\Component\Certification\Model;
 
+use Certificationy\Component\Certification\Context\CertificationContext;
+
 class Certification
 {
     /**
@@ -16,9 +18,30 @@ class Certification
      */
     protected $categories;
 
+    /**
+     * @var CertificationContext
+     */
+    protected $context;
+
     public function __construct()
     {
         $this->categories = new ModelCollection();
+    }
+
+    /**
+     * @param \Certificationy\Component\Certification\Context\CertificationContext $context
+     */
+    public function setContext(CertificationContext $context)
+    {
+        $this->context = $context;
+    }
+
+    /**
+     * @return \Certificationy\Component\Certification\Context\CertificationContext
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 
     /**
@@ -36,7 +59,7 @@ class Certification
     /**
      * @param ModelCollection $categories
      */
-    public function setCategory(ModelCollection $categories)
+    public function setCategories(ModelCollection $categories)
     {
         foreach ($categories as $category) {
             $this->addCategory($category);
@@ -57,5 +80,19 @@ class Certification
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Certification
+     */
+    public static function __set_state(Array $data)
+    {
+        $certification = new Certification();
+        $certification->setCategories($data['categories']);
+        $certification->setContext($data['context']);
+
+        return $certification;
     }
 }
