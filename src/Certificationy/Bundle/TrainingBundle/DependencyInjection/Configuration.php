@@ -21,11 +21,6 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('certificationy_training');
-        $root->children()
-            ->scalarNode('data_path')
-            ->cannotBeEmpty()
-            ->isRequired()
-        ->end();
 
         return $treeBuilder;
     }

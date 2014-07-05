@@ -9,15 +9,14 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
-use Certificationy\Component\Certification\Builder\Builder;
-use Certificationy\Component\Certification\Builder\ProviderBuildPass;
-use Certificationy\Component\Certification\Context\CertificationContext;
-use Certificationy\Component\Certification\Dumper\PhpDumper;
-use Certificationy\Component\Certification\Loader\CertificationPhpLoader;
-use Certificationy\Component\Certification\Model\Certification;
-use Certificationy\Component\Certification\Provider\JsonProvider;
-use Certificationy\Component\Certification\Provider\ProviderRegistry;
-use Certificationy\Component\Certification\Provider\YamlProvider;
+use Certificationy\Component\Certy\Builder\Builder;
+use Certificationy\Component\Certy\Context\CertificationContext;
+use Certificationy\Component\Certy\Dumper\PhpDumper;
+use Certificationy\Component\Certy\Factory\CertificationFactory;
+use Certificationy\Component\Certy\Loader\PhpLoader;
+use Certificationy\Component\Certy\Provider\JsonProvider;
+use Certificationy\Component\Certy\Provider\ProviderRegistry;
+use Certificationy\Component\Certy\Provider\YamlProvider;
 
 class CertificationManager
 {
@@ -49,33 +48,18 @@ class CertificationManager
     }
 
     /**
-     * @return \Certificationy\Component\Certification\Model\Certification
+     * @return \Certificationy\Component\Certy\Model\Certification
      */
     public function createCertification()
     {
-        /**
-         * I use this loader, only because I use PhpDumper !!! It's a cache system.
-         * Load certification named 'symfony2' (via CertificationContext)
-         */
-        $certificationLoader = new CertificationPhpLoader($this->kernelCacheDir, 'certificationy');
-        $certification = $certificationLoader->load('symfony2');
+        $certificationName = 'symfony2';
 
-        if ($certification instanceof Certification) {
-            return $certification;
-        }
-
-        /**
-         * Setup the context for symfony2 certification, I dont know if it's
-         * realistic, it's just for the example
-         *
-         * With CertificationBundle certificationContext is a service populate via config component
-         **/
-        $certificationContext = new CertificationContext('symfony2');
-        $certificationContext->setNumberOfQuestion(100);
-        $certificationContext->setCertificationScore(50);
-        $certificationContext->setCertificationLanguage('en');
+        $certificationContext = new CertificationContext($certificationName);
+        $certificationContext->setNumberOfQuestions(100);
+        $certificationContext->setScore(50);
+        $certificationContext->setLanguage('en');
         $certificationContext->setDebug(true);
-        $certificationContext->setCertificationThreshold(array(
+        $certificationContext->setThreshold(array(
                 array('newbie' => 30),
                 array('beginner' => 45),
                 array('not_bad' => 50),
@@ -85,41 +69,20 @@ class CertificationManager
                 array('jesus_christ' => 100)
         ));
 
-        /**
-         * Load different provider to retrieve our raw data from different place
-         * Yaml, DB, Cache, CSV, Dropbox, Evernote ? :D And from space obviously.
-         *
-         * With CertificationBundle each provider is tagged service e.g : certification.provider
-         */
         $providerRegistry = new ProviderRegistry();
-        $providerRegistry->addProvider(new YamlProvider($this->dataPath.'/YAML'), 'yaml');
-        $providerRegistry->addProvider(new JsonProvider($this->dataPath.'/JSON'), 'json');
+        $providerRegistry->addProvider(new YamlProvider($this->dataPath.'/YAML'), $certificationName);
+        $providerRegistry->addProvider(new JsonProvider($this->dataPath.'/JSON'), $certificationName);
 
-        /**
-         * Setup our builder, he need context, and at to call builderPass for our Providers
-         *
-         * With CertificationBundle the builder it's service, with configurator (see symfony service configurator)
-         */
-        $certificationBuilder = new Builder($certificationContext);
-        $certificationBuilder->addBuilderPass(new ProviderBuildPass($providerRegistry));
+        $certificationFactory = new CertificationFactory();
+        $certificationFactory
+            ->setBuilder(new Builder())
+            ->setLoader(new PhpLoader($this->kernelCacheDir, 'certificationy'))
+            ->setDumper(new PhpDumper($this->kernelCacheDir))
+            ->setProviderRegistry($providerRegistry)
+        ;
 
-        /**
-         * Here we have Certificationy\Component\Certification\Model\Certification instance, fully hydrated.
-         */
-        $certification = $certificationBuilder->build();
-
-        /**
-         * Extra bonus :
-         * Case 1: Share a certification (abstract of the way, we will provide mainly use format) as digital.
-         * Case 2: Transform digital certification on physical certification.
-         * Case 3: Cache
-         */
-        $dumper = new PhpDumper($certification, $certificationContext, $this->kernelCacheDir); //Cache
-//        $dumper = new DropboxDumper($certification, $certificationContext, $this->kernelCacheDir);
-//        $dumper = new pdfDumper($certification, $certificationContext, $this->kernelCacheDir);
-//        $dumper = new sqlDumper($certification, $certificationContext, $this->kernelCacheDir);
-        $dumper->dump();
-
-        return $certification;
+        var_dump($certificationFactory->createNamed('symfony2', $certificationContext));
+        exit;
+//        return $certificationFactory->createNamed('symfony2', $certificationContext);
     }
 }
