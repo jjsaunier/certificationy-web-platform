@@ -9,7 +9,6 @@
 
 namespace Certificationy\Bundle\WebBundle\Controller;
 
-use Knp\Menu\MenuItem;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -62,7 +61,6 @@ class AbstractController
     }
 
     /**
-     * @param MenuItem[] $menu
      */
     public function setMenuCollection(Array $menuCollection)
     {

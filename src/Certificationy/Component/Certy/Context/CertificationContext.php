@@ -106,7 +106,7 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @return \int[]
+     * @return integer[]
      */
     public function getThreshold()
     {
@@ -114,7 +114,7 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @param \string[] $excludeCategory
+     * @param \string[] $excludeCategories
      */
     public function setExcludeCategories($excludeCategories)
     {
@@ -140,7 +140,7 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @return \string[]
+     * @return string[]
      */
     public function getExcludeCategories()
     {
@@ -174,7 +174,7 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @return \string[]
+     * @return string[]
      */
     public function getExcludeQuestions()
     {

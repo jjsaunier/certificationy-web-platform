@@ -34,7 +34,7 @@ class FileDumper extends AbstractDumper
     protected $fileName;
 
     /**
-     * @param null       $cacheDir
+     * @param string       $cacheDir
      * @param null       $cacheDirName
      * @param Filesystem $filesystem
      */
@@ -49,7 +49,7 @@ class FileDumper extends AbstractDumper
     }
 
     /**
-     * @param $filename
+     * @param string $filename
      *
      * @return string
      */
@@ -84,7 +84,7 @@ class FileDumper extends AbstractDumper
 
     /**
      * @param string $filename
-     * @param mixed  $rawData
+     * @param string  $rawData
      */
     protected function dumpFile($filename, $rawData)
     {

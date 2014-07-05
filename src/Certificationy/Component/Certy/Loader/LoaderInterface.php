@@ -14,7 +14,7 @@ use Certificationy\Component\Certy\Model\Certification;
 interface LoaderInterface
 {
     /**
-     * @param $certificationName
+     * @param string $certificationName
      *
      * @return Certification
      */

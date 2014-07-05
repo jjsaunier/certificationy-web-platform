@@ -23,7 +23,7 @@ class ProviderRegistry implements ProviderRegistryInterface
 
     /**
      * @param ProviderInterface $provider
-     * @param string[]|string   $certifications
+     * @param string[]|string   $certificationsName
      * @param int               $strategy
      *
      * @throws \Exception
@@ -75,7 +75,7 @@ class ProviderRegistry implements ProviderRegistryInterface
     }
 
     /**
-     * @return ProviderInterface[]
+     * @return ProviderInterface
      */
     public function getProviders($certificationName)
     {
