@@ -10,6 +10,7 @@
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
 use Certificationy\Component\Certy\Builder\Builder;
+use Certificationy\Component\Certy\Builder\ProviderBuildPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Dumper\PhpDumper;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
@@ -72,16 +73,17 @@ class CertificationManager
         $providerRegistry->addProvider(new YamlProvider($this->dataPath.'/YAML'), $certificationName);
         $providerRegistry->addProvider(new JsonProvider($this->dataPath.'/JSON'), $certificationName);
 
+        $builder = new Builder();
+        $builder->addBuilderPass(new ProviderBuildPass($providerRegistry));
+
         $certificationFactory = new CertificationFactory();
         $certificationFactory
-            ->setBuilder(new Builder())
+            ->setBuilder($builder)
             ->setLoader(new PhpLoader($this->kernelCacheDir, 'certificationy'))
             ->setDumper(new PhpDumper($this->kernelCacheDir))
             ->setProviderRegistry($providerRegistry)
         ;
 
-        var_dump($certificationFactory->createNamed('symfony2', $certificationContext));
-        exit;
-//        return $certificationFactory->createNamed('symfony2', $certificationContext);
+        return $certificationFactory->createNamed('symfony2', $certificationContext);
     }
 }

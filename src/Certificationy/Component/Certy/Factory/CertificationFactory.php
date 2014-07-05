@@ -10,7 +10,6 @@
 namespace Certificationy\Component\Certy\Factory;
 
 use Certificationy\Component\Certy\Builder\BuilderInterface;
-use Certificationy\Component\Certy\Builder\ProviderBuildPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Dumper\DumperInterface;
 use Certificationy\Component\Certy\Loader\LoaderInterface;
@@ -45,15 +44,18 @@ class CertificationFactory
      */
     public function createNamed($name, CertificationContext $context)
     {
+        if($name !== $context->getName()){
+            throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
+        }
+
         if (null !== $this->loader) {
             $certification = $this->loader->load($name);
 
             if ($certification instanceof Certification) {
+
                 return $certification;
             }
         }
-
-        $this->builder->addBuilderPass(new ProviderBuildPass($this->providerRegistry));
 
         $certification = $this->builder->build($context);
 

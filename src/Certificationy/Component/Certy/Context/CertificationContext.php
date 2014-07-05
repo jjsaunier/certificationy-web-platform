@@ -116,7 +116,7 @@ class CertificationContext implements CertificationContextInterface
     /**
      * @param \string[] $excludeCategories
      */
-    public function setExcludeCategories($excludeCategories)
+    public function setExcludeCategories(Array $excludeCategories)
     {
         foreach ($excludeCategories as $categoryName) {
             $this->addExcludeCategory($categoryName);
@@ -150,7 +150,7 @@ class CertificationContext implements CertificationContextInterface
     /**
      * @param \string[] $excludeQuestions
      */
-    public function setExcludeQuestions($excludeQuestions)
+    public function setExcludeQuestions(Array $excludeQuestions)
     {
         foreach ($excludeQuestions as $questionName) {
             $this->addExcludeQuestion($questionName);
@@ -245,9 +245,9 @@ class CertificationContext implements CertificationContextInterface
     public static function __set_state(Array $data)
     {
         $certificationContext = new CertificationContext($data['name']);
-        $certificationContext->setNumberOfQuestions($data['numberOfQuestion']);
-        $certificationContext->setExcludeCategories($data['excludeCategory']);
-        $certificationContext->setExcludeQuestions($data['excludeQuestion']);
+        $certificationContext->setNumberOfQuestions($data['numberOfQuestions']);
+        $certificationContext->setExcludeCategories($data['excludeCategories']);
+        $certificationContext->setExcludeQuestions($data['excludeQuestions']);
         $certificationContext->setScore($data['score']);
         $certificationContext->setLanguage($data['language']);
         $certificationContext->setThreshold($data['threshold']);

@@ -57,7 +57,7 @@ class FileLoader extends Loader implements FileTransportInterface
         $this->certificationName = $certificationName;
 
         if (true === $this->exists($filename = $this->getFilePath($this->getFileName()))) {
-            $certification = (@include $filename);
+            $certification = include $filename;
 
             if ($this->validate($certification)) {
                 if (true === $certification->getContext()->getDebug()) {
