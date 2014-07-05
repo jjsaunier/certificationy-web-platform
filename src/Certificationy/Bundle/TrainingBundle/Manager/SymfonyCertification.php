@@ -9,8 +9,7 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
-
-class Certification extends \Certificationy\Component\Certy\Certification
+class SymfonyCertification extends \Certificationy\Component\Certy\Certification
 {
 
-} 
+}

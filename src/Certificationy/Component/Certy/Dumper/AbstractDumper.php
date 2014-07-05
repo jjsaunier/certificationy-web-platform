@@ -23,7 +23,7 @@ abstract class AbstractDumper implements DumperInterface
      * @param Certification        $certification
      * @param CertificationContext $context
      *
-     * @return mixed|string
+     * @return string
      */
     /* final */ public function dump(Certification $certification, CertificationContext $context)
     {

@@ -17,6 +17,7 @@ interface BuilderInterface
 {
     /**
      * @param CollectorInterface $collector
+     * @return void
      */
     public function __construct(CollectorInterface $collector = null);
 
@@ -28,7 +29,7 @@ interface BuilderInterface
     /**
      * @param BuilderPassInterface $builderPass
      *
-     * @return mixed
+     * @return Builder
      */
     public function addBuilderPass(BuilderPassInterface $builderPass);
 

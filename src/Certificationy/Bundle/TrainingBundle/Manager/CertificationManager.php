@@ -40,7 +40,6 @@ class CertificationManager
     }
 
     /**
-     * @param string $name
      */
     public function getCertification($certificationName)
     {

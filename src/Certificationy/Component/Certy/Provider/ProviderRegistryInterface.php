@@ -16,11 +16,11 @@ interface ProviderRegistryInterface
     const EXCEPTION_STRATEGY = 3;
 
     /**
-     * @param ProviderInterface $provider
-     * @param string[]|string   $certifications
-     * @param int               $strategy
+     * @param ProviderInterface $providers
+     * @param string[]|string   $certificationName
      *
      * @throws \Exception
+     * @return void
      */
     public function setProviders(Array $providers, $certificationName);
 
@@ -43,6 +43,7 @@ interface ProviderRegistryInterface
      * @param $certificationName
      *
      * @throws \Exception
+     * @return void
      */
     public function removeProvider($providerName, $certificationName);
 

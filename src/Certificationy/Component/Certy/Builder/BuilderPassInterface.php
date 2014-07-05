@@ -17,7 +17,7 @@ interface BuilderPassInterface
      * @param Builder              $builder
      * @param CertificationContext $certificationContext
      *
-     * @return mixed
+     * @return \Certificationy\Certification\Question[]
      */
     public function execute(Builder $builder, CertificationContext $certificationContext);
 }

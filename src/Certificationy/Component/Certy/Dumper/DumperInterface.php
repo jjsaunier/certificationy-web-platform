@@ -17,7 +17,7 @@ interface DumperInterface
     /**
      * @param Certification $certification
      *
-     * @return mixed
+     * @return string
      */
     public function dump(Certification $certification, CertificationContext $context);
 }

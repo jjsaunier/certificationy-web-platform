@@ -48,7 +48,6 @@ class FileLoader extends Loader implements FileTransportInterface
 
     /**
      * @param string   $certificationName
-     * @param callable $callable
      *
      * @return mixed
      * @throws \Exception
@@ -123,7 +122,6 @@ class FileLoader extends Loader implements FileTransportInterface
     }
 
     /**
-     * @param string $certificationName
      *
      * @return bool
      */

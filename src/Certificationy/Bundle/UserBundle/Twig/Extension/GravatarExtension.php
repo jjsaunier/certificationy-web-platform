@@ -82,6 +82,7 @@ class GravatarExtension extends \Twig_Extension
 
     /**
      * @param User $user
+     * @param integer $size
      *
      * @return string
      */
@@ -92,6 +93,7 @@ class GravatarExtension extends \Twig_Extension
 
     /**
      * @param User $user
+     * @param integer $size
      *
      * @return string
      */
