@@ -45,7 +45,7 @@ class CertificationFactory
      */
     public function createNamed($name, CertificationContext $context)
     {
-        if(null !== $this->loader){
+        if (null !== $this->loader) {
             $certification = $this->loader->load($name);
 
             if ($certification instanceof Certification) {
@@ -57,7 +57,7 @@ class CertificationFactory
 
         $certification = $this->builder->build($context);
 
-        if(null !== $this->dumper){
+        if (null !== $this->dumper) {
             $this->dumper->dump($certification, $context);
         }
 
@@ -111,4 +111,4 @@ class CertificationFactory
 
         return $this;
     }
-} 
+}

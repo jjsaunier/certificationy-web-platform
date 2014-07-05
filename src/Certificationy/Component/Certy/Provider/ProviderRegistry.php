@@ -32,13 +32,13 @@ class ProviderRegistry implements ProviderRegistryInterface
     {
         $providerName = $provider->getName();
 
-        if(!is_array($certificationsName)){
+        if (!is_array($certificationsName)) {
             $certificationsName = (array) $certificationsName;
         }
 
-        foreach($certificationsName as $certificationName){
+        foreach ($certificationsName as $certificationName) {
 
-            if(!isset($this->providerCollection[$certificationName])){
+            if (!isset($this->providerCollection[$certificationName])) {
                 $this->providerCollection[$certificationName] = array();
             }
 
@@ -69,7 +69,7 @@ class ProviderRegistry implements ProviderRegistryInterface
      */
     public function setProviders(Array $providers, $certificationName)
     {
-        foreach($providers as $provider){
+        foreach ($providers as $provider) {
             $this->addProvider($provider, $certificationName);
         }
     }
@@ -112,7 +112,7 @@ class ProviderRegistry implements ProviderRegistryInterface
 
         unset($this->providerCollection[$certificationName][$providerName]);
 
-        if(empty($this->providerCollection[$certificationName])){
+        if (empty($this->providerCollection[$certificationName])) {
             unset($this->providerCollection[$certificationName]);
         }
     }

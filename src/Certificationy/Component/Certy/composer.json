@@ -1,5 +1,5 @@
 {
-    "name": "certificationy/certification",
+    "name": "certificationy/certy",
     "description": "Create for real or training certification system",
     "keywords": [ "Certification", "Training", "Examen" ],
     "type": "library",
@@ -15,6 +15,6 @@
         "php": ">=5.4"
     },
     "autoload": {
-        "psr-4": { "Certificationy\\Component\\Certification\\": "" }
+        "psr-4": { "Certificationy\\Component\\Certy\\": "" }
     }
 }

@@ -19,4 +19,4 @@ interface LoaderInterface
      * @return Certification
      */
     public function load($certificationName);
-} 
+}

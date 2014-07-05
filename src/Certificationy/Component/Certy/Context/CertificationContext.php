@@ -83,13 +83,13 @@ class CertificationContext implements CertificationContextInterface
      */
     public function setThreshold(Array $certifiedThreshold)
     {
-        foreach($certifiedThreshold as $score => $thresholdName){
+        foreach ($certifiedThreshold as $score => $thresholdName) {
             $this->addThreshold($score, $thresholdName);
         }
     }
 
     /**
-     * @param int $score
+     * @param int    $score
      * @param string $thresholdName
      */
     public function addThreshold($score, $thresholdName)
@@ -118,7 +118,7 @@ class CertificationContext implements CertificationContextInterface
      */
     public function setExcludeCategories($excludeCategories)
     {
-        foreach($excludeCategories as $categoryName){
+        foreach ($excludeCategories as $categoryName) {
             $this->addExcludeCategory($categoryName);
         }
     }
@@ -152,7 +152,7 @@ class CertificationContext implements CertificationContextInterface
      */
     public function setExcludeQuestions($excludeQuestions)
     {
-        foreach($excludeQuestions as $questionName){
+        foreach ($excludeQuestions as $questionName) {
             $this->addExcludeQuestion($questionName);
         }
     }
@@ -168,7 +168,8 @@ class CertificationContext implements CertificationContextInterface
     /**
      * @param string $questionName
      */
-    public function removeExcludeQuestion($questionName){
+    public function removeExcludeQuestion($questionName)
+    {
         unset($this->excludeQuestions[$questionName]);
     }
 

@@ -9,8 +9,7 @@
 
 namespace Certificationy\Component\Certy\Context;
 
-
 interface CertificationContextInterface
 {
 
-} 
+}

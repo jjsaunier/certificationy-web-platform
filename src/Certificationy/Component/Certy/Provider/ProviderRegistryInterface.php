@@ -9,7 +9,6 @@
 
 namespace Certificationy\Component\Certy\Provider;
 
-
 interface ProviderRegistryInterface
 {
     const OVERRIDE_STRATEGY = 1;
@@ -54,4 +53,4 @@ interface ProviderRegistryInterface
      * @return bool
      */
     public function isRegister($providerName, $certificationName);
-} 
+}

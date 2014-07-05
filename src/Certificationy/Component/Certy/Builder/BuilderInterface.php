@@ -9,11 +9,9 @@
 
 namespace Certificationy\Component\Certy\Builder;
 
-
 use Certificationy\Component\Certy\Collector\CollectorInterface;
 use Certificationy\Component\Certy\Context\CertificationContextInterface;
 use Certificationy\Component\Certy\Model\Certification;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 interface BuilderInterface
 {
@@ -40,4 +38,4 @@ interface BuilderInterface
      * @return Certification
      */
     public function build(CertificationContextInterface $context);
-} 
+}

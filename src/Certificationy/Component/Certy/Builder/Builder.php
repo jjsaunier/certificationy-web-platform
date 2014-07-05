@@ -16,7 +16,6 @@ use Certificationy\Component\Certy\Model\Answer;
 use Certificationy\Component\Certy\Model\Category;
 use Certificationy\Component\Certy\Model\Certification;
 use Certificationy\Component\Certy\Model\Question;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class Builder implements BuilderInterface
 {
@@ -36,7 +35,7 @@ class Builder implements BuilderInterface
     protected $cache;
 
     /**
-     * @param CollectorInterface   $collector
+     * @param CollectorInterface $collector
      */
     public function __construct(CollectorInterface $collector = null)
     {
@@ -112,7 +111,7 @@ class Builder implements BuilderInterface
     {
         $oid = spl_object_hash($context);
 
-        if(!isset($this->cache[$oid])){
+        if (!isset($this->cache[$oid])) {
             foreach ($this->builderPass as $pass) {
                 $this->collector->addResources($pass->execute($this, $context));
             }
