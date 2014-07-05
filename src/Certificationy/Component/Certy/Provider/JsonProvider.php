@@ -9,22 +9,29 @@
 
 namespace Certificationy\Component\Certy\Provider;
 
-use Certificationy\Component\Certy\Collector\Resource;
 use Symfony\Component\Finder\Finder;
 
-class JsonProvider extends Provider
+class JsonProvider extends AbstractProvider implements FileProviderInterface
 {
     /**
-     * @var string
+     * @var Array
      */
-    private $path;
+    private $paths;
 
     /**
      * @param string $path
      */
-    public function __construct($path)
+    public function __construct(Array $paths)
     {
-        $this->path = $path;
+        $this->paths = $paths;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function addPath($path)
+    {
+        $this->paths[] = $path;
     }
 
     /**
@@ -33,16 +40,14 @@ class JsonProvider extends Provider
     public function load()
     {
         $finder = new Finder();
-        $finder->files()->in($this->path);
-        $resources = array();
+        $finder->files()->in($this->paths);
 
         foreach ($finder as $file) {
             $filename = explode('.', $file->getFilename());
             $content = json_decode(file_get_contents($file->getRealPath()), true);
-            $resources[] = new Resource($filename[0], $this->getName(), $content);
-        }
 
-        return $resources;
+            $this->addResource($filename[0], $content);
+        }
     }
 
     /**

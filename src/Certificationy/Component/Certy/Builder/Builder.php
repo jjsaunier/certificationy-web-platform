@@ -113,7 +113,9 @@ class Builder implements BuilderInterface
 
         if (!isset($this->cache[$oid])) {
             foreach ($this->builderPass as $pass) {
-                $this->collector->addResources($pass->execute($this, $context));
+                $pass->setProvidersResources($this->collector->getResources());
+                $pass->execute($this, $context);
+                $this->collector->setResources($pass->getProvidersResources());
             }
 
             $this->cache[$oid] = $this->normalize($context);

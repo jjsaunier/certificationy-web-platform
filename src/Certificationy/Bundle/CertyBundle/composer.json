@@ -1,0 +1,21 @@
+{
+    "name": "certificationy/certy-bundle",
+    "description": "Certy Bundle",
+    "keywords": ["Certification", "Certy", "Certificationy"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johann Saunier",
+            "email": "johann_27@hotmail.fr"
+        }
+    ],
+    "require":
+    {
+        "php": ">=5.3.0",
+        "certificationy/certy": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Certificationy\\Bundle\\Certy\\": "" }
+    }
+}

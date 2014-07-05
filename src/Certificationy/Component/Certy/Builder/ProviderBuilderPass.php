@@ -13,7 +13,7 @@ use Certificationy\Certification\Question;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Provider\ProviderRegistry;
 
-class ProviderBuildPass implements BuilderPassInterface
+class ProviderBuilderPass extends AbstractBuilderPass
 {
     /**
      * @var \Certificationy\Component\Certy\Provider\ProviderRegistry
@@ -36,12 +36,9 @@ class ProviderBuildPass implements BuilderPassInterface
      */
     public function execute(Builder $builder, CertificationContext $certificationContext)
     {
-        $data = array();
-
         foreach ($this->providerRegistry->getProviders($certificationContext->getName()) as $provider) {
-            $data[$provider->getName()] = $provider->load();
+            $provider->load();
+            $this->addProviderResources($provider->getName(), $provider->getResources());
         }
-
-        return $data;
     }
 }

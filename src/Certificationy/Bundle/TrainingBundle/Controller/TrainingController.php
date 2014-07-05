@@ -33,10 +33,8 @@ class TrainingController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $this->certificationManager->createCertification();
-
         $response = $this->engine->renderResponse('CertificationyTrainingBundle:Session:index.html.twig', array(
-
+            'certification' => $this->certificationManager->createCertification()
         ));
 
         return $response;

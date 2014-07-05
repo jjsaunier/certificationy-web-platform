@@ -1,0 +1,86 @@
+parameters:
+    certy_certification_builder_class: Certificationy\Component\Certy\Builder\Builder
+    certy_certification_provider_registry_class: Certificationy\Component\Certy\Provider\ProviderRegistry
+    certy_certification_providers_builder_pass_class: Certificationy\Component\Certy\Builder\ProviderBuilderPass
+    certy_certification_abstract_loader_class: Certificationy\Component\Certy\Loader\Loader
+    certy_certification_file_loader_class: Certificationy\Component\Certy\Loader\FileLoader
+    certy_certification_php_loader_class: Certificationy\Component\Certy\Loader\PhpLoader
+    certy_certification_abstract_dumper_class: Certificationy\Component\Certy\Dumper\AbstractDumper
+    certy_certification_file_dumper_class: Certificationy\Component\Certy\Dumper\FileDumper
+    certy_certification_php_dumper_class: Certificationy\Component\Certy\Dumper\PhpDumper
+    certy_certification_factory_class: Certificationy\Component\Certy\Factory\CertificationFactory
+
+    ### To be extracted in TrainingBundle
+    certy_certification_provider_json_provider_class: Certificationy\Component\Certy\Provider\JsonProvider
+    certy_certification_provider_yaml_provider_class: Certificationy\Component\Certy\Provider\YamlProvider
+    certy_certification_symfony2_context_class: Certificationy\Component\Certy\Context\CertificationContext
+
+services:
+    certy.certification.builder:
+        class: %certy_certification_builder_class%
+
+    certy.certification.provider_registry:
+        class: %certy_certification_provider_registry_class%
+
+    certy.certification.providers.builder_pass:
+        class: %certy_certification_providers_builder_pass_class%
+        arguments:
+            - @certy.certification.provider_registry
+        tags:
+            - { name: certy.builder_pass }
+
+    certy.certification.loader.abstract:
+        class: %certy_certification_abstract_loader_class%
+        abstract: true
+
+    certy.certification.loader.file:
+        class: %certy_certification_file_loader_class%
+        parent: certy.certification.loader.abstract
+        arguments:
+            - %kernel.cache_dir%
+            - 'certificationy'
+
+    certy.certification.loader.php:
+        class: %certy_certification_php_loader_class%
+        parent: certy.certification.loader.file
+
+    certy.certification.dumper.abstract:
+        class: %certy_certification_abstract_dumper_class%
+        abstract: true
+
+    certy.certification.dumper.file:
+        class: %certy_certification_file_dumper_class%
+        parent: certy.certification.dumper.abstract
+        arguments:
+            - %kernel.cache_dir%
+            - 'certificationy'
+
+    certy.certification.dumper.php:
+        class: %certy_certification_php_dumper_class%
+        parent: certy.certification.dumper.file
+
+    certy.certification.factory:
+        class: %certy_certification_factory_class%
+        calls:
+            - [ "setBuilder", [ @certy.certification.builder ] ]
+            - [ "setDumper", [ @certy.certification.dumper.php ] ]
+            - [ "setLoader", [ @certy.certification.loader.php ] ]
+            - [ "setProviderRegistry", [ @certy.certification.provider_registry ] ]
+
+    ### Provider to be extract in Training Bundle, is related to the final business
+    certy.certification.symfony2_context:
+        class: %certy_certification_symfony2_context_class%
+
+    certy.certification.json.provider:
+        class: %certy_certification_provider_json_provider_class%
+        arguments:
+            - [ %certy_file_provider_root_dir%/JSON ]
+        tags:
+            - { name: certy.provider, certification: 'symfony2' }
+
+    certy.certification.yaml.provider:
+        class: %certy_certification_provider_yaml_provider_class%
+        arguments:
+            - [ %certy_file_provider_root_dir%/YAML ]
+        tags:
+            - { name: certy.provider, certification: 'symfony2' }

@@ -9,35 +9,22 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
-use Certificationy\Component\Certy\Builder\Builder;
-use Certificationy\Component\Certy\Builder\ProviderBuildPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
-use Certificationy\Component\Certy\Dumper\PhpDumper;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
-use Certificationy\Component\Certy\Loader\PhpLoader;
-use Certificationy\Component\Certy\Provider\JsonProvider;
-use Certificationy\Component\Certy\Provider\ProviderRegistry;
-use Certificationy\Component\Certy\Provider\YamlProvider;
 
 class CertificationManager
 {
     /**
-     * @var string
+     * @var \Certificationy\Component\Certy\Factory\CertificationFactory
      */
-    protected $dataPath;
-
-    /**
-     * @var string
-     */
-    protected $kernelCacheDir;
+    protected $certificationFactory;
 
     /**
      * @param string $dataPath
      */
-    public function __construct($dataPath, $kernelCacheDir)
+    public function __construct(CertificationFactory $certificationFactory)
     {
-        $this->dataPath = $dataPath;
-        $this->kernelCacheDir = $kernelCacheDir;
+        $this->certificationFactory = $certificationFactory;
     }
 
     /**
@@ -52,9 +39,7 @@ class CertificationManager
      */
     public function createCertification()
     {
-        $certificationName = 'symfony2';
-
-        $certificationContext = new CertificationContext($certificationName);
+        $certificationContext = new CertificationContext('symfony2');
         $certificationContext->setNumberOfQuestions(100);
         $certificationContext->setScore(50);
         $certificationContext->setLanguage('en');
@@ -69,21 +54,27 @@ class CertificationManager
                 array('jesus_christ' => 100)
         ));
 
-        $providerRegistry = new ProviderRegistry();
-        $providerRegistry->addProvider(new YamlProvider($this->dataPath.'/YAML'), $certificationName);
-        $providerRegistry->addProvider(new JsonProvider($this->dataPath.'/JSON'), $certificationName);
+        return $this->certificationFactory->createNamed('symfony2', $certificationContext);
 
-        $builder = new Builder();
-        $builder->addBuilderPass(new ProviderBuildPass($providerRegistry));
+        /** Standalone example
 
-        $certificationFactory = new CertificationFactory();
-        $certificationFactory
-            ->setBuilder($builder)
-            ->setLoader(new PhpLoader($this->kernelCacheDir, 'certificationy'))
-            ->setDumper(new PhpDumper($this->kernelCacheDir))
-            ->setProviderRegistry($providerRegistry)
-        ;
+            $providerRegistry = new ProviderRegistry();
+            $providerRegistry->addProvider(new YamlProvider($this->dataPath.'/YAML'), $certificationName);
+            $providerRegistry->addProvider(new JsonProvider($this->dataPath.'/JSON'), $certificationName);
 
-        return $certificationFactory->createNamed('symfony2', $certificationContext);
+            $builder = new Builder();
+            $builder->addBuilderPass(new ProviderBuilderPass($providerRegistry));
+
+            $certificationFactory = new CertificationFactory();
+            $certificationFactory
+                ->setBuilder($builder)
+                ->setLoader(new PhpLoader($this->kernelCacheDir, 'certificationy'))
+                ->setDumper(new PhpDumper($this->kernelCacheDir))
+                ->setProviderRegistry($providerRegistry)
+            ;
+
+           return $certificationFactory->createNamed('symfony2', $certificationContext);
+
+         **/
     }
 }

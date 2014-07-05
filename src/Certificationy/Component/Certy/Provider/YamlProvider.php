@@ -13,19 +13,27 @@ use Certificationy\Component\Certy\Collector\Resource;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
-class YamlProvider extends Provider
+class YamlProvider extends AbstractProvider implements FileProviderInterface
 {
     /**
-     * @var string
+     * @var string[]
      */
-    private $path;
+    private $paths;
+
+    /**
+     * @param string[] $path
+     */
+    public function __construct(Array $paths)
+    {
+        $this->paths = $paths;
+    }
 
     /**
      * @param string $path
      */
-    public function __construct($path)
+    public function addPath($path)
     {
-        $this->path = $path;
+        $this->paths[] = $path;
     }
 
     /**
@@ -34,16 +42,13 @@ class YamlProvider extends Provider
     public function load()
     {
         $finder = new Finder();
-        $finder->files()->in($this->path);
-        $resources = array();
+        $finder->files()->in($this->paths);
 
         foreach ($finder as $file) {
             $filename = explode('.', $file->getFilename());
             $content = Yaml::parse(file_get_contents($file->getRealPath()));
-            $resources[] = new Resource($filename[0], $this->getName(), $content);
+            $this->addResource($filename[0], $content);
         }
-
-        return $resources;
     }
 
     /**

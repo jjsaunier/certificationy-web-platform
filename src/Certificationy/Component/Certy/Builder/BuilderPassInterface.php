@@ -20,4 +20,15 @@ interface BuilderPassInterface
      * @return \Certificationy\Certification\Question[]
      */
     public function execute(Builder $builder, CertificationContext $certificationContext);
+
+    /**
+     * @param string$providerName
+     * @param array $resources
+     */
+    public function addProviderResources($providerName, Array $resources);
+
+    /**
+     * @return array
+     */
+    public function getProvidersResources();
 }

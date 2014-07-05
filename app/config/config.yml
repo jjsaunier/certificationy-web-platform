@@ -195,5 +195,8 @@ braincrafted_bootstrap:
         knp_menu: true
         knp_paginator: true
 
-certificationy_training:
-    data_path: %kernel.root_dir%/../src/Certificationy/Certification/Data
+certificationy_certy:
+    debug: %kernel.debug%
+    provider:
+        file:
+            root_dir: %kernel.root_dir%/../src/Certificationy/Certification/Data

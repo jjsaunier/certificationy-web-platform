@@ -47,7 +47,7 @@ class FileLoader extends Loader implements FileTransportInterface
     }
 
     /**
-     * @param string   $certificationName
+     * @param string $certificationName
      *
      * @return mixed
      * @throws \Exception

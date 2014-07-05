@@ -16,7 +16,7 @@ use Certificationy\Component\Certy\Model\Certification;
 interface BuilderInterface
 {
     /**
-     * @param CollectorInterface $collector
+     * @param  CollectorInterface $collector
      * @return void
      */
     public function __construct(CollectorInterface $collector = null);

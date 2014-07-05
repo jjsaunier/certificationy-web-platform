@@ -45,15 +45,15 @@ class ProviderRegistry implements ProviderRegistryInterface
             $providerCollection =& $this->providerCollection[$certificationName];
 
             switch ($strategy) {
-                case static::OVERRIDE_STRATEGY:
+                case self::OVERRIDE_STRATEGY:
                     $providerCollection[$providerName] = $provider;
                     break;
-                case static::IGNORE_STRATEGY:
+                case self::IGNORE_STRATEGY:
                     if (!$this->isRegister($providerName, $certificationName)) {
                         $providerCollection[$providerName] = $provider;
                     }
                     break;
-                case static::EXCEPTION_STRATEGY:
+                case self::EXCEPTION_STRATEGY:
                     if ($this->isRegister($providerName, $certificationName)) {
                         throw new \Exception(sprintf('Provider %s is already register for certification', $providerName));
                     }
@@ -75,7 +75,7 @@ class ProviderRegistry implements ProviderRegistryInterface
     }
 
     /**
-     * @return ProviderInterface
+     * @return ProviderInterface[]
      */
     public function getProviders($certificationName)
     {

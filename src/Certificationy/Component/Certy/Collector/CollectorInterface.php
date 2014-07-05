@@ -11,5 +11,23 @@ namespace Certificationy\Component\Certy\Collector;
 
 interface CollectorInterface extends \Countable
 {
+    /**
+     * @param string $providerName
+     * @param array  $resource
+     */
+    public function addResource($providerName, Array $resource);
 
+    /**
+     * @param array $resources
+     */
+    public function setResources(Array $resources);
+    /**
+     * @return Resource[]
+     */
+    public function getResources();
+
+    /**
+     * @return string[]
+     */
+    public function getProvidersName();
 }

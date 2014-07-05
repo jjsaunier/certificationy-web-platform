@@ -9,13 +9,10 @@
 
 namespace Certificationy\Component\Certy\Provider;
 
-class Provider implements ProviderInterface
+interface FileProviderInterface
 {
     /**
-     * @return string
+     * @param string $path
      */
-    public function getName()
-    {
-        return 'default';
-    }
+    public function addPath($path);
 }

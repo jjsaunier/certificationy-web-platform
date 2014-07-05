@@ -44,7 +44,7 @@ class CertificationFactory
      */
     public function createNamed($name, CertificationContext $context)
     {
-        if($name !== $context->getName()){
+        if ($name !== $context->getName()) {
             throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
         }
 
@@ -52,7 +52,6 @@ class CertificationFactory
             $certification = $this->loader->load($name);
 
             if ($certification instanceof Certification) {
-
                 return $certification;
             }
         }

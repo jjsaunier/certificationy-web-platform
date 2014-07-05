@@ -11,7 +11,7 @@ namespace Certificationy\Component\Certy\Loader;
 
 use Certificationy\Component\Certy\Model\Certification;
 
-class Loader implements LoaderInterface
+abstract class Loader implements LoaderInterface
 {
     /**
      * @param $certificationName

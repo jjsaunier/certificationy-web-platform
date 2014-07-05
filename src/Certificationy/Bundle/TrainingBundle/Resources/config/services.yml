@@ -27,5 +27,4 @@ services:
     certificationy.training.certification_manager:
         class: Certificationy\Bundle\TrainingBundle\Manager\CertificationManager
         arguments:
-            - %certy_file_provider_root_dir%
-            - %kernel.cache_dir%
+            - @certy.certification.factory

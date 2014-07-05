@@ -16,4 +16,16 @@ interface ProviderInterface
      */
     public function getName();
 
+    /**
+     * @param $filename
+     * @param $content
+     *
+     * @return mixed
+     */
+    public function addResource($filename, $content);
+
+    /**
+     * @return Resource[]
+     */
+    public function getResources();
 }
