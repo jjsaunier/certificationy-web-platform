@@ -9,8 +9,12 @@ parameters:
     certy_certification_file_dumper_class: Certificationy\Component\Certy\Dumper\FileDumper
     certy_certification_php_dumper_class: Certificationy\Component\Certy\Dumper\PhpDumper
     certy_certification_factory_class: Certificationy\Component\Certy\Factory\CertificationFactory
+    certy_certification_context_registry_class: Certificationy\Component\Certy\Context\ContextRegistry
 
 services:
+    certy.certification.context_registry:
+        class: %certy_certification_context_registry_class%
+
     certy.certification.builder:
         class: %certy_certification_builder_class%
 
@@ -61,3 +65,4 @@ services:
             - [ "setDumper", [ @certy.certification.dumper.php ] ]
             - [ "setLoader", [ @certy.certification.loader.php ] ]
             - [ "setProviderRegistry", [ @certy.certification.provider_registry ] ]
+            - [ "setContextRegistry", [ @certy.certification.context_registry ] ]

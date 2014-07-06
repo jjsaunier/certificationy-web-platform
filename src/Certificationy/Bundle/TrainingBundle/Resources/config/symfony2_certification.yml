@@ -8,6 +8,8 @@ services:
             - %symfony_certification_name%
         calls:
             - [ "setDebug", [ %kernel.debug% ] ]
+        tags:
+            - { name: certy.context }
 
     certificationy.training.certification.json.provider:
         class: Certificationy\Component\Certy\Provider\JsonProvider
@@ -29,4 +31,3 @@ services:
         factory_method: createNamed
         arguments:
             - %symfony_certification_name%
-            - @certificationy.training.certification.symfony2_context

@@ -34,12 +34,20 @@ class TrainingController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $this->menuBuilder->getChild('training')->getChild('new_session')->setCurrent(true);
+        $this->menuBuilder->getChild('training')->setCurrent(true);
 
         $response = $this->engine->renderResponse('CertificationyTrainingBundle:Session:index.html.twig', array(
-            'certification' => $this->certification
+            'certification_metrics' => $this->certification->getMetrics()
         ));
 
         return $response;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function certificationAction(Request $request)
+    {
+        $this->menuBuilder->getChild('training')->setCurrent(true);
     }
 }

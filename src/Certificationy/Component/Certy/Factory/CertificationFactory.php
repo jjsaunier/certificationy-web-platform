@@ -11,6 +11,7 @@ namespace Certificationy\Component\Certy\Factory;
 
 use Certificationy\Component\Certy\Builder\BuilderInterface;
 use Certificationy\Component\Certy\Context\CertificationContext;
+use Certificationy\Component\Certy\Context\ContextRegistry;
 use Certificationy\Component\Certy\Dumper\DumperInterface;
 use Certificationy\Component\Certy\Loader\LoaderInterface;
 use Certificationy\Component\Certy\Provider\ProviderRegistryInterface;
@@ -38,11 +39,24 @@ class CertificationFactory
     protected $dumper;
 
     /**
+     * @var ContextRegistry|null
+     */
+    protected $contextRegistry;
+
+    /**
      * @param string               $name
      * @param CertificationContext $context
      */
-    public function createNamed($name, CertificationContext $context)
+    public function createNamed($name, CertificationContext $context = null)
     {
+        if(null === $context){
+            if(null === $this->contextRegistry){
+                throw new \Exception('You must define a context for your certification');
+            }
+
+            $context = $this->contextRegistry->getContext($name);
+        }
+
         if ($name !== $context->getName()) {
             throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
         }
@@ -106,5 +120,13 @@ class CertificationFactory
         $this->dumper = $dumper;
 
         return $this;
+    }
+
+    /**
+     * @param ContextRegistry $contextRegistry
+     */
+    public function setContextRegistry(ContextRegistry $contextRegistry)
+    {
+        $this->contextRegistry = $contextRegistry;
     }
 }

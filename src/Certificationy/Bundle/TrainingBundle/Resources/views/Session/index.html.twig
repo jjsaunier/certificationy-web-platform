@@ -6,7 +6,7 @@
     <div class="jumbotron">
         <h1>{{ 'page.heading'|trans }}</h1>
         <p class="lead">{{ 'page.heading_description'|trans }}</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">{{ 'page.heading_button'|trans }}</a></p>
+        <p><a class="btn btn-lg btn-success" href="{{ path('certification', { name: 'symfony2' }) }}" role="button">{{ 'page.heading_button'|trans }}</a></p>
     </div>
 
     <div class="row">
@@ -14,9 +14,9 @@
             <h2>Community power</h2>
             <p>
                 <ul>
-                    <li>Categories : {{ certification.metrics.categoryCount }}</li>
-                    <li>Questions : {{ certification.metrics.questionCount }}</li>
-                    <li>Answers : {{ certification.metrics.answerCount }}</li>
+                    <li>Categories : {{ certification_metrics.categoryCount }}</li>
+                    <li>Questions : {{ certification_metrics.questionCount }}</li>
+                    <li>Answers : {{ certification_metrics.answerCount }}</li>
                 </ul>
             </p>
             <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>

@@ -9,10 +9,22 @@
 
 namespace Certificationy\Bundle\CertyBundle\Controller;
 
-class CertyController
-{
-    public function __construct()
-    {
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
+class CertyController extends Controller
+{
+    /**
+     * @param Request $request
+     */
+    public function certificationAction(Request $request, $name)
+    {
+        $factory = $this->get('certy.certification.factory');
+
+        $certification = $factory->createNamed($name);
+
+        return $this->render('CertificationyCertyBundle:Certification:questions.html.twig', array(
+            'certification' => $certification
+        ));
     }
-} 
+}

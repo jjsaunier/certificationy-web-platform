@@ -1,0 +1,6 @@
+certification:
+    path: /{name}
+    defaults:
+        _controller: CertificationyCertyBundle:Certy:Certification
+    requirements:
+        _method: GET

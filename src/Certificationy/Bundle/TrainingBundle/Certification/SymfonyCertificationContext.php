@@ -13,7 +13,7 @@ use Certificationy\Component\Certy\Context\CertificationContext;
 
 class SymfonyCertificationContext extends CertificationContext
 {
-    public function initialized()
+    protected function initialized()
     {
         $this->setNumberOfQuestions(100);
         $this->setScore(50);
