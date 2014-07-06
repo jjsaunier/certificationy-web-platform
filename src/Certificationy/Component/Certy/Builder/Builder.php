@@ -15,6 +15,7 @@ use Certificationy\Component\Certy\Context\CertificationContextInterface;
 use Certificationy\Component\Certy\Model\Answer;
 use Certificationy\Component\Certy\Model\Category;
 use Certificationy\Component\Certy\Model\Certification;
+use Certificationy\Component\Certy\Model\Metrics;
 use Certificationy\Component\Certy\Model\Question;
 
 class Builder implements BuilderInterface
@@ -73,6 +74,7 @@ class Builder implements BuilderInterface
     {
         $certification = static::createCertification();
         $certification->setContext($context);
+        $metrics = $certification->getMetrics();
 
         foreach ($this->collector->getResources() as $resource) {
             $resourceContent = $resource->getContent();
@@ -80,15 +82,18 @@ class Builder implements BuilderInterface
             $category = new Category();
             $category->setLabel($resourceContent['category']);
             $category->setName($resource->getName());
+            $metrics->increment(Metrics::CATEGORY);
 
             foreach ($resourceContent['questions'] as $questionContent) {
                 $question = new Question();
                 $question->setLabel($questionContent['question']);
+                $metrics->increment(Metrics::QUESTION);
 
                 foreach ($questionContent['answers'] as $answerContent) {
                     $answer = new Answer();
                     $answer->setLabel($answerContent['value']);
                     $answer->setExpected($answerContent['correct']);
+                    $metrics->increment(Metrics::ANSWER);
 
                     $question->addAnswer($answer);
                 }

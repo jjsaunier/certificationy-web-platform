@@ -65,6 +65,7 @@ class Question
         if (null === $answer->getQuestion()) {
             $answer->setQuestion($this);
         }
+
         $this->answers->add($answer);
     }
 

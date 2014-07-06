@@ -19,6 +19,11 @@ class Certification
     protected $categories;
 
     /**
+     * @var Metrics
+     */
+    protected $metrics;
+
+    /**
      * @var CertificationContext
      */
     protected $context;
@@ -26,6 +31,7 @@ class Certification
     public function __construct()
     {
         $this->categories = new ModelCollection();
+        $this->metrics = new Metrics();
     }
 
     /**
@@ -57,6 +63,14 @@ class Certification
     }
 
     /**
+     * @return Metrics
+     */
+    public function getMetrics()
+    {
+        return $this->metrics;
+    }
+
+    /**
      * @param ModelCollection $categories
      */
     public function setCategories(ModelCollection $categories)
@@ -83,6 +97,14 @@ class Certification
     }
 
     /**
+     * @param Metrics $metrics
+     */
+    public function setMetrics(Metrics $metrics)
+    {
+        $this->metrics = $metrics;
+    }
+
+    /**
      * @param array $data
      *
      * @return Certification
@@ -92,6 +114,7 @@ class Certification
         $certification = new Certification();
         $certification->setCategories($data['categories']);
         $certification->setContext($data['context']);
+        $certification->setMetrics($data['metrics']);
 
         return $certification;
     }

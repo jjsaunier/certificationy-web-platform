@@ -10,11 +10,6 @@ parameters:
     certy_certification_php_dumper_class: Certificationy\Component\Certy\Dumper\PhpDumper
     certy_certification_factory_class: Certificationy\Component\Certy\Factory\CertificationFactory
 
-    ### To be extracted in TrainingBundle
-    certy_certification_provider_json_provider_class: Certificationy\Component\Certy\Provider\JsonProvider
-    certy_certification_provider_yaml_provider_class: Certificationy\Component\Certy\Provider\YamlProvider
-    certy_certification_symfony2_context_class: Certificationy\Component\Certy\Context\CertificationContext
-
 services:
     certy.certification.builder:
         class: %certy_certification_builder_class%
@@ -66,21 +61,3 @@ services:
             - [ "setDumper", [ @certy.certification.dumper.php ] ]
             - [ "setLoader", [ @certy.certification.loader.php ] ]
             - [ "setProviderRegistry", [ @certy.certification.provider_registry ] ]
-
-    ### Provider to be extract in Training Bundle, is related to the final business
-    certy.certification.symfony2_context:
-        class: %certy_certification_symfony2_context_class%
-
-    certy.certification.json.provider:
-        class: %certy_certification_provider_json_provider_class%
-        calls:
-            - [ "setOptions", [ { path: %certy_file_provider_root_dir%/JSON } ] ]
-        tags:
-            - { name: certy.provider, certification: 'symfony2' }
-
-    certy.certification.yaml.provider:
-        class: %certy_certification_provider_yaml_provider_class%
-        calls:
-            - [ "setOptions", [ { path: %certy_file_provider_root_dir%/YAML } ] ]
-        tags:
-            - { name: certy.provider, certification: 'symfony2' }

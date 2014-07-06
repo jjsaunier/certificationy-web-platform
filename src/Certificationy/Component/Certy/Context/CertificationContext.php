@@ -60,6 +60,13 @@ class CertificationContext implements CertificationContextInterface
         $this->threshold = array();
         $this->excludeCategories = array();
         $this->excludeQuestions = array();
+
+        $this->initialized();
+    }
+
+    protected function initialized()
+    {
+
     }
 
     /**

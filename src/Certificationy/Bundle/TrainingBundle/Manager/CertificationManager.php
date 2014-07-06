@@ -9,6 +9,7 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
+use Certificationy\Bundle\TrainingBundle\Certification\SymfonyCertification;
 use Certificationy\Component\Certy\Builder\Builder;
 use Certificationy\Component\Certy\Builder\ProviderBuilderPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
@@ -46,24 +47,24 @@ class CertificationManager
      */
     public function createCertification()
     {
-        $certificationContext = new CertificationContext('symfony2');
-        $certificationContext->setNumberOfQuestions(100);
-        $certificationContext->setScore(50);
-        $certificationContext->setLanguage('en');
-        $certificationContext->setDebug(false);
-        $certificationContext->setThreshold(array(
-                array('newbie' => 30),
-                array('beginner' => 45),
-                array('not_bad' => 50),
-                array('good' => 75),
-                array('very_good' => 85),
-                array('expert' => 95),
-                array('jesus_christ' => 100)
-        ));
+//        $certificationContext = new CertificationContext('symfony2');
+//        $certificationContext->setNumberOfQuestions(100);
+//        $certificationContext->setScore(50);
+//        $certificationContext->setLanguage('en');
+//        $certificationContext->setDebug(false);
+//        $certificationContext->setThreshold(array(
+//                array('newbie' => 30),
+//                array('beginner' => 45),
+//                array('not_bad' => 50),
+//                array('good' => 75),
+//                array('very_good' => 85),
+//                array('expert' => 95),
+//                array('jesus_christ' => 100)
+//        ));
 
 
         //Example with CertyBundle
-        return $this->certificationFactory->createNamed('symfony2', $certificationContext);
+//        return $this->certificationFactory->createNamed('symfony2', $certificationContext); //Create with name
 
 //        Example with Certy component
 

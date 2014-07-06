@@ -7,15 +7,9 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Component\Certy;
+namespace Certificationy\Bundle\CertyBundle\Manager;
 
-/**
- * Entry point to create certification
- * Class Certification
- *
- * @package Certificationy\Component\Certification
- */
-class Certification
+class CertificationManager
 {
 
-}
+} 

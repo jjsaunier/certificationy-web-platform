@@ -1,0 +1,3 @@
+certy_certification:
+    resource: @CertificationyCertyBundle/Resources/config/routing/certification.yml
+    prefix: /

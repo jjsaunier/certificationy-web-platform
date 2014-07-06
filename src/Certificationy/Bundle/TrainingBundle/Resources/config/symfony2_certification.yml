@@ -1,0 +1,32 @@
+parameters:
+    symfony_certification_name: 'symfony2'
+
+services:
+    certificationy.training.certification.symfony2_context:
+        class: Certificationy\Bundle\TrainingBundle\Certification\SymfonyCertificationContext
+        arguments:
+            - %symfony_certification_name%
+        calls:
+            - [ "setDebug", [ %kernel.debug% ] ]
+
+    certificationy.training.certification.json.provider:
+        class: Certificationy\Component\Certy\Provider\JsonProvider
+        calls:
+            - [ "setOptions", [ { path: %certy_file_provider_root_dir%/JSON } ] ]
+        tags:
+            - { name: certy.provider, certification: %symfony_certification_name% }
+
+    certificationy.training.certification.yaml.provider:
+        class: Certificationy\Component\Certy\Provider\YamlProvider
+        calls:
+            - [ "setOptions", [ { path: %certy_file_provider_root_dir%/YAML } ] ]
+        tags:
+            - { name: certy.provider, certification: %symfony_certification_name% }
+
+    certification.training.certification.symfony:
+        class: Certificationy\Bundle\TrainingBundle\Certification\SymfonyCertificationContext
+        factory_service: certy.certification.factory
+        factory_method: createNamed
+        arguments:
+            - %symfony_certification_name%
+            - @certificationy.training.certification.symfony2_context

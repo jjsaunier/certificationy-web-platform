@@ -1,5 +1,3 @@
-parameters:
-
 services:
     certificationy.training.menu_builder:
         class: Certificationy\Bundle\TrainingBundle\Menu\TrainingBuilder
@@ -21,10 +19,6 @@ services:
     certificationy.training.training_controller:
         class: Certificationy\Bundle\TrainingBundle\Controller\TrainingController
         parent: certificationy.web.abstract_controller
+        scope: request
         arguments:
-            - @certificationy.training.certification_manager
-
-    certificationy.training.certification_manager:
-        class: Certificationy\Bundle\TrainingBundle\Manager\CertificationManager
-        arguments:
-            - @certy.certification.factory
+            - @certification.training.certification.symfony

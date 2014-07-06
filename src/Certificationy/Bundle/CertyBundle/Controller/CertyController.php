@@ -7,9 +7,12 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Bundle\TrainingBundle\Manager;
+namespace Certificationy\Bundle\CertyBundle\Controller;
 
-class SymfonyCertification extends \Certificationy\Component\Certy\Certification
+class CertyController
 {
+    public function __construct()
+    {
 
-}
+    }
+} 

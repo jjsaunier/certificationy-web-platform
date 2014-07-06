@@ -1,3 +1,8 @@
 training:
     menu: "Trainning"
     new_session: "New session"
+
+page:
+    heading: Are you ready ?
+    heading_button: Start mock certification
+    heading_description: Train you to become an expert, or just train to stay on the top.

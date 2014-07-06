@@ -3,12 +3,14 @@ parameters:
 services:
     certificationy.web.abstract_controller:
         class: Certificationy\Bundle\WebBundle\Controller\AbstractController
+        scope: request
         calls:
             - [ "setRequestStack", [ @request_stack ] ]
             - [ "setEngine", [ @templating ] ]
-            - [ "setMenuCollection", [ { } ] ]
+            - [ "setMenuBuilder", [ @certificationy.training.menu ] ]
             - [ "setRouter", [ @router ] ]
 
     certificationy.web.site_controller:
         class: Certificationy\Bundle\WebBundle\Controller\SiteController
         parent: certificationy.web.abstract_controller
+        scope: request

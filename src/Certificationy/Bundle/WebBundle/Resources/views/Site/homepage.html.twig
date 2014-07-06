@@ -12,6 +12,12 @@
     </div>
 {% endblock content %}
 
+{% block wrapper %}
+    <div class="container-fluid">
+        {{ block('content') }}
+    </div>
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
 

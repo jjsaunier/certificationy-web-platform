@@ -25,12 +25,14 @@
         {% endblock menu %}
 
         {% block flashbag %}
-            {{ include('@BraincraftedBootstrap/flash.html.twig', { close: true } ) }}
+            <div class="container">
+                {{ include('@BraincraftedBootstrap/flash.html.twig', { close: true } ) }}
+            </div>
         {% endblock %}
 
         {% block container %}
             {% block wrapper %}
-                <div class="container-fluid">
+                <div class="container">
                     {% block content %}{% endblock %}
                 </div>
             {% endblock %}

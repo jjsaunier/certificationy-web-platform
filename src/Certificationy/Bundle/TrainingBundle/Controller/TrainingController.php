@@ -11,6 +11,7 @@ namespace Certificationy\Bundle\TrainingBundle\Controller;
 
 use Certificationy\Bundle\TrainingBundle\Manager\CertificationManager;
 use Certificationy\Bundle\WebBundle\Controller\AbstractController;
+use Certificationy\Component\Certy\Model\Certification;
 use Symfony\Component\HttpFoundation\Request;
 
 class TrainingController extends AbstractController
@@ -18,14 +19,14 @@ class TrainingController extends AbstractController
     /**
      * @var CertificationManager
      */
-    protected $certificationManager;
+    protected $certification;
 
     /**
      * @param CertificationManager $certificationManager
      */
-    public function __construct(CertificationManager $certificationManager)
+    public function __construct(Certification $certification)
     {
-        $this->certificationManager = $certificationManager;
+        $this->certification = $certification;
     }
 
     /**
@@ -33,8 +34,10 @@ class TrainingController extends AbstractController
      */
     public function indexAction(Request $request)
     {
+        $this->menuBuilder->getChild('training')->getChild('new_session')->setCurrent(true);
+
         $response = $this->engine->renderResponse('CertificationyTrainingBundle:Session:index.html.twig', array(
-            'certification' => $this->certificationManager->createCertification()
+            'certification' => $this->certification
         ));
 
         return $response;

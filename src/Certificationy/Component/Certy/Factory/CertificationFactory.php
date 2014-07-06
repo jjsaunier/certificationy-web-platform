@@ -13,7 +13,6 @@ use Certificationy\Component\Certy\Builder\BuilderInterface;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Dumper\DumperInterface;
 use Certificationy\Component\Certy\Loader\LoaderInterface;
-use Certificationy\Component\Certy\Model\Certification;
 use Certificationy\Component\Certy\Provider\ProviderRegistryInterface;
 
 class CertificationFactory

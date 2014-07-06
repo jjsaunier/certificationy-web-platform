@@ -38,3 +38,7 @@ certificationy_web:
 certification_training:
     resource: @CertificationyTrainingBundle/Resources/config/routing.yml
     prefix: /training
+
+certy:
+    resource: @CertificationyCertyBundle/Resources/config/routing.yml
+    prefix: /certification
