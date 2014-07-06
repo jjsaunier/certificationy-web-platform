@@ -19,8 +19,7 @@ class YamlProvider extends AbstractFileProvider
     protected function loadFile(\SplFileInfo $file)
     {
         $filename = explode('.', $file->getFilename());
-        $content = Yaml::parse(file_get_contents($file->getRealPath()));
-        $this->addResource($filename[0], $content);
+        $this->addResource($filename[0], Yaml::parse(file_get_contents($file->getRealPath())));
     }
 
     /**
