@@ -48,12 +48,8 @@ class CertificationFactory
             throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
         }
 
-        if (null !== $this->loader) {
-            $certification = $this->loader->load($name);
-
-            if ($certification instanceof Certification) {
-                return $certification;
-            }
+        if (null !== $this->loader && false === $context->getDebug()) {
+            return $this->loader->load($name);
         }
 
         $certification = $this->builder->build($context);

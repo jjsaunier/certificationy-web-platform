@@ -28,4 +28,9 @@ interface ProviderInterface
      * @return Resource[]
      */
     public function getResources();
+
+    /**
+     * @return Resource[]
+     */
+    public function load();
 }

@@ -60,10 +60,6 @@ class FileLoader extends Loader implements FileTransportInterface
             $certification = include $filename;
 
             if ($this->validate($certification)) {
-                if (true === $certification->getContext()->getDebug()) {
-                    return false;
-                }
-
                 return $certification;
             } else {
                 throw new \Exception('You must return Certificationy\Component\Certy\Model\Certification object');

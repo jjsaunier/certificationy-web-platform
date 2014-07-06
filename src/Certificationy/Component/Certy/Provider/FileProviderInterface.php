@@ -9,10 +9,9 @@
 
 namespace Certificationy\Component\Certy\Provider;
 
-interface FileProviderInterface
+use Certificationy\Component\Certy\Provider\Configuration\ProviderConfigurableInterface;
+
+interface FileProviderInterface extends ProviderConfigurableInterface
 {
-    /**
-     * @param string $path
-     */
-    public function addPath($path);
+
 }

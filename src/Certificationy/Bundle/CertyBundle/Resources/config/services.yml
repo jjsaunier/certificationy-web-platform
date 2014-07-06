@@ -73,14 +73,14 @@ services:
 
     certy.certification.json.provider:
         class: %certy_certification_provider_json_provider_class%
-        arguments:
-            - [ %certy_file_provider_root_dir%/JSON ]
+        calls:
+            - [ "setOptions", [ { path: %certy_file_provider_root_dir%/JSON } ] ]
         tags:
             - { name: certy.provider, certification: 'symfony2' }
 
     certy.certification.yaml.provider:
         class: %certy_certification_provider_yaml_provider_class%
-        arguments:
-            - [ %certy_file_provider_root_dir%/YAML ]
+        calls:
+            - [ "setOptions", [ { path: %certy_file_provider_root_dir%/YAML } ] ]
         tags:
             - { name: certy.provider, certification: 'symfony2' }
