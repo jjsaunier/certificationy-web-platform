@@ -44,4 +44,4 @@ class ProviderConfiguration implements ProviderConfigurationInterface
     {
         return $this->options;
     }
-} 
+}

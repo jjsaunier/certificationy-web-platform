@@ -24,4 +24,4 @@ interface ProviderConfigurationInterface
      * @return array
      */
     public function getOptions();
-} 
+}

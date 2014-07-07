@@ -11,7 +11,13 @@ namespace Certificationy\Component\Certy\Context;
 
 interface CertificationContextInterface
 {
+    /**
+     * @return string
+     */
     public function getName();
 
+    /**
+     * @return boolean
+     */
     public function getDebug();
 }

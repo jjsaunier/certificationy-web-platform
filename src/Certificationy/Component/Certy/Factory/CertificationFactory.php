@@ -49,8 +49,8 @@ class CertificationFactory
      */
     public function createNamed($name, CertificationContext $context = null)
     {
-        if(null === $context){
-            if(null === $this->contextRegistry){
+        if (null === $context) {
+            if (null === $this->contextRegistry) {
                 throw new \Exception('You must define a context for your certification');
             }
 

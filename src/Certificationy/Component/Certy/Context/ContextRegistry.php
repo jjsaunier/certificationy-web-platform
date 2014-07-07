@@ -25,7 +25,6 @@ class ContextRegistry
 
     /**
      * @param CertificationContextInterface $context
-     * @param string                        $name
      */
     public function addContext(CertificationContextInterface $context)
     {
@@ -33,11 +32,12 @@ class ContextRegistry
     }
 
     /**
+     * @param string $name
      * @return CertificationContextInterface
      */
     public function getContext($name)
     {
-        if(!isset($this->contexts[$name])){
+        if (!isset($this->contexts[$name])) {
             throw new \Exception(sprintf(
                 'Context %s is not registered, available are [ %s ]',
                 $name,
@@ -55,4 +55,4 @@ class ContextRegistry
     {
         return $this->contexts;
     }
-} 
+}
