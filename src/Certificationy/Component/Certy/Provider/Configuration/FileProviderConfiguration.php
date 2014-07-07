@@ -35,8 +35,8 @@ class FileProviderConfiguration extends ProviderConfiguration
         ));
 
         $resolver->setNormalizers(array(
-            'path' => function(Options $options, $value){
-                if(!is_array($value)){
+            'path' => function (Options $options, $value) {
+                if (!is_array($value)) {
                     $value = (array) $value;
                 }
 
@@ -44,4 +44,4 @@ class FileProviderConfiguration extends ProviderConfiguration
             }
         ));
     }
-} 
+}

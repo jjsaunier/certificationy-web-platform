@@ -42,7 +42,7 @@ class Metrics
      */
     public function increment($type)
     {
-        switch($type){
+        switch ($type) {
             case self::CATEGORY:
                 $this->categoryCount++;
             break;
@@ -60,7 +60,7 @@ class Metrics
      */
     public function decrement($type)
     {
-        switch($type){
+        switch ($type) {
             case self::CATEGORY:
                 $this->categoryCount--;
                 break;
@@ -124,7 +124,7 @@ class Metrics
     /**
      * @param array $data
      *
-     * @return Question
+     * @return Metrics
      */
     public static function __set_state(Array $data)
     {

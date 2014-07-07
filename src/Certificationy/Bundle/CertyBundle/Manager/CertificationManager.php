@@ -12,4 +12,4 @@ namespace Certificationy\Bundle\CertyBundle\Manager;
 class CertificationManager
 {
 
-} 
+}

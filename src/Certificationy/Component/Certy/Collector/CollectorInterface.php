@@ -14,11 +14,13 @@ interface CollectorInterface extends \Countable
     /**
      * @param string $providerName
      * @param array  $resource
+     * @return void
      */
     public function addResource($providerName, Array $resource);
 
     /**
      * @param array $resources
+     * @return void
      */
     public function setResources(Array $resources);
     /**

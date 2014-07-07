@@ -75,7 +75,7 @@ class ProviderRegistry implements ProviderRegistryInterface
     }
 
     /**
-     * @return ProviderInterface[]
+     * @return ProviderInterface
      */
     public function getProviders($certificationName)
     {

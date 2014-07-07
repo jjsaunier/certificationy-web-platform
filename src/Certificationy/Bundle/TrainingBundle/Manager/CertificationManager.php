@@ -28,7 +28,6 @@ class CertificationManager
     protected $certificationFactory;
 
     /**
-     * @param string $dataPath
      */
     public function __construct(CertificationFactory $certificationFactory)
     {
@@ -51,7 +50,6 @@ class CertificationManager
 //        return $this->certificationFactory->createNamed('symfony2', $certificationContext); //Create with name
 
 //        Example with Certy component
-
 
         $certificationName = 'symfony2';
 
@@ -131,6 +129,7 @@ class CertificationManager
 
         //With ContextRegistry
        $certificationFactory->setContextRegistry($contextRegistry);
+
        return $certificationFactory->createNamed('symfony2');
     }
 }

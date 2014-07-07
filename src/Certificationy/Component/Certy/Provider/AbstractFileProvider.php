@@ -59,4 +59,4 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
             $this->loadFile($file);
         }
     }
-} 
+}
