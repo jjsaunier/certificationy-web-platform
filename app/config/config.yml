@@ -92,7 +92,6 @@ assetic:
                 css/homepage.css
         bootstrap_theme_css:
             inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/theme.less
                 - @CertificationyWebBundle/Resources/private/less/global.less
             filters:
                 - less
@@ -200,3 +199,9 @@ certificationy_certy:
     provider:
         file:
             root_dir: %kernel.root_dir%/../src/Certificationy/Certification/Data
+    scenario:
+        class: Certificationy\Bundle\CertyBundle\Process\Certification\CertificationScenario
+    steps:
+        description: Certificationy\Bundle\CertyBundle\Process\Certification\DescriptionStep
+        quiz: Certificationy\Bundle\CertyBundle\Process\Certification\QuizStep
+        final: Certificationy\Bundle\CertyBundle\Process\Certification\FinalStep

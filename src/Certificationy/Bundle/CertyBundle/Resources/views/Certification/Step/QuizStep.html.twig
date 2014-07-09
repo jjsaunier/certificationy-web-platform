@@ -1,0 +1,8 @@
+{% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
+
+{% block certy_content %}
+    hello word, quizz step
+
+    <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'symfony2', 'stepName': 'description'}) }}" class="btn btn-success"><i class="icon-backward icon-white"></i> back</a>
+    <a href="{{ path('sylius_flow_forward', {'scenarioAlias': 'symfony2', 'stepName': 'quiz'}) }}" class="btn btn-success">forward <i class="icon-forward icon-white"></i></a>
+{% endblock %}

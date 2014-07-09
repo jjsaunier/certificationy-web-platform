@@ -30,7 +30,11 @@ class AppKernel extends Kernel
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
             new Certificationy\Bundle\WebBundle\CertificationyWebBundle(),
             new Certificationy\Bundle\TrainingBundle\CertificationyTrainingBundle(),
-            new Certificationy\Bundle\CertyBundle\CertificationyCertyBundle()
+            new Certificationy\Bundle\CertyBundle\CertificationyCertyBundle(),
+
+            //Sylius
+            new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

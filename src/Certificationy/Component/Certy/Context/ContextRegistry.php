@@ -55,4 +55,12 @@ class ContextRegistry
     {
         return $this->contexts;
     }
+
+    /**
+     * @return array
+     */
+    public function getCertificationNames()
+    {
+        return array_keys($this->contexts);
+    }
 }

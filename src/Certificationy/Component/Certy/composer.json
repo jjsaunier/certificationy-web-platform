@@ -1,5 +1,5 @@
 {
-    "name": "certificationy/certy",
+    "name": "prophet777/certy",
     "description": "Create for real or training certification system",
     "keywords": [ "Certification", "Training", "Mock", "Quizz" ],
     "type": "library",
@@ -23,5 +23,13 @@
     },
     "autoload": {
         "psr-4": { "Certificationy\\Component\\Certy\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Certificationy\\Bundle\\Certy\\Tests\\": "Tests/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }

@@ -24,7 +24,8 @@
         "jquery/jquery":  "1.10.*",
         "knplabs/knp-paginator-bundle": "~2.3",
         "knplabs/knp-menu-bundle": "~1.1",
-        "FortAwesome/Font-Awesome": "*"
+        "FortAwesome/Font-Awesome": "*",
+        "sylius/flow-bundle": "~0.10"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -71,11 +72,13 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "2.5-dev"
-        }
+            "dev-master": "1.0.x-dev"
+        },
+        "minimum-stability": "dev"
     }
 }

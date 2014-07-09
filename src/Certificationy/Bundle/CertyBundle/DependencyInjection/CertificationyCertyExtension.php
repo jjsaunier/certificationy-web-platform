@@ -23,10 +23,21 @@ class CertificationyCertyExtension extends Extension
             $certyConfig->buildProvider($config['provider']);
         }
 
+        //Build scenario config
+        if(isset($config['scenario'])){
+            $certyConfig->buildScenario($config['scenario']);
+        }
+
+        //Build step config
+        if(isset($config['steps'])){
+            $certyConfig->buildSteps($config['steps']);
+        }
+
         //Debug
         $container->setParameter('certy_debug', $config['debug']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader->load('certificationy.yml');
+        $loader->load('flow.yml');
     }
 }
