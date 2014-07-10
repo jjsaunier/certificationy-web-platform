@@ -23,7 +23,7 @@ class ScenarioCompilerPass implements CompilerPassInterface
     {
         $contextRegistry = $container->get('certy.certification.context_registry');
 
-        foreach($contextRegistry->getCertificationNames() as $name){
+        foreach ($contextRegistry->getCertificationNames() as $name) {
             $scenarioDefinition = new Definition('Certificationy\Bundle\CertyBundle\Process\Certification\Scenario');
             $scenarioDefinition->addMethodCall('setContainer', array(new Reference('service_container')));
             $scenarioDefinition->addMethodCall('setCertificationName', array($name));

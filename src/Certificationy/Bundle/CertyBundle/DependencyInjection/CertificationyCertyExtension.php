@@ -24,12 +24,12 @@ class CertificationyCertyExtension extends Extension
         }
 
         //Build scenario config
-        if(isset($config['scenario'])){
+        if (isset($config['scenario'])) {
             $certyConfig->buildScenario($config['scenario']);
         }
 
         //Build step config
-        if(isset($config['steps'])){
+        if (isset($config['steps'])) {
             $certyConfig->buildSteps($config['steps']);
         }
 

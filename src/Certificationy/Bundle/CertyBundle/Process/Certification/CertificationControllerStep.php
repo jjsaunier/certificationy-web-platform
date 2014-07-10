@@ -9,7 +9,6 @@
 
 namespace Certificationy\Bundle\CertyBundle\Process\Certification;
 
-
 use Certificationy\Component\Certy\Model\Certification;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 
@@ -28,4 +27,4 @@ abstract class CertificationControllerStep extends ControllerStep
         $this->certification = $certification;
     }
 
-} 
+}

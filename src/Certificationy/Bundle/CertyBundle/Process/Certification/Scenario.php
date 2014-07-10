@@ -38,7 +38,7 @@ class Scenario extends ContainerAware implements ProcessScenarioInterface
         $steps = $this->container->getParameter('certy_certification_step_classes');
         $factory = $this->container->get('certy.certification.factory');
 
-        foreach($steps as $name => $class){
+        foreach ($steps as $name => $class) {
             $step = new $class;
             $step->setCertification($certification = $factory->createNamed($this->certificationName));
 

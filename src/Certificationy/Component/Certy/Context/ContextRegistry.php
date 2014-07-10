@@ -32,7 +32,7 @@ class ContextRegistry
     }
 
     /**
-     * @param string $name
+     * @param  string                        $name
      * @return CertificationContextInterface
      */
     public function getContext($name)

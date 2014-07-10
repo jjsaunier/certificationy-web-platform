@@ -23,7 +23,7 @@ interface BuilderPassInterface
 
     /**
      * @param string$providerName
-     * @param array $resources
+     * @param  array $resources
      * @return void
      */
     public function addProviderResources($providerName, Array $resources);

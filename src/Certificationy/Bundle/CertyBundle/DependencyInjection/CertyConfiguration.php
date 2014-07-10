@@ -60,7 +60,7 @@ class CertyConfiguration
     {
         $parameters = array();
 
-        foreach($this->defaultClasses as $stepName => $stepClass){
+        foreach ($this->defaultClasses as $stepName => $stepClass) {
             $class = isset($stepsConfig[$stepName])
                 ? $stepsConfig[$stepName]
                 : $stepClass
