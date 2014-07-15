@@ -1,1 +1,0 @@
-$(document).ready(function(){$(window).scroll(function(){50<$(this).scrollTop()?$("#back-to-top").fadeIn():$("#back-to-top").fadeOut()});$("#back-to-top").click(function(){$("#back-to-top").tooltip("hide");$("body,html").animate({scrollTop:0},800);return!1});$("#back-to-top").tooltip("show")});
