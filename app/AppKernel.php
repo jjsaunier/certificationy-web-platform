@@ -25,16 +25,14 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+//            new Swarrot\SwarrotBundle\SwarrotBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
             //Certificationy
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
             new Certificationy\Bundle\WebBundle\CertificationyWebBundle(),
             new Certificationy\Bundle\TrainingBundle\CertificationyTrainingBundle(),
             new Certificationy\Bundle\CertyBundle\CertificationyCertyBundle(),
-
-            //Sylius
-            new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
-
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

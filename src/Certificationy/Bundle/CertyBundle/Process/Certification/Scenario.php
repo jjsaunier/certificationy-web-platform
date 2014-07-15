@@ -9,6 +9,7 @@
 
 namespace Certificationy\Bundle\CertyBundle\Process\Certification;
 
+use Certificationy\Component\Certy\Model\Certification;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
@@ -16,16 +17,16 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 class Scenario extends ContainerAware implements ProcessScenarioInterface
 {
     /**
-     * @var string
+     * @var Certification
      */
-    protected $certificationName;
+    protected $certification;
 
     /**
-     * @param string $name
+     * @param Certification $certification
      */
-    public function setCertificationName($name)
+    public function setCertification(Certification $certification)
     {
-        $this->certificationName = $name;
+        $this->certification = $certification;
     }
 
     /**
@@ -36,12 +37,10 @@ class Scenario extends ContainerAware implements ProcessScenarioInterface
     public function build(ProcessBuilderInterface $builder)
     {
         $steps = $this->container->getParameter('certy_certification_step_classes');
-        $factory = $this->container->get('certy.certification.factory');
 
         foreach ($steps as $name => $class) {
             $step = new $class;
-            $step->setCertification($certification = $factory->createNamed($this->certificationName));
-
+            $step->setCertification($this->certification);
             $builder->add($name, $step);
         }
     }

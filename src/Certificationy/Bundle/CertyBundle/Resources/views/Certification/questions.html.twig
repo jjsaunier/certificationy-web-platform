@@ -1,6 +1,0 @@
-{% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
-
-{% block certy_certification %}
-    <a href="{{ path('sylius_flow_start', {'scenarioAlias': 'certification_flow', 'stepName': 'description'}) }}" class="btn btn-success"><i class="icon-backward icon-white"></i> back</a>
-    <a href="{{ path('sylius_flow_forward', {'scenarioAlias': 'certification_flow', 'stepName': 'question'}) }}" class="btn btn-success">forward <i class="icon-forward icon-white"></i></a>
-{% endblock %}

@@ -9,22 +9,61 @@
 
 namespace Certificationy\Component\Certy\Model;
 
+use Behat\Transliterator\Transliterator;
+use JMS\Serializer\Annotation\Type;
+
 class Answer
 {
     /**
      * @var bool
+     * @Type("boolean")
      */
     protected $expected;
 
     /**
      * @var Question
+     * @Type("Certificationy\Component\Certy\Model\Question")
      */
     protected $question;
 
     /**
      * @var string
+     * @Type("string")
      */
     protected $label;
+
+    /**
+     * @var string
+     * @Type("string")
+     */
+    protected $name;
+
+    /**
+     * @var bool
+     * @Type("boolean")
+     */
+    protected $answered;
+
+    public function __construct()
+    {
+        $this->response = array();
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = Transliterator::urlize($name);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * @param $value
@@ -74,6 +113,7 @@ class Answer
      */
     public function setLabel($label)
     {
+        $this->setName($label);
         $this->label = $label;
     }
 
@@ -83,6 +123,27 @@ class Answer
     public function getLabel()
     {
         return $this->label;
+    }
+
+    public function setAsAnswered()
+    {
+        $this->answered = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnswered()
+    {
+        return $this->answered === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
+        return $this->expected === true;
     }
 
     /**
@@ -95,6 +156,7 @@ class Answer
         $answer = new Answer();
         $answer->setExpected($data['expected']);
         $answer->setLabel($data['label']);
+        $answer->setName($data['name']);
 
         return $answer;
     }

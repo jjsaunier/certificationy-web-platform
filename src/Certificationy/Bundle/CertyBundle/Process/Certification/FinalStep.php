@@ -21,7 +21,9 @@ class FinalStep extends CertificationControllerStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        return $this->render('CertificationyCertyBundle:Certification/Step:FinalStep.html.twig');
+        return $this->render('CertificationyCertyBundle:Certification/Step:FinalStep.html.twig', array(
+            'certification' => $context->getStorage()->get('certification')
+        ));
     }
 
     /**

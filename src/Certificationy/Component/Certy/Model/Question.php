@@ -9,26 +9,55 @@
 
 namespace Certificationy\Component\Certy\Model;
 
+use Behat\Transliterator\Transliterator;
+use JMS\Serializer\Annotation\Type;
+
 class Question
 {
     /**
      * @var ModelCollection
+     * @Type("ModelCollection<Certificationy\Component\Certy\Model\Answer>")
      */
     protected $answers;
 
     /**
      * @var Category
+     * @Type("Certificationy\Component\Certy\Model\Category")
+     *
      */
     protected $category;
 
     /**
      * @var string
+     * @Type("string")
      */
     protected $label;
+
+    /**
+     * @var string
+     * @Type("string")
+     */
+    protected $name;
 
     public function __construct()
     {
         $this->answers = new ModelCollection();
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = Transliterator::urlize($name);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -91,6 +120,7 @@ class Question
     public function setLabel($label)
     {
         $this->label = $label;
+        $this->setName($label);
     }
 
     /**
@@ -102,6 +132,42 @@ class Question
     }
 
     /**
+     * @return ModelCollection
+     */
+    public function getAnswered()
+    {
+        return $this->answers->filter(function (Answer $answer) {
+            if ($answer->isAnswered()) {
+                return $answer;
+            }
+        });
+    }
+
+    /**
+     * @return ModelCollection
+     */
+    public function getValidAnswers()
+    {
+        return $this->answers->filter(function (Answer $answer) {
+            if ($answer->isValid()) {
+                return $answer;
+            }
+        });
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
+        if ($this->getAnswered()->isEmpty()) {
+            return false;
+        }
+
+        return $this->getAnswered() == $this->getValidAnswers();
+    }
+
+    /**
      * @param  array    $data
      * @return Question
      */
@@ -110,6 +176,7 @@ class Question
         $question = new Question();
         $question->setAnswers($data['answers']);
         $question->setLabel($data['label']);
+        $question->setName($data['name']);
 
         return $question;
     }

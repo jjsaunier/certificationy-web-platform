@@ -63,9 +63,10 @@ class TrainingBuilder
             'label' => $this->translator->trans('training.menu', array(), 'training')
         ));
 
-        $trainingMenu->addChild('new_session', array(
-            'route' => 'session_index',
-            'label' => '.icon-tower '.$this->translator->trans('training.new_session', array(), 'training')
+        $trainingMenu->addChild('symfony2', array(
+            'route' => 'certification_guidelines',
+            'routeParameters' => array('name' => 'symfony2'),
+            'label' => $this->translator->trans('symfony2', array(), 'training')
         ));
 
         return $menu;

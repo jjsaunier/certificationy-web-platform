@@ -9,6 +9,7 @@
 
 namespace Certificationy\Component\Certy\Builder;
 
+use Certificationy\Component\Certy\Collector\CollectorInterface;
 use Certificationy\Component\Certy\Context\CertificationContext;
 
 interface BuilderPassInterface
@@ -16,20 +17,11 @@ interface BuilderPassInterface
     /**
      * @param Builder              $builder
      * @param CertificationContext $certificationContext
-     *
-     * @return \Certificationy\Certification\Question[]
      */
     public function execute(Builder $builder, CertificationContext $certificationContext);
 
     /**
-     * @param string$providerName
-     * @param  array $resources
-     * @return void
+     * @param CollectorInterface $collector
      */
-    public function addProviderResources($providerName, Array $resources);
-
-    /**
-     * @return array
-     */
-    public function getProvidersResources();
+    public function setCollector(CollectorInterface $collector);
 }

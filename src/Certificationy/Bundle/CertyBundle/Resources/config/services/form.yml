@@ -1,0 +1,31 @@
+parameters:
+    certy_certification_form_class: Certificationy\Bundle\CertyBundle\Form\Type\CertificationType
+    certy_ceritification_form_name: certy_certification_default
+    certy_certification_form_handler: Certificationy\Bundle\CertyBundle\Form\Handler\CertificationHandler
+    certy_form_handler: Certificationy\Bundle\CertyBundle\Form\Handler\Handler
+    certy_certification_answer_type: Certificationy\Bundle\CertyBundle\Form\Type\AnswerType
+
+services:
+    certy.certification.form:
+        class: %certy_certification_form_class%
+        tags:
+            - { name: form.type, alias: %certy_ceritification_form_name% }
+
+    certy.form.handler:
+        class: %certy_form_handler%
+        calls:
+            - [ "setFormFactory", [ @form.factory ] ]
+            - [ "setRequestStack", [ @request_stack ] ]
+
+    certy.certification.form_handler:
+        class: %certy_certification_form_handler%
+        parent: certy.form.handler
+        arguments:
+            - @event_dispatcher
+        calls:
+            - [ "setName", [ %certy_ceritification_form_name% ] ]
+
+    certy.certification.answer.extension:
+        class: %certy_certification_answer_type%
+        tags:
+            - { name: form.type, alias: certification_answer }

@@ -9,22 +9,33 @@
 
 namespace Certificationy\Component\Certy\Model;
 
+use JMS\Serializer\Annotation\Type;
+
 class Metrics
 {
     /**
      * @var int
+     * @Type("integer")
      */
     protected $categoryCount;
 
     /**
      * @var int
+     * @Type("integer")
      */
     protected $questionCount;
 
     /**
      * @var int
+     * @Type("integer")
      */
     protected $answerCount;
+
+    /**
+     * @var array
+     * @Type("array")
+     */
+    protected $reportMetrics;
 
     const CATEGORY = 1;
     const QUESTION = 2;
@@ -35,6 +46,7 @@ class Metrics
         $this->categoryCount = 0;
         $this->questionCount = 0;
         $this->answerCount = 0;
+        $this->reportMetrics = array();
     }
 
     /**
@@ -71,6 +83,44 @@ class Metrics
                 $this->answerCount--;
                 break;
         }
+    }
+
+    /**
+     * @param Category $category
+     * @param Question $question
+     */
+    public function addReportMetrics(Category $category)
+    {
+        if (!isset($this->reportMetrics[$category->getName()])) {
+            $this->reportMetrics[$category->getName()] = array(
+                'valid' => 0,
+                'invalid' => 0
+            );
+        }
+
+        $currentReport =& $this->reportMetrics[$category->getName()];
+
+        foreach ($category->getQuestions() as $question) {
+            if ($question->isValid()) {
+                $currentReport['valid']++;
+            } else {
+                $currentReport['invalid']++;
+            }
+        }
+    }
+
+    /**
+     * @param Category $category
+     *
+     * @return bool
+     */
+    public function getReportMetrics(Category $category)
+    {
+        if (!isset($this->reportMetrics[$category->getName()])) {
+            return false;
+        }
+
+        return $this->reportMetrics[$category->getName()];
     }
 
     /**

@@ -21,8 +21,11 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
 
     /**
      * @param \SplFileInfo $file
+     * @param string       $certificationName
+     *
+     * @return mixed
      */
-    abstract protected function loadFile(\SplFileInfo $file);
+    abstract protected function loadFile(\SplFileInfo $file, $certificationName);
 
     /**
      * @return FileProviderConfiguration
@@ -48,15 +51,24 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
         $this->config = $this->createProviderConfiguration($options);
     }
 
-    public function load()
+    /**
+     * @param string $certificationName
+     *
+     * @return \Resource[]|void
+     */
+    public function load($certificationName)
     {
         $options = $this->getConfig()->getOptions();
+
+        foreach ($options['path'] as $id => $path) {
+            $options['path'][$id] = $path.'/'.$this->getName().'/'.$certificationName;
+        }
 
         $finder = new Finder();
         $finder->files()->in($options['path']);
 
         foreach ($finder as $file) {
-            $this->loadFile($file);
+            $this->loadFile($file, $certificationName);
         }
     }
 }

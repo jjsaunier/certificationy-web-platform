@@ -1,6 +1,0 @@
-session_index:
-    path: /
-    defaults:
-        _controller: certificationy.training.training_controller:indexAction
-    requirements:
-        _method: GET

@@ -1,0 +1,18 @@
+{% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
+
+{% block certy_content %}
+    {% embed 'CertificationyCertyBundle:Certification/Embed:CategoryList.html.twig' %}
+        {% block category_line %}
+            {{ parent() }} - {{ category.questions.count }} Questions
+        {% endblock category_line %}
+    {% endembed %}
+
+
+    <ul>
+        <li>Categories : {{ certification.metrics.categoryCount }}</li>
+        <li>Questions : {{ certification.metrics.questionCount }}</li>
+        <li>Answers : {{ certification.metrics.answerCount }}</li>
+    </ul>
+
+    <a href="{{ path('certification_test', {'name': 'symfony2' }) }}" class="btn btn-success">Start ! <i class="icon-forward icon-white"></i></a>
+{% endblock %}

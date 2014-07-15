@@ -1,0 +1,68 @@
+<h2>{{ certification.context.label|capitalize }} certification report</h2>
+
+{% for category in certification.categories %}
+    {% set metrics = certification.metrics.getReportMetrics(category) %}
+
+    {%- set panel_class -%}
+        {% spaceless %}
+            {% if metrics %}
+                {% if metrics.valid == (category.questions.count / 2) %}
+                    warning
+                {% endif %}
+
+                {% if metrics.valid > (category.questions.count / 2) %}
+                    success
+                {% endif %}
+
+                {% if metrics.valid < (category.questions.count / 2) %}
+                    danger
+                {% endif %}
+            {% else %}
+                default
+            {% endif %}
+        {% endspaceless %}
+    {%- endset -%}
+
+    <div id="accordion">
+        <div class="panel panel-{{ panel_class }}" id="panel{{ loop.index }}">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse{{ loop.index }}">
+                        {{ category.label }}
+
+                        {% if metrics %}
+                            [{{ metrics.valid }} / {{ category.questions.count }}]
+                        {% else %}
+                            [0 / 0]
+                        {% endif %}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse{{ loop.index }}" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        {% for question in category.questions %}
+                            <li>
+                                <h4>
+                                    {% block append_question %}{% endblock %}
+                                    {{ question.label|capitalize }}
+                                </h4>
+
+                                <ul id="answers" class="fa-ul">
+                                    {% for answer in question.answers %}
+                                        <li class="{{ answer|class }}">
+                                            {#<span class="glyphicon glyphicon-"></span>#}
+                                            <i class="fa-li fa fa-{{ answer.isAnswered() ? 'check-square-o' : 'square-o' }}" ></i>
+                                            {{ answer.label }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

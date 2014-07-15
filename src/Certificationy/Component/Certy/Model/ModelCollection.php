@@ -8,6 +8,7 @@
 **/
 
 namespace Certificationy\Component\Certy\Model;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * Class ModelCollection
@@ -20,11 +21,12 @@ class ModelCollection implements \Countable, \ArrayAccess, \IteratorAggregate
      * An array containing the entries of this collection.
      *
      * @var array
+     * @Type("array")
      */
     private $_elements;
 
     /**
-     * Initializes a new ArrayCollection.
+     * Initializes a new ModelCollection.
      *
      * @param array $elements
      */

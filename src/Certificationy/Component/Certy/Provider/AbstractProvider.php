@@ -20,17 +20,19 @@ abstract class AbstractProvider implements ProviderInterface
 
     /**
      * @param string $resourceName
-     * @param Array  $content
+     * @param string $certificationName
+     * @param mixed  $content
      *
+     * @return mixed|void
      * @throws \Exception
      */
-    public function addResource($resourceName, $content)
+    public function addResource($resourceName, $certificationName, $content)
     {
         if (!is_array($content) || empty($content)) {
             throw new \Exception(sprintf('Provider %s return unexpected result', $this->getName()));
         }
 
-        $this->resources[] = new Resource($resourceName, $this->getName(), $content);
+        $this->resources[] = new Resource($this->getName(), $certificationName, $resourceName, $content);
     }
 
     /**

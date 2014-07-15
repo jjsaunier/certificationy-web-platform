@@ -1,0 +1,35 @@
+<h2>{{ certification.context.label|capitalize }} certification report</h2>
+
+{% for category in certification.categories %}
+    {% set metrics = certification.metrics.getReportMetrics(category) %}
+
+    <h4>{{ category.label }}
+        {% if metrics %}
+            [{{ metrics.valid }} / {{ metrics.invalid }}]
+        {% else %}
+            [0 / 0]
+        {% endif %}
+    </h4>
+
+    <p>
+        <ul class="list-unstyled">
+            {% for question in category.questions %}
+                <li>
+                    {{ question.label|capitalize }}
+
+                    {% block append_question %}{% endblock %}
+                    <ul>
+                        {% for answer in question.answers %}
+                            <li class="{{ answer|class }}">
+                                <span class="glyphicon glyphicon-{{ answer.isAnswered() ? 'check' : 'unchecked' }}"></span>
+                                {{ answer.label }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </p>
+
+{% endfor %}

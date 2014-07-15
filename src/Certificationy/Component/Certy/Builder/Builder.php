@@ -66,25 +66,31 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param  CertificationContextInterface $context
-     * @todo insulate some part for reuse it to build it on fly
+     * @param CertificationContextInterface $context
+     *
      * @return Certification
      */
     protected function normalize(CertificationContextInterface $context)
     {
         $certification = static::createCertification();
         $certification->setContext($context);
+
         $metrics = $certification->getMetrics();
 
-        foreach ($this->collector->getResources() as $resource) {
+        foreach ($this->collector->getFlattenResources($context->getName()) as $resource) {
             $resourceContent = $resource->getContent();
+
+            if (in_array($resource->getResourceName(), $context->getExcludeCategories())) {
+                continue;
+            }
 
             $category = new Category();
             $category->setLabel($resourceContent['category']);
-            $category->setName($resource->getName());
+            $category->setName($resource->getResourceName());
             $metrics->increment(Metrics::CATEGORY);
 
             foreach ($resourceContent['questions'] as $questionContent) {
+
                 $question = new Question();
                 $question->setLabel($questionContent['question']);
                 $metrics->increment(Metrics::QUESTION);
@@ -118,9 +124,8 @@ class Builder implements BuilderInterface
 
         if (!isset($this->cache[$oid])) {
             foreach ($this->builderPass as $pass) {
-                $pass->setProvidersResources($this->collector->getResources());
+                $pass->setCollector($this->collector);
                 $pass->execute($this, $context);
-                $this->collector->setResources($pass->getProvidersResources());
             }
 
             $this->cache[$oid] = $this->normalize($context);

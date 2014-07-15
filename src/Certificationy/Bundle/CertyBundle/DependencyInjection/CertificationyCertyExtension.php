@@ -36,8 +36,15 @@ class CertificationyCertyExtension extends Extension
         //Debug
         $container->setParameter('certy_debug', $config['debug']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        //Calculator
+        if (isset($config['calculator'])) {
+            $certyConfig->buildCalculator($config['calculator']);
+        }
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
         $loader->load('certificationy.yml');
-        $loader->load('flow.yml');
+        $loader->load('form.yml');
+        $loader->load('event.yml');
+        $loader->load('twig.yml');
     }
 }

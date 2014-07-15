@@ -9,36 +9,31 @@
 
 namespace Certificationy\Component\Certy\Builder;
 
-use Certificationy\Certification\Question;
 use Certificationy\Component\Certy\Context\CertificationContext;
-use Certificationy\Component\Certy\Provider\ProviderRegistry;
+use Certificationy\Component\Certy\Provider\ProviderInterface;
 
 class ProviderBuilderPass extends AbstractBuilderPass
 {
     /**
-     * @var \Certificationy\Component\Certy\Provider\ProviderRegistry
+     * @var ProviderInterface
      */
-    protected $providerRegistry;
+    protected $provider;
 
     /**
-     * @param ProviderRegistry $providerRegistry
+     * @param ProviderInterface $provider
      */
-    public function __construct(ProviderRegistry $providerRegistry)
+    public function __construct(ProviderInterface $provider)
     {
-        $this->providerRegistry = $providerRegistry;
+        $this->provider = $provider;
     }
 
     /**
      * @param Builder              $builder
      * @param CertificationContext $certificationContext
-     *
-     * @return Question[]
      */
     public function execute(Builder $builder, CertificationContext $certificationContext)
     {
-        foreach ($this->providerRegistry->getProviders($certificationContext->getName()) as $provider) {
-            $provider->load();
-            $this->addProviderResources($provider->getName(), $provider->getResources());
-        }
+        $this->provider->load($certificationContext->getName());
+        $this->collector->addResource($this->provider->getName(), $certificationContext->getName(), $this->provider->getResources());
     }
 }

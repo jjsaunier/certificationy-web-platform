@@ -1,6 +1,7 @@
 training:
     menu: "Trainning"
     new_session: "New session"
+    symfony2: "Symfony2 framework"
 
 page:
     heading: Are you ready ?

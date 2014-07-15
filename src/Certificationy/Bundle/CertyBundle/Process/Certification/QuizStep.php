@@ -21,16 +21,18 @@ class QuizStep extends CertificationControllerStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        return $this->render('CertificationyCertyBundle:Certification/Step:QuizStep.html.twig');
-    }
+        $certificationHandler = $this->container->get('certy.certification.form_handler');
+        $certificationHandler->setRequest($context->getRequest());
 
-    /**
-     * @param ProcessContextInterface $context
-     *
-     * @return null|\Sylius\Bundle\FlowBundle\Process\Step\ActionResult|Response
-     */
-    public function forwardAction(ProcessContextInterface $context)
-    {
-        return $this->complete();
+        if ($certification = $certificationHandler->process($this->certification)) {
+            $context->getStorage()->set('certification', $certification);
+
+            return $this->complete();
+        }
+
+        return $this->render('CertificationyCertyBundle:Certification/Step:QuizStep.html.twig', array(
+            'certification' => $this->certification,
+            'form' => $certificationHandler->createView()
+        ));
     }
 }

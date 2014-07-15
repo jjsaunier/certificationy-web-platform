@@ -9,25 +9,32 @@
 
 namespace Certificationy\Component\Certy\Model;
 
+use Behat\Transliterator\Transliterator;
+use JMS\Serializer\Annotation\Type;
+
 class Category
 {
     /**
      * @var ModelCollection
+     * @Type("ModelCollection<Certificationy\Component\Certy\Model\Question>")
      */
     protected $questions;
 
     /**
      * @var Certification
+     * @Type("Certificationy\Component\Certy\Model\Certification")
      */
     protected $certification;
 
     /**
      * @var string
+     * @Type("string")
      */
     protected $label;
 
     /**
      * @var string
+     * @Type("string")
      */
     protected $name;
 
@@ -111,7 +118,7 @@ class Category
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = Transliterator::urlize($name);
     }
 
     /**
@@ -132,6 +139,7 @@ class Category
         $category = new Category();
         $category->setLabel($data['label']);
         $category->setName($data['name']);
+        $category->setQuestions($data['questions']);
 
         return $category;
     }

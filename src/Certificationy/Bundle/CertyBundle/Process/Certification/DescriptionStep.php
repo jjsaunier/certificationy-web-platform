@@ -21,7 +21,9 @@ class DescriptionStep extends CertificationControllerStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        return $this->render('CertificationyCertyBundle:Certification/Step:DescriptionStep.html.twig');
+        return $this->render('CertificationyCertyBundle:Certification/Step:DescriptionStep.html.twig', array(
+            'certification' => $this->certification
+        ));
     }
 
     /**

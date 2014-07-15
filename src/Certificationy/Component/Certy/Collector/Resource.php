@@ -14,12 +14,17 @@ class Resource
     /**
      * @var string
      */
-    protected $type;
+    protected $resourceName;
 
     /**
      * @var string
      */
-    protected $name;
+    protected $providerName;
+
+    /**
+     * @var string
+     */
+    protected $certificationName;
 
     /**
      * @var array
@@ -27,31 +32,33 @@ class Resource
     protected $content;
 
     /**
-     * @param string $name
-     * @param string $type
+     * @param string $providerName
+     * @param string $certificationName
+     * @param string $resourceName
      * @param array  $content
      */
-    public function __construct($name, $type, Array $content)
+    public function __construct($providerName, $certificationName, $resourceName, Array $content)
     {
-        $this->name = $name;
-        $this->type = $type;
+        $this->providerName = $providerName;
+        $this->certificationName = $certificationName;
+        $this->resourceName = $resourceName;
         $this->content = $content;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getProviderName()
     {
-        return $this->name;
+        return $this->providerName;
     }
 
     /**
      * @return string
      */
-    public function getType()
+    public function getResourceName()
     {
-        return $this->type;
+        return $this->resourceName;
     }
 
     /**
@@ -60,5 +67,21 @@ class Resource
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @param string $certificationName
+     */
+    public function setCertificationName($certificationName)
+    {
+        $this->certificationName = $certificationName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertificationName()
+    {
+        return $this->certificationName;
     }
 }

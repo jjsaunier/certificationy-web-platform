@@ -10,10 +10,13 @@
 namespace Certificationy\Component\Certy\Factory;
 
 use Certificationy\Component\Certy\Builder\BuilderInterface;
+use Certificationy\Component\Certy\Builder\ProviderBuilderPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Context\ContextRegistry;
 use Certificationy\Component\Certy\Dumper\DumperInterface;
 use Certificationy\Component\Certy\Loader\LoaderInterface;
+use Certificationy\Component\Certy\Model\Certification;
+use Certificationy\Component\Certy\Provider\ProviderInterface;
 use Certificationy\Component\Certy\Provider\ProviderRegistryInterface;
 
 class CertificationFactory
@@ -39,35 +42,49 @@ class CertificationFactory
     protected $dumper;
 
     /**
-     * @var ContextRegistry|null
+     * @var ProviderInterface[]
      */
-    protected $contextRegistry;
+    protected $providers = array();
 
     /**
      * @param string               $name
      * @param CertificationContext $context
+     * @param string[]             $providers
+     *
+     * @return Certification
+     * @throws \Exception
      */
-    public function createNamed($name, CertificationContext $context = null)
+    public function createNamed($name, CertificationContext $context, Array $providers)
     {
-        if (null === $context) {
-            if (null === $this->contextRegistry) {
-                throw new \Exception('You must define a context for your certification');
-            }
-
-            $context = $this->contextRegistry->getContext($name);
+        if (empty($providers)) {
+            throw new \Exception('You must define at least one provider');
         }
 
         if ($name !== $context->getName()) {
             throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
         }
 
+        //Avoid to regenerate certification
         if (null !== $this->loader && false === $context->getDebug()) {
             return $this->loader->load($name);
         }
 
+        //Check if required provider are loads
+        foreach ($providers as $provider) {
+            if (!$this->providerRegistry->isRegister($provider)) {
+                throw new \Exception(sprintf(
+                    'Provider %s is not registered. Did you mean %s',
+                    $provider,
+                    implode(', ', $this->providerRegistry->getRegistered())
+                ));
+            }
+            $this->builder->addBuilderPass(new ProviderBuilderPass($this->providerRegistry->getProvider($provider)));
+        }
+
         $certification = $this->builder->build($context);
 
-        if (null !== $this->dumper) {
+        //Dump for next usage
+        if (false === $context->getDebug() && null !== $this->dumper) {
             $this->dumper->dump($certification, $context);
         }
 

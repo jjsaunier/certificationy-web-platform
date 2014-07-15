@@ -14,117 +14,56 @@ class ProviderRegistry implements ProviderRegistryInterface
     /**
      * @var ProviderInterface[]
      */
-    protected $providerCollection = array();
-
-    /**
-     * @var array
-     */
-    protected $scope = array();
+    protected $providers = array();
 
     /**
      * @param ProviderInterface $provider
-     * @param string[]|string   $certificationsName
-     * @param int               $strategy
-     *
-     * @throws \Exception
      */
-    public function addProvider(ProviderInterface $provider, $certificationsName, $strategy = self::OVERRIDE_STRATEGY)
+    public function addProvider(ProviderInterface $provider)
     {
-        $providerName = $provider->getName();
-
-        if (!is_array($certificationsName)) {
-            $certificationsName = (array) $certificationsName;
-        }
-
-        foreach ($certificationsName as $certificationName) {
-
-            if (!isset($this->providerCollection[$certificationName])) {
-                $this->providerCollection[$certificationName] = array();
-            }
-
-            $providerCollection =& $this->providerCollection[$certificationName];
-
-            switch ($strategy) {
-                case self::OVERRIDE_STRATEGY:
-                    $providerCollection[$providerName] = $provider;
-                    break;
-                case self::IGNORE_STRATEGY:
-                    if (!$this->isRegister($providerName, $certificationName)) {
-                        $providerCollection[$providerName] = $provider;
-                    }
-                    break;
-                case self::EXCEPTION_STRATEGY:
-                    if ($this->isRegister($providerName, $certificationName)) {
-                        throw new \Exception(sprintf('Provider %s is already register for certification', $providerName));
-                    }
-                    break;
-                default:
-                    throw new \Exception(sprintf('Unknown strategy %s', $strategy));
-            }
-        }
+        $this->providers[$provider->getName()] = $provider;
     }
 
     /**
      * @param ProviderInterface[] $providers
      */
-    public function setProviders(Array $providers, $certificationName)
+    public function setProviders(Array $providers)
     {
         foreach ($providers as $provider) {
-            $this->addProvider($provider, $certificationName);
+            $this->addProvider($provider);
         }
     }
 
     /**
+     * @param string $providerName
+     *
      * @return ProviderInterface
-     */
-    public function getProviders($certificationName)
-    {
-        return $this->providerCollection[$certificationName];
-    }
-
-    /**
-     * @param $providerName
-     * @param $certificationName
-     *
-     * @return mixed
      * @throws \Exception
      */
-    public function getProvider($providerName, $certificationName)
+    public function getProvider($providerName)
     {
-        if (!$this->isRegister($providerName, $certificationName)) {
-            throw new \Exception(sprintf('Provider %s does not exist for %s', $providerName, $certificationName));
+        if (!$this->isRegister($providerName)) {
+            throw new \Exception(sprintf('Provider %s does not exist', $providerName));
         }
 
-        return $this->providerCollection[$certificationName][$providerName];
+        return $this->providers[$providerName];
     }
 
     /**
-     * @param $providerName
-     * @param $certificationName
-     *
-     * @throws \Exception
-     */
-    public function removeProvider($providerName, $certificationName)
-    {
-        if (!$this->isRegister($providerName, $certificationName)) {
-            throw new \Exception(sprintf('Provider %s does not exist for %s', $providerName, $certificationName));
-        }
-
-        unset($this->providerCollection[$certificationName][$providerName]);
-
-        if (empty($this->providerCollection[$certificationName])) {
-            unset($this->providerCollection[$certificationName]);
-        }
-    }
-
-    /**
-     * @param $providerName
-     * @param $certificationName
+     * @param string $providerName
      *
      * @return bool
      */
-    public function isRegister($providerName, $certificationName)
+    public function isRegister($providerName)
     {
-        return isset($this->providerCollection[$certificationName][$providerName]);
+        return isset($this->providers[$providerName]);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRegistered()
+    {
+        return array_keys($this->providers);
     }
 }

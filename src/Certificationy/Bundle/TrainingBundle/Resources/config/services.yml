@@ -21,4 +21,4 @@ services:
         parent: certificationy.web.abstract_controller
         scope: request
         arguments:
-            - @certification.training.certification.symfony
+            - @certificationy.certification.manager

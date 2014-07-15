@@ -18,7 +18,9 @@ class PhpDumper extends FileDumper
      */
     protected function doDump(Certification $certification)
     {
-        foreach ($certification->getCategories() as $category) {
+        $dumped = clone $certification;
+
+        foreach ($dumped->getCategories() as $category) {
             $category->setCertification(null);
 
             foreach ($category->getQuestions() as $question) {
@@ -30,7 +32,7 @@ class PhpDumper extends FileDumper
             }
         }
 
-        $this->dumpFile($this->getFilePath($this->getFileName()), '<?php return '. var_export($certification, true) .'; ?>');
+        $this->dumpFile($this->getFilePath($this->getFileName()), '<?php return '. var_export($dumped, true) .'; ?>');
     }
 
     /**

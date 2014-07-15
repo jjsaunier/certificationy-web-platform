@@ -12,6 +12,11 @@ class Configuration implements ConfigurationInterface
     protected $defaultScenarioClass = 'Certificationy\Bundle\CertyBundle\Process\Certification\CertificationScenario';
 
     /**
+     * @var string
+     */
+    protected $defaultCalculatorClass = 'Certificationy\Component\Certy\Calculator\Calculator';
+
+    /**
      * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
@@ -19,6 +24,18 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('certificationy_certy');
         $root->children()
+            ->arrayNode('calculator')
+                ->children()
+                    ->scalarNode('class')->defaultValue($this->defaultCalculatorClass)->end()
+                    ->scalarNode('delegator')
+                        ->defaultValue(null)
+                        ->validate()
+                        ->ifNotInArray(CertyConfiguration::$acceptedDelegator)
+                            ->thenInvalid('Invalid delegator %s')
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
             ->arrayNode('scenario')
                 ->children()
                     ->scalarNode('class')->defaultValue($this->defaultScenarioClass)->end()
@@ -37,8 +54,6 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
-            ->cannotBeEmpty()
-            ->isRequired()
         ->end();
 
         return $treeBuilder;

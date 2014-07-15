@@ -11,47 +11,33 @@ namespace Certificationy\Component\Certy\Provider;
 
 interface ProviderRegistryInterface
 {
-    const OVERRIDE_STRATEGY = 1;
-    const IGNORE_STRATEGY = 2;
-    const EXCEPTION_STRATEGY = 3;
-
     /**
-     * @param ProviderInterface $providers
-     * @param string[]|string   $certificationName
-     *
-     * @throws \Exception
-     * @return void
+     * @param ProviderInterface $provider
      */
-    public function setProviders(Array $providers, $certificationName);
+    public function addProvider(ProviderInterface $provider);
 
     /**
-     * @return ProviderInterface[]
+     * @param ProviderInterface[] $providers
      */
-    public function getProviders($certificationName);
+    public function setProviders(Array $providers);
 
     /**
-     * @param $providerName
-     * @param $certificationName
+     * @param string $providerName
      *
-     * @return mixed
+     * @return ProviderInterface
      * @throws \Exception
      */
-    public function getProvider($providerName, $certificationName);
+    public function getProvider($providerName);
 
     /**
-     * @param $providerName
-     * @param $certificationName
-     *
-     * @throws \Exception
-     * @return void
-     */
-    public function removeProvider($providerName, $certificationName);
-
-    /**
-     * @param $providerName
-     * @param $certificationName
+     * @param string $providerName
      *
      * @return bool
      */
-    public function isRegister($providerName, $certificationName);
+    public function isRegister($providerName);
+
+    /**
+     * @return string[]
+     */
+    public function getRegistered();
 }

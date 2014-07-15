@@ -13,13 +13,16 @@ class JsonProvider extends AbstractFileProvider
 {
     /**
      * @param \SplFileInfo $file
+     * @param string       $certificationName
+     *
+     * @return mixed|void
      */
-    protected function loadFile(\SplFileInfo $file)
+    protected function loadFile(\SplFileInfo $file, $certificationName)
     {
         $filename = explode('.', $file->getFilename());
         $content = json_decode(file_get_contents($file->getRealPath()), true);
 
-        $this->addResource($filename[0], $content);
+        $this->addResource($filename[0], $certificationName, $content);
     }
 
     /**

@@ -17,12 +17,14 @@ interface ProviderInterface
     public function getName();
 
     /**
-     * @param $filename
-     * @param $content
+     * @param string $resourceName
+     * @param string $certificationName
+     * @param mixed  $content
      *
-     * @return mixed
+     * @return mixed|void
+     * @throws \Exception
      */
-    public function addResource($filename, $content);
+    public function addResource($resourceName, $certificationName, $content);
 
     /**
      * @return Resource[]
@@ -30,7 +32,8 @@ interface ProviderInterface
     public function getResources();
 
     /**
+     * @param  string     $certificationName
      * @return Resource[]
      */
-    public function load();
+    public function load($certificationName);
 }

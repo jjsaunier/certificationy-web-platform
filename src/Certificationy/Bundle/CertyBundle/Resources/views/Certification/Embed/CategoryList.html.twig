@@ -1,0 +1,9 @@
+{% block list_open_tag %} <ol {% block list_attr %} {% endblock %}> {% endblock %}
+    {% for category in certification.categories %}
+        <li {% block li_attr %}{% endblock %}>
+            {% block category_line %}
+                {{ category.label|capitalize }}
+            {% endblock category_line %}
+        </li>
+    {% endfor %}
+{% block list_close_tag %} </ol> {% endblock %}

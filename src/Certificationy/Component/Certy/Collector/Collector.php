@@ -13,41 +13,73 @@ class Collector implements CollectorInterface
 {
     /**
      * @var Resource[]
+     *
+     * yaml
+     *      -> symfony2
+     *           -> resource
+     *           -> resource
+     *           -> resource
+     *      -> jquery
+     *           -> resource
+     * json
+     *      -> symfony2
+     *           -> resource
+     *
      */
     protected $resources;
 
     /**
      * @var string[]
      */
-    protected $providersName;
+    protected $collectedProviders;
 
     public function __construct()
     {
         $this->resources = array();
-        $this->providersName = array();
+        $this->collectedProviders = array();
     }
 
     /**
      * @param string $providerName
-     * @param array  $resource
+     * @param array  $resources
      */
-    public function addResource($providerName, Array $resource)
+    public function addResource($providerName, $certificationName, Array $resources)
     {
-        if (!in_array($providerName, $this->providersName)) {
-            $this->providersName[] = $providerName;
+        if (!in_array($providerName, $this->collectedProviders)) {
+            $this->collectedProviders[] = $providerName;
         }
 
-        $this->resources = $this->resources + $resource;
+        if (!isset($this->resources[$providerName])) {
+            $this->resources[$providerName] = array();
+        }
+
+        if (!isset($this->resources[$providerName][$certificationName])) {
+            $this->resources[$providerName][$certificationName] = array();
+        }
+
+        $currentResource = &$this->resources[$providerName][$certificationName];
+        $currentResource = array_merge_recursive($currentResource, $resources);
     }
 
     /**
-     * @param array $resources
+     * @param $certificationName
+     *
+     * @return array|\Resource[]
      */
-    public function setResources(Array $resources)
+    public function getFlattenResources($certificationName)
     {
-        foreach ($resources as $providerName => $resource) {
-            $this->addResource($providerName, $resource);
+        $flatten = array();
+        foreach ($this->resources as $providerResources) {
+            foreach ($providerResources as $certifName => $resources) {
+                if ($certificationName === $certifName) {
+                    foreach ($resources as $resource) {
+                        $flatten[] = $resource;
+                    }
+                }
+            }
         }
+
+        return $flatten;
     }
 
     /**
@@ -69,8 +101,8 @@ class Collector implements CollectorInterface
     /**
      * @return string[]
      */
-    public function getProvidersName()
+    public function getCollectedProviders()
     {
-        return $this->providersName;
+        return $this->collectedProviders;
     }
 }

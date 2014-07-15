@@ -19,7 +19,6 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-    session:
         name: 'Certificationy'
         cookie_domain: %domain%
         handler_id:  ~
@@ -194,14 +193,54 @@ braincrafted_bootstrap:
         knp_menu: true
         knp_paginator: true
 
+jms_serializer:
+    metadata:
+        cache: ~
+        debug: %kernel.debug%
+
+#swarrot:
+#    provider: pecl
+#    default_connection: rabbitmq
+#    default_command: swarrot.command.base
+#    processors_stack:
+#        signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
+#        ack: 'Swarrot\Processor\Ack\AckProcessor'
+#        max_messages: 'Swarrot\Processor\MaxMessages\MaxMessagesProcessor'
+#        retry: 'Swarrot\Processor\Retry\RetryProcessor'
+#        exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
+#    connections:
+#        rabbitmq:
+#            host: %rabbitmq_host%
+#            port: %rabbitmq_port%
+#            login: %rabbitmq_login%
+#            password: %rabbitmq_password%
+#            vhost: '/'
+#    consumers:
+#        certification:
+#            processor: certy.certification.result_processor
+#            extras:
+#                retry_exchange: certification
+#                retry_attempts: 3
+#                retry_routing_key_pattern: 'retry_%%attempt%%'
+#                max_messages: 2
+#    messages_types:
+#        compute_certification:
+#            connection: rabbitmq
+#            exchange: certification
+#            routing_key: ~
+
 certificationy_certy:
     debug: %kernel.debug%
     provider:
         file:
-            root_dir: %kernel.root_dir%/../src/Certificationy/Certification/Data
+            root_dir: %kernel.root_dir%/Resources/Data
+#Default (let's until docs is not written)
     scenario:
         class: Certificationy\Bundle\CertyBundle\Process\Certification\CertificationScenario
     steps:
         description: Certificationy\Bundle\CertyBundle\Process\Certification\DescriptionStep
         quiz: Certificationy\Bundle\CertyBundle\Process\Certification\QuizStep
         final: Certificationy\Bundle\CertyBundle\Process\Certification\FinalStep
+    calculator:
+        class: Certificationy\Component\Certy\Calculator\Calculator
+        delegator: ~ #rabbitmq

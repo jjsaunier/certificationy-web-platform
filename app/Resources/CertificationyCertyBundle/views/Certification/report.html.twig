@@ -1,0 +1,46 @@
+{% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.collapse').collapse();
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style type="text/css">
+        .panel-heading a:after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e114";
+            float: right;
+            color: grey;
+        }
+
+        .panel-heading a.collapsed:after {
+            content: "\e080";
+        }
+
+        ul#answers{
+            list-style-type: none;
+        }
+
+    </style>
+{% endblock %}
+
+{% block certy_content %}
+    {% block certy_report %}
+        {% embed 'CertificationyCertyBundle:Certification/Embed:CertificationReport.html.twig' %}
+            {% block append_question %}
+                {% if is_valid(question) %}
+                    <span class="glyphicon glyphicon-ok"></span>
+                {% else %}
+                    <span class="glyphicon glyphicon-remove"></span>
+                {% endif %}
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+{% endblock %}

@@ -1,6 +1,23 @@
-certification:
+certification_guidelines:
     path: /{name}
     defaults:
-        _controller: CertificationyCertyBundle:Certy:Certification
+        _controller: CertificationyCertyBundle:Certy:guidelines
     requirements:
         _method: GET
+        name: "[a-z0-9]+"
+
+certification_test:
+    path: /{name}/test
+    defaults:
+        _controller: CertificationyCertyBundle:Certy:test
+    requirements:
+        _method: GET|POST
+        name: "[a-z0-9]+"
+
+certification_report:
+    path: /{name}/report
+    defaults:
+        _controller: CertificationyCertyBundle:Certy:report
+    requirements:
+        _method: GET
+        name: "[a-z0-9]+"

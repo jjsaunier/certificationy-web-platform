@@ -1,0 +1,38 @@
+{% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
+
+{% block certy_content %}
+    <div class="col-md-3">
+        {% embed 'CertificationyCertyBundle:Certification/Embed:CategoryList.html.twig' %}
+            {% block list_attr %}class="list-group"{% endblock %}
+            {% block li_attr %}class="list-group-item"{% endblock %}
+            {% block category_line %}
+                <span class="badge">{{ category.questions.count }}</span>
+                {{ parent() }}
+            {% endblock category_line %}
+        {% endembed %}
+    </div>
+
+    <div class="col-md-9">
+        <div class="text-center">
+            <div>
+                <img src="{{ asset('images/logo_symfony.png') }}">
+            </div>
+            <a href="{{ path('certification_test', {'name': 'symfony2' }) }}" class="btn btn-success">Start ! <i class="icon-forward icon-white"></i></a>
+        </div>
+
+        <ul id="certification_tab" class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#overview" role="tab" data-toggle="tab">{{ 'overview'|trans({}, 'guidelines') }}</a></li>
+            <li class=""><a href="#contribute" role="tab" data-toggle="tab">{{ 'contribute'|trans({}, 'guidelines') }}</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="overview">
+                {{ include('@CertificationyCerty/Certification/Guidelines/overview.html.twig') }}
+            </div>
+
+            <div class="tab-pane fade" id="contribute">
+                {{ include('@CertificationyCerty/Certification/Guidelines/contribute.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

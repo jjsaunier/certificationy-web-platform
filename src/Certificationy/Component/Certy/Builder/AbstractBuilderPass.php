@@ -9,42 +9,20 @@
 
 namespace Certificationy\Component\Certy\Builder;
 
+use Certificationy\Component\Certy\Collector\CollectorInterface;
+
 abstract class AbstractBuilderPass implements BuilderPassInterface
 {
     /**
-     * @var array
+     * @var CollectorInterface
      */
-    protected $providersResources;
-
-    public function __construct()
-    {
-        $this->providersResources = array();
-    }
+    protected $collector;
 
     /**
-     * @param string$providerName
-     * @param array $resources
+     * @param CollectorInterface $collector
      */
-    public function addProviderResources($providerName, Array $resources)
+    public function setCollector(CollectorInterface $collector)
     {
-        $this->providersResources[$providerName] = $resources;
-    }
-
-    /**
-     * @return array
-     */
-    public function getProvidersResources()
-    {
-        return $this->providersResources;
-    }
-
-    /**
-     * @param array $providersResources
-     */
-    public function setProvidersResources(Array $providersResources)
-    {
-        foreach ($providersResources as $providerName => $providerResources) {
-            $this->addProviderResources($providerName, $providerResources);
-        }
+        $this->collector = $collector;
     }
 }

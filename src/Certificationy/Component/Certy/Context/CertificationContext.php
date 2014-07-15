@@ -9,57 +9,81 @@
 
 namespace Certificationy\Component\Certy\Context;
 
+use Behat\Transliterator\Transliterator;
+use JMS\Serializer\Annotation\Type;
+
 class CertificationContext implements CertificationContextInterface
 {
     /**
      * @var int
+     * @Type("integer")
      */
     protected $numberOfQuestions;
 
     /**
      * @var string[]
+     * @Type("array<string>")
      */
     protected $excludeCategories;
 
     /**
      * @var string[]
+     * @Type("array<string>")
      */
     protected $excludeQuestions;
 
     /**
      * @var int
+     * @Type("integer")
      */
     protected $score;
 
     /**
      * @var string
+     * @Type("string")
      */
     protected $language;
 
     /**
      * @var int[]
+     * @Type("array<integer>")
      */
     protected $threshold;
 
     /**
      * @var bool
+     * @Type("boolean")
      */
     protected $debug;
 
     /**
-     * @vars string
+     * @var string
+     * @Type("string")
      */
     protected $name;
+
+    /**
+     * @var string
+     * @Type("string")
+     */
+    protected $label;
+
+    /**
+     * @var string[]
+     * @Type("array<string>")
+     */
+    protected $providers;
 
     /**
      * @param string $name
      */
     public function __construct($name)
     {
-        $this->name = $name;
+        $this->name = Transliterator::urlize($name);
         $this->threshold = array();
         $this->excludeCategories = array();
         $this->excludeQuestions = array();
+        $this->providers = array();
 
         $this->initialized();
     }
@@ -67,6 +91,22 @@ class CertificationContext implements CertificationContextInterface
     protected function initialized()
     {
 
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
     }
 
     /**
@@ -259,6 +299,7 @@ class CertificationContext implements CertificationContextInterface
         $certificationContext->setLanguage($data['language']);
         $certificationContext->setThreshold($data['threshold']);
         $certificationContext->setDebug($data['debug']);
+        $certificationContext->setLabel($data['label']);
 
         return $certificationContext;
     }

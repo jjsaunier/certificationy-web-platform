@@ -10,23 +10,34 @@
 namespace Certificationy\Component\Certy\Model;
 
 use Certificationy\Component\Certy\Context\CertificationContext;
+use Certificationy\Component\Certy\Context\CertificationContextInterface;
+use JMS\Serializer\Annotation\Type;
 
 class Certification
 {
     /**
      * @var ModelCollection
+     * @Type("ModelCollection<Certificationy\Component\Certy\Model\Category>")
      */
     protected $categories;
 
     /**
      * @var Metrics
+     * @Type("Certificationy\Component\Certy\Model\Metrics")
      */
     protected $metrics;
 
     /**
      * @var CertificationContext
+     * @Type("Certificationy\Component\Certy\Context\CertificationContext")
      */
     protected $context;
+
+    /**
+     * @var ResultCertification
+     * @Type("Certificationy\Component\Certy\Model\ResultCertification")
+     */
+    protected $result;
 
     public function __construct()
     {
@@ -35,9 +46,25 @@ class Certification
     }
 
     /**
+     * @param \Certificationy\Component\Certy\Model\ResultCertification $rawResult
+     */
+    public function setResult(ResultCertification $result = null)
+    {
+        $this->result = $result;
+    }
+
+    /**
+     * @return \Certificationy\Component\Certy\Model\ResultCertification
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
      * @param \Certificationy\Component\Certy\Context\CertificationContext $context
      */
-    public function setContext(CertificationContext $context)
+    public function setContext(CertificationContextInterface $context)
     {
         $this->context = $context;
     }

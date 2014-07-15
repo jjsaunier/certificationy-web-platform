@@ -25,3 +25,9 @@ parameters:
     sensio_client_secret: key
 
     domain: .certificationy.dev
+
+    rabbitmq_host: 127.0.0.1
+    rabbitmq_port: 5672
+    rabbitmq_login: username
+    rabbitmq_password: password
+    vhost: '/'

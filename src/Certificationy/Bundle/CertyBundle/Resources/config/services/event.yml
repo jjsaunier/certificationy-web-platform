@@ -1,0 +1,10 @@
+parameters:
+    certy_certification_submission_compute_listener_class: Certificationy\Component\Certy\EventListener\CertificationComputeResultListener
+
+services:
+    certy.certification.submission_compute.listener:
+        class: %certy_certification_submission_compute_listener_class%
+        arguments:
+            - @certy.certification.calculator_manager
+        tags:
+            - { name: kernel.event_listener, event: certy.certification.submission, method: onSubmission }

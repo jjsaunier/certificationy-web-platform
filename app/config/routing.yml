@@ -42,6 +42,3 @@ certification_training:
 certy:
     resource: @CertificationyCertyBundle/Resources/config/routing.yml
     prefix: /certification
-
-sylius_flow:
-    resource: @SyliusFlowBundle/Resources/config/routing.yml

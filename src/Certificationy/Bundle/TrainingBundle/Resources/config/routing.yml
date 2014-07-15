@@ -1,7 +1,10 @@
 certificationy_train_session_routing:
-    resource: @CertificationyTrainingBundle/Resources/config/routing/session.yml
-    prefix: /session
+    resource: @CertificationyTrainingBundle/Resources/config/routing/training.yml
+    prefix: /
 
-certificationy_certification_routing:
-    resource: @CertificationyTrainingBundle/Resources/config/routing/certification.yml
-    prefix: /certification
+training:
+    path: /{name}
+    defaults:
+        _controller: certificationy.training.training_controller:indexAction
+    requirements:
+        _method: GET
