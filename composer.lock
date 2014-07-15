@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f1ba90209cd55bafaab305989cd290e2",
+    "hash": "97a575be515e18b22aae5908f3f95a73",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1917,16 +1917,16 @@
         },
         {
             "name": "swarrot/swarrot",
-            "version": "v1.2.6",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/swarrot.git",
-                "reference": "d6136a0327b2595b6d22958ab457d00713f9c464"
+                "reference": "f18e881482d59047c28aaf73bc5a41158fee7bd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/d6136a0327b2595b6d22958ab457d00713f9c464",
-                "reference": "d6136a0327b2595b6d22958ab457d00713f9c464",
+                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/f18e881482d59047c28aaf73bc5a41158fee7bd6",
+                "reference": "f18e881482d59047c28aaf73bc5a41158fee7bd6",
                 "shasum": ""
             },
             "require": {
@@ -1970,7 +1970,7 @@
                 "swarrot",
                 "worker"
             ],
-            "time": "2014-07-03 09:55:55"
+            "time": "2014-07-15 13:38:48"
         },
         {
             "name": "swarrot/swarrot-bundle",
@@ -2078,67 +2078,6 @@
                 "mailer"
             ],
             "time": "2014-06-13 11:44:54"
-        },
-        {
-            "name": "sylius/flow-bundle",
-            "version": "v0.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusFlowBundle.git",
-                "reference": "f62d38cba80a6e74672412aea4bb4193c2edcf71"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusFlowBundle/zipball/f62d38cba80a6e74672412aea4bb4193c2edcf71",
-                "reference": "f62d38cba80a6e74672412aea4bb4193c2edcf71",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.1"
-            },
-            "require-dev": {
-                "symfony/yaml": "~2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.10-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Bundle\\FlowBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "email": "pjedrzejewski@diweb.pl",
-                    "homepage": "http://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "http://sylius.org"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "http://github.com/Sylius/Sylius/contributors"
-                }
-            ],
-            "description": "Multiple action setups for Symfony2, build your checkouts/installers or whatever needs more than one step to complete.",
-            "homepage": "http://sylius.org",
-            "keywords": [
-                "checkout",
-                "flow",
-                "installation",
-                "steps"
-            ],
-            "time": "2014-06-24 01:41:19"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2372,16 +2311,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0"
+                "reference": "e66ee967571b89234c90946fe0d50dad195ad29c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/e3d2844abc988bc467bb1593cd340700096b0ac0",
-                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e66ee967571b89234c90946fe0d50dad195ad29c",
+                "reference": "e66ee967571b89234c90946fe0d50dad195ad29c",
                 "shasum": ""
             },
             "require": {
@@ -2484,7 +2423,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-07-08 14:42:08"
+            "time": "2014-07-15 15:39:46"
         },
         {
             "name": "twbs/bootstrap",

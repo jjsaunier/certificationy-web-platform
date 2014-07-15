@@ -3,7 +3,6 @@ namespace Certificationy\Bundle\CertyBundle;
 
 use Certificationy\Bundle\CertyBundle\DependencyInjection\Compiler\BuilderCompilerPass;
 use Certificationy\Bundle\CertyBundle\DependencyInjection\Compiler\ProviderCompilerPass;
-use Certificationy\Bundle\CertyBundle\DependencyInjection\Compiler\ScenarioCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

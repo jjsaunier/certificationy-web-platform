@@ -23,7 +23,7 @@ class CertyController extends Controller
         $certification = $certificationManager->getCertification($name);
 
         //Clear previous session when we are at the point to start new one
-        if($request->getSession()->has('certification')){
+        if ($request->getSession()->has('certification')) {
             $request->getSession()->remove('certification');
         }
 
@@ -67,7 +67,7 @@ class CertyController extends Controller
         $certification = $request->getSession()->get('certification');
 
         //Certification does'nt exist in session
-        if(null === $certification){
+        if (null === $certification) {
             $router = $this->container->get('router');
 
 //            return new RedirectResponse();
