@@ -12,6 +12,7 @@ namespace Certificationy\Bundle\CertyBundle\Controller;
 use Certificationy\Component\Certy\Model\Certification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CertyController extends Controller
 {
@@ -31,22 +32,37 @@ class CertyController extends Controller
     /**
      * @param Request $request
      * @param string  $name
+     * @TODO: Use esi for this method
      */
     public function testAction(Request $request, $name)
     {
         $certificationHandler = $this->container->get('certy.certification.form_handler');
         $certificationManager = $this->container->get('certificationy.certification.manager');
-
         $certification = $certificationManager->getCertification($name);
+
+        $response = new Response();
+
+//        if(!$request->isMethod('POST')){
+//            $response->setPublic();
+//            $response->setEtag(md5(serialize($certification)));
+//
+//            if ($response->isNotModified($request)) {
+//                return $response;
+//            }
+//        }
 
         if ($certification = $certificationHandler->process($certification)) {
             return $this->reportAction($request, $certification);
         }
 
-        return $this->render('CertificationyCertyBundle:Certification:test.html.twig', array(
+        $content = $this->renderView('CertificationyCertyBundle:Certification:test.html.twig', array(
             'certification' => $certification,
             'form' => $certificationHandler->createView()
         ));
+
+        $response->setContent($content);
+
+        return $response;
     }
 
     /**

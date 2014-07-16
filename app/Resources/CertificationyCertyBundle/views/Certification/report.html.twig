@@ -4,7 +4,7 @@
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function(){
-            $('.collapse').collapse();
+            $('div#details .collapse').collapse();
         });
     </script>
 {% endblock %}
@@ -28,19 +28,84 @@
             list-style-type: none;
         }
 
+        .table span.glyphicon { margin-right:10px; }
+        div#menu .panel-body { padding:0px; }
+        div#menu .panel-body table tr td { padding-left: 15px }
+        div#menu .panel-body .table {margin-bottom: 0px; }
+
+        .blockquote-box{border-right:5px solid #E6E6E6;margin-bottom:25px}
+        .blockquote-box .square{width:100px;min-height:50px;margin-right:22px;text-align:center!important;background-color:#E6E6E6;padding:20px 0}
+        .blockquote-box.blockquote-primary{border-color:#357EBD}
+        .blockquote-box.blockquote-primary .square{background-color:#428BCA;color:#FFF}
+        .blockquote-box.blockquote-success{border-color:#4CAE4C}
+        .blockquote-box.blockquote-success .square{background-color:#5CB85C;color:#FFF}
+        .blockquote-box.blockquote-info{border-color:#46B8DA}
+        .blockquote-box.blockquote-info .square{background-color:#5BC0DE;color:#FFF}
+        .blockquote-box.blockquote-warning{border-color:#EEA236}
+        .blockquote-box.blockquote-warning .square{background-color:#F0AD4E;color:#FFF}
+        .blockquote-box.blockquote-danger{border-color:#D43F3A}
+        .blockquote-box.blockquote-danger .square{background-color:#D9534F;color:#FFF}
     </style>
 {% endblock %}
 
 {% block certy_content %}
     {% block certy_report %}
-        {% embed 'CertificationyCertyBundle:Certification/Embed:CertificationReport.html.twig' %}
-            {% block append_question %}
-                {% if is_valid(question) %}
-                    <span class="glyphicon glyphicon-ok"></span>
-                {% else %}
-                    <span class="glyphicon glyphicon-remove"></span>
-                {% endif %}
-            {% endblock %}
-        {% endembed %}
+
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="menu">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Report summary
+                        </h4>
+                    </div>
+                    <div class="panel-collapse">
+                        <div class="panel-body">
+                            <table class="table" role="tablist">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        <a href="#overview" role="tab" data-toggle="tab">
+                                             Overview
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        <a href="#details" role="tab" data-toggle="tab">
+                                             Details
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span> Stats
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9 col-md-9">
+            <div class="text-center">
+                <img src="{{ asset('images/logo_symfony.png')}}">
+                <h2>{{ certification.context.label|capitalize }} certification report</h2>
+            </div>
+
+            <div id="tabContent" class="tab-content">
+                <div id="overview" class="tab-pane active fade in">
+                    {{ include('@CertificationyCerty/Certification/Report/overview.html.twig') }}
+                </div>
+
+                <div id="details" class="tab-pane fade">
+                    {{ include('@CertificationyCerty/Certification/Report/details.html.twig') }}
+                </div>
+            </div>
+        </div>
+
     {% endblock %}
 {% endblock %}

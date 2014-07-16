@@ -95,6 +95,8 @@ class ResultCertification
      */
     public function setScore($score)
     {
+        $this->computed = true;
+
         $this->score = $score;
     }
 

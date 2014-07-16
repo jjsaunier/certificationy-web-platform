@@ -1,5 +1,3 @@
-<h2>{{ certification.context.label|capitalize }} certification report</h2>
-
 {% for category in certification.categories %}
     {% set metrics = certification.metrics.getReportMetrics(category) %}
 

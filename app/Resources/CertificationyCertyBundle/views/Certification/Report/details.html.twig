@@ -1,0 +1,9 @@
+{% embed 'CertificationyCertyBundle:Certification/Embed:CertificationReport.html.twig' %}
+    {% block append_question %}
+        {% if is_valid(question) %}
+            <span class="glyphicon glyphicon-ok"></span>
+        {% else %}
+            <span class="glyphicon glyphicon-remove"></span>
+        {% endif %}
+    {% endblock %}
+{% endembed %}
