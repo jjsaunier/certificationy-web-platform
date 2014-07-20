@@ -59,7 +59,8 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "web/components"
     },
     "extra": {
         "symfony-app-dir": "app",

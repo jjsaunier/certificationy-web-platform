@@ -125,7 +125,7 @@ assetic:
             output: js/bootstrap.js
         jquery:
             inputs:
-                - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+                - %kernel.root_dir%/../web/components/jquery/jquery.js
             filters:
                 - yui_js
                 - closure
