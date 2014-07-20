@@ -20,7 +20,6 @@ class CustomContextEvent extends Event
     protected $certification;
 
     /**
-     * @param Certification $context
      */
     public function __construct(Certification $certification)
     {
@@ -28,7 +27,7 @@ class CustomContextEvent extends Event
     }
 
     /**
-     * @param Certification $context
+     * @param Certification $certification
      */
     public function setCertification($certification)
     {

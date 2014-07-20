@@ -41,7 +41,7 @@ class AnswerType extends AbstractType
     }
 
     /**
-     * @return callable
+     * @return \Closure
      */
     public function getAnswersList()
     {

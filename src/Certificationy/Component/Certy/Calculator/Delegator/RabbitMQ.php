@@ -11,7 +11,6 @@ namespace Certificationy\Component\Certy\Calculator\Delegator;
 
 use Certificationy\Component\Certy\Model\Certification;
 use JMS\Serializer\Serializer;
-use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 
@@ -35,7 +34,6 @@ class RabbitMQ implements DelegatorInterface
     /**
      * @param Publisher            $publisher
      * @param Serializer           $serializer
-     * @param LoggerInterface|null $logger
      */
     public function __construct(Publisher $publisher, Serializer $serializer)
     {

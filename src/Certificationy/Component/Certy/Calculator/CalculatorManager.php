@@ -35,7 +35,7 @@ class CalculatorManager
     }
 
     /**
-     * @return DelegatorInterface
+     * @return boolean
      */
     public function canDelegate()
     {

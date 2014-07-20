@@ -46,7 +46,7 @@ class Certification
     }
 
     /**
-     * @param \Certificationy\Component\Certy\Model\ResultCertification $rawResult
+     * @param \Certificationy\Component\Certy\Model\ResultCertification $result
      */
     public function setResult(ResultCertification $result = null)
     {

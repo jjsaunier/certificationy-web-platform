@@ -12,7 +12,6 @@ namespace Certificationy\Bundle\CertyBundle\Form\Handler;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Test\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class Handler
@@ -85,7 +84,7 @@ class Handler
     }
 
     /**
-     * @param $method
+     * @param string $method
      */
     public function setMethod($method)
     {
@@ -93,7 +92,7 @@ class Handler
     }
 
     /**
-     * @return null
+     * @return FormInterface
      * @throws \Exception
      */
     public function getForm()

@@ -37,7 +37,7 @@ class CategoryType extends AbstractType
     }
 
     /**
-     * @return callable
+     * @return \Closure
      */
     protected function getCategoryList()
     {
