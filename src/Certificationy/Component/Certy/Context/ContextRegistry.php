@@ -57,7 +57,7 @@ class ContextRegistry
     }
 
     /**
-     * @return array
+     * @return integer[]
      */
     public function getCertificationNames()
     {

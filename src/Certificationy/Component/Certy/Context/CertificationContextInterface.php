@@ -13,11 +13,13 @@ interface CertificationContextInterface
 {
     /**
      * @param string $name
+     * @return void
      */
     public function __construct($name);
 
     /**
      * @param string $label
+     * @return void
      */
     public function setLabel($label);
 
@@ -28,16 +30,19 @@ interface CertificationContextInterface
 
     /**
      * @param string[] $certifiedThreshold
+     * @return void
      */
     public function setThreshold(array $certifiedThreshold);
 
     /**
      * @param int    $score
      * @param string $thresholdName
+     * @return void
      */
     public function addThreshold($score, $thresholdName);
     /**
      * @param $score
+     * @return void
      */
     public function removeThreshold($score);
 
@@ -48,11 +53,13 @@ interface CertificationContextInterface
 
     /**
      * @param \string[] $excludeCategories
+     * @return void
      */
     public function setExcludeCategories(array $excludeCategories);
 
     /**
      * @param string $categoryName
+     * @return void
      */
     public function addExcludeCategory($categoryName);
 
@@ -69,6 +76,7 @@ interface CertificationContextInterface
 
     /**
      * @param int $numberOfQuestion
+     * @return void
      */
     public function setNumberOfQuestions($numberOfQuestion);
     /**
@@ -77,6 +85,7 @@ interface CertificationContextInterface
     public function getNumberOfQuestions();
     /**
      * @param string $language
+     * @return void
      */
     public function setLanguage($language);
 
@@ -87,6 +96,7 @@ interface CertificationContextInterface
 
     /**
      * @param boolean $debug
+     * @return void
      */
     public function setDebug($debug);
 

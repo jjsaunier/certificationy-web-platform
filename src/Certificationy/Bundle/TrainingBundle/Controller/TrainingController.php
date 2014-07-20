@@ -21,7 +21,7 @@ class TrainingController extends AbstractController
     protected $certificationManager;
 
     /**
-     * @param CertificationManager $certification
+     * @param CertificationManager $certificationManager
      */
     public function __construct(CertificationManager $certificationManager)
     {

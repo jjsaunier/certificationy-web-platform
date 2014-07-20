@@ -304,7 +304,7 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @return \string[]
+     * @return string[]
      */
     public function getAvailableLevels()
     {
@@ -336,7 +336,7 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @return \string[]
+     * @return string[]
      */
     public function getAvailableLanguages()
     {

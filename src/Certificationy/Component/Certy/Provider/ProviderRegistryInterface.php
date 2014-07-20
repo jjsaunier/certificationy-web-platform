@@ -13,11 +13,13 @@ interface ProviderRegistryInterface
 {
     /**
      * @param ProviderInterface $provider
+     * @return void
      */
     public function addProvider(ProviderInterface $provider);
 
     /**
      * @param ProviderInterface[] $providers
+     * @return void
      */
     public function setProviders(array $providers);
 

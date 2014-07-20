@@ -22,6 +22,7 @@ interface BuilderPassInterface
 
     /**
      * @param CollectorInterface $collector
+     * @return void
      */
     public function setCollector(CollectorInterface $collector);
 }

@@ -89,7 +89,6 @@ class Metrics
 
     /**
      * @param Category $category
-     * @param Question $question
      */
     public function addReportMetrics(Category $category)
     {

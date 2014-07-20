@@ -15,6 +15,7 @@ interface CalculatorInterface
 {
     /**
      * @param Certification $certification
+     * @return Certification
      */
     public function compute(Certification $certification);
 }

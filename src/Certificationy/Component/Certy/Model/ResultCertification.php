@@ -9,7 +9,6 @@
 
 namespace Certificationy\Component\Certy\Model;
 
-use Certificationy\Component\Certy\Context\CertificationContext;
 use JMS\Serializer\Annotation\Type;
 
 class ResultCertification
@@ -33,7 +32,6 @@ class ResultCertification
     protected $computed;
 
     /**
-     * @param CertificationContext $certificationContext
      */
     public function __construct()
     {

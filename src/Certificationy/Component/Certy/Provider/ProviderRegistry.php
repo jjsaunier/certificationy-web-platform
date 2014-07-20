@@ -60,7 +60,7 @@ class ProviderRegistry implements ProviderRegistryInterface
     }
 
     /**
-     * @return string[]
+     * @return integer[]
      */
     public function getRegistered()
     {

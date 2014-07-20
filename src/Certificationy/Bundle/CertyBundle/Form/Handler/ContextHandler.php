@@ -44,7 +44,7 @@ class ContextHandler extends Handler
     /**
      * @param Certification $data
      *
-     * @return bool|void
+     * @return Certification
      */
     protected function onSuccess($data)
     {

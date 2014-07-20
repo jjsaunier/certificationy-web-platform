@@ -95,7 +95,7 @@ class Report
     }
 
     /**
-     * @param mixed $label
+     * @param string $label
      */
     public function setLabel($label)
     {
@@ -207,7 +207,7 @@ class Report
     }
 
     /**
-     * @return \DateTime
+     * @return integer
      */
     public function getScoreRequired()
     {
@@ -215,7 +215,7 @@ class Report
     }
 
     /**
-     * @param mixed $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -231,7 +231,7 @@ class Report
     }
 
     /**
-     * @param Array $excludedCategories
+     * @param string[] $excludedCategories
      */
     public function setExcludedCategories($excludedCategories)
     {

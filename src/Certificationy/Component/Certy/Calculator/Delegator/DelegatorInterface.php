@@ -13,8 +13,12 @@ interface DelegatorInterface
 {
     /**
      * @param DelegatableInterface $object
+     * @return void
      */
     public function setDelegatedObject(DelegatableInterface $object);
 
+    /**
+     * @return void
+     */
     public function send();
 }
