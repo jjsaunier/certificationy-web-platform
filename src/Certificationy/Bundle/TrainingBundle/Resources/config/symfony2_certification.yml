@@ -1,8 +1,16 @@
 parameters:
-    symfony_certification_name: 'symfony2'
 
 services:
     certificationy.certification.manager:
         class: Certificationy\Bundle\TrainingBundle\Manager\CertificationManager
         arguments:
             - @certy.certification.factory
+            - @certy.certification.builder
+
+    certificationy.report.persister:
+        class: Certificationy\Bundle\TrainingBundle\EventListener\StoreCertificationReportListener
+        arguments:
+            - @doctrine.odm.mongodb.document_manager
+            - @security.context
+        tags:
+            - { name: kernel.event_listener, event: certy.certification.post_computation, method: store }

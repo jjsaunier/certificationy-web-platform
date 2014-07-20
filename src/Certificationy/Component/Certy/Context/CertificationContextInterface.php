@@ -25,19 +25,11 @@ interface CertificationContextInterface
      * @return string
      */
     public function getLabel();
-    /**
-     * @param int $score
-     */
-    public function setScore($score);
-    /**
-     * @return int
-     */
-    public function getScore();
 
     /**
      * @param string[] $certifiedThreshold
      */
-    public function setThreshold(Array $certifiedThreshold);
+    public function setThreshold(array $certifiedThreshold);
 
     /**
      * @param int    $score
@@ -57,7 +49,7 @@ interface CertificationContextInterface
     /**
      * @param \string[] $excludeCategories
      */
-    public function setExcludeCategories(Array $excludeCategories);
+    public function setExcludeCategories(array $excludeCategories);
 
     /**
      * @param string $categoryName

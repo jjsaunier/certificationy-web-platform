@@ -12,17 +12,6 @@
             <img style="margin-bottom: 20px;" alt="avatar" title="avatar" src="{{ gravatar(user, 275) }}">
             <div>
                 {% block actions %}
-                    {% block back_action %}
-                        <a title="{{ 'profile.back'|trans({}, 'profile') }}" href="{{ path('fos_user_profile_show') }}" class="btn btn-default">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    {% endblock back_action %}
-                    {% block edit_action %}
-                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            {{ 'profile.edit'|trans({}, 'profile') }}
-                        </a>
-                    {% endblock edit_action %}
                 {% endblock actions %}
             </div>
         </div>

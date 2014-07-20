@@ -120,7 +120,7 @@ class Builder implements BuilderInterface
      */
     public function build(CertificationContextInterface $context)
     {
-        $oid = spl_object_hash($context);
+        $oid = md5(serialize($context)); //It's not based of object instance, but on his content.
 
         if (!isset($this->cache[$oid])) {
             foreach ($this->builderPass as $pass) {

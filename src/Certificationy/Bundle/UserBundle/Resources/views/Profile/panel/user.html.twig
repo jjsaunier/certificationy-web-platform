@@ -1,0 +1,19 @@
+<h2>
+    User profile
+    <a title="{{ 'profile.user.edit'|trans({}, 'profile') }}" href="{{ path('fos_user_profile_edit') }}">
+        <span class="glyphicon glyphicon-edit"></span>
+    </a>
+</h2>
+
+<dl>
+    <dt>{{ 'profile.user.username'|trans({}, 'profile')}}</dt>
+    <dd>{{ user.username }}</dd>
+
+    {% if app.user == user %}
+        <dt>{{ 'profile.user.email'|trans({}, 'profile')}}</dt>
+        <dd>{{ user.email }}</dd>
+
+        <dt>{{ 'profile.user.real_name'|trans({}, 'profile')}}</dt>
+        <dd>{{ user.realName }}</dd>
+    {% endif %}
+</dl>

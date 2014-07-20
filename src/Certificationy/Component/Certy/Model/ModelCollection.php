@@ -329,7 +329,7 @@ class ModelCollection implements \Countable, \ArrayAccess, \IteratorAggregate
      *
      * @return ModelCollection
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
         return new ModelCollection($data['_elements']);
     }

@@ -19,7 +19,7 @@ interface ProviderRegistryInterface
     /**
      * @param ProviderInterface[] $providers
      */
-    public function setProviders(Array $providers);
+    public function setProviders(array $providers);
 
     /**
      * @param string $providerName

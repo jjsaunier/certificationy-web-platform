@@ -134,7 +134,7 @@ class Category
      *
      * @return Category
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
         $category = new Category();
         $category->setLabel($data['label']);

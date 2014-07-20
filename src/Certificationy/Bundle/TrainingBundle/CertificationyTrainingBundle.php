@@ -9,9 +9,17 @@
 
 namespace Certificationy\Bundle\TrainingBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CertificationyTrainingBundle extends Bundle
 {
-
+    /**
+     * @param ContainerBuilder $container
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->removeDefinition('certificationy.report.persister');
+    }
 }

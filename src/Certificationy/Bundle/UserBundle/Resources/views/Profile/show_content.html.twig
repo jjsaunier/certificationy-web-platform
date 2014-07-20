@@ -1,14 +1,17 @@
 <div class="col-md-9 col-lg-9 ">
-    <dl>
-        <dt>{{ 'profile.username'|trans({}, 'profile')}}</dt>
-        <dd>{{ user.username }}</dd>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#user" role="tab" data-toggle="tab">{{ 'profile.tabs.user'|trans({}, 'profile') }}</a></li>
+        <li><a href="#report" role="tab" data-toggle="tab">{{ 'profile.tabs.report'|trans({}, 'profile') }}</a></li>
+    </ul>
+    <div id="tab-content" class="tab-content">
 
-        {% if app.user == user %}
-            <dt>{{ 'profile.email'|trans({}, 'profile')}}</dt>
-            <dd>{{ user.email }}</dd>
+        <div class="tab-pane fade in active" id="user">
+            {{ include('CertificationyUserBundle:Profile/panel:user.html.twig')}}
+        </div>
 
-            <dt>{{ 'profile.real_name'|trans({}, 'profile')}}</dt>
-            <dd>{{ user.realName }}</dd>
-        {% endif %}
-    </dl>
+        <div class="tab-pane fade" id="report">
+            {{ include('CertificationyUserBundle:Profile/panel:report.html.twig') }}
+        </div>
+
+    </div>
 </div>

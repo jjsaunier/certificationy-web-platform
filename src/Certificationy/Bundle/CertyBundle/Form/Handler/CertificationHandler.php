@@ -13,7 +13,6 @@ use Certificationy\Component\Certy\Events\CertificationEvents;
 use Certificationy\Component\Certy\Events\CertificationSubmissionEvent;
 use Certificationy\Component\Certy\Model\Certification;
 use Certificationy\Component\Certy\Model\ResultCertification;
-use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CertificationHandler extends Handler
@@ -24,7 +23,6 @@ class CertificationHandler extends Handler
     protected $eventDispatcher;
 
     /**
-     * @param StorageInterface         $storage
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(EventDispatcherInterface $eventDispatcher)

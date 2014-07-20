@@ -1,8 +1,17 @@
-<p>
-    <ul>
-        <li>Language : {{ certification.context.language }}</li>
-        <li>Categories : {{ certification.metrics.categoryCount }}</li>
-        <li>Questions : {{ certification.metrics.questionCount }}</li>
-        <li>Answers : {{ certification.metrics.answerCount }}</li>
-    </ul>
-</p>
+{% block overview_content %}
+    <div class="col-md-5">
+        <h3>Settings</h3>
+        {{ form(form) }}
+    </div>
+    <div class="col-md-5">
+        <h3>Information</h3>
+        <ul>
+            <li>Categories : {{ certification.metrics.categoryCount }}</li>
+            <li>Questions : {{ certification.metrics.questionCount }}</li>
+            <li>Answers : {{ certification.metrics.answerCount }}</li>
+        </ul>
+    </div>
+{% endblock overview_content %}
+
+
+

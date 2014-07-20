@@ -50,37 +50,39 @@ class Metrics
     }
 
     /**
-     * @param int $type
+     * @param string $type
+     * @param int    $count
      */
-    public function increment($type)
+    public function increment($type, $count = 1)
     {
         switch ($type) {
             case self::CATEGORY:
-                $this->categoryCount++;
-            break;
+                $this->categoryCount = $this->categoryCount + $count;
+                break;
             case self::QUESTION:
-                $this->questionCount++;
-            break;
+                $this->questionCount = $this->questionCount + $count;
+                break;
             case self::ANSWER:
-                $this->answerCount++;
-            break;
+                $this->answerCount = $this->answerCount + $count;
+                break;
         }
     }
 
     /**
-     * @param int $type
+     * @param string $type
+     * @param int    $count
      */
-    public function decrement($type)
+    public function decrement($type, $count = 1)
     {
         switch ($type) {
             case self::CATEGORY:
-                $this->categoryCount--;
+                $this->categoryCount = $this->categoryCount - $count;
                 break;
             case self::QUESTION:
-                $this->questionCount--;
+                $this->questionCount = $this->questionCount - $count;
                 break;
             case self::ANSWER:
-                $this->answerCount--;
+                $this->answerCount = $this->answerCount - $count;
                 break;
         }
     }
@@ -121,6 +123,14 @@ class Metrics
         }
 
         return $this->reportMetrics[$category->getName()];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllReportMetrics()
+    {
+        return $this->reportMetrics;
     }
 
     /**
@@ -176,7 +186,7 @@ class Metrics
      *
      * @return Metrics
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
         $metrics = new Metrics();
         $metrics->setCategoryCount($data['categoryCount']);

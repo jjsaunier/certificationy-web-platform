@@ -171,7 +171,7 @@ class Question
      * @param  array    $data
      * @return Question
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
         $question = new Question();
         $question->setAnswers($data['answers']);

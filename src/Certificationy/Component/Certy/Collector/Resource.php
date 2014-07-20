@@ -37,7 +37,7 @@ class Resource
      * @param string $resourceName
      * @param array  $content
      */
-    public function __construct($providerName, $certificationName, $resourceName, Array $content)
+    public function __construct($providerName, $certificationName, $resourceName, array $content)
     {
         $this->providerName = $providerName;
         $this->certificationName = $certificationName;

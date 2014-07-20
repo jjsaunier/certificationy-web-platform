@@ -1,9 +1,14 @@
 parameters:
     certy_certification_form_class: Certificationy\Bundle\CertyBundle\Form\Type\CertificationType
-    certy_ceritification_form_name: certy_certification_default
     certy_certification_form_handler: Certificationy\Bundle\CertyBundle\Form\Handler\CertificationHandler
     certy_form_handler: Certificationy\Bundle\CertyBundle\Form\Handler\Handler
     certy_certification_answer_type: Certificationy\Bundle\CertyBundle\Form\Type\AnswerType
+    certy_certification_context_form: Certificationy\Bundle\CertyBundle\Form\Type\ContextType
+    certy_certification_context_form_handler: Certificationy\Bundle\CertyBundle\Form\Handler\ContextHandler
+    certy_certification_category_type: Certificationy\Bundle\CertyBundle\Form\Type\CategoryType
+
+    certy_ceritification_form_name: certy_certification_default
+    certy_certification_form_context_name: certy_certification_context
 
 services:
     certy.certification.form:
@@ -25,7 +30,25 @@ services:
         calls:
             - [ "setName", [ %certy_ceritification_form_name% ] ]
 
-    certy.certification.answer.extension:
+    certy.certification.answer.type:
         class: %certy_certification_answer_type%
         tags:
             - { name: form.type, alias: certification_answer }
+
+    certy.certification.context.form:
+        class: %certy_certification_context_form%
+        tags:
+            - { name: form.type, alias: %certy_certification_form_context_name% }
+
+    certy.certification.context.form_handler:
+        class: %certy_certification_context_form_handler%
+        parent: certy.form.handler
+        arguments:
+            - @event_dispatcher
+        calls:
+            - [ "setName", [ %certy_certification_form_context_name% ] ]
+
+    certy.certification.category.type:
+        class: %certy_certification_category_type%
+        tags:
+            - { name: form.type, alias: certification_category }

@@ -185,7 +185,7 @@ hwi_oauth:
 braincrafted_bootstrap:
     output_dir:
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+    jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.js
     less_filter: less
     auto_configure:
         assetic: true
@@ -197,6 +197,16 @@ jms_serializer:
     metadata:
         cache: ~
         debug: %kernel.debug%
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://127.0.0.1:27017
+            options: {}
+    default_database: certificationy
+    document_managers:
+        default:
+            auto_mapping: true
 
 #swarrot:
 #    provider: pecl

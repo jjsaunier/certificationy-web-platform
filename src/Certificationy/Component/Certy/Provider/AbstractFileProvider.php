@@ -38,7 +38,7 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
     /**
      * @return FileProviderConfiguration
      */
-    protected function createProviderConfiguration(Array $options = array())
+    protected function createProviderConfiguration(array $options = array())
     {
         return new FileProviderConfiguration($options);
     }
@@ -46,7 +46,7 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
     /**
      * @param array $options
      */
-    public function setOptions(Array $options = array())
+    public function setOptions(array $options = array())
     {
         $this->config = $this->createProviderConfiguration($options);
     }

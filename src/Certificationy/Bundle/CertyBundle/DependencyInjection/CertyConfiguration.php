@@ -45,7 +45,7 @@ class CertyConfiguration
     /**
      * @param array $providerConfig
      */
-    public function buildProvider(Array $providerConfig)
+    public function buildProvider(array $providerConfig)
     {
         if (isset($providerConfig['file'])) {
             $this->container->setParameter('certy_file_provider_root_dir', $providerConfig['file']['root_dir']);
@@ -55,7 +55,7 @@ class CertyConfiguration
     /**
      * @param array $scenarioConfig
      */
-    public function buildScenario(Array $scenarioConfig)
+    public function buildScenario(array $scenarioConfig)
     {
         $this->container->setParameter('certy_scenario_class', $scenarioConfig['class']);
     }
@@ -63,7 +63,7 @@ class CertyConfiguration
     /**
      * @param array $stepsConfig
      */
-    public function buildSteps(Array $stepsConfig)
+    public function buildSteps(array $stepsConfig)
     {
         $parameters = array();
 
@@ -82,7 +82,7 @@ class CertyConfiguration
     /**
      * @param array $calculatorConfig
      */
-    public function buildCalculator(Array $calculatorConfig)
+    public function buildCalculator(array $calculatorConfig)
     {
         //Register calculator service
         $definition = new Definition($calculatorConfig['class']);

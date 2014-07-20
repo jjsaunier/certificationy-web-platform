@@ -1,10 +1,23 @@
 parameters:
     certy_certification_submission_compute_listener_class: Certificationy\Component\Certy\EventListener\CertificationComputeResultListener
+    certy_certification_context_category_listener: Certificationy\Component\Certy\EventListener\ContextCategoryListener
+    certy_certification_context_score_listener: Certificationy\Component\Certy\EventListener\ContextScoreListener
 
 services:
     certy.certification.submission_compute.listener:
         class: %certy_certification_submission_compute_listener_class%
         arguments:
             - @certy.certification.calculator_manager
+            - @event_dispatcher
         tags:
             - { name: kernel.event_listener, event: certy.certification.submission, method: onSubmission }
+
+    certy.certification.context_category.listener:
+        class: %certy_certification_context_category_listener%
+        tags:
+            - { name: kernel.event_listener, event: certy.certification.custom_context, method: exclude, priority: 10 }
+
+    certy.certification.context_score.listener:
+        class: %certy_certification_context_score_listener%
+        tags:
+            - { name: kernel.event_listener, event: certy.certification.custom_context, method: updateScore, priority: -10 }

@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
 //            new Swarrot\SwarrotBundle\SwarrotBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
 
             //Certificationy
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),

@@ -45,7 +45,7 @@ class ResultCertification
     /**
      * @param $result
      */
-    public function setResults(Array $results)
+    public function setResults(array $results)
     {
         $this->assertIsComputed();
 

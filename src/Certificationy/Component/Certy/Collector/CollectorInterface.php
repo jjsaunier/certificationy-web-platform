@@ -18,7 +18,7 @@ interface CollectorInterface extends \Countable
      *
 *@return void
      */
-    public function addResource($providerName, $certificationName, Array $resources);
+    public function addResource($providerName, $certificationName, array $resources);
 
     /**
      * @return Resource[]

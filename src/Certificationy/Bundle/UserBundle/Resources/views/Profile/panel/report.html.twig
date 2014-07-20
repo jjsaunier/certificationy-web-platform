@@ -1,0 +1,36 @@
+<h2>Certification report</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ 'profile.report.hash'|trans({}, 'profile') }}</th>
+            <th>{{ 'profile.report.date'|trans({}, 'profile') }}</th>
+            <th>{{ 'profile.report.certification'|trans({}, 'profile') }}</th>
+            <th>{{ 'profile.report.language'|trans({}, 'profile') }}</th>
+            <th>{{ 'profile.report.level'|trans({}, 'profile') }}</th>
+            <th>{{ 'profile.report.score'|trans({}, 'profile') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+            <tr class="{{ report.score >= report.maxScore ? 'success' : 'danger' }}">
+                <td> {{ report.id }} </td>
+                <td> {{ report.createdAt|date }} </td>
+                <td>
+                    <a href="{{ path('certification_guidelines', { 'name': report.name }) }}">
+                        {{ report.label|capitalize }}
+                    </a>
+                </td>
+                <td> {{ report.language }} </td>
+                <td> {{ report.level }} </td>
+                <td> {{ report.score }} / {{ report.maxScore }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">
+                    {{ 'profile.report.empty'|trans({}, 'profile') }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

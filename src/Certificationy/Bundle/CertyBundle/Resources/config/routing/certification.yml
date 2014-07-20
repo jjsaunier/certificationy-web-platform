@@ -3,7 +3,7 @@ certification_guidelines:
     defaults:
         _controller: CertificationyCertyBundle:Certy:guidelines
     requirements:
-        _method: GET
+        _method: GET|POST
         name: "[a-z0-9]+"
 
 certification_test:

@@ -9,8 +9,11 @@
 
 namespace Certificationy\Component\Certy\EventListener;
 
+use Certificationy\Component\Certy\Events\CertificationComputationEvent;
+use Certificationy\Component\Certy\Events\CertificationEvents;
 use Certificationy\Component\Certy\Events\CertificationSubmissionEvent;
 use Certificationy\Component\Certy\Calculator\CalculatorManager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CertificationComputeResultListener
 {
@@ -20,11 +23,18 @@ class CertificationComputeResultListener
     protected $calculatorManager;
 
     /**
-     * @param CalculatorManager $calculatorManager
+     * @var EventDispatcherInterface
      */
-    public function __construct(CalculatorManager $calculatorManager)
+    protected $eventDispatcher;
+
+    /**
+     * @param CalculatorManager        $calculatorManager
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(CalculatorManager $calculatorManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->calculatorManager = $calculatorManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -39,7 +49,10 @@ class CertificationComputeResultListener
         }
 
         $calculator = $this->calculatorManager->getCalculator();
+        $certification = $event->getCertification();
 
-        $event->setCertification($calculator->compute($event->getCertification()));
+        $this->eventDispatcher->dispatch(CertificationEvents::CERTIFICATION_PRE_COMPUTATION, new CertificationComputationEvent($certification));
+        $event->setCertification($calculator->compute($certification));
+        $this->eventDispatcher->dispatch(CertificationEvents::CERTIFICATION_POST_COMPUTATION, new CertificationComputationEvent($certification));
     }
 }

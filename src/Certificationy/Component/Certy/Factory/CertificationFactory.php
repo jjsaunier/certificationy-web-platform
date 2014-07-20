@@ -54,7 +54,7 @@ class CertificationFactory
      * @return Certification
      * @throws \Exception
      */
-    public function createNamed($name, CertificationContext $context, Array $providers)
+    public function createNamed($name, CertificationContext $context, array $providers)
     {
         if (empty($providers)) {
             throw new \Exception('You must define at least one provider');

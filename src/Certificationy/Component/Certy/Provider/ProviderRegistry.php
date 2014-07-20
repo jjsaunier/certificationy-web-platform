@@ -27,7 +27,7 @@ class ProviderRegistry implements ProviderRegistryInterface
     /**
      * @param ProviderInterface[] $providers
      */
-    public function setProviders(Array $providers)
+    public function setProviders(array $providers)
     {
         foreach ($providers as $provider) {
             $this->addProvider($provider);

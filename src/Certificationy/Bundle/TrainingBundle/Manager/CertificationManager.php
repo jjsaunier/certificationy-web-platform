@@ -9,6 +9,7 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
+use Certificationy\Component\Certy\Builder\Builder;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
 
@@ -20,11 +21,17 @@ class CertificationManager
     protected $factory;
 
     /**
+     * @var Builder
+     */
+    protected $builder;
+
+    /**
      * @param CertificationFactory $factory
      */
-    public function __construct(CertificationFactory $factory)
+    public function __construct(CertificationFactory $factory, Builder $builder)
     {
         $this->factory = $factory;
+        $this->builder = $builder;
     }
 
     /**
@@ -42,18 +49,31 @@ class CertificationManager
      *
      * @return CertificationContext
      */
-    protected function getContext($name)
+    public function getContext($name)
     {
         $context = new CertificationContext($name);
 
+        /**
+         * Not implemented means no effect.
+         */
         if ($name === 'symfony2') {
-            $context->setNumberOfQuestions(100);
-            $context->setScore(50);
+//            Automatically computed with listener
+//            $context->setNumberOfQuestions(100);
+//            $context->setRequiredScore(50);
             $context->setLabel('Symfony 2');
-            $context->setLanguage('en');
+            $context->setAvailableLanguages(array('en' => 'English')); //not implemented
+            $context->setLanguage('en'); //not implemented
             $context->setDebug(true);
-
-            $context->setThreshold(array(
+            $context->setAvailableLevels(array(
+                'easy' => 'Easy',
+                'normal' => 'Normal',
+                'medium' => 'Medium',
+                'hard' => 'Hard',
+                'very_hard' => 'Very hard',
+                'stof' => 'Stof'
+            ));
+            $context->setLevel('default'); //not implemented
+            $context->setThreshold(array( //not implemented on display
                 array('newbie' => 30),
                 array('beginner' => 45),
                 array('not_bad' => 50),

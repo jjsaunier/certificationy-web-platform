@@ -43,7 +43,7 @@ class Collector implements CollectorInterface
      * @param string $providerName
      * @param array  $resources
      */
-    public function addResource($providerName, $certificationName, Array $resources)
+    public function addResource($providerName, $certificationName, array $resources)
     {
         if (!in_array($providerName, $this->collectedProviders)) {
             $this->collectedProviders[] = $providerName;

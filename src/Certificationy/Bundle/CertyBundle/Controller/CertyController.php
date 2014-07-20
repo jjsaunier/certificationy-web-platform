@@ -9,10 +9,12 @@
 
 namespace Certificationy\Bundle\CertyBundle\Controller;
 
-use Certificationy\Component\Certy\Model\Certification;
+use Certificationy\Bundle\CertyBundle\Exception\CheaterException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CertyController extends Controller
 {
@@ -22,10 +24,20 @@ class CertyController extends Controller
     public function guidelinesAction(Request $request, $name)
     {
         $certificationManager = $this->container->get('certificationy.certification.manager');
+        $contextHandler = $this->container->get('certy.certification.context.form_handler');
+
         $certification = $certificationManager->getCertification($name);
 
+        if ($contextHandler->process($certification)) {
+            $request->getSession()->set('certification', $certification);
+            $router = $this->container->get('router');
+
+            return new RedirectResponse($router->generate('certification_test', array('name' => $name)));
+        }
+
         return $this->render('CertificationyCertyBundle:Certification:guidelines.html.twig', array(
-            'certification' => $certification
+            'certification' => $certification,
+            'form' => $contextHandler->createView()
         ));
     }
 
@@ -36,13 +48,16 @@ class CertyController extends Controller
      */
     public function testAction(Request $request, $name)
     {
-        $certificationHandler = $this->container->get('certy.certification.form_handler');
-        $certificationManager = $this->container->get('certificationy.certification.manager');
-        $certification = $certificationManager->getCertification($name);
+        $certification = $request->getSession()->get('certification');
 
+        if (null === $certification) {
+            throw new HttpException(Response::HTTP_NOT_FOUND);
+        }
+
+        $certificationHandler = $this->container->get('certy.certification.form_handler');
         $response = new Response();
 
-//        if(!$request->isMethod('POST')){
+//        if (!$request->isMethod('POST')) {
 //            $response->setPublic();
 //            $response->setEtag(md5(serialize($certification)));
 //
@@ -52,7 +67,12 @@ class CertyController extends Controller
 //        }
 
         if ($certification = $certificationHandler->process($certification)) {
-            return $this->reportAction($request, $certification);
+            $router = $this->container->get('router');
+
+            return new RedirectResponse(
+                $router->generate('certification_report',
+                array('name' => $name)
+            ));
         }
 
         $content = $this->renderView('CertificationyCertyBundle:Certification:test.html.twig', array(
@@ -68,8 +88,17 @@ class CertyController extends Controller
     /**
      * @param Request $request
      */
-    public function reportAction(Request $request, Certification $certification)
+    public function reportAction(Request $request)
     {
+        $certification = $request->getSession()->get('certification');
+
+        //Prevent sneaky people.
+        $request->getSession()->remove('certification');
+
+        if (null === $certification) {
+            throw new CheaterException;
+        }
+
         return $this->render('CertificationyCertyBundle:Certification:report.html.twig', array(
             'certification' => $certification
         ));

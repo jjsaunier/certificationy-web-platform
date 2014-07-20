@@ -12,4 +12,7 @@ namespace Certificationy\Component\Certy\Events;
 final class CertificationEvents
 {
     const CERTIFICATION_SUBMISSION = 'certy.certification.submission';
+    const CERTIFICATION_PRE_COMPUTATION = 'certy.certification.pre_computation';
+    const CERTIFICATION_POST_COMPUTATION = 'certy.certification.post_computation';
+    const CERTIFICATION_CUSTOM_CONTEXT = 'certy.certification.custom_context';
 }

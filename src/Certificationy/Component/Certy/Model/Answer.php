@@ -151,7 +151,7 @@ class Answer
      *
      * @return Answer
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
         $answer = new Answer();
         $answer->setExpected($data['expected']);

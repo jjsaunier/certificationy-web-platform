@@ -33,12 +33,6 @@ class CertificationContext implements CertificationContextInterface
     protected $excludeQuestions;
 
     /**
-     * @var int
-     * @Type("integer")
-     */
-    protected $score;
-
-    /**
      * @var string
      * @Type("string")
      */
@@ -69,10 +63,28 @@ class CertificationContext implements CertificationContextInterface
     protected $label;
 
     /**
+     * @var int
+     * @Type("integer")
+     */
+    protected $requiredScore;
+
+    /**
+     * @var string
+     * @Type("string")
+     */
+    protected $level;
+
+    /**
      * @var string[]
      * @Type("array<string>")
      */
-    protected $providers;
+    protected $availableLevels;
+
+    /**
+     * @var string[]
+     * @Type("array<string>")
+     */
+    protected $availableLanguages;
 
     /**
      * @param string $name
@@ -83,7 +95,6 @@ class CertificationContext implements CertificationContextInterface
         $this->threshold = array();
         $this->excludeCategories = array();
         $this->excludeQuestions = array();
-        $this->providers = array();
 
         $this->initialized();
     }
@@ -91,6 +102,22 @@ class CertificationContext implements CertificationContextInterface
     protected function initialized()
     {
 
+    }
+
+    /**
+     * @param int $requiredScore
+     */
+    public function setRequiredScore($requiredScore)
+    {
+        $this->requiredScore = $requiredScore;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequiredScore()
+    {
+        return $this->requiredScore;
     }
 
     /**
@@ -110,25 +137,9 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
-     * @param int $score
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
-    }
-
-    /**
-     * @return int
-     */
-    public function getScore()
-    {
-        return $this->score;
-    }
-
-    /**
      * @param string[] $certifiedThreshold
      */
-    public function setThreshold(Array $certifiedThreshold)
+    public function setThreshold(array $certifiedThreshold)
     {
         foreach ($certifiedThreshold as $score => $thresholdName) {
             $this->addThreshold($score, $thresholdName);
@@ -163,7 +174,7 @@ class CertificationContext implements CertificationContextInterface
     /**
      * @param \string[] $excludeCategories
      */
-    public function setExcludeCategories(Array $excludeCategories)
+    public function setExcludeCategories(array $excludeCategories)
     {
         foreach ($excludeCategories as $categoryName) {
             $this->addExcludeCategory($categoryName);
@@ -197,7 +208,7 @@ class CertificationContext implements CertificationContextInterface
     /**
      * @param \string[] $excludeQuestions
      */
-    public function setExcludeQuestions(Array $excludeQuestions)
+    public function setExcludeQuestions(array $excludeQuestions)
     {
         foreach ($excludeQuestions as $questionName) {
             $this->addExcludeQuestion($questionName);
@@ -285,21 +296,71 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
+     * @param \string[] $availableLevels
+     */
+    public function setAvailableLevels($availableLevels)
+    {
+        $this->availableLevels = $availableLevels;
+    }
+
+    /**
+     * @return \string[]
+     */
+    public function getAvailableLevels()
+    {
+        return $this->availableLevels;
+    }
+
+    /**
+     * @param string $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param \string[] $availableLanguages
+     */
+    public function setAvailableLanguages($availableLanguages)
+    {
+        $this->availableLanguages = $availableLanguages;
+    }
+
+    /**
+     * @return \string[]
+     */
+    public function getAvailableLanguages()
+    {
+        return $this->availableLanguages;
+    }
+
+    /**
      * @param array $data
      *
      * @return CertificationContext
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
         $certificationContext = new CertificationContext($data['name']);
         $certificationContext->setNumberOfQuestions($data['numberOfQuestions']);
         $certificationContext->setExcludeCategories($data['excludeCategories']);
         $certificationContext->setExcludeQuestions($data['excludeQuestions']);
-        $certificationContext->setScore($data['score']);
         $certificationContext->setLanguage($data['language']);
         $certificationContext->setThreshold($data['threshold']);
         $certificationContext->setDebug($data['debug']);
         $certificationContext->setLabel($data['label']);
+        $certificationContext->setAvailableLevels($data['available_levels']);
+        $certificationContext->setLevel($data['level']);
+        $certificationContext->setAvailableLanguages($data['available_languages']);
 
         return $certificationContext;
     }

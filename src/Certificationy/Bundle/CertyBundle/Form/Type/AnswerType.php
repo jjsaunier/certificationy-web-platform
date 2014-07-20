@@ -28,15 +28,7 @@ class AnswerType extends AbstractType
             'multiple' => true,
             'expanded' => true,
             'property_path' => 'results',
-            'choice_list' => function (Options $options) {
-                $question = $options->get('question');
-                $choices = array();
-                foreach ($question->getAnswers() as $answer) {
-                    $choices[Calculator::getHash($question->getCategory(), $question, $answer)] = $answer->getLabel();
-                }
-
-                return new SimpleChoiceList($choices);
-            }
+            'choice_list' => $this->getAnswersList()
         ));
 
         $resolver->setRequired(array(
@@ -46,6 +38,22 @@ class AnswerType extends AbstractType
         $resolver->setAllowedTypes(array(
             'question' => array('Certificationy\Component\Certy\Model\Question')
         ));
+    }
+
+    /**
+     * @return callable
+     */
+    public function getAnswersList()
+    {
+        return function (Options $options) {
+            $question = $options->get('question');
+            $choices = array();
+            foreach ($question->getAnswers() as $answer) {
+                $choices[Calculator::getHash($question->getCategory(), $question, $answer)] = $answer->getLabel();
+            }
+
+            return new SimpleChoiceList($choices);
+        };
     }
 
     /**

@@ -21,7 +21,7 @@ class ProviderConfiguration implements ProviderConfigurationInterface
     /**
      * @param array $options
      */
-    public function __construct(Array $options = array())
+    public function __construct(array $options = array())
     {
         $resolver = new OptionsResolver();
 
