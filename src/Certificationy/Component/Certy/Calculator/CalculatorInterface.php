@@ -14,7 +14,7 @@ use Certificationy\Component\Certy\Model\Certification;
 interface CalculatorInterface
 {
     /**
-     * @param Certification $certification
+     * @param  Certification $certification
      * @return Certification
      */
     public function compute(Certification $certification);

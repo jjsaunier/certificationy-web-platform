@@ -32,8 +32,8 @@ class RabbitMQ implements DelegatorInterface
     protected $serializer;
 
     /**
-     * @param Publisher            $publisher
-     * @param Serializer           $serializer
+     * @param Publisher  $publisher
+     * @param Serializer $serializer
      */
     public function __construct(Publisher $publisher, Serializer $serializer)
     {

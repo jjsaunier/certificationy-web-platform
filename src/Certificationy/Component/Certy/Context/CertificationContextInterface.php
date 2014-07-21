@@ -12,13 +12,13 @@ namespace Certificationy\Component\Certy\Context;
 interface CertificationContextInterface
 {
     /**
-     * @param string $name
+     * @param  string $name
      * @return void
      */
     public function __construct($name);
 
     /**
-     * @param string $label
+     * @param  string $label
      * @return void
      */
     public function setLabel($label);
@@ -29,14 +29,14 @@ interface CertificationContextInterface
     public function getLabel();
 
     /**
-     * @param string[] $certifiedThreshold
+     * @param  string[] $certifiedThreshold
      * @return void
      */
     public function setThreshold(array $certifiedThreshold);
 
     /**
-     * @param int    $score
-     * @param string $thresholdName
+     * @param  int    $score
+     * @param  string $thresholdName
      * @return void
      */
     public function addThreshold($score, $thresholdName);
@@ -52,13 +52,13 @@ interface CertificationContextInterface
     public function getThreshold();
 
     /**
-     * @param \string[] $excludeCategories
+     * @param  \string[] $excludeCategories
      * @return void
      */
     public function setExcludeCategories(array $excludeCategories);
 
     /**
-     * @param string $categoryName
+     * @param  string $categoryName
      * @return void
      */
     public function addExcludeCategory($categoryName);
@@ -75,7 +75,7 @@ interface CertificationContextInterface
     public function getExcludeCategories();
 
     /**
-     * @param int $numberOfQuestion
+     * @param  int  $numberOfQuestion
      * @return void
      */
     public function setNumberOfQuestions($numberOfQuestion);
@@ -84,7 +84,7 @@ interface CertificationContextInterface
      */
     public function getNumberOfQuestions();
     /**
-     * @param string $language
+     * @param  string $language
      * @return void
      */
     public function setLanguage($language);
@@ -95,7 +95,7 @@ interface CertificationContextInterface
     public function getLanguage();
 
     /**
-     * @param boolean $debug
+     * @param  boolean $debug
      * @return void
      */
     public function setDebug($debug);
