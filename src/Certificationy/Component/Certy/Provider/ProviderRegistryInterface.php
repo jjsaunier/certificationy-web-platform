@@ -12,13 +12,13 @@ namespace Certificationy\Component\Certy\Provider;
 interface ProviderRegistryInterface
 {
     /**
-     * @param ProviderInterface $provider
+     * @param  ProviderInterface $provider
      * @return void
      */
     public function addProvider(ProviderInterface $provider);
 
     /**
-     * @param ProviderInterface[] $providers
+     * @param  ProviderInterface[] $providers
      * @return void
      */
     public function setProviders(array $providers);

@@ -21,7 +21,7 @@ interface BuilderPassInterface
     public function execute(Builder $builder, CertificationContext $certificationContext);
 
     /**
-     * @param CollectorInterface $collector
+     * @param  CollectorInterface $collector
      * @return void
      */
     public function setCollector(CollectorInterface $collector);

@@ -239,7 +239,7 @@ class Report
     }
 
     /**
-     * @return Array
+     * @return string[]
      */
     public function getExcludedCategories()
     {

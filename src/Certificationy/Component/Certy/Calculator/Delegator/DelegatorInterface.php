@@ -12,7 +12,7 @@ namespace Certificationy\Component\Certy\Calculator\Delegator;
 interface DelegatorInterface
 {
     /**
-     * @param DelegatableInterface $object
+     * @param  DelegatableInterface $object
      * @return void
      */
     public function setDelegatedObject(DelegatableInterface $object);
