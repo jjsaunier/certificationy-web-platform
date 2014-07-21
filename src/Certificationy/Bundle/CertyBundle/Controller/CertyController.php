@@ -20,6 +20,9 @@ class CertyController extends Controller
 {
     /**
      * @param Request $request
+     * @param string  $name
+     *
+     * @return RedirectResponse|Response
      */
     public function guidelinesAction(Request $request, $name)
     {
@@ -44,7 +47,9 @@ class CertyController extends Controller
     /**
      * @param Request $request
      * @param string  $name
-     * @TODO: Use esi for this method
+     *
+     * @return RedirectResponse|Response
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
     public function testAction(Request $request, $name)
     {
@@ -87,17 +92,20 @@ class CertyController extends Controller
 
     /**
      * @param Request $request
+     *
+     * @return Response
+     * @throws \Certificationy\Bundle\CertyBundle\Exception\CheaterException
      */
     public function reportAction(Request $request)
     {
         $certification = $request->getSession()->get('certification');
 
-        //Prevent sneaky people.
-        $request->getSession()->remove('certification');
-
-        if (null === $certification) {
-            throw new CheaterException;
-        }
+//        //Prevent sneaky people.
+//        $request->getSession()->remove('certification');
+//
+//        if (null === $certification) {
+//            throw new CheaterException;
+//        }
 
         return $this->render('CertificationyCertyBundle:Certification:report.html.twig', array(
             'certification' => $certification

@@ -11,41 +11,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
-    <style type="text/css">
-        .panel-heading a:after {
-            font-family: 'Glyphicons Halflings';
-            content: "\e114";
-            float: right;
-            color: grey;
-        }
-
-        .panel-heading a.collapsed:after {
-            content: "\e080";
-        }
-
-        ul#answers{
-            list-style-type: none;
-        }
-
-        .table span.glyphicon { margin-right:10px; }
-        div#menu .panel-body { padding:0px; }
-        div#menu .panel-body table tr td { padding-left: 15px }
-        div#menu .panel-body .table {margin-bottom: 0px; }
-
-        .blockquote-box{border-right:5px solid #E6E6E6;margin-bottom:25px}
-        .blockquote-box .square{width:100px;min-height:50px;margin-right:22px;text-align:center!important;background-color:#E6E6E6;padding:20px 0}
-        .blockquote-box.blockquote-primary{border-color:#357EBD}
-        .blockquote-box.blockquote-primary .square{background-color:#428BCA;color:#FFF}
-        .blockquote-box.blockquote-success{border-color:#4CAE4C}
-        .blockquote-box.blockquote-success .square{background-color:#5CB85C;color:#FFF}
-        .blockquote-box.blockquote-info{border-color:#46B8DA}
-        .blockquote-box.blockquote-info .square{background-color:#5BC0DE;color:#FFF}
-        .blockquote-box.blockquote-warning{border-color:#EEA236}
-        .blockquote-box.blockquote-warning .square{background-color:#F0AD4E;color:#FFF}
-        .blockquote-box.blockquote-danger{border-color:#D43F3A}
-        .blockquote-box.blockquote-danger .square{background-color:#D9534F;color:#FFF}
-    </style>
+    <link href="{{ asset('css/report.css') }}" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block certy_content %}
@@ -56,7 +22,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            Report summary
+                            {{ 'menu.title'|trans({}, 'report') }}
                         </h4>
                     </div>
                     <div class="panel-collapse">
@@ -66,7 +32,7 @@
                                     <td>
                                         <i class="fa fa-tasks"></i>
                                         <a href="#overview" role="tab" data-toggle="tab">
-                                             Overview
+                                            {{ 'menu.overview'|trans({}, 'report') }}
                                         </a>
                                     </td>
                                 </tr>
@@ -74,7 +40,7 @@
                                     <td>
                                         <i class="fa fa-th-list"></i>
                                         <a href="#details" role="tab" data-toggle="tab">
-                                             Details
+                                            {{ 'menu.details'|trans({}, 'report') }}
                                         </a>
                                     </td>
                                 </tr>
@@ -88,7 +54,7 @@
         <div class="col-sm-9 col-md-9">
             <div class="text-center">
                 <img src="{{ asset('images/logo_symfony.png')}}">
-                <h2>{{ certification.context.label|capitalize }} certification report</h2>
+                <h2> {{ 'headline'|trans({'%certification%' : certification.context.label|capitalize}, 'report') }}</h2>
             </div>
 
             <div id="tabContent" class="tab-content">

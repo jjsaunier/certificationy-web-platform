@@ -56,6 +56,14 @@ assetic:
             apply_to: "\.less$"
         cssrewrite: ~
     assets:
+        report_css:
+            inputs:
+                - %kernel.root_dir%/Resources/CertificationyCertyBundle/private/less/report.less
+            filters:
+                - less
+                - cssrewrite
+                - yui_css
+            output: css/report.css
         user_css:
             inputs:
                 - @CertificationyUserBundle/Resources/private/less/user.less
