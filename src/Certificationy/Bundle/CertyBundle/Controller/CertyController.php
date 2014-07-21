@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\Certy Bundle\Controller;
+namespace Certificationy\Bundle\CertyBundle\Controller;
 
 use Certificationy\Bundle\CertyBundle\Exception\CheaterException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
