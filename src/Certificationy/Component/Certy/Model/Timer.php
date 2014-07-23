@@ -36,7 +36,7 @@ class Timer
     }
 
     /**
-     * @return bool|\DateInterval
+     * @return integer[]
      */
     public function elapsed()
     {
@@ -48,4 +48,4 @@ class Timer
             's' => $diff->s
         );
     }
-} 
+}

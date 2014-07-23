@@ -10,7 +10,6 @@
 namespace Certificationy\Component\Certy\Events;
 
 use Certificationy\Component\Certy\Calculator\Delegator\DelegatableInterface;
-use Symfony\Component\EventDispatcher\Event;
 
 class CertificationSubmissionEvent extends CertificationEvent implements DelegatableInterface
 {

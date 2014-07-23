@@ -27,7 +27,7 @@ class TrainingExtension extends \Twig_Extension
     }
 
     /**
-     * @return array
+     * @return \Twig_SimpleFilter[]
      */
     public function getFilters()
     {
@@ -49,8 +49,8 @@ class TrainingExtension extends \Twig_Extension
 
         $output = array();
 
-        foreach($elapsed as $type => $value){
-            if($value !== 0){
+        foreach ($elapsed as $type => $value) {
+            if ($value !== 0) {
                 $output[] = $value.$this->translator->trans($strings[$type], array(), 'report');
             }
         }
