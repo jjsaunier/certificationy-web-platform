@@ -2,8 +2,15 @@ parameters:
     certy_certification_submission_compute_listener_class: Certificationy\Component\Certy\EventListener\CertificationComputeResultListener
     certy_certification_context_category_listener: Certificationy\Component\Certy\EventListener\ContextCategoryListener
     certy_certification_context_score_listener: Certificationy\Component\Certy\EventListener\ContextScoreListener
+    certy_certification_timer_listener: Certificationy\Component\Certy\EventListener\TimerListener
 
 services:
+    certy.certification.timer.listener:
+        class: %certy_certification_timer_listener%
+        tags:
+            - { name: kernel.event_listener, event: certy.certification.start, method: startTimer }
+            - { name: kernel.event_listener, event: certy.certification.submission, method: stopTimer }
+
     certy.certification.submission_compute.listener:
         class: %certy_certification_submission_compute_listener_class%
         arguments:

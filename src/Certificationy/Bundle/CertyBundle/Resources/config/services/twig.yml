@@ -2,7 +2,7 @@ parameters:
     certy_certification_report_extension: Certificationy\Bundle\CertyBundle\Twig\Extension\CertificationExtension
 
 services:
-    certy.certification.report.extension:
+    certy.certification.twig.extension:
         class: %certy_certification_report_extension%
         tags:
             - { name: twig.extension }

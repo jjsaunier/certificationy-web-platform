@@ -9,6 +9,7 @@
             <th>{{ 'profile.report.language'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.level'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.score'|trans({}, 'profile') }}</th>
+            <th>{{ 'profile.report.timing'|trans({}, 'profile') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
                 <td> {{ report.language }} </td>
                 <td> {{ report.level }} </td>
                 <td> {{ report.score }} / {{ report.maxScore }}</td>
+                <td> {{ report.elapsedTime|elapsed }}</td>
             </tr>
         {% else %}
             <tr>

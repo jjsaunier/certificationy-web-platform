@@ -37,6 +37,11 @@ class Metrics
      */
     protected $reportMetrics;
 
+    /**
+     * @var Timer
+     */
+    protected $timer;
+
     const CATEGORY = 1;
     const QUESTION = 2;
     const ANSWER = 3;
@@ -47,6 +52,7 @@ class Metrics
         $this->questionCount = 0;
         $this->answerCount = 0;
         $this->reportMetrics = array();
+        $this->timer = new Timer();
     }
 
     /**
@@ -193,5 +199,13 @@ class Metrics
         $metrics->setAnswerCount($data['answerCount']);
 
         return $metrics;
+    }
+
+    /**
+     * @return Timer
+     */
+    public function getTimer()
+    {
+        return $this->timer;
     }
 }

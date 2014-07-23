@@ -2,4 +2,8 @@ menu:
     title: "Report summary"
     overview: "Overview"
     details: "Details"
-headline: %certification% report
+headline: "%certification% report"
+time:
+    hour: "h"
+    minute: "m"
+    second: "s"

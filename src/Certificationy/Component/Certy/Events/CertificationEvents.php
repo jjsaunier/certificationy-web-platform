@@ -15,4 +15,5 @@ final class CertificationEvents
     const CERTIFICATION_PRE_COMPUTATION = 'certy.certification.pre_computation';
     const CERTIFICATION_POST_COMPUTATION = 'certy.certification.post_computation';
     const CERTIFICATION_CUSTOM_CONTEXT = 'certy.certification.custom_context';
+    const CERTIFICATION_START = 'certy.certification.start';
 }

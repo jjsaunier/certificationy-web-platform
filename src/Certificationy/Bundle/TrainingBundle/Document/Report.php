@@ -49,6 +49,9 @@ class Report
     /** @ODM\Field(type="hash") */
     protected $excludedCategories;
 
+    /** @ODM\Field(type="hash") */
+    protected $elapsedTime;
+
     /**
      * @var int
      */
@@ -244,5 +247,21 @@ class Report
     public function getExcludedCategories()
     {
         return $this->excludedCategories;
+    }
+
+    /**
+     * @param int[] $elapsedTime
+     */
+    public function setElapsedTime($elapsedTime)
+    {
+        $this->elapsedTime = $elapsedTime;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getElapsedTime()
+    {
+        return $this->elapsedTime;
     }
 }

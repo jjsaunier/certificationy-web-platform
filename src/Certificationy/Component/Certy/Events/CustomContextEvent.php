@@ -9,36 +9,8 @@
 
 namespace Certificationy\Component\Certy\Events;
 
-use Certificationy\Component\Certy\Model\Certification;
 use Symfony\Component\EventDispatcher\Event;
 
-class CustomContextEvent extends Event
+class CustomContextEvent extends CertificationEvent
 {
-    /**
-     * @var Certification
-     */
-    protected $certification;
-
-    /**
-     */
-    public function __construct(Certification $certification)
-    {
-        $this->certification = $certification;
-    }
-
-    /**
-     * @param Certification $certification
-     */
-    public function setCertification($certification)
-    {
-        $this->certification = $certification;
-    }
-
-    /**
-     * @return Certification
-     */
-    public function getCertification()
-    {
-        return $this->certification;
-    }
 }

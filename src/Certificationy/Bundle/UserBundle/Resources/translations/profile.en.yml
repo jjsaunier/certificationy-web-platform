@@ -17,3 +17,5 @@ profile:
         level: "Level"
         score: "Score"
         empty: "No report yet"
+        timing: "Elapsed time"
+ 

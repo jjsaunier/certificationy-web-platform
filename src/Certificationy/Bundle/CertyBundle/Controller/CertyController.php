@@ -10,6 +10,8 @@
 namespace Certificationy\Bundle\CertyBundle\Controller;
 
 use Certificationy\Bundle\CertyBundle\Exception\CheaterException;
+use Certificationy\Component\Certy\Events\CertificationEvent;
+use Certificationy\Component\Certy\Events\CertificationEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +36,9 @@ class CertyController extends Controller
         if ($contextHandler->process($certification)) {
             $request->getSession()->set('certification', $certification);
             $router = $this->container->get('router');
+
+            $eventDispatcher = $this->container->get('event_dispatcher');
+            $eventDispatcher->dispatch(CertificationEvents::CERTIFICATION_START, new CertificationEvent($certification));
 
             return new RedirectResponse($router->generate('certification_test', array('name' => $name)));
         }
@@ -72,6 +77,7 @@ class CertyController extends Controller
 //        }
 
         if ($certification = $certificationHandler->process($certification)) {
+
             $router = $this->container->get('router');
 
             return new RedirectResponse(

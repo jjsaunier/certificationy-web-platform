@@ -66,6 +66,7 @@ class StoreCertificationReportListener
         $report->setLevel($context->getLevel());
         $report->setScoreRequired($context->getRequiredScore());
         $report->setExcludedCategories($context->getExcludeCategories());
+        $report->setElapsedTime($metrics->getTimer()->elapsed());
 
         $this->documentManager->persist($report);
         $this->documentManager->flush();

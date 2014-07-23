@@ -22,3 +22,10 @@ services:
         scope: request
         arguments:
             - @certificationy.certification.manager
+
+    certificationy.twig.extension:
+        class: Certificationy\Bundle\TrainingBundle\Twig\Extension\TrainingExtension
+        arguments:
+            - @translator
+        tags:
+            - { name: twig.extension }
