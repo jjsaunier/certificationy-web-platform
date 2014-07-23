@@ -112,7 +112,6 @@ class CertyController extends Controller
 //        if (null === $certification) {
 //            throw new CheaterException;
 //        }
-
         return $this->render('CertificationyCertyBundle:Certification:report.html.twig', array(
             'certification' => $certification
         ));

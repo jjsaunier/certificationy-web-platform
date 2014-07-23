@@ -9,8 +9,6 @@
 
 namespace Certificationy\Component\Certy\Events;
 
-use Symfony\Component\EventDispatcher\Event;
-
 class CustomContextEvent extends CertificationEvent
 {
 }

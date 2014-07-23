@@ -42,4 +42,4 @@ class CertificationEvent extends Event
     {
         return $this->certification;
     }
-} 
+}

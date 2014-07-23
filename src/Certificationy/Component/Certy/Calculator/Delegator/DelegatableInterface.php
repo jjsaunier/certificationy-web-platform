@@ -16,7 +16,7 @@ interface DelegatableInterface
     /**
      * @param $certification
      *
-     * @return mixed
+     * @return void
      */
     public function setCertification(Certification $certification);
 
