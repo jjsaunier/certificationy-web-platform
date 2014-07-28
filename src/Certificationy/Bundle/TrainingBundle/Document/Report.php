@@ -12,7 +12,7 @@ namespace Certificationy\Bundle\TrainingBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * @ODM\Document
+ * @ODM\Document(repositoryClass="Certificationy\Bundle\TrainingBundle\Repository\ReportRepository")
  */
 class Report
 {

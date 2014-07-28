@@ -14,12 +14,25 @@ doctrine:
 monolog:
     handlers:
         main:
-            type:         fingers_crossed
+            type: fingers_crossed
             action_level: error
-            handler:      nested
-        nested:
-            type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            handler: grouped
+        grouped:
+            type: group
+            members: [ application, swift ]
+        application:
+            type: service
+            id: snc_redis.monolog.handler
             level: debug
-        console:
-            type:  console
+        swift:
+            type: swift_mailer
+            type:               swift_mailer
+            from_email:         log@certificationy.com
+            to_email:           johann_27@hotmail.com
+            subject:            "[LOG][CERTIFICATIONY]"
+            level:              debug
+        login:
+            type: service
+            id: snc_redis.monolog.handler
+            level: info
+            channels: security

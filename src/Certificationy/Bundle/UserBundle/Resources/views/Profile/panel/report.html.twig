@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for report in reports %}
+        {% for report in pagination %}
             <tr class="{{ report.score >= report.maxScore ? 'success' : 'danger' }}">
                 <td> {{ report.id }} </td>
                 <td> {{ report.createdAt|date }} </td>
@@ -27,12 +27,13 @@
                 <td> {{ report.score }} / {{ report.maxScore }}</td>
                 <td> {{ report.elapsedTime|elapsed }}</td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">
-                    {{ 'profile.report.empty'|trans({}, 'profile') }}
-                </td>
-            </tr>
         {% endfor %}
     </tbody>
+    <tfoot>
+        <tr>
+            <td class="text-center" colspan="6">
+                {{ knp_pagination_render(pagination) }}
+            </td>
+        </tr>
+    </tfoot>
 </table>

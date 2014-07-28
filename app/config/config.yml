@@ -24,6 +24,10 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    session:
+        cookie_lifetime: 31536000
+        cookie_domain: %domain%
+        name: certificationy
 
 # Twig Configuration
 twig:
@@ -209,12 +213,41 @@ jms_serializer:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://127.0.0.1:27017
+            server: %mongodb_server%
             options: {}
-    default_database: certificationy
+    default_database: %mongodb_collection%
     document_managers:
         default:
             auto_mapping: true
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: %redis_dsn%/1
+
+        session:
+            type: predis
+            alias: session
+            dsn: %redis_dsn%/2
+
+        monolog:
+            type: predis
+            alias: monolog
+            dsn: %redis_dsn%/3
+            logging: false
+            options:
+                connection_persistent: true
+
+    monolog:
+        client: monolog
+        key: monolog
+
+    session:
+        client: session
+        prefix: session:main
+        use_as_default: true
 
 #swarrot:
 #    provider: pecl
@@ -223,7 +256,6 @@ doctrine_mongodb:
 #    processors_stack:
 #        signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
 #        ack: 'Swarrot\Processor\Ack\AckProcessor'
-#        max_messages: 'Swarrot\Processor\MaxMessages\MaxMessagesProcessor'
 #        retry: 'Swarrot\Processor\Retry\RetryProcessor'
 #        exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
 #    connections:
@@ -252,13 +284,6 @@ certificationy_certy:
     provider:
         file:
             root_dir: %kernel.root_dir%/Resources/Data
-#Default (let's until docs is not written)
-    scenario:
-        class: Certificationy\Bundle\CertyBundle\Process\Certification\CertificationScenario
-    steps:
-        description: Certificationy\Bundle\CertyBundle\Process\Certification\DescriptionStep
-        quiz: Certificationy\Bundle\CertyBundle\Process\Certification\QuizStep
-        final: Certificationy\Bundle\CertyBundle\Process\Certification\FinalStep
     calculator:
         class: Certificationy\Component\Certy\Calculator\Calculator
         delegator: ~ #rabbitmq

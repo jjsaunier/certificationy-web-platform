@@ -22,9 +22,12 @@
         "braincrafted/bootstrap-bundle": "~2.0",
         "twbs/bootstrap": "~3.0",
         "components/jquery": "~2.0",
-        "knplabs/knp-paginator-bundle": "~2.3",
+        "knplabs/knp-paginator-bundle": "~2.4",
         "knplabs/knp-menu-bundle": "~1.1",
         "FortAwesome/Font-Awesome": "*",
+        "snc/redis-bundle": "~1.1",
+        "predis/predis": "~0.8",
+        "whatthejeff/nyancat-phpunit-resultprinter": "~1.2",
 
         "behat/transliterator": "~1.0",
         "swarrot/swarrot-bundle": "@stable",

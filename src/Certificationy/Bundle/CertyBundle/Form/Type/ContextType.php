@@ -25,10 +25,7 @@ class ContextType extends AbstractType
 
         $builder->add('language', 'choice', array('choices' => $context->getAvailableLanguages()));
 
-        $builder->add('level', 'choice', array(
-            'choices' => $context->getAvailableLevels(),
-            'attr' => array('help_text' => 'This is actually not implemented')
-        ));
+        $builder->add('level', 'choice', array('choices' => $context->getAvailableLevels()));
 
         $builder->add('exclude_categories', 'certification_category', array(
             'certification' => $options['certification'])

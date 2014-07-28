@@ -12,6 +12,7 @@ namespace Certificationy\Bundle\UserBundle\Controller;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProfileController extends BaseController
 {
@@ -32,13 +33,19 @@ class ProfileController extends BaseController
             ->getRepository('CertificationyTrainingBundle:Report')
         ;
 
-        $reports = $reportRepository->findByUserId($user->getId());
+        $paginator = $this->container->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+            $reportRepository->getQueryBuilderReportsForUser($user),
+            $this->container->get('request')->query->get('page', 1),
+            15
+        );
 
         return $this->container->get('templating')->renderResponse(
             'FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
                 'user' => $user,
-                'reports' => $reports
+                'pagination' => $pagination
             )
         );
     }

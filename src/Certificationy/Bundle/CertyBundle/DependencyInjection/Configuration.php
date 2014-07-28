@@ -9,11 +9,6 @@ class Configuration implements ConfigurationInterface
     /**
      * @var string
      */
-    protected $defaultScenarioClass = 'Certificationy\Bundle\CertyBundle\Process\Certification\CertificationScenario';
-
-    /**
-     * @var string
-     */
     protected $defaultCalculatorClass = 'Certificationy\Component\Certy\Calculator\Calculator';
 
     /**
@@ -35,14 +30,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-            ->arrayNode('scenario')
-                ->children()
-                    ->scalarNode('class')->defaultValue($this->defaultScenarioClass)->end()
-                ->end()
-            ->end()
-            ->arrayNode('steps')
-                ->prototype('scalar')->end()
             ->end()
             ->scalarNode('debug')->end()
             ->arrayNode('provider')

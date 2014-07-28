@@ -1,0 +1,3 @@
+[submodule "app/Resources/data"]
+	path = app/Resources/data
+	url = https://github.com/ProPheT777/certificationy-data.git

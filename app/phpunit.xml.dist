@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- http://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
     backupGlobals               = "false"
     backupStaticAttributes      = "false"
@@ -10,8 +9,11 @@
     convertWarningsToExceptions = "true"
     processIsolation            = "false"
     stopOnFailure               = "false"
+    printerFile                 = "vendor/whatthejeff/nyancat-phpunit-resultprinter/src/NyanCat/PHPUnit/ResultPrinter.php"
+    printerClass                = "NyanCat\PHPUnit\ResultPrinter"
     syntaxCheck                 = "false"
-    bootstrap                   = "bootstrap.php.cache" >
+    bootstrap                   = "bootstrap.php.cache"
+>
 
     <testsuites>
         <testsuite name="Project Test Suite">
@@ -19,12 +21,6 @@
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
-
-    <!--
-    <php>
-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
-    </php>
-    -->
 
     <filter>
         <whitelist>

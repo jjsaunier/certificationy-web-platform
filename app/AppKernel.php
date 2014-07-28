@@ -24,10 +24,12 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new \Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
-//            new Swarrot\SwarrotBundle\SwarrotBundle(),
+            //new Swarrot\SwarrotBundle\SwarrotBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
 
             //Certificationy
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),

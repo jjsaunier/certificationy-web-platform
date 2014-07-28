@@ -14,11 +14,6 @@ security:
                 csrf_provider: form.csrf_provider
                 default_target_path: /
                 always_use_default_target_path: true
-            remember_me:
-                key: "%secret%"
-                lifetime: 31536000
-                path: /
-                domain: %domain%
             logout: true
             anonymous: true
             oauth:
@@ -36,8 +31,8 @@ security:
         - { path: ^/connect$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/certification, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/certification, role: ROLE_USER }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

@@ -65,12 +65,7 @@ class CertificationManager
             $context->setLanguage('en'); //not implemented
             $context->setDebug(true);
             $context->setAvailableLevels(array(
-                'easy' => 'Easy',
-                'normal' => 'Normal',
-                'medium' => 'Medium',
-                'hard' => 'Hard',
-                'very_hard' => 'Very hard',
-                'stof' => 'Stof'
+                'normal' => 'Normal'
             ));
             $context->setLevel('default'); //not implemented
             $context->setThreshold(array( //not implemented on display
