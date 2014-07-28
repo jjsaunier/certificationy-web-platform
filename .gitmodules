@@ -1,3 +1,3 @@
-[submodule "app/Resources/data"]
-	path = app/Resources/data
-	url = https://github.com/ProPheT777/certificationy-data.git
+[submodule "app/Resources/certificationy-data"]
+	path = app/Resources/certificationy-data
+	url = ../certificationy-data.git
