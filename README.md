@@ -8,16 +8,15 @@ The goal is to train about the symfony certification [http://sensiolabs.com/en/s
 
 Installation
 -------------
-
+ 
 ### Requirements ###
 * PHP 5.3.3 at least
 * PHP extension : cURL, mongo, amqp (optional)
 * Composer
 * MySQL
 * MongoDB
+* Redis
 * RabbitMQ (optional)
-
-**I'm interesting for vagrant / docker solution**
 
 Installation
 -------------
@@ -62,14 +61,8 @@ Roadmap
 * Write test for Certy component (phpunit)
 * Write test for Certy bundle (phpunit)
 * Write test for the web platform (behat)
-* Redesigned homepage
-* Add contribution page for the web plateform
-* Add httpCache / ESI for Certification part.
-* Add redis cache for production (session, doctrine, form)
 * i18n training support (Need to review data structure)
 * Level training support (Need to review data structure)
-* Improve metrics, add timer.
-* Add new context ability : limit number of questions per category
 
 **Long time :**
 * Add interesting dumper (I think to pdf & SQL)
