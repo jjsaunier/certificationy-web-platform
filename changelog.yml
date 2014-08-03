@@ -1,0 +1,7 @@
+1.0.0:
+    meta:
+        date: 31/06/2014
+    changes:
+        - FIX Empty resource files
+        - NEW Doctrine 2 training
+        - NEW Symfony 2 training
