@@ -33,7 +33,8 @@
         "swarrot/swarrot-bundle": "@stable",
         "jms/serializer-bundle": "~0.13",
         "doctrine/mongodb-odm": "1.0.*@beta",
-        "doctrine/mongodb-odm-bundle": "3.0.*@beta"
+        "doctrine/mongodb-odm-bundle": "3.0.*@beta",
+        "guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
