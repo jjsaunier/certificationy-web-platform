@@ -87,6 +87,18 @@ class CertificationContext implements CertificationContextInterface
     protected $availableLanguages;
 
     /**
+     * @var bool
+     * @Type("boolean")
+     */
+    protected $allowExcludeCategories;
+
+    /**
+     * @var bool
+     * @Type("boolean")
+     */
+    protected $allowCustomNumberOfQuestions;
+
+    /**
      * @param string $name
      */
     public function __construct($name)
@@ -344,6 +356,62 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
+     * @param boolean $allowExcludeCategories
+     */
+    public function setAllowExcludeCategories($allowExcludeCategories)
+    {
+        $this->allowExcludeCategories = $allowExcludeCategories;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAllowExcludeCategories()
+    {
+        return $this->allowExcludeCategories;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeCustomize()
+    {
+        if (1 < count($this->getAvailableLanguages())) {
+            return true;
+        }
+
+        if (null !== $this->getAvailableLevels()) {
+            return true;
+        }
+
+        if (true === $this->getAllowExcludeCategories()) {
+            return true;
+        }
+
+        if (true === $this->getAllowCustomNumberOfQuestions()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param boolean $allowCustomNumberOfQuestions
+     */
+    public function setAllowCustomNumberOfQuestions($allowCustomNumberOfQuestions)
+    {
+        $this->allowCustomNumberOfQuestions = $allowCustomNumberOfQuestions;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAllowCustomNumberOfQuestions()
+    {
+        return $this->allowCustomNumberOfQuestions;
+    }
+
+    /**
      * @param array $data
      *
      * @return CertificationContext
@@ -358,9 +426,11 @@ class CertificationContext implements CertificationContextInterface
         $certificationContext->setThreshold($data['threshold']);
         $certificationContext->setDebug($data['debug']);
         $certificationContext->setLabel($data['label']);
-        $certificationContext->setAvailableLevels($data['available_levels']);
+        $certificationContext->setAvailableLevels($data['availableLevels']);
         $certificationContext->setLevel($data['level']);
-        $certificationContext->setAvailableLanguages($data['available_languages']);
+        $certificationContext->setAvailableLanguages($data['availableLanguages']);
+        $certificationContext->setAllowExcludeCategories($data['allowExcludeCategories']);
+        $certificationContext->setAllowCustomNumberOfQuestions($data['allowCustomNumberOfQuestions']);
 
         return $certificationContext;
     }

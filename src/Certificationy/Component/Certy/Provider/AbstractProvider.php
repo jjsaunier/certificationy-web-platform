@@ -29,7 +29,7 @@ abstract class AbstractProvider implements ProviderInterface
     public function addResource($resourceName, $certificationName, $content)
     {
         if (!is_array($content) || empty($content)) {
-            throw new \Exception(sprintf('Provider %s return unexpected result', $this->getName()));
+            $content = array();
         }
 
         $this->resources[] = new Resource($this->getName(), $certificationName, $resourceName, $content);

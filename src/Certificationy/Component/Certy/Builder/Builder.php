@@ -80,7 +80,7 @@ class Builder implements BuilderInterface
         foreach ($this->collector->getFlattenResources($context->getName()) as $resource) {
             $resourceContent = $resource->getContent();
 
-            if (in_array($resource->getResourceName(), $context->getExcludeCategories())) {
+            if (empty($resourceContent)) {
                 continue;
             }
 
@@ -89,8 +89,11 @@ class Builder implements BuilderInterface
             $category->setName($resource->getResourceName());
             $metrics->increment(Metrics::CATEGORY);
 
-            foreach ($resourceContent['questions'] as $questionContent) {
+            if (empty($resourceContent['questions'])) {
+                $resourceContent['questions'] = array();
+            }
 
+            foreach ($resourceContent['questions'] as $questionContent) {
                 $question = new Question();
                 $question->setLabel($questionContent['question']);
                 $metrics->increment(Metrics::QUESTION);
@@ -132,5 +135,13 @@ class Builder implements BuilderInterface
         }
 
         return $this->cache[$oid];
+    }
+
+    /**
+     * @return Collector|CollectorInterface
+     */
+    public function getCollector()
+    {
+        return $this->collector;
     }
 }

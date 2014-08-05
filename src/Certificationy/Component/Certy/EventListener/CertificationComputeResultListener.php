@@ -9,10 +9,10 @@
 
 namespace Certificationy\Component\Certy\EventListener;
 
+use Certificationy\Component\Certy\Calculator\CalculatorManager;
 use Certificationy\Component\Certy\Events\CertificationComputationEvent;
 use Certificationy\Component\Certy\Events\CertificationEvents;
 use Certificationy\Component\Certy\Events\CertificationSubmissionEvent;
-use Certificationy\Component\Certy\Calculator\CalculatorManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CertificationComputeResultListener

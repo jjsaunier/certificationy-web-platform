@@ -61,7 +61,7 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
         $options = $this->getConfig()->getOptions();
 
         foreach ($options['path'] as $id => $path) {
-            $options['path'][$id] = $path.'/'.$this->getName().'/'.$certificationName;
+            $options['path'][$id] = $path.'/'.$certificationName.'/'.$this->getName();
         }
 
         $finder = new Finder();

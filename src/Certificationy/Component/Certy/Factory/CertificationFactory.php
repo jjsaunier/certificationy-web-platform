@@ -12,7 +12,6 @@ namespace Certificationy\Component\Certy\Factory;
 use Certificationy\Component\Certy\Builder\BuilderInterface;
 use Certificationy\Component\Certy\Builder\ProviderBuilderPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
-use Certificationy\Component\Certy\Context\ContextRegistry;
 use Certificationy\Component\Certy\Dumper\DumperInterface;
 use Certificationy\Component\Certy\Loader\LoaderInterface;
 use Certificationy\Component\Certy\Model\Certification;
@@ -64,7 +63,7 @@ class CertificationFactory
             throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
         }
 
-        //Avoid to regenerate certification
+        //Avoid to regenerate certification previously generated
         if (null !== $this->loader && false === $context->getDebug()) {
             return $this->loader->load($name);
         }
@@ -78,6 +77,7 @@ class CertificationFactory
                     implode(', ', $this->providerRegistry->getRegistered())
                 ));
             }
+
             $this->builder->addBuilderPass(new ProviderBuilderPass($this->providerRegistry->getProvider($provider)));
         }
 
@@ -137,13 +137,5 @@ class CertificationFactory
         $this->dumper = $dumper;
 
         return $this;
-    }
-
-    /**
-     * @param ContextRegistry $contextRegistry
-     */
-    public function setContextRegistry(ContextRegistry $contextRegistry)
-    {
-        $this->contextRegistry = $contextRegistry;
     }
 }
