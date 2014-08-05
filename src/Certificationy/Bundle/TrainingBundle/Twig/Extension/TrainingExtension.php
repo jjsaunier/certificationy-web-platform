@@ -39,7 +39,7 @@ class TrainingExtension extends \Twig_Extension
     /**
      * @param array $elapsed
      */
-    public function elapsed(Array $elapsed)
+    public function elapsed(array $elapsed)
     {
         $strings = array(
             'h' => 'time.hour',

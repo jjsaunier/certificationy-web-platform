@@ -6,6 +6,11 @@ services:
         arguments:
             - @certy.certification.factory
             - @certy.certification.builder
+            - %kernel.debug%
+            - @snc_redis.default
+            - @jms_serializer
+        calls:
+            - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
 
     certificationy.report.persister:
         class: Certificationy\Bundle\TrainingBundle\EventListener\StoreCertificationReportListener
@@ -14,3 +19,10 @@ services:
             - @security.context
         tags:
             - { name: kernel.event_listener, event: certy.certification.post_computation, method: store }
+
+    certificationy.metrics.listener:
+        class: Certificationy\Bundle\TrainingBundle\EventListener\MetricsCounterListener
+        arguments:
+            - @snc_redis.counter
+        tags:
+            - { name: kernel.event_listener, event: certy.certification.submission, method: increment }

@@ -52,9 +52,7 @@ class Report
     /** @ODM\Field(type="hash") */
     protected $elapsedTime;
 
-    /**
-     * @var int
-     */
+    /** @ODM\Int */
     protected $maxScore;
 
     public function __construct()

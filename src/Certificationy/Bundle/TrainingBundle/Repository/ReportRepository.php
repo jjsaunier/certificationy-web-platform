@@ -9,7 +9,6 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Repository;
 
-
 use Certificationy\Bundle\UserBundle\Entity\User;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
@@ -25,9 +24,9 @@ class ReportRepository extends DocumentRepository
         $qb
             ->field('userId')
             ->equals($user->getId())
-            ->sort('createdAt', 'asc')
+            ->sort('createdAt', 'desc')
         ;
 
         return $qb;
     }
-} 
+}

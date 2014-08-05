@@ -9,7 +9,32 @@
 
 namespace Certificationy\Bundle\TrainingBundle\EventListener;
 
+use Certificationy\Component\Certy\Events\CertificationEvent;
+use Predis\Client;
 
-class MetricsCounterListener {
+class MetricsCounterListener
+{
+    /**
+     * @var Client
+     */
+    protected $redisClient;
 
-} 
+    /**
+     * @param Client $redisClient
+     */
+    public function __construct(Client $redisClient)
+    {
+        $this->redisClient = $redisClient;
+    }
+
+    /**
+     * @param CertificationEvent $event
+     */
+    public function increment(CertificationEvent $event)
+    {
+        $this->redisClient->incr('total');
+        $this->redisClient->incr($event->getCertification()->getContext()->getName());
+
+        $this->redisClient->bgsave();
+    }
+}

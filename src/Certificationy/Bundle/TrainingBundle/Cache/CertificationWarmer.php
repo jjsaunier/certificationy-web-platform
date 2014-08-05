@@ -1,15 +1,39 @@
 <?php
-/**
-* This file is part of the PhpStorm.
-* (c) johann (johann_27@hotmail.fr)
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-**/
-
 namespace Certificationy\Bundle\TrainingBundle\Cache;
 
+use Certificationy\Bundle\TrainingBundle\Manager\CertificationManager;
+use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 
-class CertificationWarmer {
+class CertificationWarmer implements CacheWarmerInterface
+{
+    /**
+     * @var CertificationManager
+     */
+    protected $certificationManager;
 
-} 
+    /**
+     * @param CertificationManager $certificationManager
+     */
+    public function __construct(CertificationManager $certificationManager)
+    {
+        $this->certificationManager = $certificationManager;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOptional()
+    {
+        return false;
+    }
+
+    /**
+     * @param string $cacheDir
+     */
+    public function warmUp($cacheDir)
+    {
+        foreach ($this->certificationManager->getCertifications() as $name => $label) {
+            $this->certificationManager->getCertification($name);
+        }
+    }
+}

@@ -9,6 +9,7 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Menu;
 
+use Certificationy\Bundle\TrainingBundle\Manager\CertificationManager;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -27,23 +28,24 @@ class TrainingBuilder
     protected $translator;
 
     /**
-     * @var SecurityContext
+     * @var \Certificationy\Bundle\TrainingBundle\Manager\CertificationManager
      */
-    protected $securityContext;
+    protected $certificationManager;
 
     /**
-     * @param FactoryInterface $factory
-     * @param Translator       $translator
-     * @param SecurityContext  $securityContext
+     * @param FactoryInterface     $factory
+     * @param Translator           $translator
+     * @param SecurityContext      $securityContext
+     * @param CertificationManager $certificationManager
      */
     public function __construct(
         FactoryInterface $factory,
         Translator $translator,
-        SecurityContext $securityContext
+        CertificationManager $certificationManager
     ) {
         $this->translator = $translator;
         $this->factory = $factory;
-        $this->securityContext = $securityContext;
+        $this->certificationManager = $certificationManager;
     }
 
     /**
@@ -55,19 +57,17 @@ class TrainingBuilder
     {
         $menu = $this->factory->createItem('training');
 
-        if (false === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $menu;
-        }
-
         $trainingMenu = $menu->addChild('training', array(
             'label' => $this->translator->trans('training.menu', array(), 'training')
         ));
 
-        $trainingMenu->addChild('symfony2', array(
-            'route' => 'certification_guidelines',
-            'routeParameters' => array('name' => 'symfony2'),
-            'label' => $this->translator->trans('symfony2', array(), 'training')
-        ));
+        foreach ($this->certificationManager->getCertifications() as $certificationName => $certificationLabel) {
+            $trainingMenu->addChild($certificationName, array(
+                'route' => 'certification_guidelines',
+                'routeParameters' => array('name' => $certificationName),
+                'label' => $certificationLabel
+            ));
+        }
 
         return $menu;
     }

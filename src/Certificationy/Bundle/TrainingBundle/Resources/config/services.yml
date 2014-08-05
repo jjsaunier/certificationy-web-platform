@@ -4,7 +4,7 @@ services:
         arguments:
             - @knp_menu.factory
             - @translator
-            - @security.context
+            - @certificationy.certification.manager
 
     certificationy.training.menu:
         class: Knp\Menu\MenuItem
@@ -29,3 +29,20 @@ services:
             - @translator
         tags:
             - { name: twig.extension }
+
+    certificationy.certification_loader.twig.extension:
+        class: Certificationy\Bundle\TrainingBundle\Twig\Extension\ContributingExtension
+        arguments:
+            -  @twig.loader
+            - %certy_file_provider_root_dir%
+        calls:
+            - [ addCertificationTemplateDir, [ @certificationy.certification.manager ] ]
+        tags:
+            - { name: twig.extension }
+
+    certificationy.certification.cache_warmer:
+        class: Certificationy\Bundle\TrainingBundle\Cache\CertificationWarmer
+        arguments:
+            - @certificationy.certification.manager
+        tags:
+            - { name: kernel.cache_warmer }
