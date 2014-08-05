@@ -1,0 +1,17 @@
+parameters:
+
+
+services:
+    github.client:
+        class: Certificationy\Bundle\GithubBundle\Api\Client
+        arguments:
+            - %github_login%
+            - %github_password%
+
+    github.security:
+        class: Certificationy\Bundle\GithubBundle\Api\Security
+        calls:
+            -  [ "setSecret", [ %kernel.secret% ] ]
+
+    github.status:
+        class: Certificationy\Bundle\GithubBundle\Api\Status
