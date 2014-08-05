@@ -8,7 +8,7 @@ The goal is to train about the symfony certification [http://sensiolabs.com/en/s
 
 Installation
 -------------
- 
+
 ### Requirements ###
 * PHP 5.3.3 at least
 * PHP extension : cURL, mongo, amqp (optional)
