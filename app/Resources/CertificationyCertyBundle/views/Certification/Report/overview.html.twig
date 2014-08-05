@@ -1,4 +1,4 @@
-    <h2 class="text-center">You scored {{ certification.result.score }} / {{ certification.context.numberOfQuestions }}</h2>
+    <h2 class="text-center">You scored {{ certification.result.score }} / {{ certification.context.requiredScore }}</h2>
 
     {% if certification.result.score >= certification.context.requiredScore %}
         <div class="blockquote-box blockquote-success clearfix">
@@ -7,7 +7,7 @@
             </div>
             <h4>Congratulation !</h4>
             <p>
-                And this was my sentence ...
+                And this, is my sentence ...
             </p>
         </div>
     {% else %}

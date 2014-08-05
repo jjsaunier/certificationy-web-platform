@@ -3,7 +3,9 @@ imports:
     - { resource: security.yml }
 
 framework:
-    #esi:             ~
+    esi: ~
+    fragments:
+        path: /_proxy
     translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
@@ -22,7 +24,6 @@ framework:
         name: 'Certificationy'
         cookie_domain: %domain%
         handler_id:  ~
-    fragments:       ~
     http_method_override: true
     session:
         cookie_lifetime: 31536000
@@ -33,6 +34,8 @@ framework:
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        ga_tracking: %google_analytics_id%
     form:
         resources:
             - 'BraincraftedBootstrapBundle::layout.html.twig'
@@ -104,9 +107,9 @@ assetic:
         bootstrap_theme_css:
             inputs:
                 - @CertificationyWebBundle/Resources/private/less/global.less
+                - @CertificationyWebBundle/Resources/public/css/devicons.css
             filters:
                 - less
-                - cssrewrite
                 - yui_css
             output: css/bootstrap-theme.css
         bootstrap_social_css:
@@ -207,7 +210,6 @@ braincrafted_bootstrap:
 
 jms_serializer:
     metadata:
-        cache: ~
         debug: %kernel.debug%
 
 doctrine_mongodb:
@@ -232,17 +234,10 @@ snc_redis:
             alias: session
             dsn: %redis_dsn%/2
 
-        monolog:
+        counter:
             type: predis
-            alias: monolog
-            dsn: %redis_dsn%/3
-            logging: false
-            options:
-                connection_persistent: true
-
-    monolog:
-        client: monolog
-        key: monolog
+            alias: counter
+            dsn: %redis_dsn%/4
 
     session:
         client: session
@@ -283,7 +278,7 @@ certificationy_certy:
     debug: %kernel.debug%
     provider:
         file:
-            root_dir: %kernel.root_dir%/Resources/Data
+            root_dir: %kernel.root_dir%/Resources/certificationy-data
     calculator:
         class: Certificationy\Component\Certy\Calculator\Calculator
         delegator: ~ #rabbitmq

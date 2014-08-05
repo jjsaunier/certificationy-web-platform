@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Certificationy\Bundle\WebBundle\CertificationyWebBundle(),
             new Certificationy\Bundle\TrainingBundle\CertificationyTrainingBundle(),
             new Certificationy\Bundle\CertyBundle\CertificationyCertyBundle(),
+            new Certificationy\Bundle\GithubBundle\CertificationyGithubBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

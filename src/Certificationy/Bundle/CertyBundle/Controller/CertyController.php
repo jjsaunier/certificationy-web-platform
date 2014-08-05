@@ -67,15 +67,6 @@ class CertyController extends Controller
         $certificationHandler = $this->container->get('certy.certification.form_handler');
         $response = new Response();
 
-//        if (!$request->isMethod('POST')) {
-//            $response->setPublic();
-//            $response->setEtag(md5(serialize($certification)));
-//
-//            if ($response->isNotModified($request)) {
-//                return $response;
-//            }
-//        }
-
         if ($certification = $certificationHandler->process($certification)) {
 
             $router = $this->container->get('router');
@@ -106,12 +97,13 @@ class CertyController extends Controller
     {
         $certification = $request->getSession()->get('certification');
 
-//        //Prevent sneaky people.
-//        $request->getSession()->remove('certification');
-//
-//        if (null === $certification) {
-//            throw new CheaterException;
-//        }
+        //Prevent sneaky people.
+        $request->getSession()->remove('certification');
+
+        if (null === $certification) {
+            throw new CheaterException();
+        }
+
         return $this->render('CertificationyCertyBundle:Certification:report.html.twig', array(
             'certification' => $certification
         ));

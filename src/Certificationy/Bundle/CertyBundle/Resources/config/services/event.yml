@@ -1,6 +1,6 @@
 parameters:
     certy_certification_submission_compute_listener_class: Certificationy\Component\Certy\EventListener\CertificationComputeResultListener
-    certy_certification_context_category_listener: Certificationy\Component\Certy\EventListener\ContextCategoryListener
+    certy_certification_context_listener: Certificationy\Component\Certy\EventListener\ContextListener
     certy_certification_context_score_listener: Certificationy\Component\Certy\EventListener\ContextScoreListener
     certy_certification_timer_listener: Certificationy\Component\Certy\EventListener\TimerListener
 
@@ -19,10 +19,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: certy.certification.submission, method: onSubmission }
 
-    certy.certification.context_category.listener:
-        class: %certy_certification_context_category_listener%
+    certy.certification.context.listener:
+        class: %certy_certification_context_listener%
         tags:
-            - { name: kernel.event_listener, event: certy.certification.custom_context, method: exclude, priority: 10 }
+            - { name: kernel.event_listener, event: certy.certification.custom_context, method: removeCategories, priority: 10 }
+            - { name: kernel.event_listener, event: certy.certification.custom_context, method: removeQuestions, priority: 5 }
 
     certy.certification.context_score.listener:
         class: %certy_certification_context_score_listener%

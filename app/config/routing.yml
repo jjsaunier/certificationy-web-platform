@@ -35,10 +35,15 @@ hwi_github_login:
 certificationy_web:
     resource: @CertificationyWebBundle/Resources/config/routing.yml
 
-certification_training:
+certificationy_training:
     resource: @CertificationyTrainingBundle/Resources/config/routing.yml
     prefix: /training
 
 certy:
     resource: @CertificationyCertyBundle/Resources/config/routing.yml
     prefix: /certification
+
+certificationy_github:
+    resource: @CertificationyGithubBundle/Resources/config/routing.yml
+    prefix: /github
+

@@ -21,8 +21,8 @@ monolog:
             type: group
             members: [ application, swift ]
         application:
-            type: service
-            id: snc_redis.monolog.handler
+            type:   stream
+            path:   "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
         swift:
             type: swift_mailer
@@ -32,7 +32,7 @@ monolog:
             subject:            "[LOG][CERTIFICATIONY]"
             level:              debug
         login:
-            type: service
-            id: snc_redis.monolog.handler
+            type:   stream
+            path:   "%kernel.logs_dir%/auth_%kernel.environment%.log"
             level: info
             channels: security

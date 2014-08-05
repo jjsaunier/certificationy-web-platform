@@ -23,16 +23,6 @@ class CertificationyCertyExtension extends Extension
             $certyConfig->buildProvider($config['provider']);
         }
 
-        //Build scenario config
-        if (isset($config['scenario'])) {
-            $certyConfig->buildScenario($config['scenario']);
-        }
-
-        //Build step config
-        if (isset($config['steps'])) {
-            $certyConfig->buildSteps($config['steps']);
-        }
-
         //Debug
         $container->setParameter('certy_debug', $config['debug']);
 

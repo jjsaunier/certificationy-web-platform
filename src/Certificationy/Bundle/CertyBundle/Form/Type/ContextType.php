@@ -11,6 +11,8 @@ namespace Certificationy\Bundle\CertyBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ContextType extends AbstractType
@@ -23,15 +25,30 @@ class ContextType extends AbstractType
     {
         $context = $options['data'];
 
-        $builder->add('language', 'choice', array('choices' => $context->getAvailableLanguages()));
+        if (1 < count($context->getAvailableLanguages())) {
+            $builder->add('language', 'choice', array('choices' => $context->getAvailableLanguages()));
+        }
 
-        $builder->add('level', 'choice', array('choices' => $context->getAvailableLevels()));
+        if (null !== $context->getAvailableLevels()) {
+            $builder->add('level', 'choice', array('choices' => $context->getAvailableLevels()));
+        }
 
-        $builder->add('exclude_categories', 'certification_category', array(
-            'certification' => $options['certification'])
-        );
+        if (true === $context->getAllowExcludeCategories()) {
+            $builder->add('exclude_categories', 'certification_category', array(
+                    'certification' => $options['certification'])
+            );
+        }
 
-        $builder->add('Submit', 'submit');
+        if (true === $context->getAllowCustomNumberOfQuestions()) {
+            $builder->add('number_of_questions', 'number');
+        }
+
+        $certification = $options['certification'];
+        $metrics = $certification->getMetrics();
+
+        if ($metrics->getQuestionCount() > 0 && $metrics->getAnswerCount() > 0) {
+            $builder->add('submit', 'submit');
+        }
     }
 
     /**
@@ -48,8 +65,21 @@ class ContextType extends AbstractType
         ));
 
         $resolver->setDefaults(array(
-            'data_class' => 'Certificationy\Component\Certy\Context\CertificationContext'
+            'data_class' => 'Certificationy\Component\Certy\Context\CertificationContext',
+            'translation_domain' => 'form'
         ));
+    }
+
+    /**
+     * @param FormView      $view
+     * @param FormInterface $form
+     * @param array         $options
+     */
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        foreach ($view as $name => $child) {
+            $child->vars['label'] = 'label.'.$name;
+        }
     }
 
     /**

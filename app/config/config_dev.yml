@@ -11,16 +11,9 @@ web_profiler:
     toolbar: %debug_toolbar%
     intercept_redirects: %debug_redirects%
 
-#monolog:
-#    handlers:
-#        main:
-#            type:   stream
-#            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-#            level:  debug
-#            formatter:
-#        console:
-#            type: console
-#            bubble: false
+jms_serializer:
+    metadata:
+        cache: ~
 
 monolog:
     handlers:
@@ -32,14 +25,17 @@ monolog:
             type: group
             members: [ application, login ]
         application:
-            type: service
-            id: snc_redis.monolog.handler
+            type:   stream
+            path:   "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
         login:
-            type: service
-            id: snc_redis.monolog.handler
+            type:   stream
+            path:   "%kernel.logs_dir%/auth_%kernel.environment%.log"
             level: info
             channels: security
+        console:
+            type: console
+            bubble: false
 
 assetic:
     use_controller: %use_assetic_controller%

@@ -49,13 +49,11 @@
                                 <ul id="answers" class="fa-ul">
                                     {% for answer in question.answers %}
                                         <li class="{{ answer|class }}">
-                                            {#<span class="glyphicon glyphicon-"></span>#}
                                             <i class="fa-li fa fa-{{ answer.isAnswered() ? 'check-square-o' : 'square-o' }}" ></i>
                                             {{ answer.label }}
                                         </li>
                                     {% endfor %}
                                 </ul>
-
                             </li>
                         {% endfor %}
                     </ul>

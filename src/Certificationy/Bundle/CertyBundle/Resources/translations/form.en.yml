@@ -1,0 +1,4 @@
+label:
+    exclude_categories: "Exclude category"
+    number_of_questions: "Number of questions by category"
+    submit: "Start training"
