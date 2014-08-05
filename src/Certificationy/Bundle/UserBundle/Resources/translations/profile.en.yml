@@ -6,13 +6,10 @@ profile:
         email: "Email"
         back: "Back"
         real_name: "Real name"
-    tabs:
-        user: "User"
-        report: "Training history"
     report:
         hash: "Hash"
         date: "Date"
-        certification: "Certification"
+        tech: "Tech"
         language: "Language"
         level: "Level"
         score: "Score"
