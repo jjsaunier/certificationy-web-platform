@@ -7,14 +7,16 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action;
+namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
+
+use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\CheckAction;
 
 class CheckUniquenessReaction
 {
     /**
      * @param CheckAction $action
      */
-    public function check(CheckAction $action)
+    public function perform(CheckAction $action)
     {
 
     }

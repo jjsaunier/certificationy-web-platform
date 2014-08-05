@@ -11,7 +11,22 @@ namespace Certificationy\Bundle\GithubBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
-class InspectionRepository extends DocumentRepository
+class InspectionReportRepository extends DocumentRepository
 {
+    /**
+     * @param $limit
+     *
+     * @return mixed
+     */
+    public function getLastInspection($limit)
+    {
+        $qb = $this->createQueryBuilder();
 
-} 
+        $qb
+            ->limit($limit)
+            ->sort('createdAt', 'ASC')
+        ;
+
+        return $qb->getQuery()->execute();
+    }
+}

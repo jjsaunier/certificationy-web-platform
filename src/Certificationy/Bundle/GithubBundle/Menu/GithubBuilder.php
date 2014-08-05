@@ -9,8 +9,8 @@
 
 namespace Certificationy\Bundle\GithubBundle\Menu;
 
-
 use Knp\Menu\FactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class GithubBuilder
 {
@@ -26,4 +26,21 @@ class GithubBuilder
     {
         $this->factory = $factory;
     }
-} 
+
+    /**
+     * @param Request $request
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
+    public function createInspectionMenu(Request $request)
+    {
+        $menu = $this->factory->createItem('inspection');
+
+        $menu->addChild('inspection', array(
+            'route' => 'github_inspection',
+            'label' => 'Contribution'
+        ));
+
+        return $menu;
+    }
+}

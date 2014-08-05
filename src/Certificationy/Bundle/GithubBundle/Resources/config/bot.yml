@@ -1,0 +1,42 @@
+services:
+    github.bot:
+        class: Certificationy\Bundle\GithubBundle\Bot\Common\Bot
+        abstract: true
+        arguments:
+            - @github.client
+            - @github.security
+
+    github.reviewer.bot:
+        class: Certificationy\Bundle\GithubBundle\Bot\ReviewerBot
+        parent: github.bot
+        calls:
+            - [ "setKernelRootDir", [ %kernel.root_dir% ] ]
+            - [ "registerActionSubscriber", [ @github.reviewer.status_push.reaction ] ]
+            - [ "registerActionListener", [ @github.reviewer.git_clone.reaction, 'git_clone' ] ]
+            - [ "registerActionListener", [ @github.reviewer.check_parser.reaction, 'check' ] ]
+            - [ "registerActionListener", [ @github.reviewer.check_structure.reaction, 'check' ] ]
+            - [ "registerActionListener", [ @github.reviewer.persistence.reaction, 'persist' ] ]
+
+    github.reviewer.status_push.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\SwitchCommitStatusReaction
+        arguments:
+            - @router
+
+    github.reviewer.git_clone.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\GitLocaleCloneReaction
+        arguments:
+            - %github_login%
+            - %github_password%
+        calls:
+            - [ "setLogger", [ @?logger ] ]
+
+    github.reviewer.check_parser.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckParserReaction
+
+    github.reviewer.check_structure.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckStructureReaction
+
+    github.reviewer.persistence.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\PersistenceReaction
+        arguments:
+            - @doctrine.odm.mongodb.document_manager

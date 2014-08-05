@@ -9,7 +9,9 @@
 
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy;
 
-
-class ReviewerBotActions {
-
-} 
+final class ReviewerBotActions
+{
+    const GIT_CLONE = 'git_clone';
+    const CHECK = 'check';
+    const PERSIST = 'persist';
+}

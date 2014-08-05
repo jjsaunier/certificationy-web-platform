@@ -9,7 +9,8 @@
 
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action;
 
+use Certificationy\Bundle\GithubBundle\Bot\Common\Action\GenericAction;
 
-class GitLocaleCloneAction {
-
-} 
+class GitLocaleCloneAction extends GenericAction
+{
+}

@@ -12,22 +12,39 @@ namespace Certificationy\Bundle\GithubBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * @ODM\Document(repositoryClass="Certificationy\Bundle\GithubBundle\Repository\InspectionRepository")
+ * @ODM\Document(repositoryClass="Certificationy\Bundle\GithubBundle\Repository\InspectionReportRepository")
  */
-class Inspection
+class InspectionReport
 {
+    /** @ODM\Id("type=bin_uuid") */
+    protected $id;
+
     /** @ODM\Field(type="hash") */
     protected $errors;
 
     /** @ODM\Field(type="hash") */
     protected $sender;
 
+    /** @ODM\Field(type="hash") */
+    protected $data;
+
     /** @ODM\Date */
     protected $createdAt;
+
+    /** @ODM\String */
+    protected $checksum;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -65,7 +82,7 @@ class Inspection
     /**
      * @param mixed $sender
      */
-    public function setSender($sender)
+    public function setSender(array $sender)
     {
         $this->sender = $sender;
     }
@@ -77,4 +94,44 @@ class Inspection
     {
         return $this->sender;
     }
-} 
+
+    /**
+     * @param mixed $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGood()
+    {
+        return 0 === count($this->errors);
+    }
+
+    /**
+     * @param mixed $checksum
+     */
+    public function setChecksum($checksum)
+    {
+        $this->checksum = $checksum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChecksum()
+    {
+        return $this->checksum;
+    }
+}

@@ -1,0 +1,9 @@
+github_analyzer:
+    path: /hook/analyze
+    defaults:
+        _controller: CertificationyGithubBundle:Analyzer:analyze
+
+github_inspection:
+    path: /contribution/inspection
+    defaults:
+        _controller: CertificationyGithubBundle:Inspection:inspectionWall

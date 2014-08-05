@@ -7,7 +7,7 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Bundle\GithubBundle;
+namespace Certificationy\Bundle\GithubBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +16,14 @@ class AnalyzerController extends Controller
 {
     /**
      * @param Request $request
+     *
+     * CAUTION: THIS IS EXPERIMENTAL (and a success)
+     * This controller will be explode.
      */
     public function analyzeAction(Request $request)
     {
-        $analyzerManager = $this->container->get('certificationy.github_analyser.manager');
+        $reviewerBot = $this->container->get('github.reviewer.bot');
 
-
+        return $reviewerBot->handle($request);
     }
-} 
+}

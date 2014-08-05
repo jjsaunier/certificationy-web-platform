@@ -9,7 +9,66 @@
 
 namespace Certificationy\Bundle\GithubBundle\Api;
 
+use Certificationy\Bundle\GithubBundle\Api\Common\RequestableInterface;
+use GuzzleHttp\Exception\ClientException;
+use Psr\Log\LoggerInterface;
 
-class Client {
+class Client
+{
+    /**
+     * @var \GuzzleHttp\Client
+     */
+    protected $guzzleClient;
 
-} 
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    const BASE_URL_API = 'https://api.github.com';
+
+    /**
+     * @param string $username
+     * @param string $password
+     */
+    public function __construct($username, $password)
+    {
+        $this->guzzleClient = new \GuzzleHttp\Client(array(
+            'base_url' => static::BASE_URL_API,
+            'defaults' => array(
+                'auth' => array($username, $password)
+            )
+        ));
+    }
+
+    /**
+     * @param RequestableInterface $object
+     */
+    public function send(RequestableInterface $apiRequest)
+    {
+        $request = $this->guzzleClient->createRequest(
+            $apiRequest->getMethod(),
+            $apiRequest->getUrl(),
+            $apiRequest->getOptions()
+        );
+
+        try {
+            return $this->guzzleClient->send($request);
+        } catch (ClientException $e) {
+
+            if (null !== $this->logger) {
+                $this->logger->alert($e->getMessage());
+            }
+
+            return null;
+        }
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
+    }
+}

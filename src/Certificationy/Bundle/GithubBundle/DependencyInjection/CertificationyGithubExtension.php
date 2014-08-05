@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\WebBundle\DependencyInjection;
+namespace Certificationy\Bundle\GithubBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class CertificationyWebExtension extends Extension
+class CertificationyGithubExtension extends Extension
 {
     /**
      * @param array            $configs
@@ -27,5 +27,7 @@ class CertificationyWebExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('bot.yml');
+        $loader->load('api.yml');
     }
 }

@@ -9,7 +9,23 @@
 
 namespace Certificationy\Bundle\GithubBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
-class InspectionController {
+class InspectionController extends Controller
+{
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function inspectionWallAction(Request $request)
+    {
+        $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
+        $inspectionReportRepository = $dm->getRepository('CertificationyGithubBundle:InspectionReport');
 
-} 
+        $inspections = $inspectionReportRepository->getLastInspection(15);
+
+        return $this->render('CertificationyGithubBundle::inspection_wall.html.twig', array(
+            'inspections' => $inspections
+        ));
+    }
+}

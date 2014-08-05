@@ -9,7 +9,7 @@
 
 namespace Certificationy\Bundle\GithubBundle\Manager;
 
+class AnalyzerManager
+{
 
-class AnalyzerManager {
-
-} 
+}

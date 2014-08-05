@@ -9,7 +9,20 @@
 
 namespace Certificationy\Bundle\GithubBundle\Api\Common;
 
+interface RequestableInterface
+{
+    /**
+     * @return string
+     */
+    public function getMethod();
 
-interface RequestableInterface {
+    /**
+     * @return string
+     */
+    public function getUrl();
 
-} 
+    /**
+     * @return Array
+     */
+    public function getOptions();
+}

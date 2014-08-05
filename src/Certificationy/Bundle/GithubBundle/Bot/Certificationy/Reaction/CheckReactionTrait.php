@@ -7,9 +7,21 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action;
+namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
-class CheckReaction
+use Symfony\Component\Finder\Finder;
+
+trait CheckReactionTrait
 {
-    protected function get
-} 
+    /**
+     * @param $basePath
+     *
+     * @return Finder
+     */
+    protected function getFiles($basePath)
+    {
+        $finder = new Finder();
+
+        return $finder->in($basePath.'/*/yaml')->name('*.yml');
+    }
+}

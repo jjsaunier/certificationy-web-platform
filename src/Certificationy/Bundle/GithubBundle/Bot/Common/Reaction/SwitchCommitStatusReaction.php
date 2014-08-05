@@ -9,16 +9,32 @@
 
 namespace Certificationy\Bundle\GithubBundle\Bot\Common\Reaction;
 
-
+use Certificationy\Bundle\GithubBundle\Api\Status\Status;
+use Certificationy\Bundle\GithubBundle\Bot\Common\Action\SwitchCommitStatusAction;
 use Certificationy\Bundle\GithubBundle\Bot\Common\BotActions;
-use GuzzleHttp\Event\SubscriberInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class SwitchCommitStatusReaction implements SubscriberInterface
+class SwitchCommitStatusReaction implements EventSubscriberInterface
 {
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    protected $router;
+
+    /**
+     * @param RouterInterface $router
+     */
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
     /**
      * @return array
      */
-    public function getEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             BotActions::SET_COMMIT_STATUS_ERROR => 'switchCommitToError',
@@ -28,23 +44,83 @@ class SwitchCommitStatusReaction implements SubscriberInterface
         );
     }
 
-    public function switchCommitToError()
+    /**
+     * @param array $content
+     *
+     * @return Status
+     */
+    protected function createStatus(array $content)
     {
+        $status = new Status();
 
+        $status->setUrl(
+            $content['repository']['owner']['login'],
+            $content['repository']['name'],
+            $content['pull_request']['head']['sha']
+        );
+
+        return $status;
     }
 
-    public function switchCommitToPending()
+    /**
+     * @param array $content
+     *
+     * @return string
+     */
+    protected function createUrl(array $content)
     {
-
+        return $this->router->generate(
+            'github_inspection',
+            array('inspection_id' => $content['pull_request']['head']['sha']),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
-    public function switchCommitToSuccess()
+    /**
+     * @param SwitchCommitStatusAction $action
+     */
+    public function switchCommitToError(SwitchCommitStatusAction $action)
     {
+        $status = $this->createStatus($content = $action->getData()['content']);
 
+        $status->setOptions(Status::ERROR, $this->createUrl($content), $action->getMessage());
+
+        $action->getClient()->send($status);
     }
 
-    public function switchCommitToFailure()
+    /**
+     * @param SwitchCommitStatusAction $action
+     */
+    public function switchCommitToPending(SwitchCommitStatusAction $action)
     {
+        $status = $this->createStatus($content = $action->getData()['content']);
 
+        $status->setOptions(Status::PENDING, $this->createUrl($content), $action->getMessage());
+
+        $action->getClient()->send($status);
     }
-} 
+
+    /**
+     * @param SwitchCommitStatusAction $action
+     */
+    public function switchCommitToSuccess(SwitchCommitStatusAction $action)
+    {
+        $status = $this->createStatus($content = $action->getData()['content']);
+
+        $status->setOptions(Status::SUCCESS, $this->createUrl($content), $action->getMessage());
+
+        $action->getClient()->send($status);
+    }
+
+    /**
+     * @param SwitchCommitStatusAction $action
+     */
+    public function switchCommitToFailure(SwitchCommitStatusAction $action)
+    {
+        $status = $this->createStatus($content = $action->getData()['content']);
+
+        $status->setOptions(Status::FAILURE, $this->createUrl($content), $action->getMessage());
+
+        $action->getClient()->send($status);
+    }
+}

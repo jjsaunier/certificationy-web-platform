@@ -1,3 +1,20 @@
 parameters:
 
 services:
+    certificationy.github_analyser.manager:
+        class: Certificationy\Bundle\GithubBundle\Manager\AnalyzerManager
+
+    certificationy.github.menu_builder:
+        class: Certificationy\Bundle\GithubBundle\Menu\GithubBuilder
+        arguments:
+            - @knp_menu.factory
+
+    certificationy.github.menu:
+        class: Knp\Menu\MenuItem
+        factory_service: certificationy.github.menu_builder
+        factory_method: createInspectionMenu
+        arguments:
+            - @request
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: github }

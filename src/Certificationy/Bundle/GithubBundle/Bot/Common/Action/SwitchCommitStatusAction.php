@@ -10,42 +10,31 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Common\Action;
 
 use Certificationy\Bundle\GithubBundle\Api\Client;
-use Symfony\Component\EventDispatcher\Event;
 
-class SwitchCommitStatusAction extends Event
+class SwitchCommitStatusAction extends GenericAction
 {
     /**
-     * @var \Certificationy\Bundle\GithubBundle\Api\Client
+     * @var string
      */
-    protected $client;
-
-    /**
-     * @var Array
-     */
-    protected $data;
+    protected $message;
 
     /**
      * @param Client $client
+     * @param array  $data
+     * @param string $message
      */
-    public function __construct(Client $client, Array $data)
+    public function __construct(Client $client, array $data, $message)
     {
-        $this->client = $client;
-        $this->data = $data;
+        parent::__construct($client, $data);
+
+        $this->message = $message;
     }
 
     /**
-     * @return \Certificationy\Bundle\GithubBundle\Api\Client
+     * @return string
      */
-    public function getClient()
+    public function getMessage()
     {
-        return $this->client;
+        return $this->message;
     }
-
-    /**
-     * @return Array
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-} 
+}

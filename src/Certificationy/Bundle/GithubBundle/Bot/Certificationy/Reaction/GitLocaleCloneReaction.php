@@ -9,7 +9,86 @@
 
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
+use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\GitLocaleCloneAction;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Process\Process;
 
-class GitLocaleCloneReaction {
+class GitLocaleCloneReaction
+{
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
-} 
+    /**
+     * @var string
+     */
+    protected $login;
+
+    /**
+     * @var string
+     */
+    protected $password;
+
+    /**
+     * @param string $login
+     * @param string $password
+     */
+    public function __construct(
+        $login,
+        $password
+    ) {
+        $this->login = $login;
+        $this->password = $password;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @param GitLocaleCloneAction $action
+     */
+    public function perform(GitLocaleCloneAction $action)
+    {
+        $content = $action->getData()['content'];
+
+        if (true === $action->getData()['debug']) {
+
+            $url = sprintf(
+                'https://%s:%s@github.com/%s/test-hook.git',
+                $this->login,
+                $this->password,
+                $this->login
+            );
+
+            $content['pull_request']['head']['repo']['clone_url'] = $url;
+        }
+
+        $cmd = array();
+        $cmd[] = 'cd analyze';
+        $cmd[] = 'mkdir -p '.$content['pull_request']['head']['sha'];
+        $cmd[] = 'cd '. $content['pull_request']['head']['sha'];
+        $cmd[] = sprintf(
+            'git clone -b %s %s',
+            $content['pull_request']['head']['ref'],
+            $content['pull_request']['head']['repo']['clone_url']
+        );
+
+        $process = new Process(implode(' && ', $cmd));
+        $process->setTimeout(360);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            if (null !== $this->logger) {
+                $this->logger->error($process->getErrorOutput());
+            }
+
+            throw new \RuntimeException($process->getErrorOutput());
+        }
+    }
+}

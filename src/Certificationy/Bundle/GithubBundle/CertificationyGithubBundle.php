@@ -7,18 +7,10 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\WebBundle;
+namespace Certificationy\Bundle\GithubBundle;
 
-use Certificationy\Bundle\WebBundle\DependencyInjection\Compiler\FlashBagCompilerPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class CertificationyWebBundle extends Bundle
+class CertificationyGithubBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new FlashBagCompilerPass());
-    }
 }

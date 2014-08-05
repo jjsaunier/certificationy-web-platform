@@ -7,10 +7,12 @@
 * file that was distributed with this source code.
 **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot;
-
+namespace Certificationy\Bundle\GithubBundle\Bot\Common;
 
 interface BotInterface
 {
-
-} 
+    /**
+     * @return string[]
+     */
+    public function getGithubEvents();
+}

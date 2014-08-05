@@ -9,7 +9,8 @@
 
 namespace Certificationy\Bundle\GithubBundle\Api;
 
-
-class Events {
-
-} 
+final class Events
+{
+    const PULL_REQUEST = 'pull_request';
+    const PING = 'ping';
+}
