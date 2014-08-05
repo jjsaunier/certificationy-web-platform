@@ -9,7 +9,7 @@
 
 namespace Certificationy\Bundle\WebBundle\Controller;
 
+class AnalyzerController extends AbstractController
+{
 
-class AnalyzerController {
-
-} 
+}

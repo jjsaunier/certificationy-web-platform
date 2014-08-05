@@ -9,8 +9,17 @@ services:
             - [ "setEngine", [ @templating ] ]
             - [ "setMenuBuilder", [ @certificationy.training.menu ] ]
             - [ "setRouter", [ @router ] ]
+            - [ "setSecurityContext", [ @security.context ] ]
 
     certificationy.web.site_controller:
         class: Certificationy\Bundle\WebBundle\Controller\SiteController
+        parent: certificationy.web.abstract_controller
+        scope: request
+        arguments:
+            - %kernel.root_dir%
+            - @certificationy.certification.manager
+
+    certificationy.analyzer.site_controller:
+        class: Certificationy\Bundle\WebBundle\Controller\AnalyzerController
         parent: certificationy.web.abstract_controller
         scope: request

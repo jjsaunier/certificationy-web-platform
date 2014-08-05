@@ -1,3 +1,38 @@
-<p class="text-muted credit">
-    Code licensed under <a target="_blank" href="https://github.com/ProPheT777/certificationy-web-platform/blob/master/LICENSE">MIT</a>
-</p>
+<div class="col-md-4">
+    <h5 class="text-mute">Available trainings:</h5>
+    <ul>
+        {% for name, label in trainings %}
+            <li>
+                <a title="{{ label|capitalize }}" href="{{ path('certification_guidelines', { name: name }) }}">
+                    {{ label|capitalize }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="col-md-4">
+    <h5 class="text-mute">Github</h5>
+    <ul>
+        <li>
+            <a title="Web platform repository" href="https://github.com/ProPheT777/certificationy-web-platform">
+                Web platform repository
+            </a>
+        </li>
+        <li>
+            <a title="Training repository" href="https://github.com/ProPheT777/certificationy-data">
+                Training repository
+            </a>
+        </li>
+        <li>
+            <a title="Certificationy component" href="https://github.com/ProPheT777/certificationy">
+                Certificationy component
+            </a>
+        </li>
+        <li>
+            <a title="Certificationy bundle" href="https://github.com/ProPheT777/certificationy-bundle">
+                Certificationy bundle
+            </a>
+        </li>
+    </ul>
+</div>

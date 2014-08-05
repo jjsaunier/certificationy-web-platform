@@ -1,30 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('css/homepage.css') }}" rel="stylesheet" type="text/css" media="all" />
-{% endblock %}
-
 {% block content %}
     <div class="row">
-        {% include '@CertificationyWeb/Site/section/home/showcase.html.twig' %}
-        {% include '@CertificationyWeb/Site/section/home/showcase_products.html.twig' %}
+        <div class="col-md-12">
+            <h1>You are developer and you search a way to train about techs ?</h1>
+            <p>
+                Welcome to certificationy, it's a web platform where you can train on different techs or validate your
+                knowledges.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>
+                <i class="fa fa-university"></i>
+                Validate knowledges
+            </h2>
+            <p class="text-justify">
+                You want to test your skills or simply see how you're doing ? Trainings are written by involved community in the tech.
+                You can customize training by excluding categories, choose your level (if available), choose language
+                (if available), the numbers of questions by category. Get detailed report about your training.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>
+                <i class="fa fa-cubes"></i>
+                Open source trainings
+            </h2>
+            <p class="text-justify">
+                Each training is open source, everybody can contribute on it ! Just go on contribution tab inside a
+                training, you will see all instructions to contribute. The entire platform is also open source.
+                So if you find typo or you want to add some categories / questions, feel free to contribute on our
+                github repositories
+                <i class="fa fa-heart"></i>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>
+                <i class="fa fa-child"></i>
+                We are evolving
+            </h2>
+            <p class="text-justify">
+                The platform can evolve very fast, the number of trainings support is not freeze.
+                Everybody can add new trainings support if community approved it.
+            </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4">
+            {{ render_esi(controller('certificationy.web.site_controller:changelogAction', {}, {'standalone': true})) }}
+        </div>
+
+        <div class="col-md-8">
+            <h3><i class="fa fa-github"></i> Contributing</h3>
+            <ul class="list-unstyled">
+                <li>
+                    Web platform repository :
+                    <a title="Web platform repository" href="https://github.com/ProPheT777/certificationy-web-platform">
+                        https://github.com/ProPheT777/certificationy-web-platform
+                    </a>
+                </li>
+                <li>
+                    Training repository :
+                    <a title="Training repository" href="https://github.com/ProPheT777/certificationy-data">
+                        https://github.com/ProPheT777/certificationy-data
+                    </a>
+                </li>
+                <li><hr></li>
+                <li>
+                    Certificationy component :
+                    <a title="Certificationy component" href="https://github.com/ProPheT777/certificationy">
+                        https://github.com/ProPheT777/certificationy
+                    </a>
+                </li>
+                <li>
+                    Certificationy bundle :
+                    <a title="Certificationy bundle" href="https://github.com/ProPheT777/certificationy-bundle">
+                        https://github.com/ProPheT777/certificationy-bundle
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 {% endblock content %}
-
-{% block wrapper %}
-    <div class="container-fluid">
-        {{ block('content') }}
-    </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script type="text/javascript">
-        $('ul#products a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show')
-        });
-    </script>
-{% endblock %}

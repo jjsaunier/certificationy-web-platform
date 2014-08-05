@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class AbstractController
 {
@@ -36,6 +37,11 @@ class AbstractController
      * @var MenuItem
      */
     protected $menuBuilder;
+
+    /**
+     * @var SecurityContext
+     */
+    protected $securityContext;
 
     /**
      * @param RequestStack $requestStack
@@ -67,5 +73,21 @@ class AbstractController
     public function setMenuBuilder(MenuItem $menuBuilder)
     {
         $this->menuBuilder = $menuBuilder;
+    }
+
+    /**
+     * @param \Symfony\Component\Security\Core\SecurityContext $securityContext
+     */
+    public function setSecurityContext($securityContext)
+    {
+        $this->securityContext = $securityContext;
+    }
+
+    /**
+     * @return \Symfony\Component\Security\Core\SecurityContext
+     */
+    public function getSecurityContext()
+    {
+        return $this->securityContext;
     }
 }

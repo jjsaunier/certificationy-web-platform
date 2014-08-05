@@ -13,9 +13,10 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
-            {{ knp_menu_render('training', { style: 'navbar'}) }}
-            {{ knp_menu_render('user', { style: 'navbar'}) }}
-        </div>
 
+            {% for menu in menus %}
+                {{ knp_menu_render(menu, { style: 'navbar'}) }}
+            {% endfor %}
+        </div>
     </div>
 </nav>
