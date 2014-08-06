@@ -42,7 +42,6 @@ class Client
     }
 
     /**
-     * @param RequestableInterface $object
      */
     public function send(RequestableInterface $apiRequest)
     {

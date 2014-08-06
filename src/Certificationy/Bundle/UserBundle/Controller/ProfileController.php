@@ -12,7 +12,6 @@ namespace Certificationy\Bundle\UserBundle\Controller;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Request;
 
 class ProfileController extends BaseController
 {

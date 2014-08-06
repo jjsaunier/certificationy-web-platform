@@ -17,7 +17,6 @@ use Certificationy\Bundle\GithubBundle\Bot\Certificationy\ReviewerBotActions;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Action\SwitchCommitStatusAction;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Bot;
 use Certificationy\Bundle\GithubBundle\Bot\Common\BotActions;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
