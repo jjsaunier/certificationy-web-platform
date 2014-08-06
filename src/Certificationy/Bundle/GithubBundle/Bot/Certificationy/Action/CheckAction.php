@@ -27,6 +27,7 @@ class CheckAction extends GenericAction
     /**
      * @param Client $client
      * @param array  $data
+     * @param string $basePath
      */
     public function __construct(Client $client, array $data, $basePath)
     {

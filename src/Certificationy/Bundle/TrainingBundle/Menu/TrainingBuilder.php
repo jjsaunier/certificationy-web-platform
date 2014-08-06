@@ -12,7 +12,6 @@ namespace Certificationy\Bundle\TrainingBundle\Menu;
 use Certificationy\Bundle\TrainingBundle\Manager\CertificationManager;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Translation\Translator;
 
 class TrainingBuilder
@@ -35,7 +34,6 @@ class TrainingBuilder
     /**
      * @param FactoryInterface     $factory
      * @param Translator           $translator
-     * @param SecurityContext      $securityContext
      * @param CertificationManager $certificationManager
      */
     public function __construct(

@@ -118,7 +118,6 @@ abstract class Bot implements BotInterface
     /**
      * @param object $listener
      * @param string $eventName
-     * @param string $method
      * @param int    $priority
      */
     public function registerActionListener($listener, $eventName, $priority = 0)

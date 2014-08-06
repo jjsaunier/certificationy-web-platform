@@ -14,7 +14,7 @@ use Symfony\Component\Finder\Finder;
 trait CheckReactionTrait
 {
     /**
-     * @param $basePath
+     * @param string $basePath
      *
      * @return Finder
      */
