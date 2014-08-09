@@ -58,7 +58,7 @@ class SiteController extends AbstractController
     public function menuAction(Request $request)
     {
         return $this->engine->renderResponse('@CertificationyWeb/Menu/nav.html.twig', array(
-            'menus' => [ 'training', 'github', 'user' ]
+            'menus' => [ 'training', 'github', 'user', 'web' ]
         ));
     }
 

@@ -8,6 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
+        "ext-mongo": "*",
         "symfony/symfony": "~2.5",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
@@ -37,7 +38,8 @@
         "guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit": "~4.1"
     },
     "scripts": {
         "post-root-package-install": [

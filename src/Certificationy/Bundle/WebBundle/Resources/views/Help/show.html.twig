@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style type="text/css">
+        .nav-tabs {
+            border-bottom: 0; }
+        .nav-tabs > li {
+            width: 100%; }
+        .nav-tabs > li > a {
+            border: 1px solid transparent;
+            border-radius: 4px 0 0 4px;
+            margin-right: 0; }
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+            background: #FFF;
+            border: 1px solid #DDD;
+            border-right-color: #FFF;
+            margin-right: -1px;
+            position: relative;
+            z-index: 1; }
+
+        .tab-content {
+            border: 1px solid #DDD;
+            border-radius: 4px;
+            margin-left: -31px;
+            min-height: 20em;
+            padding: 1em;
+            position: relative;
+            z-index: 0; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#contribute" data-toggle="tab">How to contribute</a></li>
+            </ul>
+        </div><!-- col -->
+
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="contribute">
+                    {{ include('@CertificationyWeb/Help/Section/contribute.html.twig') }}
+                </div>
+            </div><!-- tab-content -->
+        </div><!-- col -->
+    </div><!-- row -->
+{% endblock content %}

@@ -59,7 +59,7 @@ class Client
                 $this->logger->alert($e->getMessage());
             }
 
-            return null;
+            return false;
         }
     }
 

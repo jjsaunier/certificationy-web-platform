@@ -40,12 +40,18 @@ class ReviewerBot extends Bot
 
     /**
      * @return string[]
+     *
+     * @TODO: Make callable to dispatch directly on the method from bot
      */
     public function getGithubEvents()
     {
         return array(
             Events::PULL_REQUEST
         );
+
+//        return array(
+//            Events::PULL_REQUEST => 'doOnPullRequest'
+//        );
     }
 
     /**

@@ -1,0 +1,6 @@
+help_show:
+    path: /
+    defaults:
+        _controller: certificationy.web.help.controller:showAction
+    requirements:
+        _method: GET

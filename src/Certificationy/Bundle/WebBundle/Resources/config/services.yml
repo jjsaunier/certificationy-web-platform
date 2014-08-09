@@ -19,7 +19,22 @@ services:
             - %kernel.root_dir%
             - @certificationy.certification.manager
 
-    certificationy.analyzer.site_controller:
-        class: Certificationy\Bundle\WebBundle\Controller\AnalyzerController
+    certificationy.web.help.controller:
+        class: Certificationy\Bundle\WebBundle\Controller\HelpController
         parent: certificationy.web.abstract_controller
         scope: request
+
+    certificationy.web.menu_builder:
+        class: Certificationy\Bundle\WebBundle\Menu\WebBuilder
+        arguments:
+            - @knp_menu.factory
+
+    certificationy.web.menu:
+        class: Knp\Menu\MenuItem
+        factory_service: certificationy.web.menu_builder
+        factory_method: createWebMenu
+        arguments:
+            - @request
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: web }
