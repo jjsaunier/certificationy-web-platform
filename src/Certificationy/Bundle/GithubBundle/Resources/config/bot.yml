@@ -16,6 +16,7 @@ services:
             - [ "registerActionListener", [ @github.reviewer.check_parser.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.check_structure.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.persistence.reaction, 'persist' ] ]
+            - [ "registerActionListener", [ @github.reviewer.remove_folder.reaction, 'remove_folder' ] ]
 
     github.reviewer.status_push.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\SwitchCommitStatusReaction
@@ -40,3 +41,8 @@ services:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\PersistenceReaction
         arguments:
             - @doctrine.odm.mongodb.document_manager
+
+    github.reviewer.remove_folder.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\RemoveFolderReaction
+        calls:
+            - [ "setLogger", [ @?logger ] ]

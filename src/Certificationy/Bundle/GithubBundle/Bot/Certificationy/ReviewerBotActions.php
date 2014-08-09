@@ -14,4 +14,5 @@ final class ReviewerBotActions
     const GIT_CLONE = 'git_clone';
     const CHECK = 'check';
     const PERSIST = 'persist';
+    const CLEAN = 'remove_folder';
 }

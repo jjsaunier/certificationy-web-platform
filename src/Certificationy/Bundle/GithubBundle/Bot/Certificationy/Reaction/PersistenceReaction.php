@@ -21,6 +21,11 @@ class PersistenceReaction
     protected $documentManager;
 
     /**
+     * @var string
+     */
+    protected $currentTaskHash;
+
+    /**
      * @param DocumentManager $documentManager
      */
     public function __construct(DocumentManager $documentManager)
@@ -35,27 +40,44 @@ class PersistenceReaction
     {
         $content = $action->getData()['content'];
 
-        $sender = array(
-            'login' => $content['sender']['login'],
-            'avatar_url' => $content['sender']['avatar_url'],
-            'url' => $content['sender']['html_url']
-        );
+        if($action->getStatus() === PersistenceAction::TASK_START){
+            $sender = array(
+                'login' => $content['sender']['login'],
+                'avatar_url' => $content['sender']['avatar_url'],
+                'url' => $content['sender']['html_url']
+            );
 
-        $data = array(
-            'html_url' => $content['pull_request']['html_url'],
-            'diff_url' => $content['pull_request']['diff_url'],
-            'patch_url' => $content['pull_request']['patch_url'],
-            'title' => $content['pull_request']['title'],
-            'label' => $content['pull_request']['head']['label']
-        );
+            $data = array(
+                'html_url' => $content['pull_request']['html_url'],
+                'diff_url' => $content['pull_request']['diff_url'],
+                'patch_url' => $content['pull_request']['patch_url'],
+                'title' => $content['pull_request']['title'],
+                'label' => $content['pull_request']['head']['label']
+            );
 
-        $inspection = new InspectionReport();
-        $inspection->setSender($sender);
-        $inspection->setErrors($action->getErrors());
-        $inspection->setData($data);
-        $inspection->setChecksum($content['pull_request']['head']['sha']);
+            $inspection = new InspectionReport();
+            $inspection->setSender($sender);
+            $inspection->setChecksum($content['pull_request']['head']['sha']);
+            $inspection->setErrors($action->getErrors());
+            $inspection->setData($data);
+            $inspection->setStatus(PersistenceAction::TASK_START);
 
-        $this->documentManager->persist($inspection);
-        $this->documentManager->flush();
+            $this->documentManager->persist($inspection);
+            $this->documentManager->flush();
+
+            $this->currentTaskHash = $inspection->getId();
+        }
+
+        if($action->getStatus() === PersistenceAction::TASK_END){
+            $inspectionRepository = $this->documentManager->getRepository('CertificationyGithubBundle:InspectionReport');
+
+            $inspection = $inspectionRepository->find($this->currentTaskHash);
+
+            $inspection->setErrors($action->getErrors());
+            $inspection->setStatus(PersistenceAction::TASK_END);
+
+            $this->documentManager->persist($inspection);
+            $this->documentManager->flush();
+        }
     }
 }

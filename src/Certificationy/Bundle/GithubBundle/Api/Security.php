@@ -41,17 +41,6 @@ class Security
     {
         $content = $request->getContent();
 
-        if ($request->headers->get('User-Agent') !== 'GitHub-Hookshot/eddbeea') {
-
-            if (null !== $this->logger) {
-                $this->logger->info('Github API bad user agent', array(
-                    'request' => $request
-                ));
-            }
-
-            throw new HttpException(Response::HTTP_NOT_ACCEPTABLE);
-        }
-
         $identityCheck = explode('=', $request->headers->get('X-Hub-Signature'));
 
         if ($identityCheck[1] !== hash_hmac($identityCheck[0], $content, $this->secret)) {

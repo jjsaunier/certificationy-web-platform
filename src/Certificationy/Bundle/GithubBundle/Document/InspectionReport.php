@@ -34,6 +34,9 @@ class InspectionReport
     /** @ODM\String */
     protected $checksum;
 
+    /** @ODM\String */
+    protected $status;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -133,5 +136,21 @@ class InspectionReport
     public function getChecksum()
     {
         return $this->checksum;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

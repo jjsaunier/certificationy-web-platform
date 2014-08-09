@@ -20,15 +20,26 @@ class PersistenceAction extends GenericAction
     protected $errors;
 
     /**
+     * @var string
+     */
+    protected $status;
+
+    const TASK_START = 'task_start';
+
+    const TASK_END = 'task_end';
+
+    /**
      * @param Client $client
      * @param array  $data
      * @param array  $errors
+     * @param       string $status
      */
-    public function __construct(Client $client, array $data, array $errors)
+    public function __construct(Client $client, array $data, array $errors, $status)
     {
         parent::__construct($client, $data);
 
         $this->errors = $errors;
+        $this->status = $status;
     }
 
     /**
@@ -37,5 +48,13 @@ class PersistenceAction extends GenericAction
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

@@ -13,6 +13,7 @@ use Certificationy\Bundle\GithubBundle\Api\Events;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\CheckAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\GitLocaleCloneAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\PersistenceAction;
+use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\RemoveFolderAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\ReviewerBotActions;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Action\SwitchCommitStatusAction;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Bot;
@@ -101,6 +102,12 @@ class ReviewerBot extends Bot
      */
     protected function doOnPullRequest(array $data)
     {
+        //Save in db (mongo)
+        $this->actionDispatcher->dispatch(
+            ReviewerBotActions::PERSIST,
+            new PersistenceAction($this->client, $data, array(), PersistenceAction::TASK_START)
+        );
+
         //Set commit status to pending
         $this->actionDispatcher->dispatch(
             BotActions::SET_COMMIT_STATUS_PENDING,
@@ -129,7 +136,7 @@ class ReviewerBot extends Bot
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(
             ReviewerBotActions::PERSIST,
-            new PersistenceAction($this->client, $data, $checkAction->getErrors())
+            new PersistenceAction($this->client, $data, $checkAction->getErrors(), PersistenceAction::TASK_END)
         );
 
         if (0 === $checkAction->getErrors()['total']) {
@@ -151,5 +158,11 @@ class ReviewerBot extends Bot
                 )
             );
         }
+
+        //Clean up
+        $this->actionDispatcher->dispatch(
+            ReviewerBotActions::CLEAN,
+            new RemoveFolderAction($this->client, $data)
+        );
     }
 }
