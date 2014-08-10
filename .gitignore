@@ -19,3 +19,6 @@
 
 /composer.phar
 
+
+web/analyze/*
+app/Resources/certificationy-data
