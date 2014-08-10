@@ -33,7 +33,7 @@ class InspectionController extends Controller
 
     /**
      * @param Request $request
-     * @param        string $checksum
+     * @param string  $checksum
      */
     public function inspectionCommitAction(Request $request, $checksum)
     {
@@ -42,7 +42,7 @@ class InspectionController extends Controller
 
         $inspection = $inspectionRepository->findOneByChecksum($checksum);
 
-        if(null === $inspection){
+        if (null === $inspection) {
             throw new HttpException(Response::HTTP_NOT_FOUND);
         }
 
