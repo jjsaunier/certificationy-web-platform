@@ -99,6 +99,12 @@ class CertificationContext implements CertificationContextInterface
     protected $allowCustomNumberOfQuestions;
 
     /**
+     * @var string
+     * @Type("string")
+     */
+    protected $icons;
+
+    /**
      * @param string $name
      */
     public function __construct($name)
@@ -412,6 +418,22 @@ class CertificationContext implements CertificationContextInterface
     }
 
     /**
+     * @param string $icons
+     */
+    public function setIcons($icons)
+    {
+        $this->icons = $icons;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcons()
+    {
+        return $this->icons;
+    }
+
+    /**
      * @param array $data
      *
      * @return CertificationContext
@@ -431,6 +453,7 @@ class CertificationContext implements CertificationContextInterface
         $certificationContext->setAvailableLanguages($data['availableLanguages']);
         $certificationContext->setAllowExcludeCategories($data['allowExcludeCategories']);
         $certificationContext->setAllowCustomNumberOfQuestions($data['allowCustomNumberOfQuestions']);
+        $certificationContext->setIcons($data['icons']);
 
         return $certificationContext;
     }
