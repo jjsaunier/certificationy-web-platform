@@ -282,3 +282,9 @@ certificationy_certy:
     calculator:
         class: Certificationy\Component\Certy\Calculator\Calculator
         delegator: ~ #rabbitmq
+
+services:
+    twig.extension.i18n:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

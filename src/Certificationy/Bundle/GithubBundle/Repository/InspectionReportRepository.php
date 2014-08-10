@@ -24,7 +24,7 @@ class InspectionReportRepository extends DocumentRepository
 
         $qb
             ->limit($limit)
-            ->sort('createdAt', 'ASC')
+            ->sort('createdAt', 'DESC')
         ;
 
         return $qb->getQuery()->execute();

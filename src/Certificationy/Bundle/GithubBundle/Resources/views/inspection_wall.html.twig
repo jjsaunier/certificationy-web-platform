@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% macro getPanelClass(inspection) -%}
+    {% spaceless %}
+        {% if inspection.status == 'task_start' %}
+            warning
+        {% else %}
+            {{ inspection.errors.total == 0  ? 'success' : 'danger'}}
+        {% endif %}
+    {% endspaceless %}
+{%- endmacro %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-12">
             {% for inspection in inspections %}
 
-                <div id="{{ inspection.checksum }}" class="panel panel-success">
+                <div id="{{ inspection.checksum }}" class="panel panel-{{ _self.getPanelClass(inspection) }}">
                     <div class="panel-heading">
 
                         <h3 class="panel-title">
@@ -22,81 +32,38 @@
                                 </p>
                             </div>
                             <div class="col-md-10">
-
-                                <div class="panel-group" id="accordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                                    {{ badge(0) }} Pattern
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div style="height: 0px;" id="collapseOne" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                                    {{ badge(0) }} Unicity
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div style="height: 0px;" id="collapseTwo" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                    {{ badge(0) }} Context
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div style="" id="collapseThree" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                {{ include('@CertificationyGithub/panel/'~ inspection.status ~'.html.twig') }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-2 text-center">
                                 {{ inspection.sender['login'] }}
                             </div>
-                            <div class="col-md-10">
 
-                                <ul class="list-unstyled list-inline fa-ul">
-                                    <li>
-                                        <i class="fa fa-github"></i>
-                                        <a target="_blank" href="{{ inspection.data['html_url'] }}">
-                                            Github
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-code"></i>
-                                        <a target="_blank" href="{{ inspection.data['diff_url'] }}">
-                                            Diff
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-file-code-o"></i>
-                                        <a target="_blank" href="{{ inspection.data['patch_url'] }}">
-                                            Patch
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {% if inspection.status != 'task_start' %}
+                                <div class="col-md-10">
+                                    <ul class="list-unstyled list-inline fa-ul">
+                                        <li>
+                                            <i class="fa fa-github"></i>
+                                            <a target="_blank" href="{{ inspection.data['html_url'] }}">
+                                                Github
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-code"></i>
+                                            <a target="_blank" href="{{ inspection.data['diff_url'] }}">
+                                                Diff
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-file-code-o"></i>
+                                            <a target="_blank" href="{{ inspection.data['patch_url'] }}">
+                                                Patch
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

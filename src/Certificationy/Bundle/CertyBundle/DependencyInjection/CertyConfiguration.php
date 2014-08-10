@@ -10,6 +10,7 @@
 namespace Certificationy\Bundle\CertyBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -49,8 +50,13 @@ class CertyConfiguration
     public function buildCalculator(array $calculatorConfig)
     {
         //Register calculator service
-        $definition = new Definition($calculatorConfig['class']);
-        $this->container->setDefinition('certy.certificationy.calculator', $definition);
+        $calculatorDefinition = new Definition($calculatorConfig['class']);
+        $calculatorDefinition
+            ->addArgument(new Reference('event_dispatcher'))
+            ->addMethodCall('setLogger', array(new Reference('monolog.logger.certy', ContainerInterface::NULL_ON_INVALID_REFERENCE)))
+        ;
+
+        $this->container->setDefinition('certy.certificationy.calculator', $calculatorDefinition);
 
         //Register CalculatorManager
         $definition = new Definition('Certificationy\Component\Certy\Calculator\CalculatorManager');

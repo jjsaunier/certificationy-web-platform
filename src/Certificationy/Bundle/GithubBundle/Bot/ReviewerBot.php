@@ -84,6 +84,12 @@ class ReviewerBot extends Bot
                         )
                     );
 
+                    //Save in db (mongo)
+                    $this->actionDispatcher->dispatch(
+                        ReviewerBotActions::PERSIST,
+                        new PersistenceAction($this->client, $data, array(), PersistenceAction::TASK_END)
+                    );
+
                     if (true === $data['debug']) {
                         throw $e;
                     }

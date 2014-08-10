@@ -17,25 +17,25 @@ jms_serializer:
 
 monolog:
     handlers:
-        main:
-            type: buffer
-            action_level: warning
-            handler: grouped
-        grouped:
-            type: group
-            members: [ application, login ]
         application:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
-        login:
-            type:   stream
-            path:   "%kernel.logs_dir%/auth_%kernel.environment%.log"
-            level: info
-            channels: security
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            channels: [ 'request', 'event', 'templating', 'router' ]
+        security:
+            type: stream
+            path: "%kernel.logs_dir%/auth_%kernel.environment%.log"
+            channels: ['security' ]
         console:
             type: console
             bubble: false
+        redis:
+            type: stream
+            path: "%kernel.logs_dir%/redis_%kernel.environment%.log"
+            channels: [ 'snc_redis' ]
+        doctrine:
+            type: stream
+            path: "%kernel.logs_dir%/doctrine_%kernel.environment%.log"
+            channels: [ 'doctrine' ]
 
 assetic:
     use_controller: %use_assetic_controller%

@@ -15,24 +15,33 @@ monolog:
     handlers:
         main:
             type: fingers_crossed
-            action_level: error
+            action_level: warning
             handler: grouped
         grouped:
             type: group
-            members: [ application, swift ]
+            members: [application, security, redis, doctrine]
         application:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            channels: [ 'request', 'event', 'templating', 'router' ]
+        security:
+            type: stream
+            path: "%kernel.logs_dir%/auth_%kernel.environment%.log"
+            channels: ['security' ]
+        console:
+            type: console
+            bubble: false
+        redis:
+            type: stream
+            path: "%kernel.logs_dir%/redis_%kernel.environment%.log"
+            channels: [ 'snc_redis' ]
+        doctrine:
+            type: stream
+            path: "%kernel.logs_dir%/doctrine_%kernel.environment%.log"
+            channels: [ 'doctrine' ]
         swift:
             type: swift_mailer
-            type:               swift_mailer
-            from_email:         log@certificationy.com
-            to_email:           johann_27@hotmail.com
-            subject:            "[LOG][CERTIFICATIONY]"
-            level:              debug
-        login:
-            type:   stream
-            path:   "%kernel.logs_dir%/auth_%kernel.environment%.log"
-            level: info
-            channels: security
+            from_email: logger@certificationy.com
+            to_email: johann_27@hotmail.fr
+            subject: "[certificationy-web-platform][logger]"
+            level: debug

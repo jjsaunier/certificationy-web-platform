@@ -10,9 +10,18 @@
 namespace Certificationy\Component\Certy\Calculator;
 
 use Certificationy\Component\Certy\Model\Certification;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 interface CalculatorInterface
 {
+    /**
+     * @param LoggerInterface $logger
+     *
+     * @return mixed
+     */
+    public function setLogger(LoggerInterface $logger = null);
+
     /**
      * @param  Certification $certification
      * @return Certification

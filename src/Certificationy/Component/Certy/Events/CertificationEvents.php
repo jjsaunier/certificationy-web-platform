@@ -16,4 +16,7 @@ final class CertificationEvents
     const CERTIFICATION_POST_COMPUTATION = 'certy.certification.post_computation';
     const CERTIFICATION_CUSTOM_CONTEXT = 'certy.certification.custom_context';
     const CERTIFICATION_START = 'certy.certification.start';
+    const CERTIFICATION_VALID_QUESTION = 'certy.certification.valid_question';
+    const CERTIFICATION_INVALID_QUESTION = 'certy.certification.invalid_question';
+
 }

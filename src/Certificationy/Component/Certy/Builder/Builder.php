@@ -17,6 +17,7 @@ use Certificationy\Component\Certy\Model\Category;
 use Certificationy\Component\Certy\Model\Certification;
 use Certificationy\Component\Certy\Model\Metrics;
 use Certificationy\Component\Certy\Model\Question;
+use Psr\Log\LoggerInterface;
 
 class Builder implements BuilderInterface
 {
@@ -36,6 +37,11 @@ class Builder implements BuilderInterface
     protected $cache;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param CollectorInterface $collector
      */
     public function __construct(CollectorInterface $collector = null)
@@ -43,6 +49,14 @@ class Builder implements BuilderInterface
         $this->collector = null === $collector ? new Collector() : $collector;
         $this->builderPass = array();
         $this->cache = array();
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
     }
 
     /**
@@ -60,6 +74,13 @@ class Builder implements BuilderInterface
      */
     public function addBuilderPass(BuilderPassInterface $builderPass)
     {
+        if(null !== $this->logger) {
+            $this->logger->debug(sprintf(
+                'Builder pass %s loaded',
+                get_class($builderPass)
+            ));
+        }
+
         $this->builderPass[] = $builderPass;
 
         return $this;
@@ -123,6 +144,13 @@ class Builder implements BuilderInterface
      */
     public function build(CertificationContextInterface $context)
     {
+        if(null !== $this->logger) {
+            $this->logger->debug(sprintf(
+                'Build certification %s',
+                $context->getName()
+            ));
+        }
+
         $oid = md5(serialize($context)); //It's not based of object instance, but on his content.
 
         if (!isset($this->cache[$oid])) {
