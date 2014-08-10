@@ -5,13 +5,13 @@ services:
             - %github_login%
             - %github_password%
         calls:
-            - [ "setLogger", [ @?logger ] ]
+            - [ "setLogger", [ @?monolog.logger.github ] ]
 
     github.security:
         class: Certificationy\Bundle\GithubBundle\Api\Security
         calls:
             - [ "setSecret", [ %kernel.secret% ] ]
-            - [ "setLogger", [ @?logger ] ]
+            - [ "setLogger", [ @?monolog.logger.github ] ]
 
     github.status:
         class: Certificationy\Bundle\GithubBundle\Api\Status\Status

@@ -43,12 +43,19 @@ class Security
 
         $identityCheck = explode('=', $request->headers->get('X-Hub-Signature'));
 
+        if (!is_array($identityCheck) || 2 !== count($identityCheck)) {
+
+            if (null !== $this->logger) {
+                $this->logger->info('Not acceptable request from Github API');
+            }
+
+            throw new HttpException(Response::HTTP_NOT_ACCEPTABLE);
+        }
+
         if ($identityCheck[1] !== hash_hmac($identityCheck[0], $content, $this->secret)) {
 
             if (null !== $this->logger) {
-                $this->logger->info('Github API wrong signature', array(
-                    'request' => $request
-                ));
+                $this->logger->info('Github API wrong signature');
             }
 
             throw new HttpException(Response::HTTP_FORBIDDEN);
@@ -56,8 +63,7 @@ class Security
 
         if (null !== $this->logger) {
             $this->logger->info(
-                sprintf('Github API called with event %s', $request->headers->get('X-GitHub-Event')),
-                array('request' => $request)
+                sprintf('Github API called with event %s', $request->headers->get('X-GitHub-Event'))
             );
         }
 

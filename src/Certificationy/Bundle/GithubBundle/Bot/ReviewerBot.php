@@ -41,26 +41,60 @@ class ReviewerBot extends Bot
 
     /**
      * @return string[]
-     *
-     * @TODO: Make callable to dispatch directly on the method from bot
      */
     public function getGithubEvents()
     {
         return array(
-            Events::PULL_REQUEST
+            Events::PULL_REQUEST => 'onPullRequest'
         );
+    }
 
-//        return array(
-//            Events::PULL_REQUEST => 'doOnPullRequest'
-//        );
+    /**
+     * @param string   $eventName
+     * @param Request  $request
+     * @param array    $data
+     * @param Response $response
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function doHandle($eventName, Request $request, array $data, Response $response)
+    {
+        if (Events::PULL_REQUEST === $eventName) {
+            try {
+                return parent::doHandle($eventName, $request, $data, $response);
+            } catch ( \Exception $e) {
+                $this->actionDispatcher->dispatch(
+                    BotActions::SET_COMMIT_STATUS_FAILURE,
+                    new SwitchCommitStatusAction(
+                        $this->client,
+                        $data,
+                        'The Certificationy CI build could not complete due to an error'
+                    )
+                );
+
+                //Save in db (mongo)
+                $this->actionDispatcher->dispatch(
+                    ReviewerBotActions::PERSIST,
+                    new PersistenceAction($this->client, $data, array(), PersistenceAction::TASK_END)
+                );
+
+                if (true === $data['debug']) {
+                    throw $e;
+                }
+            }
+        }
+
+        return parent::doHandle($eventName, $response, $data, $response);
     }
 
     /**
      * 1 Set commit status to pending
-     * 2 Clone the branch of fork who is pulled
-     * 3 Check commit data
-     * 4 Save report inside MongoDB
-     * 5 Update commit status success|error|failure
+     * 2 Save status in DB (mongo)
+     * 3 Clone the branch of fork who is pulled
+     * 4 Check commit data
+     * 5 Save report inside MongoDB
+     * 6 Update commit status success|error|failure
      *
      * @param Request  $request
      * @param array    $data
@@ -68,45 +102,7 @@ class ReviewerBot extends Bot
      *
      * @return Response
      */
-    protected function doHandle(Request $request, array $data, Response $response)
-    {
-        switch ($data['event']) {
-            case Events::PULL_REQUEST:
-                try {
-                    $this->doOnPullRequest($data);
-                } catch ( \Exception $e) {
-                    $this->actionDispatcher->dispatch(
-                        BotActions::SET_COMMIT_STATUS_FAILURE,
-                        new SwitchCommitStatusAction(
-                            $this->client,
-                            $data,
-                            'The Certificationy CI build could not complete due to an error'
-                        )
-                    );
-
-                    //Save in db (mongo)
-                    $this->actionDispatcher->dispatch(
-                        ReviewerBotActions::PERSIST,
-                        new PersistenceAction($this->client, $data, array(), PersistenceAction::TASK_END)
-                    );
-
-                    if (true === $data['debug']) {
-                        throw $e;
-                    }
-                }
-            break;
-            case Events::PING:
-                $response->setContent('PONG - '.$data['delivery_uuid']);
-            break;
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param array $data
-     */
-    protected function doOnPullRequest(array $data)
+    protected function onPullRequest(Request $request, array $data, Response $response)
     {
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(

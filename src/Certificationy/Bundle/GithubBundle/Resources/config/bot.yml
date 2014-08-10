@@ -2,6 +2,8 @@ services:
     github.bot:
         class: Certificationy\Bundle\GithubBundle\Bot\Common\Bot
         abstract: true
+        calls:
+            - [ "setLogger", [ @?monolog.logger.github ] ]
         arguments:
             - @github.client
             - @github.security

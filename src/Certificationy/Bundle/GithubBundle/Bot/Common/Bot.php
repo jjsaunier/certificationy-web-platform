@@ -10,6 +10,7 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Common;
 
 use Certificationy\Bundle\GithubBundle\Api\Client;
+use Certificationy\Bundle\GithubBundle\Api\Events;
 use Certificationy\Bundle\GithubBundle\Api\Security;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -39,15 +40,6 @@ abstract class Bot implements BotInterface
      * @var LoggerInterface
      */
     protected $logger;
-
-    /**
-     * @param Request  $request
-     * @param array    $data
-     * @param Response $response
-     *
-     * @return Response
-     */
-    abstract protected function doHandle(Request $request, array $data, Response $response);
 
     /**
      * @param Client   $client
@@ -81,7 +73,7 @@ abstract class Bot implements BotInterface
     /**
      * @return Response
      */
-    protected function createResponse()
+    protected function createResponse($content = null)
     {
         $response = new Response();
 
@@ -90,21 +82,57 @@ abstract class Bot implements BotInterface
         $response->headers->addCacheControlDirective('must-revalidate', true);
         $response->headers->addCacheControlDirective('no-store', true);
 
+        if (null !== $content) {
+            $response->setContent($content);
+        }
+
         return $response;
     }
 
     /**
      * @param Request $request
+     *
+     * @return Response
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
     public function handle(Request $request)
     {
         $data = $this->security->handleRequest($request);
 
-        if (!$this->matchEvent($data['event'])) {
+        if ($data['event'] === Events::PING) {
+            return $this->createResponse('PONG - '.$data['delivery_uuid']);
+        }
+
+        if (!$this->matchEvent($data['event']) && $data['event']) {
+
+            if (null !== $this->logger) {
+                $this->logger->debug(sprintf(
+                    '%s accept following events [ %s ] given : %s',
+                    get_class($this),
+                    implode(', ', $this->getGithubEvents()),
+                    $data['event']
+                ));
+            }
+
             throw new HttpException(Response::HTTP_NOT_FOUND);
         }
 
-        return $this->doHandle($request, $data, $this->createResponse());
+        $this->doHandle($data['event'], $request, $data, $response = $this->createResponse());
+
+        return $response;
+    }
+
+    /**
+     * @param string   $eventName
+     * @param Request  $request
+     * @param array    $data
+     * @param Response $response
+     *
+     * @return mixed
+     */
+    protected function doHandle($eventName, Request $request, array $data, Response $response)
+    {
+        return $this->{$this->getGithubEvents()[$eventName]}($request, $data, $response);
     }
 
     /**
