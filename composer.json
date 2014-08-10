@@ -4,7 +4,7 @@
     "type": "project",
     "description": "Certificationy web platform",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": { "": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
@@ -33,18 +33,48 @@
         "behat/transliterator": "~1.0",
         "swarrot/swarrot-bundle": "@stable",
         "jms/serializer-bundle": "~0.13",
-        "doctrine/mongodb-odm": "1.0.*@beta",
-        "doctrine/mongodb-odm-bundle": "3.0.*@beta",
-        "guzzlehttp/guzzle": "~4.0"
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+        "guzzlehttp/guzzle": "~4.0",
+        "vorillaz/devicons": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "~4.1"
     },
+    "repositories" : [
+        {
+            "type" : "package",
+            "package" : {
+                "name": "vorillaz/devicons",
+                "type": "project",
+                "version": "1.5.0",
+                "dist": {
+                    "url": "https://github.com/vorillaz/devicons/archive/master.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/vorillaz/devicons.git",
+                    "type": "git",
+                    "reference": "1.5.0"
+                },
+                "extra": {
+                    "component": {
+                        "styles": [
+                            "css/*"
+                        ],
+                        "files" : [
+                            "fonts/*"
+                        ]
+                    }
+                },
+                "require": {
+                    "robloach/component-installer": "~0.0.12"
+                }
+            }
+        }
+    ],
     "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",

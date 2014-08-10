@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53f3738c0534fd04f44a75614aeca983",
+    "hash": "93ee3597d219ebd6cbb5ce2ec696380b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -769,16 +769,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.0.0-BETA11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "d6110fa6840370fc49c5492cb6a30d8432ddfa8d"
+                "reference": "66b78196b53d2984d6ed389806224823cd6b9b12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/d6110fa6840370fc49c5492cb6a30d8432ddfa8d",
-                "reference": "d6110fa6840370fc49c5492cb6a30d8432ddfa8d",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/66b78196b53d2984d6ed389806224823cd6b9b12",
+                "reference": "66b78196b53d2984d6ed389806224823cd6b9b12",
                 "shasum": ""
             },
             "require": {
@@ -814,25 +814,20 @@
             ],
             "authors": [
                 {
-                    "name": "Bulat Shakirzyanov",
-                    "email": "mallluhuct@gmail.com",
-                    "homepage": "http://avalanche123.com"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
-                    "name": "Kris Wallsmith",
-                    "email": "kris.wallsmith@gmail.com",
-                    "homepage": "http://kriswallsmith.net/"
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
                 },
                 {
                     "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com",
-                    "homepage": "http://jmikola.net"
+                    "email": "jmikola@gmail.com"
+                },
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com"
+                },
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com"
                 }
             ],
             "description": "Doctrine MongoDB Object Document Mapper",
@@ -843,21 +838,20 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2014-06-06 17:50:20"
+            "time": "2014-08-05 15:33:21"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
-            "version": "v3.0.0-BETA6",
-            "target-dir": "Doctrine/Bundle/MongoDBBundle",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "b06c06e72136f662d0cf604952fcc4238b1e9cb9"
+                "reference": "59cf093975403a5c647023801b7ced883d795dd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/b06c06e72136f662d0cf604952fcc4238b1e9cb9",
-                "reference": "b06c06e72136f662d0cf604952fcc4238b1e9cb9",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/59cf093975403a5c647023801b7ced883d795dd7",
+                "reference": "59cf093975403a5c647023801b7ced883d795dd7",
                 "shasum": ""
             },
             "require": {
@@ -882,8 +876,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Bundle\\MongoDBBundle": ""
+                "psr-4": {
+                    "Doctrine\\Bundle\\MongoDBBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -892,19 +886,16 @@
             ],
             "authors": [
                 {
-                    "name": "Bulat Shakirzyanov",
-                    "email": "mallluhuct@gmail.com",
-                    "homepage": "http://avalanche123.com"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
                     "name": "Kris Wallsmith",
                     "email": "kris@symfony.com"
+                },
+                {
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com"
                 }
             ],
             "description": "Symfony2 Doctrine MongoDB Bundle",
@@ -914,7 +905,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2014-05-19 18:39:02"
+            "time": "2014-08-05 15:32:18"
         },
         {
             "name": "doctrine/orm",
@@ -3144,6 +3135,35 @@
             "time": "2014-07-05 12:19:05"
         },
         {
+            "name": "vorillaz/devicons",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vorillaz/devicons.git",
+                "reference": "1.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/vorillaz/devicons/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "robloach/component-installer": "~0.0.12"
+            },
+            "type": "project",
+            "extra": {
+                "component": {
+                    "styles": [
+                        "css/*"
+                    ],
+                    "files": [
+                        "fonts/*"
+                    ]
+                }
+            }
+        },
+        {
             "name": "whatthejeff/fab",
             "version": "v1.0.0",
             "source": {
@@ -4132,8 +4152,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "swarrot/swarrot-bundle": 0,
-        "doctrine/mongodb-odm": 10,
-        "doctrine/mongodb-odm-bundle": 10
+        "doctrine/mongodb-odm": 20,
+        "doctrine/mongodb-odm-bundle": 20
     },
     "prefer-stable": false,
     "platform": {

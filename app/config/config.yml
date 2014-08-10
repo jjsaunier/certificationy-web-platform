@@ -16,6 +16,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
+        assets_version: %assets_version%
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -106,11 +107,12 @@ assetic:
                 css/homepage.css
         bootstrap_theme_css:
             inputs:
+                - %kernel.root_dir%/../web/components/devicons/css/devicons.css
                 - @CertificationyWebBundle/Resources/private/less/global.less
-                - @CertificationyWebBundle/Resources/public/css/devicons.css
             filters:
                 - less
                 - yui_css
+                - cssrewrite
             output: css/bootstrap-theme.css
         bootstrap_social_css:
             inputs:
@@ -145,6 +147,9 @@ assetic:
                 - yui_js
                 - closure
             output: js/jquery.js
+
+monolog:
+    channels: [ "github", "certy" ]
 
 # Doctrine Configuration
 doctrine:

@@ -16,7 +16,6 @@ jms_serializer:
         cache: ~
 
 monolog:
-    channels: [ "github", "certy" ]
     handlers:
         application:
             type: stream
