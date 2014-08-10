@@ -15,8 +15,9 @@
     <div class="col-md-9">
         <div class="text-center">
             <div>
-                {#<img src="{{ asset('images/certificationy/'~certification.context.name~'/logo.png') }}">#}
-                <i class="devicons devicons-symfony" style="font-size: 20em;"></i>
+                {% if certification.context.icons is not null %}
+                    <i class="devicons {{ certification.context.icons }}" style="font-size: 20em;"></i>
+                {% endif %}
             </div>
         </div>
 

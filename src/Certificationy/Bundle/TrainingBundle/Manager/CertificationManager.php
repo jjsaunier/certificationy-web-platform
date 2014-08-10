@@ -138,10 +138,10 @@ class CertificationManager
             $context->setAvailableLanguages($contextConfig['availableLanguages']);
             $context->setLanguage($contextConfig['defaults']['language']);
             $context->setDebug($this->kernelDebug);
-            $context->setNumberOfQuestions($contextConfig['numberOfQuestions']);
-            $context->setAllowCustomNumberOfQuestions($contextConfig['allowCustomNumberOfQuestions']);
+            $context->setNumberOfQuestions($contextConfig['defaults']['questions_peer_category']);
+            $context->setAllowCustomNumberOfQuestions($contextConfig['customize']['number_of_questions']);
 
-            $context->setAllowExcludeCategories($contextConfig['allowExcludeCategories']);
+            $context->setAllowExcludeCategories($contextConfig['customize']['exclude_categories']);
 
             if (null !== $availableContext = $contextConfig['availableLevels']) {
                 $context->setAvailableLevels($availableContext);
@@ -150,6 +150,10 @@ class CertificationManager
 
             if (null !== $contextConfig['threshold']) {
                 $context->setThreshold($contextConfig['threshold']);
+            }
+
+            if (null !== $contextConfig['icons']) {
+                $context->setIcons($contextConfig['icons']);
             }
 
             $this->redisClient->set($key, $this->serializer->serialize($context, 'json'));
