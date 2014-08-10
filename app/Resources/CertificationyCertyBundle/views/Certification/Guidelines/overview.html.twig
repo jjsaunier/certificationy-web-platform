@@ -1,8 +1,7 @@
 {% block overview_content %}
-
     {% if certification.metrics.questionCount <= 0 or certification.metrics.answerCount <= 0 %}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="alert alert-warning" role="alert">
                     This training will be available soon, we are working on it :)
                 </div>
@@ -11,11 +10,11 @@
     {% endif %}
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <h3>Settings</h3>
             {{ form(form) }}
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-6 col-md-6col-sm-6 hidden-xs">
             <h3>Information</h3>
             <ul>
                 <li>Categories : {{ certification.metrics.categoryCount }}</li>

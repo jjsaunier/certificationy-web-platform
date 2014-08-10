@@ -1,7 +1,7 @@
 {% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
 
 {% block certy_content %}
-    <div class="col-md-3">
+    <div class="col-lg-3 hidden-xs hidden-sm hidden-md">
         {% embed 'CertificationyCertyBundle:Certification/Embed:CategoryList.html.twig' %}
             {% block list_attr %}class="list-group"{% endblock %}
             {% block li_attr %}class="list-group-item"{% endblock %}
