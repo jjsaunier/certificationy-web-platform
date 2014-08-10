@@ -70,8 +70,8 @@ class SwitchCommitStatusReaction implements EventSubscriberInterface
     protected function createUrl(array $content)
     {
         return $this->router->generate(
-            'github_inspection',
-            array('inspection_id' => $content['pull_request']['head']['sha']),
+            'github_inspection_commit',
+            array('checksum' => $content['pull_request']['head']['sha']),
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

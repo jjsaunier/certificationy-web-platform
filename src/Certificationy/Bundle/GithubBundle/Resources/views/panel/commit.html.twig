@@ -1,0 +1,62 @@
+{% macro getPanelClass(inspection) -%}
+    {% spaceless %}
+        {% if inspection.status == 'task_start' %}
+            warning
+        {% else %}
+            {{ inspection.errors.total == 0  ? 'success' : 'danger'}}
+        {% endif %}
+    {% endspaceless %}
+{%- endmacro %}
+
+<div id="{{ inspection.checksum }}" class="panel panel-{{ _self.getPanelClass(inspection) }}">
+    <div class="panel-heading">
+
+        <h3 class="panel-title">
+            <i class="fa fa-code-fork"></i>
+            {{ inspection.data.title|capitalize }}
+            {{ inspection.createdAt|date }}
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <p>
+                    <img style="width: 150px; height: 150px;" src="{{ inspection.sender['avatar_url'] }}">
+                </p>
+            </div>
+            <div class="col-md-10">
+                {{ include('@CertificationyGithub/panel/'~ inspection.status ~'.html.twig') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-center">
+                {{ inspection.sender['login'] }}
+            </div>
+
+            {% if inspection.status != 'task_start' %}
+                <div class="col-md-10">
+                    <ul class="list-unstyled list-inline fa-ul">
+                        <li>
+                            <i class="fa fa-github"></i>
+                            <a target="_blank" href="{{ inspection.data['html_url'] }}">
+                                Github
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa fa-code"></i>
+                            <a target="_blank" href="{{ inspection.data['diff_url'] }}">
+                                Diff
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa fa-file-code-o"></i>
+                            <a target="_blank" href="{{ inspection.data['patch_url'] }}">
+                                Patch
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

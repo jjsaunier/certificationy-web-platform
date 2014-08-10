@@ -7,3 +7,13 @@ github_inspection:
     path: /contribution/inspection
     defaults:
         _controller: CertificationyGithubBundle:Inspection:inspectionWall
+    requirements:
+        _method: GET
+
+github_inspection_commit:
+    path: /contribution/inspection/{checksum}
+    defaults:
+        _controller: CertificationyGithubBundle:Inspection:inspectionCommit
+    requirements:
+        _method: GET
+        checksum: "[a-z0-9]+"
