@@ -45,3 +45,7 @@ monolog:
             to_email: johann_27@hotmail.fr
             subject: "[certificationy-web-platform][logger]"
             level: debug
+        github:
+            type: stream
+            path: "%kernel.logs_dir%/github_%kernel.environment%.log"
+            channels: [ 'github' ]

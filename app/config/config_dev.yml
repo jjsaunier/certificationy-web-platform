@@ -16,6 +16,7 @@ jms_serializer:
         cache: ~
 
 monolog:
+    channels: [ "github", "certy" ]
     handlers:
         application:
             type: stream
@@ -36,6 +37,10 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/doctrine_%kernel.environment%.log"
             channels: [ 'doctrine' ]
+        github:
+            type: stream
+            path: "%kernel.logs_dir%/github_%kernel.environment%.log"
+            channels: [ 'github' ]
 
 assetic:
     use_controller: %use_assetic_controller%
