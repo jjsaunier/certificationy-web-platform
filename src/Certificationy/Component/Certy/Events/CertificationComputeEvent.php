@@ -9,7 +9,6 @@
 
 namespace Certificationy\Component\Certy\Events;
 
-
 use Certificationy\Component\Certy\Model\Question;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -46,4 +45,4 @@ class CertificationComputeEvent extends Event
     {
         return $this->skip;
     }
-} 
+}

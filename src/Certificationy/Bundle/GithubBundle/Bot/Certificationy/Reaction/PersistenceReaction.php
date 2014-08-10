@@ -40,7 +40,7 @@ class PersistenceReaction
     {
         $content = $action->getData()['content'];
 
-        if($action->getStatus() === PersistenceAction::TASK_START){
+        if ($action->getStatus() === PersistenceAction::TASK_START) {
             $sender = array(
                 'login' => $content['sender']['login'],
                 'avatar_url' => $content['sender']['avatar_url'],
@@ -68,7 +68,7 @@ class PersistenceReaction
             $this->currentTaskHash = $inspection->getId();
         }
 
-        if($action->getStatus() === PersistenceAction::TASK_END){
+        if ($action->getStatus() === PersistenceAction::TASK_END) {
             $inspectionRepository = $this->documentManager->getRepository('CertificationyGithubBundle:InspectionReport');
 
             $inspection = $inspectionRepository->find($this->currentTaskHash);

@@ -11,7 +11,6 @@ namespace Certificationy\Component\Certy\Calculator;
 
 use Certificationy\Component\Certy\Model\Certification;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 interface CalculatorInterface
 {

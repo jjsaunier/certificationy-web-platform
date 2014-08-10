@@ -74,7 +74,7 @@ class Builder implements BuilderInterface
      */
     public function addBuilderPass(BuilderPassInterface $builderPass)
     {
-        if(null !== $this->logger) {
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Builder pass %s loaded',
                 get_class($builderPass)
@@ -144,7 +144,7 @@ class Builder implements BuilderInterface
      */
     public function build(CertificationContextInterface $context)
     {
-        if(null !== $this->logger) {
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Build certification %s',
                 $context->getName()

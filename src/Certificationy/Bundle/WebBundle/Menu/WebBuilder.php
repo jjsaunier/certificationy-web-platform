@@ -43,4 +43,4 @@ class WebBuilder
 
         return $menu;
     }
-} 
+}

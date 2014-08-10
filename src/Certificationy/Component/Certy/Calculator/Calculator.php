@@ -70,9 +70,9 @@ class Calculator implements CalculatorInterface
                     $validEvent = new CertificationComputeEvent($question);
                     $this->eventDispatcher->dispatch(CertificationEvents::CERTIFICATION_VALID_QUESTION, $validEvent);
 
-                    if(true === $validEvent->isSkipped()){
+                    if (true === $validEvent->isSkipped()) {
 
-                        if(null !== $this->logger){
+                        if (null !== $this->logger) {
                             $this->logger->info(sprintf(
                                 'Question %s skipped',
                                 $question->getLabel()

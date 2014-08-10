@@ -32,7 +32,7 @@ class PersistenceAction extends GenericAction
      * @param Client $client
      * @param array  $data
      * @param array  $errors
-     * @param       string $status
+     * @param string $status
      */
     public function __construct(Client $client, array $data, array $errors, $status)
     {
