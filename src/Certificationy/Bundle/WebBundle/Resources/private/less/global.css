@@ -4,11 +4,10 @@ body {
 }
 body {
   margin: 0px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-family: "open_sansregular", Helvetica, Arial, sans-serif;
   line-height: 20px;
   color: #333;
-  background-color: #FFF;
+  background-color: #333333;
 }
 #wrap {
   min-height: 100%;

@@ -80,7 +80,7 @@ assetic:
             output: css/user.css
         bootstrap_css:
             inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/bootstrap.less
+                - %kernel.root_dir%/Resources/less/bootstrap.less
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
             filters:
                 - less
@@ -95,23 +95,14 @@ assetic:
                 - cssrewrite
                 - yui_css
             output: css/font-awesome.css
-        homepage_css:
-            inputs:
-                - @CertificationyWebBundle/Resources/private/less/homepage.less
-            filters:
-                - less
-                - yui_css
-                - cssrewrite
-            output:
-                css/homepage.css
         bootstrap_theme_css:
             inputs:
+                - @CertificationyWebBundle/Resources/public/css/fonts.css
                 - %kernel.root_dir%/../web/components/devicons/css/devicons.css
                 - @CertificationyWebBundle/Resources/private/less/global.less
             filters:
                 - less
                 - yui_css
-                - cssrewrite
             output: css/bootstrap-theme.css
         bootstrap_social_css:
             inputs:
@@ -206,6 +197,8 @@ braincrafted_bootstrap:
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
     jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.js
     less_filter: less
+    customize:
+            variables_file: %kernel.root_dir%/../src/Certificationy/Bundle/WebBundle/Resources/private/less/variable.less
     auto_configure:
         assetic: true
         twig: true

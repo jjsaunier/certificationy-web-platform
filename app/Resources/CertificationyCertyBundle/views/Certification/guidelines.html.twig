@@ -6,7 +6,7 @@
             {% block list_attr %}class="list-group"{% endblock %}
             {% block li_attr %}class="list-group-item"{% endblock %}
             {% block category_line %}
-                <span class="badge">{{ category.questions.count }}</span>
+                {{ badge(category.questions.count) }}
                 {{ parent() }}
             {% endblock category_line %}
         {% endembed %}
