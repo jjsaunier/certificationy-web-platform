@@ -18,27 +18,27 @@ jms_serializer:
 monolog:
     handlers:
         application:
-            type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/application.log"
             channels: [ 'request', 'event', 'templating', 'router' ]
         security:
-            type: stream
-            path: "%kernel.logs_dir%/auth_%kernel.environment%.log"
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/security.log"
             channels: ['security' ]
         console:
             type: console
             bubble: false
         redis:
-            type: stream
-            path: "%kernel.logs_dir%/redis_%kernel.environment%.log"
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/redis.log"
             channels: [ 'snc_redis' ]
         doctrine:
-            type: stream
-            path: "%kernel.logs_dir%/doctrine_%kernel.environment%.log"
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/doctrine.log"
             channels: [ 'doctrine' ]
         github:
-            type: stream
-            path: "%kernel.logs_dir%/github_%kernel.environment%.log"
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/github.log"
             channels: [ 'github' ]
 
 assetic:
