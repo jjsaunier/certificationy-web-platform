@@ -22,28 +22,28 @@ class ModelCollectionHandler implements SubscribingHandlerInterface
      */
     public static function getSubscribingMethods()
     {
-        $methods = array();
-        $formats = array('json', 'xml', 'yml');
-        $collectionTypes = array(
+        $methods = [];
+        $formats = ['json', 'xml', 'yml'];
+        $collectionTypes = [
             'ModelCollection',
             'Certificationy\Component\Certy\Model\ModelCollection'
-        );
+        ];
 
         foreach ($collectionTypes as $type) {
             foreach ($formats as $format) {
-                $methods[] = array(
+                $methods[] = [
                     'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                     'type' => $type,
                     'format' => $format,
                     'method' => 'serializeCollection',
-                );
+                ];
 
-                $methods[] = array(
+                $methods[] = [
                     'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                     'type' => $type,
                     'format' => $format,
                     'method' => 'deserializeCollection',
-                );
+                ];
             }
         }
 

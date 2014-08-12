@@ -25,7 +25,7 @@ class CertificationType extends AbstractType
 
         foreach ($certification->getCategories() as $category) {
             foreach ($category->getQuestions() as $question) {
-                $builder->add($question->getName(), 'certification_answer', array('question' => $question));
+                $builder->add($question->getName(), 'certification_answer', ['question' => $question]);
             }
         }
 
@@ -37,15 +37,15 @@ class CertificationType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired(array('certification'));
+        $resolver->setRequired(['certification']);
 
-        $resolver->setAllowedTypes(array(
-            'certification' => array('Certificationy\Component\Certy\Model\Certification')
-        ));
+        $resolver->setAllowedTypes([
+            'certification' => ['Certificationy\Component\Certy\Model\Certification']
+        ]);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Certificationy\Component\Certy\Model\ResultCertification'
-        ));
+        ]);
     }
 
     /**

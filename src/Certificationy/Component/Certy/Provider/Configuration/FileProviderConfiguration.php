@@ -21,20 +21,20 @@ class FileProviderConfiguration extends ProviderConfiguration
      */
     public function configure(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'path'
-        ));
+        ]);
 
-        $resolver->setOptional(array(
+        $resolver->setOptional([
             'pattern'
-        ));
+        ]);
 
-        $resolver->setAllowedTypes(array(
-            'path' => array('array', 'string'),
-            'pattern' => array('string')
-        ));
+        $resolver->setAllowedTypes([
+            'path' => ['array', 'string'],
+            'pattern' => ['string']
+        ]);
 
-        $resolver->setNormalizers(array(
+        $resolver->setNormalizers([
             'path' => function (Options $options, $value) {
                 if (!is_array($value)) {
                     $value = (array) $value;
@@ -42,6 +42,6 @@ class FileProviderConfiguration extends ProviderConfiguration
 
                 return $value;
             }
-        ));
+        ]);
     }
 }

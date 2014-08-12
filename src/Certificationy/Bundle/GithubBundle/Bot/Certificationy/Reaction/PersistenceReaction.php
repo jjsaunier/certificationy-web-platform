@@ -41,19 +41,19 @@ class PersistenceReaction
         $content = $action->getData()['content'];
 
         if ($action->getStatus() === PersistenceAction::TASK_START) {
-            $sender = array(
+            $sender = [
                 'login' => $content['sender']['login'],
                 'avatar_url' => $content['sender']['avatar_url'],
                 'url' => $content['sender']['html_url']
-            );
+            ];
 
-            $data = array(
+            $data = [
                 'html_url' => $content['pull_request']['html_url'],
                 'diff_url' => $content['pull_request']['diff_url'],
                 'patch_url' => $content['pull_request']['patch_url'],
                 'title' => $content['pull_request']['title'],
                 'label' => $content['pull_request']['head']['label']
-            );
+            ];
 
             $inspection = new InspectionReport();
             $inspection->setSender($sender);

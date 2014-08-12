@@ -33,11 +33,11 @@ class CheckStructureReaction
                 continue;
             }
 
-            $context = array(
+            $context = [
                 'file_name' => $file->getFileName(),
                 'file_path' => $file->getPathName(),
                 'discriminator' => 'category'
-            );
+            ];
 
             if (!is_array($data)) {
 

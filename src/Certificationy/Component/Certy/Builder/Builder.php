@@ -47,8 +47,8 @@ class Builder implements BuilderInterface
     public function __construct(CollectorInterface $collector = null)
     {
         $this->collector = null === $collector ? new Collector() : $collector;
-        $this->builderPass = array();
-        $this->cache = array();
+        $this->builderPass = [];
+        $this->cache = [];
     }
 
     /**
@@ -111,7 +111,7 @@ class Builder implements BuilderInterface
             $metrics->increment(Metrics::CATEGORY);
 
             if (empty($resourceContent['questions'])) {
-                $resourceContent['questions'] = array();
+                $resourceContent['questions'] = [];
             }
 
             foreach ($resourceContent['questions'] as $questionContent) {

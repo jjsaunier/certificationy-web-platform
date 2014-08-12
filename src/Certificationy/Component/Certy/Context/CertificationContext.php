@@ -110,9 +110,9 @@ class CertificationContext implements CertificationContextInterface
     public function __construct($name)
     {
         $this->name = Transliterator::urlize($name);
-        $this->threshold = array();
-        $this->excludeCategories = array();
-        $this->excludeQuestions = array();
+        $this->threshold = [];
+        $this->excludeCategories = [];
+        $this->excludeQuestions = [];
 
         $this->initialized();
     }

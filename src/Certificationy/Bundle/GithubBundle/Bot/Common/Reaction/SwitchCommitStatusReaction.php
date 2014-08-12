@@ -36,12 +36,12 @@ class SwitchCommitStatusReaction implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             BotActions::SET_COMMIT_STATUS_ERROR => 'switchCommitToError',
             BotActions::SET_COMMIT_STATUS_FAILURE => 'switchCommitToFailure',
             BotActions::SET_COMMIT_STATUS_SUCCESS => 'switchCommitToSuccess',
             BotActions::SET_COMMIT_STATUS_PENDING => 'switchCommitToPending',
-        );
+        ];
     }
 
     /**
@@ -71,7 +71,7 @@ class SwitchCommitStatusReaction implements EventSubscriberInterface
     {
         return $this->router->generate(
             'github_inspection_commit',
-            array('checksum' => $content['pull_request']['head']['sha']),
+            ['checksum' => $content['pull_request']['head']['sha']],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

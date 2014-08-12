@@ -51,14 +51,14 @@ class Status implements RequestableInterface
      */
     public function setOptions($state, $targetUrl, $description, $context = 'default')
     {
-        $this->options = array(
-            'json' => array(
+        $this->options = [
+            'json' => [
                 'state' => $state,
                 'target_url' => $targetUrl,
                 'description' => $description,
                 'context' => $context
-            )
-        );
+            ]
+        ];
     }
 
     /**

@@ -14,7 +14,7 @@ class ProviderRegistry implements ProviderRegistryInterface
     /**
      * @var ProviderInterface[]
      */
-    protected $providers = array();
+    protected $providers = [];
 
     /**
      * @param ProviderInterface $provider

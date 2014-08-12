@@ -36,10 +36,10 @@ class GithubBuilder
     {
         $menu = $this->factory->createItem('inspection');
 
-        $menu->addChild('inspection', array(
+        $menu->addChild('inspection', [
             'route' => 'github_inspection',
             'label' => 'Contribution'
-        ));
+        ]);
 
         return $menu;
     }

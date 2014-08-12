@@ -31,9 +31,9 @@ class TrainingExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('elapsed', array($this, 'elapsed'))
-        );
+        return [
+            new \Twig_SimpleFilter('elapsed', [$this, 'elapsed'])
+        ];
     }
 
     /**
@@ -41,17 +41,17 @@ class TrainingExtension extends \Twig_Extension
      */
     public function elapsed(array $elapsed)
     {
-        $strings = array(
+        $strings = [
             'h' => 'time.hour',
             'i' => 'time.minute',
             's' => 'time.second'
-        );
+        ];
 
-        $output = array();
+        $output = [];
 
         foreach ($elapsed as $type => $value) {
             if ($value !== 0) {
-                $output[] = $value.$this->translator->trans($strings[$type], array(), 'report');
+                $output[] = $value.$this->translator->trans($strings[$type], [], 'report');
             }
         }
 

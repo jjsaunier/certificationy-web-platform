@@ -44,9 +44,9 @@ class ReviewerBot extends Bot
      */
     public function getGithubEvents()
     {
-        return array(
+        return [
             Events::PULL_REQUEST => 'onPullRequest'
-        );
+        ];
     }
 
     /**
@@ -76,7 +76,7 @@ class ReviewerBot extends Bot
                 //Save in db (mongo)
                 $this->actionDispatcher->dispatch(
                     ReviewerBotActions::PERSIST,
-                    new PersistenceAction($this->client, $data, array(), PersistenceAction::TASK_END)
+                    new PersistenceAction($this->client, $data, [], PersistenceAction::TASK_END)
                 );
 
                 if (true === $data['debug']) {
@@ -107,7 +107,7 @@ class ReviewerBot extends Bot
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(
             ReviewerBotActions::PERSIST,
-            new PersistenceAction($this->client, $data, array(), PersistenceAction::TASK_START)
+            new PersistenceAction($this->client, $data, [], PersistenceAction::TASK_START)
         );
 
         //Set commit status to pending

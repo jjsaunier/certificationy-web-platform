@@ -43,9 +43,9 @@ class SiteController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $response = $this->engine->renderResponse('@CertificationyWeb/Site/homepage.html.twig', array(
+        $response = $this->engine->renderResponse('@CertificationyWeb/Site/homepage.html.twig', [
 
-        ));
+        ]);
 
         return $response;
     }
@@ -57,9 +57,9 @@ class SiteController extends AbstractController
      */
     public function menuAction(Request $request)
     {
-        return $this->engine->renderResponse('@CertificationyWeb/Menu/nav.html.twig', array(
+        return $this->engine->renderResponse('@CertificationyWeb/Menu/nav.html.twig', [
             'menus' => [ 'training', 'github', 'user', 'web' ]
-        ));
+        ]);
     }
 
     /**
@@ -81,9 +81,9 @@ class SiteController extends AbstractController
 
             $response->setLastModified(new \DateTime());
 
-            return $this->engine->renderResponse('@CertificationyWeb/Site/changelog.html.twig', array(
+            return $this->engine->renderResponse('@CertificationyWeb/Site/changelog.html.twig', [
                 'changelog' => $parser->parse($content)
-            ));
+            ]);
         }
 
         return $response;
@@ -99,8 +99,8 @@ class SiteController extends AbstractController
         $response->setSharedMaxAge(600);
         $response->setVary('Accept-Encoding', 'User-Agent');
 
-        return $this->engine->renderResponse('@CertificationyWeb/Site/footer.html.twig', array(
+        return $this->engine->renderResponse('@CertificationyWeb/Site/footer.html.twig', [
             'trainings' => $this->certificationManager->getCertifications()
-        ));
+        ]);
     }
 }

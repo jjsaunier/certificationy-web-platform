@@ -69,7 +69,7 @@ class GitLocaleCloneReaction
             $content['pull_request']['head']['repo']['clone_url'] = $url;
         }
 
-        $cmd = array();
+        $cmd = [];
         $cmd[] = 'cd analyze';
         $cmd[] = 'mkdir -p '.$content['pull_request']['head']['sha'];
         $cmd[] = 'cd '. $content['pull_request']['head']['sha'];

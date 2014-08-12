@@ -40,9 +40,9 @@ class TrainingController extends AbstractController
 
         $certification = $this->certificationManager->getCertification($name);
 
-        $response = $this->engine->renderResponse('CertificationyTrainingBundle:Session:index.html.twig', array(
+        $response = $this->engine->renderResponse('CertificationyTrainingBundle:Session:index.html.twig', [
             'certification_metrics' => $certification->getMetrics()
-        ));
+        ]);
 
         return $response;
     }

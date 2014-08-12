@@ -36,7 +36,7 @@ class CertificationHandler extends Handler
     public function process(Certification $certification)
     {
         $resultCertification = new ResultCertification();
-        $this->createForm($resultCertification, array('certification' => $certification));
+        $this->createForm($resultCertification, ['certification' => $certification]);
 
         return $this->handle('POST');
     }

@@ -51,7 +51,7 @@ class Metrics
         $this->categoryCount = 0;
         $this->questionCount = 0;
         $this->answerCount = 0;
-        $this->reportMetrics = array();
+        $this->reportMetrics = [];
         $this->timer = new Timer();
     }
 
@@ -99,10 +99,10 @@ class Metrics
     public function addReportMetrics(Category $category)
     {
         if (!isset($this->reportMetrics[$category->getName()])) {
-            $this->reportMetrics[$category->getName()] = array(
+            $this->reportMetrics[$category->getName()] = [
                 'valid' => 0,
                 'invalid' => 0
-            );
+            ];
         }
 
         $currentReport =& $this->reportMetrics[$category->getName()];

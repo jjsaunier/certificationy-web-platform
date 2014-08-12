@@ -67,12 +67,12 @@ class Security
             );
         }
 
-        return array(
+        return [
             'content' => json_decode($content, true),
             'event' => $request->headers->get('X-GitHub-Event'),
             'delivery_uuid' => $request->headers->get('X-GitHub-Delivery'),
             'debug' => (bool) $request->query->get('debug', false)
-        );
+        ];
     }
 
     /**

@@ -36,7 +36,7 @@ class ContextHandler extends Handler
      */
     public function process(Certification $certification)
     {
-        $this->createForm($certification->getContext(), array('certification' => $certification));
+        $this->createForm($certification->getContext(), ['certification' => $certification]);
 
         return $this->handle('POST');
     }

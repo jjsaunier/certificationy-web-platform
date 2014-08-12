@@ -20,5 +20,5 @@ interface ProviderConfigurableInterface
      * @param  array $options
      * @return void
      */
-    public function setOptions(array $options = array());
+    public function setOptions(array $options = []);
 }

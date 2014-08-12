@@ -30,9 +30,9 @@ class BuilderCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds('certy.builder_pass');
 
         foreach ($taggedServices as $id => $tagAttributes) {
-            $definition->addMethodCall('addBuilderPass', array(
+            $definition->addMethodCall('addBuilderPass', [
                 new Reference($id)
-            ));
+            ]);
         }
     }
 }

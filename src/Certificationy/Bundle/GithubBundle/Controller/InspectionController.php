@@ -26,9 +26,9 @@ class InspectionController extends Controller
 
         $inspections = $inspectionRepository->getLastInspection(15);
 
-        return $this->render('CertificationyGithubBundle::inspection_wall.html.twig', array(
+        return $this->render('CertificationyGithubBundle::inspection_wall.html.twig', [
             'inspections' => $inspections
-        ));
+        ]);
     }
 
     /**
@@ -46,8 +46,8 @@ class InspectionController extends Controller
             throw new HttpException(Response::HTTP_NOT_FOUND);
         }
 
-        return $this->render('CertificationyGithubBundle::inspection_commit.html.twig', array(
+        return $this->render('CertificationyGithubBundle::inspection_commit.html.twig', [
             'inspection' => $inspection
-        ));
+        ]);
     }
 }

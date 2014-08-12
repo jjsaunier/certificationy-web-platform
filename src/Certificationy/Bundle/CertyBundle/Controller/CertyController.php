@@ -40,13 +40,13 @@ class CertyController extends Controller
             $eventDispatcher = $this->container->get('event_dispatcher');
             $eventDispatcher->dispatch(CertificationEvents::CERTIFICATION_START, new CertificationEvent($certification));
 
-            return new RedirectResponse($router->generate('certification_test', array('name' => $name)));
+            return new RedirectResponse($router->generate('certification_test', ['name' => $name]));
         }
 
-        return $this->render('CertificationyCertyBundle:Certification:guidelines.html.twig', array(
+        return $this->render('CertificationyCertyBundle:Certification:guidelines.html.twig', [
             'certification' => $certification,
             'form' => $contextHandler->createView()
-        ));
+        ]);
     }
 
     /**
@@ -73,14 +73,14 @@ class CertyController extends Controller
 
             return new RedirectResponse(
                 $router->generate('certification_report',
-                array('name' => $name)
+                ['name' => $name]
             ));
         }
 
-        $content = $this->renderView('CertificationyCertyBundle:Certification:test.html.twig', array(
+        $content = $this->renderView('CertificationyCertyBundle:Certification:test.html.twig', [
             'certification' => $certification,
             'form' => $certificationHandler->createView()
-        ));
+        ]);
 
         $response->setContent($content);
 
@@ -104,8 +104,8 @@ class CertyController extends Controller
             throw new CheaterException();
         }
 
-        return $this->render('CertificationyCertyBundle:Certification:report.html.twig', array(
+        return $this->render('CertificationyCertyBundle:Certification:report.html.twig', [
             'certification' => $certification
-        ));
+        ]);
     }
 }

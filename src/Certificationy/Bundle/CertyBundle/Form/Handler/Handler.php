@@ -34,7 +34,7 @@ class Handler
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * @var null|FormInterface
@@ -108,7 +108,7 @@ class Handler
      * @param null  $data
      * @param array $options
      */
-    public function createForm($data = null, array $options = array())
+    public function createForm($data = null, array $options = [])
     {
         if (null !== $data) {
             $this->options['data'] = $data;

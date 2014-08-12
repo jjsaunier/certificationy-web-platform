@@ -43,7 +43,7 @@ class CertificationFactory
     /**
      * @var ProviderInterface[]
      */
-    protected $providers = array();
+    protected $providers = [];
 
     /**
      * @param string               $name

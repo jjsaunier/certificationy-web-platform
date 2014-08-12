@@ -37,7 +37,7 @@ class RemoveFolderReaction
     {
         $content = $action->getData()['content'];
 
-        $cmd = array();
+        $cmd = [];
         $cmd[] = 'cd analyze';
         $cmd[] = 'rm -Rf '.$content['pull_request']['head']['sha'];
 

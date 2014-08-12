@@ -46,7 +46,7 @@ class Answer
 
     public function __construct()
     {
-        $this->response = array();
+        $this->response = [];
     }
 
     /**

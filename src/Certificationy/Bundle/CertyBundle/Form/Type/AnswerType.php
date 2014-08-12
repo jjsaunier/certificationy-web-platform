@@ -24,20 +24,20 @@ class AnswerType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'multiple' => true,
             'expanded' => true,
             'property_path' => 'results',
             'choice_list' => $this->getAnswersList()
-        ));
+        ]);
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'question'
-        ));
+        ]);
 
-        $resolver->setAllowedTypes(array(
-            'question' => array('Certificationy\Component\Certy\Model\Question')
-        ));
+        $resolver->setAllowedTypes([
+            'question' => ['Certificationy\Component\Certy\Model\Question']
+        ]);
     }
 
     /**
@@ -47,7 +47,7 @@ class AnswerType extends AbstractType
     {
         return function (Options $options) {
             $question = $options->get('question');
-            $choices = array();
+            $choices = [];
             foreach ($question->getAnswers() as $answer) {
                 $choices[Calculator::getHash($question->getCategory(), $question, $answer)] = $answer->getLabel();
             }

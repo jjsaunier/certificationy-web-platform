@@ -30,7 +30,7 @@ class ModelCollection implements \Countable, \ArrayAccess, \IteratorAggregate
      *
      * @param array $elements
      */
-    public function __construct(array $elements = array())
+    public function __construct(array $elements = [])
     {
         $this->_elements = $elements;
     }
@@ -313,7 +313,7 @@ class ModelCollection implements \Countable, \ArrayAccess, \IteratorAggregate
      */
     public function clear()
     {
-        $this->_elements = array();
+        $this->_elements = [];
     }
 
     /**

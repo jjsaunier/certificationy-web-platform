@@ -32,7 +32,7 @@ class FOSUBUserProvider extends BaseClass
         $setterToken = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
-        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
+        if (null !== $previousUser = $this->userManager->findUserBy([$property => $username])) {
             $previousUser->{$setterId}(null);
             $previousUser->{$setterToken}(null);
             $this->userManager->updateUser($previousUser);

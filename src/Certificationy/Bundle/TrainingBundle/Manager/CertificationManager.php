@@ -90,7 +90,7 @@ class CertificationManager
             $files = $finder->files()->in($this->basePath.'/*')->name('context.yml');
             $yaml = new Parser();
 
-            $names = array();
+            $names = [];
 
             foreach ($files as $file) {
                 $context = $yaml->parse(file_get_contents($file->getRealPath()));
@@ -113,7 +113,7 @@ class CertificationManager
         return $this->factory->createNamed(
             $name,
             null === $certificationContext ? $this->getContext($name) : $certificationContext,
-            array('yaml')
+            ['yaml']
         );
     }
 

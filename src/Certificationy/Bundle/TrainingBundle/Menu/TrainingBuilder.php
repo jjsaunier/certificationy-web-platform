@@ -55,16 +55,16 @@ class TrainingBuilder
     {
         $menu = $this->factory->createItem('training');
 
-        $trainingMenu = $menu->addChild('training', array(
-            'label' => $this->translator->trans('training.menu', array(), 'training')
-        ));
+        $trainingMenu = $menu->addChild('training', [
+            'label' => $this->translator->trans('training.menu', [], 'training')
+        ]);
 
         foreach ($this->certificationManager->getCertifications() as $certificationName => $certificationLabel) {
-            $trainingMenu->addChild($certificationName, array(
+            $trainingMenu->addChild($certificationName, [
                 'route' => 'certification_guidelines',
-                'routeParameters' => array('name' => $certificationName),
+                'routeParameters' => ['name' => $certificationName],
                 'label' => $certificationLabel
-            ));
+            ]);
         }
 
         return $menu;

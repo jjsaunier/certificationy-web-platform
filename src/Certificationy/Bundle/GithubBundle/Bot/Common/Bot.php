@@ -152,7 +152,7 @@ abstract class Bot implements BotInterface
     {
         $this->actionDispatcher->addListener(
             $eventName,
-            array($listener, 'perform'),
+            [$listener, 'perform'],
             $priority
         );
     }

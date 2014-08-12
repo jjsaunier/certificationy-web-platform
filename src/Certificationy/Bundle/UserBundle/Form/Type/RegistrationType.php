@@ -19,10 +19,10 @@ class RegistrationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('realName', 'text', array(
+        $builder->add('realName', 'text', [
             'label' => 'registration.form.real_name',
             'translation_domain' => 'registration'
-        ));
+        ]);
     }
 
     /**

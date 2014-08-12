@@ -26,16 +26,16 @@ class ContextType extends AbstractType
         $context = $options['data'];
 
         if (1 < count($context->getAvailableLanguages())) {
-            $builder->add('language', 'choice', array('choices' => $context->getAvailableLanguages()));
+            $builder->add('language', 'choice', ['choices' => $context->getAvailableLanguages()]);
         }
 
         if (null !== $context->getAvailableLevels()) {
-            $builder->add('level', 'choice', array('choices' => $context->getAvailableLevels()));
+            $builder->add('level', 'choice', ['choices' => $context->getAvailableLevels()]);
         }
 
         if (true === $context->getAllowExcludeCategories()) {
-            $builder->add('exclude_categories', 'certification_category', array(
-                    'certification' => $options['certification'])
+            $builder->add('exclude_categories', 'certification_category', [
+                    'certification' => $options['certification']]
             );
         }
 
@@ -56,18 +56,18 @@ class ContextType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'certification'
-        ));
+        ]);
 
-        $resolver->setAllowedTypes(array(
-            'certification' => array('Certificationy\Component\Certy\Model\Certification')
-        ));
+        $resolver->setAllowedTypes([
+            'certification' => ['Certificationy\Component\Certy\Model\Certification']
+        ]);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Certificationy\Component\Certy\Context\CertificationContext',
             'translation_domain' => 'form'
-        ));
+        ]);
     }
 
     /**

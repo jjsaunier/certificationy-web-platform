@@ -33,12 +33,12 @@ class CheckAction extends GenericAction
     {
         parent::__construct($client, $data);
 
-        $this->errors = array(
+        $this->errors = [
             'total' => 0,
-            'structure' => array(),
-            'pattern' => array(),
-            'parser' => array()
-        );
+            'structure' => [],
+            'pattern' => [],
+            'parser' => []
+        ];
 
         $this->basePath = $basePath;
     }
@@ -48,16 +48,16 @@ class CheckAction extends GenericAction
      * @param string $message
      * @param array  $context
      */
-    public function addError($type, $message, array $context = array())
+    public function addError($type, $message, array $context = [])
     {
         if (!isset($this->errors[$type])) {
-            $this->errors[$type] = array();
+            $this->errors[$type] = [];
         }
 
-        $this->errors[$type][] = array(
+        $this->errors[$type][] = [
             'message' => $message,
             'context' => $context
-        );
+        ];
 
         $this->errors['total']++;
     }

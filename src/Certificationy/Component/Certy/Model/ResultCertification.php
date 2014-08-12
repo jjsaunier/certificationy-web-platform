@@ -35,7 +35,7 @@ class ResultCertification
      */
     public function __construct()
     {
-        $this->results = array();
+        $this->results = [];
         $this->computed = false;
         $this->score = 0;
     }

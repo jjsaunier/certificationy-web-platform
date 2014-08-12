@@ -42,10 +42,10 @@ class Timer
     {
         $diff =  $this->stop->diff($this->start);
 
-        return array(
+        return [
             'h' => $diff->h,
             'i' => $diff->i,
             's' => $diff->s
-        );
+        ];
     }
 }

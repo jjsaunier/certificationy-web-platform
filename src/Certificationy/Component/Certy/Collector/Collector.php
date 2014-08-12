@@ -35,8 +35,8 @@ class Collector implements CollectorInterface
 
     public function __construct()
     {
-        $this->resources = array();
-        $this->collectedProviders = array();
+        $this->resources = [];
+        $this->collectedProviders = [];
     }
 
     /**
@@ -50,11 +50,11 @@ class Collector implements CollectorInterface
         }
 
         if (!isset($this->resources[$providerName])) {
-            $this->resources[$providerName] = array();
+            $this->resources[$providerName] = [];
         }
 
         if (!isset($this->resources[$providerName][$certificationName])) {
-            $this->resources[$providerName][$certificationName] = array();
+            $this->resources[$providerName][$certificationName] = [];
         }
 
         $currentResource = &$this->resources[$providerName][$certificationName];
@@ -68,7 +68,7 @@ class Collector implements CollectorInterface
      */
     public function getFlattenResources($certificationName)
     {
-        $flatten = array();
+        $flatten = [];
         foreach ($this->resources as $providerResources) {
             foreach ($providerResources as $certifName => $resources) {
                 if ($certificationName === $certifName) {

@@ -42,9 +42,9 @@ class GravatarExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            'gravatar' => new \Twig_SimpleFunction('gravatar', array($this, 'getGravatarImage'))
-        );
+        return [
+            'gravatar' => new \Twig_SimpleFunction('gravatar', [$this, 'getGravatarImage'])
+        ];
     }
 
     /**

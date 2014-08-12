@@ -24,7 +24,7 @@ class CertyConfiguration
     /**
      * @var array
      */
-    public static $acceptedDelegator = array(null, 'rabbitmq');
+    public static $acceptedDelegator = [null, 'rabbitmq'];
 
     /**
      * @param ContainerBuilder $container
@@ -53,7 +53,7 @@ class CertyConfiguration
         $calculatorDefinition = new Definition($calculatorConfig['class']);
         $calculatorDefinition
             ->addArgument(new Reference('event_dispatcher'))
-            ->addMethodCall('setLogger', array(new Reference('monolog.logger.certy', ContainerInterface::NULL_ON_INVALID_REFERENCE)))
+            ->addMethodCall('setLogger', [new Reference('monolog.logger.certy', ContainerInterface::NULL_ON_INVALID_REFERENCE)])
         ;
 
         $this->container->setDefinition('certy.certificationy.calculator', $calculatorDefinition);
@@ -85,16 +85,16 @@ class CertyConfiguration
             }
 
             $delegatorDefinition = new Definition('Certificationy\Component\Certy\Calculator\Delegator\RabbitMQ');
-            $delegatorDefinition->setArguments(array(
+            $delegatorDefinition->setArguments([
                 new Reference('swarrot.publisher'),
                 new Reference('jms_serializer')
-            ));
+            ]);
 
             $processorDefinition = new Definition('Certificationy\Component\Certy\Calculator\Delegator\Processor\ResultComputeProcessor');
-            $processorDefinition->setArguments(array(
+            $processorDefinition->setArguments([
                 new Reference('jms_serializer'),
                 new Reference('certy.certificationy.calculator')
-            ));
+            ]);
 
             $this->container->setDefinition('certy.certification.result_processor', $processorDefinition);
 

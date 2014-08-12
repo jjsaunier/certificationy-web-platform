@@ -24,16 +24,16 @@ class CertificationExtension extends \Twig_Extension
      */
     public function __construct()
     {
-        $this->cache = array();
+        $this->cache = [];
     }
     /**
      * @return array
      */
     public function getFunctions()
     {
-        return array(
-            'is_valid' => new \Twig_SimpleFunction('is_valid', array($this, 'isValid'))
-        );
+        return [
+            'is_valid' => new \Twig_SimpleFunction('is_valid', [$this, 'isValid'])
+        ];
     }
 
     /**
@@ -41,9 +41,9 @@ class CertificationExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-          'class' => new \Twig_SimpleFilter('class', array($this, 'getAnswerClass'))
-        );
+        return [
+          'class' => new \Twig_SimpleFilter('class', [$this, 'getAnswerClass'])
+        ];
     }
 
     /**

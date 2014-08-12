@@ -30,9 +30,9 @@ class ProviderCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds('certy.provider');
 
         foreach ($taggedServices as $id => $tagAttributes) {
-            $definition->addMethodCall('addProvider', array(
+            $definition->addMethodCall('addProvider', [
                 new Reference($id)
-            ));
+            ]);
         }
     }
 }

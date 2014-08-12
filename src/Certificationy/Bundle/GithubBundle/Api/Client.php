@@ -33,12 +33,12 @@ class Client
      */
     public function __construct($username, $password)
     {
-        $this->guzzleClient = new \GuzzleHttp\Client(array(
+        $this->guzzleClient = new \GuzzleHttp\Client([
             'base_url' => static::BASE_URL_API,
-            'defaults' => array(
-                'auth' => array($username, $password)
-            )
-        ));
+            'defaults' => [
+                'auth' => [$username, $password]
+            ]
+        ]);
     }
 
     /**

@@ -36,10 +36,10 @@ class WebBuilder
     {
         $menu = $this->factory->createItem('web');
 
-        $menu->addChild('help', array(
+        $menu->addChild('help', [
             'route' => 'help_show',
             'label' => 'Help'
-        ));
+        ]);
 
         return $menu;
     }

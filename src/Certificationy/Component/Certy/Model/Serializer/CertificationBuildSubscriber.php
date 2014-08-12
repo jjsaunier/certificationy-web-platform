@@ -20,18 +20,18 @@ class CertificationBuildSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            array(
+        return [
+            [
                 'event' => 'serializer.post_deserialize',
                 'method' => 'onPostDeserialize',
                 'class' => 'Certificationy\Component\Certy\Model\Certification'
-            ),
-            array(
+            ],
+            [
                 'event' => 'serializer.pre_serialize',
                 'method' => 'onPreSerialize',
                 'class' => 'Certificationy\Component\Certy\Model\Certification'
-            ),
-        );
+            ],
+        ];
     }
 
     /**

@@ -27,10 +27,10 @@ class CheckParserReaction
             try {
                 $parser->parse(file_get_contents($file->getRealPath()));
             } catch (ParseException $e) {
-                $action->addError('parser', $e->getMessage(), array(
+                $action->addError('parser', $e->getMessage(), [
                     'file_name' => $file->getFileName(),
                     'file_path' => $file->getPathName()
-                ));
+                ]);
             }
         }
     }

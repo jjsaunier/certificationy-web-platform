@@ -56,26 +56,26 @@ class UserBuilder
         $menu = $this->factory->createItem('user');
 
         if (false === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $menu->addChild('login', array(
+            $menu->addChild('login', [
                 'route' => 'fos_user_security_login',
-                'label' => $this->translator->trans('login', array(), 'menu')
-            ));
+                'label' => $this->translator->trans('login', [], 'menu')
+            ]);
         } else {
             $user = $this->securityContext->getToken()->getUser();
 
-            $currentUserMenu = $menu->addChild('current_user', array(
+            $currentUserMenu = $menu->addChild('current_user', [
                 'label' => $user->getUsername()
-            ));
+            ]);
 
-            $currentUserMenu->addChild('profile', array(
+            $currentUserMenu->addChild('profile', [
                 'route' => 'fos_user_profile_show',
-                'label' => '.icon-user '.$this->translator->trans('profile', array(), 'menu')
-            ));
+                'label' => '.icon-user '.$this->translator->trans('profile', [], 'menu')
+            ]);
 
-            $currentUserMenu->addChild('logout', array(
+            $currentUserMenu->addChild('logout', [
                 'route' => 'fos_user_security_logout',
-                'label' => '.icon-off '.$this->translator->trans('logout', array(), 'menu')
-            ));
+                'label' => '.icon-off '.$this->translator->trans('logout', [], 'menu')
+            ]);
         }
 
         return $menu;

@@ -21,19 +21,19 @@ class CategoryType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'multiple' => true,
             'expanded' => true,
             'choice_list' => $this->getCategoryList()
-        ));
+        ]);
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'certification'
-        ));
+        ]);
 
-        $resolver->setAllowedTypes(array(
-            'certification' => array('Certificationy\Component\Certy\Model\Certification')
-        ));
+        $resolver->setAllowedTypes([
+            'certification' => ['Certificationy\Component\Certy\Model\Certification']
+        ]);
     }
 
     /**
@@ -42,7 +42,7 @@ class CategoryType extends AbstractType
     protected function getCategoryList()
     {
         return function (Options $options) {
-            $categoryBuffer = array();
+            $categoryBuffer = [];
 
             foreach ($options->get('certification')->getCategories() as $category) {
                 $categoryBuffer[$category->getName()] = $category->getLabel();
