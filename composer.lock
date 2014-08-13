@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93ee3597d219ebd6cbb5ce2ec696380b",
+    "hash": "f21d6746194a480de6e2468e73300f7b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1166,16 +1166,16 @@
         },
         {
             "name": "guzzlehttp/streams",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/streams.git",
-                "reference": "78f73ec74a87d5c6c29279119773693cc732789e"
+                "reference": "fb0d1ee29987c2bdc59867bffaade6fc88c2675f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/78f73ec74a87d5c6c29279119773693cc732789e",
-                "reference": "78f73ec74a87d5c6c29279119773693cc732789e",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/fb0d1ee29987c2bdc59867bffaade6fc88c2675f",
+                "reference": "fb0d1ee29987c2bdc59867bffaade6fc88c2675f",
                 "shasum": ""
             },
             "require": {
@@ -1215,7 +1215,7 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-08-08 01:24:01"
+            "time": "2014-08-10 23:57:01"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -3336,16 +3336,16 @@
     "packages-dev": [
         {
             "name": "ocramius/instantiator",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/Instantiator.git",
-                "reference": "cc754c2289ffd4483c319f6ed6ee88ce21676f64"
+                "reference": "8aa99efa86c51319afc26d23254fe6a8b5a5144a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/cc754c2289ffd4483c319f6ed6ee88ce21676f64",
-                "reference": "cc754c2289ffd4483c319f6ed6ee88ce21676f64",
+                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/8aa99efa86c51319afc26d23254fe6a8b5a5144a",
+                "reference": "8aa99efa86c51319afc26d23254fe6a8b5a5144a",
                 "shasum": ""
             },
             "require": {
@@ -3354,6 +3354,7 @@
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
+                "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "2.0.*@ALPHA"
@@ -3377,8 +3378,7 @@
                 {
                     "name": "Marco Pivetta",
                     "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.com/",
-                    "role": "Developer"
+                    "homepage": "http://ocramius.github.com/"
                 }
             ],
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
@@ -3387,7 +3387,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-06-15 11:44:46"
+            "time": "2014-08-11 23:48:35"
         },
         {
             "name": "ocramius/lazy-map",
@@ -4157,7 +4157,7 @@
     },
     "prefer-stable": false,
     "platform": {
-        "php": ">=5.3.3",
+        "php": ">=5.5",
         "ext-mongo": "*"
     },
     "platform-dev": [
