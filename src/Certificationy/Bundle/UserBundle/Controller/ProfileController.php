@@ -36,7 +36,7 @@ class ProfileController extends BaseController
 
         $pagination = $paginator->paginate(
             $reportRepository->getQueryBuilderReportsForUser($user),
-            $this->container->get('request')->attributes->get('page', 1),
+            $this->container->get('request')->query->get('page', 1),
             10
         );
 
