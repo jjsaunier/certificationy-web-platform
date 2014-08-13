@@ -8,14 +8,16 @@
                 <em>v{{ version }} - <time datetime="{{ data['meta']['date'] }}">{{ data['meta']['date'] }}</time></em>
             </header>
 
-            <ul>
+            <ul class="fa-ul">
                 {% for change in data['changes'] %}
                     <li style="line-height: 2em;">
                         {% if change starts with "NEW" %}
+                            <i class="fa fa-plus"></i>
                             {{ label_success('NEW')}} {{ change[3:] }}
                         {% endif %}
 
                         {% if change starts with "FIX" %}
+                            <i class="fa fa-bug"></i>
                             {{ label_warning('FIX')}} {{ change[3:] }}
                         {% endif %}
                     </li>
@@ -24,4 +26,3 @@
         </article>
     {% endfor %}
 </div>
- 
