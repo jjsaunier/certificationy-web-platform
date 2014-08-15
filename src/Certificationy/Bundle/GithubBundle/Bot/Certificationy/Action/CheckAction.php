@@ -25,6 +25,11 @@ class CheckAction extends GenericAction
     protected $basePath;
 
     /**
+     * @var Array
+     */
+    protected $skip;
+
+    /**
      * @param Client $client
      * @param array  $data
      * @param string $basePath
@@ -36,11 +41,19 @@ class CheckAction extends GenericAction
         $this->errors = [
             'total' => 0,
             'structure' => [],
-            'pattern' => [],
-            'parser' => []
+            'integrity' => [],
+            'parser' => [],
+            'context' => []
         ];
 
         $this->basePath = $basePath;
+
+        $this->skip = [
+            'file' => [],
+            'category' => [],
+            'question' => [],
+            'answer' => []
+        ];
     }
 
     /**
@@ -76,5 +89,24 @@ class CheckAction extends GenericAction
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * @param $type
+     * @param $identifier
+     */
+    public function addSkip($type, $identifier)
+    {
+        $this->skip[$type][] = $identifier;
+    }
+
+    /**
+     * @param $type
+     *
+     * @return mixed
+     */
+    public function getSkip($type)
+    {
+        return $this->skip[$type];
     }
 }

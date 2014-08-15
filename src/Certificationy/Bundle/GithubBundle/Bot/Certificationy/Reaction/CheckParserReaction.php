@@ -29,8 +29,11 @@ class CheckParserReaction
             } catch (ParseException $e) {
                 $action->addError('parser', $e->getMessage(), [
                     'file_name' => $file->getFileName(),
-                    'file_path' => $file->getPathName()
+                    'file_path' => $file->getPathName(),
+                    'training' => $this->getCurrentTraining($file)
                 ]);
+
+                $action->addSkip('file', $file->getFileName());
             }
         }
     }

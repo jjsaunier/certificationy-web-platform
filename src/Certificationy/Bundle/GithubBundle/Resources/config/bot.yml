@@ -17,6 +17,7 @@ services:
             - [ "registerActionListener", [ @github.reviewer.git_clone.reaction, 'git_clone' ] ]
             - [ "registerActionListener", [ @github.reviewer.check_parser.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.check_structure.reaction, 'check' ] ]
+            - [ "registerActionListener", [ @github.reviewer.check_uniqueness.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.persistence.reaction, 'persist' ] ]
             - [ "registerActionListener", [ @github.reviewer.remove_folder.reaction, 'remove_folder' ] ]
 
@@ -38,6 +39,9 @@ services:
 
     github.reviewer.check_structure.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckStructureReaction
+
+    github.reviewer.check_uniqueness.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckUniquenessReaction
 
     github.reviewer.persistence.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\PersistenceReaction

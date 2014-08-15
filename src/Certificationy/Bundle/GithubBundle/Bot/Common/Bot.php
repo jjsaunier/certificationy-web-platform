@@ -67,7 +67,7 @@ abstract class Bot implements BotInterface
      */
     public function matchEvent($incoming)
     {
-        return in_array($incoming, $this->getGithubEvents());
+        return array_key_exists($incoming, $this->getGithubEvents());
     }
 
     /**
@@ -77,6 +77,7 @@ abstract class Bot implements BotInterface
     {
         $response = new Response();
 
+        //In the future, we must be able to cache some call to save API request limit
         $response->headers->addCacheControlDirective('no-cache', true);
         $response->headers->addCacheControlDirective('max-age', 0);
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -109,7 +110,7 @@ abstract class Bot implements BotInterface
                 $this->logger->debug(sprintf(
                     '%s accept following events [ %s ] given : %s',
                     get_class($this),
-                    implode(', ', $this->getGithubEvents()),
+                    implode(', ', array_keys($this->getGithubEvents())),
                     $data['event']
                 ));
             }

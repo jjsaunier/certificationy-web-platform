@@ -64,6 +64,20 @@ class ReviewerBot extends Bot
             try {
                 return parent::doHandle($eventName, $request, $data, $response);
             } catch ( \Exception $e) {
+
+                if(null !== $this->logger){
+                    $this->logger->error(sprintf(
+                        'An error has been throw during the task for event %s, %s',
+                        $eventName,
+                        $e->getMessage()
+                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+
+                    $this->logger->debug(sprintf(
+                        'Set commit status failed on github',
+                        $eventName
+                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+                }
+
                 $this->actionDispatcher->dispatch(
                     BotActions::SET_COMMIT_STATUS_FAILURE,
                     new SwitchCommitStatusAction(
@@ -73,13 +87,39 @@ class ReviewerBot extends Bot
                     )
                 );
 
+                if(null !== $this->logger){
+                    $this->logger->debug(sprintf(
+                        'Set commit status finished on certificationy'
+                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+                }
+
+
                 //Save in db (mongo)
                 $this->actionDispatcher->dispatch(
                     ReviewerBotActions::PERSIST,
                     new PersistenceAction($this->client, $data, [], PersistenceAction::TASK_END)
                 );
 
+                if(null !== $this->logger){
+                    $this->logger->debug(sprintf(
+                        'Perform clean'
+                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+                }
+
+                //Clean up
+                $this->actionDispatcher->dispatch(
+                    ReviewerBotActions::CLEAN,
+                    new RemoveFolderAction($this->client, $data)
+                );
+
                 if (true === $data['debug']) {
+
+                    if(null !== $this->logger){
+                        $this->logger->debug(sprintf(
+                            'debug mode activated, throwing exception'
+                        ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+                    }
+
                     throw $e;
                 }
             }
@@ -104,17 +144,35 @@ class ReviewerBot extends Bot
      */
     protected function onPullRequest(Request $request, array $data, Response $response)
     {
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf(
+                'Set commit status pending on certificationy'
+            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+        }
+
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(
             ReviewerBotActions::PERSIST,
-            new PersistenceAction($this->client, $data, [], PersistenceAction::TASK_START)
+            new PersistenceAction($this->client, $data, ['total' => 0], PersistenceAction::TASK_START)
         );
+
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf(
+                'Set commit status pending on github'
+            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+        }
 
         //Set commit status to pending
         $this->actionDispatcher->dispatch(
             BotActions::SET_COMMIT_STATUS_PENDING,
             new SwitchCommitStatusAction($this->client, $data, 'Certificationy CI is currently working')
         );
+
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf(
+                'Clone locally'
+            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+        }
 
         //Clone locally last commit on pull request
         $this->actionDispatcher->dispatch(
@@ -129,11 +187,25 @@ class ReviewerBot extends Bot
             $data['content']['pull_request']['head']['repo']['name']
         );
 
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf(
+                'Check specification'
+            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+        }
+
+
         //Check certificationy
         $this->actionDispatcher->dispatch(
             ReviewerBotActions::CHECK,
             $checkAction = new CheckAction($this->client, $data, $basePath)
         );
+
+
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf(
+                'Set commit status finished on certificationy'
+            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+        }
 
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(
@@ -142,6 +214,13 @@ class ReviewerBot extends Bot
         );
 
         if (0 === $checkAction->getErrors()['total']) {
+
+            if(null !== $this->logger){
+                $this->logger->debug(sprintf(
+                    'Set commit status successfull on github'
+                ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+            }
+
             $this->actionDispatcher->dispatch(
                 BotActions::SET_COMMIT_STATUS_SUCCESS,
                 new SwitchCommitStatusAction(
@@ -151,6 +230,13 @@ class ReviewerBot extends Bot
                 )
             );
         } else {
+
+            if(null !== $this->logger){
+                $this->logger->debug(sprintf(
+                    'Set commit status is errored on github'
+                ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+            }
+
             $this->actionDispatcher->dispatch(
                 BotActions::SET_COMMIT_STATUS_ERROR,
                 new SwitchCommitStatusAction(
@@ -159,6 +245,12 @@ class ReviewerBot extends Bot
                     'The test as failed, please look details to correct it'
                 )
             );
+        }
+
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf(
+                'Perform clean'
+            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
         }
 
         //Clean up

@@ -24,4 +24,13 @@ trait CheckReactionTrait
 
         return $finder->in($basePath.'/*/yaml')->name('*.yml');
     }
+
+    /**
+     * @param \SplFileInfo $file
+     */
+    protected function getCurrentTraining(\SplFileInfo $file)
+    {
+        $fragment = explode('/', $file->getPathName());
+        return $fragment[count($fragment) - 3];
+    }
 }

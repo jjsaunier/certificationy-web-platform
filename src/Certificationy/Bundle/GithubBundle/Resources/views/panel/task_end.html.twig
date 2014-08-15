@@ -1,15 +1,17 @@
-<div class="panel-group" id="{{ inspection.checksum }}">
+{% set identifier = inspection.checksum ~ '-' ~ loop.index %}
+
+<div class="panel-group" id="{{ identifier }}">
     {% for name, type in inspection.errors|slice(1) %}
         <div class="panel panel-{{ type|length == 0 ? 'success' : 'danger' }}">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#{{ inspection.checksum }}" href="#{{ inspection.checksum ~ '-' ~ name }}">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#{{ identifier }}" href="#{{ identifier ~ '-' ~ name }}">
                         {{ badge(type|length) }} {{ name }}
                     </a>
                 </h4>
             </div>
 
-            <div id="{{ inspection.checksum ~ '-' ~ name }}" class="panel-collapse collapse">
+            <div id="{{ identifier ~ '-' ~ name }}" class="panel-collapse collapse">
                 <div class="panel-body">
                     <ul>
                         {% for error in type %}
@@ -17,11 +19,22 @@
                             <h4>{{ error.message }}</h4>
                             <p>
                                 <ul class="list-unstyled">
-                                    <li>File : {{ error.context['file_name'] }}</li>
 
-                                    {% if error.context['discriminator'] is defined %}
-                                        <li>{{ label_primary(error.context['discriminator']) }}</li>
+                                    {% if error.context is iterable %}
+                                        <li>Files : {{ error.context['file_name']|join(', ') }} </li>
+                                    {% else %}
+                                        <li>File : {{ error.context['file_name'] }}</li>
                                     {% endif %}
+
+                                    <ul class="list-inline">
+                                        {% if error.context['discriminator'] is defined %}
+                                            <li>{{ label_primary(error.context['discriminator']) }}</li>
+                                        {% endif %}
+
+                                        {% if error.context['training'] is defined %}
+                                            <li>{{ label_primary(error.context['training']) }}</li>
+                                        {% endif %}
+                                    </ul>
                                 </ul>
                             </p>
                         </li>

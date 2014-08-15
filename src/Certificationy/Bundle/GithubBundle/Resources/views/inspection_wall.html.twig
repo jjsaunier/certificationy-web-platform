@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             {% for inspection in inspections %}
-                {{ include('@CertificationyGithub/panel/commit.html.twig') }}
+                {{ include('@CertificationyGithub/panel/commit.html.twig', { loop: loop }) }}
             {% endfor %}
         </div>
     </div>

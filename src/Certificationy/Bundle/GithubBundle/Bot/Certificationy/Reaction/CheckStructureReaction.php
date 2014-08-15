@@ -10,7 +10,6 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\CheckAction;
-use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser;
 
 class CheckStructureReaction
@@ -27,16 +26,17 @@ class CheckStructureReaction
 
         foreach ($files as $file) {
 
-            try {
-                $data = $parser->parse(file_get_contents($file->getRealPath()));
-            } catch (ParseException $e) {
+            if(in_array($file->getFileName(), $action->getSkip('file'))){
                 continue;
             }
+
+            $data = $parser->parse(file_get_contents($file->getRealPath()));
 
             $context = [
                 'file_name' => $file->getFileName(),
                 'file_path' => $file->getPathName(),
-                'discriminator' => 'category'
+                'discriminator' => 'category',
+                'training' => $this->getCurrentTraining($file)
             ];
 
             if (!is_array($data)) {
@@ -46,6 +46,8 @@ class CheckStructureReaction
                     'Output must be type of array, given '.gettype($data),
                     $context
                 );
+
+                $action->addSkip('category', $file->getFileName());
 
                 continue;
             }
@@ -63,7 +65,18 @@ class CheckStructureReaction
 
             //Structure without data can pass
             if (1 === count($data) && isset($data['category'])) {
+
+                $action->addSkip('category', $data['category']);
+
                 continue;
+            }
+
+            if(empty($data['category'])){
+                $action->addError(
+                    'structure',
+                    'Cannot have empty label',
+                    $context
+                );
             }
 
             if (!isset($data['questions']) || empty($data['questions'])) {
@@ -73,6 +86,8 @@ class CheckStructureReaction
                     'Missing questions',
                     $context
                 );
+
+                $action->addSkip('category', $data['category']);
 
                 continue;
             }
@@ -101,6 +116,15 @@ class CheckStructureReaction
                     continue 2;
                 }
 
+                if (empty($questionNode['question'])) {
+                    $action->addError(
+                        'structure',
+                        'Cannot have empty label',
+                        $context
+                    );
+                }
+
+
                 if (!isset($questionNode['answers']) || count($questionNode['answers']) <= 1) {
 
                     $action->addError(
@@ -128,6 +152,14 @@ class CheckStructureReaction
                         continue 3;
                     }
 
+                    if(empty($answerNode['value'])){
+                        $action->addError(
+                            'structure',
+                            sprintf('Cannot have empty label, related question : "%s"', $questionNode['question']),
+                            $context
+                        );
+                    }
+
                     if (!isset($answerNode['correct']) || !is_bool($answerNode['correct'])) {
 
                         $action->addError(
@@ -147,7 +179,7 @@ class CheckStructureReaction
                 if (0 === $good) {
                     $action->addError(
                         'structure',
-                        'Must have at lease one valid answer',
+                        'Must have at least one valid answer',
                         $context
                     );
 
