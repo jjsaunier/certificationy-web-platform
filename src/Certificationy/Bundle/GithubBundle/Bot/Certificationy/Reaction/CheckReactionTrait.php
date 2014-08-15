@@ -31,6 +31,7 @@ trait CheckReactionTrait
     protected function getCurrentTraining(\SplFileInfo $file)
     {
         $fragment = explode('/', $file->getPathName());
+
         return $fragment[count($fragment) - 3];
     }
 }

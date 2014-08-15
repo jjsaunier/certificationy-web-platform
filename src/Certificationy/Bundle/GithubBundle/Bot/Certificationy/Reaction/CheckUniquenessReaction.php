@@ -32,13 +32,13 @@ class CheckUniquenessReaction
 
         foreach ($files as $file) {
 
-            if(in_array($file->getFileName(), $action->getSkip('file'))){
+            if (in_array($file->getFileName(), $action->getSkip('file'))) {
                 continue 1;
             }
 
             $data = $parser->parse(file_get_contents($file->getRealPath()));
 
-            if(in_array($data['category'], $action->getSkip('category'))){
+            if (in_array($data['category'], $action->getSkip('category'))) {
                 continue 1;
             }
 
@@ -47,16 +47,16 @@ class CheckUniquenessReaction
 
             $collector['category'][$identifier] = $data['category'];
 
-            foreach($data['questions'] as $questionNode){
+            foreach ($data['questions'] as $questionNode) {
 
-                if(in_array($questionNode['question'], $action->getSkip('question'))){
+                if (in_array($questionNode['question'], $action->getSkip('question'))) {
                     continue 2;
                 }
 
                 $collector['question'][$identifier][] = $questionNode['question'];
 
-                foreach($questionNode['answers'] as $answerNode){
-                    if(in_array($answerNode['value'], $action->getSkip('answer'))){
+                foreach ($questionNode['answers'] as $answerNode) {
+                    if (in_array($answerNode['value'], $action->getSkip('answer'))) {
                         continue 3;
                     }
 
@@ -65,16 +65,16 @@ class CheckUniquenessReaction
             }
         }
 
-        foreach($collector as $type => $node){
-            if($type === 'category') { //flatten
-                foreach(array_count_values($collector[$type]) as $category => $count){
-                    if($count > 1){
+        foreach ($collector as $type => $node) {
+            if ($type === 'category') { //flatten
+                foreach (array_count_values($collector[$type]) as $category => $count) {
+                    if ($count > 1) {
 
                         $affected = array_keys($collector[$type], $category);
 
-                        $errorFiles = array();
+                        $errorFiles = [];
 
-                        foreach($affected as $value){
+                        foreach ($affected as $value) {
                             list($training, $file) = explode('=', $value);
                             $errorFiles[] = $file;
                         }
@@ -85,21 +85,21 @@ class CheckUniquenessReaction
                                 'Category "%s" was find several times',
                                 $category
                             ),
-                            array(
+                            [
                                 'file_name' => $errorFiles,
                                 'discriminator' => 'category',
                                 'training' => $training
-                            )
+                            ]
                         );
                     }
                 }
             }
 
-            if($type === 'question') { //nested
+            if ($type === 'question') { //nested
 
             }
 
-            if($type === 'answer') { //nested
+            if ($type === 'answer') { //nested
 
             }
         }

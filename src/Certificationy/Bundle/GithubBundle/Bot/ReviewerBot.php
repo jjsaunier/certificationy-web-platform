@@ -65,7 +65,7 @@ class ReviewerBot extends Bot
                 return parent::doHandle($eventName, $request, $data, $response);
             } catch ( \Exception $e) {
 
-                if(null !== $this->logger){
+                if (null !== $this->logger) {
                     $this->logger->error(sprintf(
                         'An error has been throw during the task for event %s, %s',
                         $eventName,
@@ -87,12 +87,11 @@ class ReviewerBot extends Bot
                     )
                 );
 
-                if(null !== $this->logger){
+                if (null !== $this->logger) {
                     $this->logger->debug(sprintf(
                         'Set commit status finished on certificationy'
                     ), [ 'delivery_uuid' => $data['delivery_uuid']]);
                 }
-
 
                 //Save in db (mongo)
                 $this->actionDispatcher->dispatch(
@@ -100,7 +99,7 @@ class ReviewerBot extends Bot
                     new PersistenceAction($this->client, $data, [], PersistenceAction::TASK_END)
                 );
 
-                if(null !== $this->logger){
+                if (null !== $this->logger) {
                     $this->logger->debug(sprintf(
                         'Perform clean'
                     ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -114,7 +113,7 @@ class ReviewerBot extends Bot
 
                 if (true === $data['debug']) {
 
-                    if(null !== $this->logger){
+                    if (null !== $this->logger) {
                         $this->logger->debug(sprintf(
                             'debug mode activated, throwing exception'
                         ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -144,7 +143,7 @@ class ReviewerBot extends Bot
      */
     protected function onPullRequest(Request $request, array $data, Response $response)
     {
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Set commit status pending on certificationy'
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -156,7 +155,7 @@ class ReviewerBot extends Bot
             new PersistenceAction($this->client, $data, ['total' => 0], PersistenceAction::TASK_START)
         );
 
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Set commit status pending on github'
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -168,7 +167,7 @@ class ReviewerBot extends Bot
             new SwitchCommitStatusAction($this->client, $data, 'Certificationy CI is currently working')
         );
 
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Clone locally'
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -187,12 +186,11 @@ class ReviewerBot extends Bot
             $data['content']['pull_request']['head']['repo']['name']
         );
 
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Check specification'
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
         }
-
 
         //Check certificationy
         $this->actionDispatcher->dispatch(
@@ -200,8 +198,7 @@ class ReviewerBot extends Bot
             $checkAction = new CheckAction($this->client, $data, $basePath)
         );
 
-
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Set commit status finished on certificationy'
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -215,7 +212,7 @@ class ReviewerBot extends Bot
 
         if (0 === $checkAction->getErrors()['total']) {
 
-            if(null !== $this->logger){
+            if (null !== $this->logger) {
                 $this->logger->debug(sprintf(
                     'Set commit status successfull on github'
                 ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -231,7 +228,7 @@ class ReviewerBot extends Bot
             );
         } else {
 
-            if(null !== $this->logger){
+            if (null !== $this->logger) {
                 $this->logger->debug(sprintf(
                     'Set commit status is errored on github'
                 ), [ 'delivery_uuid' => $data['delivery_uuid']]);
@@ -247,7 +244,7 @@ class ReviewerBot extends Bot
             );
         }
 
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Perform clean'
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);

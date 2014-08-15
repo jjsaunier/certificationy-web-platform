@@ -26,7 +26,7 @@ class CheckStructureReaction
 
         foreach ($files as $file) {
 
-            if(in_array($file->getFileName(), $action->getSkip('file'))){
+            if (in_array($file->getFileName(), $action->getSkip('file'))) {
                 continue;
             }
 
@@ -71,7 +71,7 @@ class CheckStructureReaction
                 continue;
             }
 
-            if(empty($data['category'])){
+            if (empty($data['category'])) {
                 $action->addError(
                     'structure',
                     'Cannot have empty label',
@@ -124,7 +124,6 @@ class CheckStructureReaction
                     );
                 }
 
-
                 if (!isset($questionNode['answers']) || count($questionNode['answers']) <= 1) {
 
                     $action->addError(
@@ -152,7 +151,7 @@ class CheckStructureReaction
                         continue 3;
                     }
 
-                    if(empty($answerNode['value'])){
+                    if (empty($answerNode['value'])) {
                         $action->addError(
                             'structure',
                             sprintf('Cannot have empty label, related question : "%s"', $questionNode['question']),
