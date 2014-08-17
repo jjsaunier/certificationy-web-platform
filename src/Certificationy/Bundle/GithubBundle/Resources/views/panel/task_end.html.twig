@@ -1,4 +1,8 @@
-{% set identifier = inspection.checksum ~ '-' ~ loop.index %}
+{% if loop is defined %}
+    {% set identifier = inspection.checksum ~ '-' ~ loop.index %}
+{% else %}
+    {% set identifier = inspection.checksum %}
+{% endif %}
 
 <div class="panel-group" id="{{ identifier }}">
     {% for name, type in inspection.errors|slice(1) %}

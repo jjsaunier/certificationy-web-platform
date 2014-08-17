@@ -18,6 +18,7 @@ services:
             - [ "registerActionListener", [ @github.reviewer.check_parser.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.check_structure.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.check_uniqueness.reaction, 'check' ] ]
+            - [ "registerActionListener", [ @github.reviewer.check_context.reaction, 'check' ] ]
             - [ "registerActionListener", [ @github.reviewer.persistence.reaction, 'persist' ] ]
             - [ "registerActionListener", [ @github.reviewer.remove_folder.reaction, 'remove_folder' ] ]
 
@@ -32,7 +33,7 @@ services:
             - %github_login%
             - %github_password%
         calls:
-            - [ "setLogger", [ @?logger ] ]
+            - [ "setLogger", [ @?monolog.logger.github ] ]
 
     github.reviewer.check_parser.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckParserReaction
@@ -43,6 +44,9 @@ services:
     github.reviewer.check_uniqueness.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckUniquenessReaction
 
+    github.reviewer.check_context.reaction:
+        class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\CheckContextReaction
+
     github.reviewer.persistence.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\PersistenceReaction
         arguments:
@@ -51,4 +55,4 @@ services:
     github.reviewer.remove_folder.reaction:
         class: Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction\RemoveFolderReaction
         calls:
-            - [ "setLogger", [ @?logger ] ]
+            - [ "setLogger", [ @?monolog.logger.github ] ]

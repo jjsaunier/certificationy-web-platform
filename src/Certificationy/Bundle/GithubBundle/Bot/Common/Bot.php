@@ -12,6 +12,7 @@ namespace Certificationy\Bundle\GithubBundle\Bot\Common;
 use Certificationy\Bundle\GithubBundle\Api\Client;
 use Certificationy\Bundle\GithubBundle\Api\Events;
 use Certificationy\Bundle\GithubBundle\Api\Security;
+use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -141,6 +142,10 @@ abstract class Bot implements BotInterface
      */
     public function registerActionSubscriber(EventSubscriberInterface $subscriber)
     {
+        if ($subscriber instanceof LoggableReactionInterface) {
+            $subscriber->setLogger($this->logger);
+        }
+
         $this->actionDispatcher->addSubscriber($subscriber);
     }
 
@@ -151,6 +156,10 @@ abstract class Bot implements BotInterface
      */
     public function registerActionListener($listener, $eventName, $priority = 0)
     {
+        if ($listener instanceof LoggableReactionInterface) {
+            $listener->setLogger($this->logger);
+        }
+
         $this->actionDispatcher->addListener(
             $eventName,
             [$listener, 'perform'],

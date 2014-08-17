@@ -96,11 +96,54 @@ class CheckUniquenessReaction
             }
 
             if ($type === 'question') { //nested
+                foreach ($node as $context => $questionsNodes) {
+                    list($training, $fileName) = explode('=', $context);
 
+                    foreach (array_count_values($questionsNodes) as $question => $count) {
+
+                        if ($count > 1) {
+                            $action->addError(
+                                'integrity',
+                                sprintf(
+                                    'Question "%s" was find several times',
+                                    $question
+                                ),
+                                [
+                                    'file_name' => $fileName,
+                                    'discriminator' => 'question',
+                                    'training' => $training
+                                ]
+                            );
+                        }
+                    }
+                }
             }
 
             if ($type === 'answer') { //nested
+                foreach ($node as $context => $answerNode) {
+                    list($training, $fileName) = explode('=', $context);
 
+                    foreach ($answerNode as $question => $answers) {
+
+                        foreach (array_count_values($answers) as $answer => $count) {
+                            if ($count > 1) {
+                                $action->addError(
+                                    'integrity',
+                                    sprintf(
+                                        'Answer "%s" was find several times for question "%s"',
+                                        $answer,
+                                        $question
+                                    ),
+                                    [
+                                        'file_name' => $fileName,
+                                        'discriminator' => 'answer',
+                                        'training' => $training
+                                    ]
+                                );
+                            }
+                        }
+                    }
+                }
             }
         }
     }

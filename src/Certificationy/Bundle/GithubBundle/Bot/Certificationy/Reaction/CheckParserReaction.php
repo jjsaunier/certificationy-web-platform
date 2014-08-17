@@ -30,7 +30,8 @@ class CheckParserReaction
                 $action->addError('parser', $e->getMessage(), [
                     'file_name' => $file->getFileName(),
                     'file_path' => $file->getPathName(),
-                    'training' => $this->getCurrentTraining($file)
+                    'training' => $this->getCurrentTraining($file),
+                    'discriminator' => 'training'
                 ]);
 
                 $action->addSkip('file', $file->getFileName());

@@ -42,8 +42,7 @@ class CheckAction extends GenericAction
             'total' => 0,
             'structure' => [],
             'integrity' => [],
-            'parser' => [],
-            'context' => []
+            'parser' => []
         ];
 
         $this->basePath = $basePath;
