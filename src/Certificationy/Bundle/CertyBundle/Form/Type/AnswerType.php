@@ -11,7 +11,6 @@ namespace Certificationy\Bundle\CertyBundle\Form\Type;
 
 use Certificationy\Component\Certy\Calculator\Calculator;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
@@ -28,7 +27,7 @@ class AnswerType extends AbstractType
             'multiple' => true,
             'expanded' => true,
             'property_path' => 'results',
-            'choice_list' => $this->getAnswersList()
+            'choices' => $this->getChoices()
         ]);
 
         $resolver->setRequired([
@@ -43,16 +42,17 @@ class AnswerType extends AbstractType
     /**
      * @return \Closure
      */
-    public function getAnswersList()
+    public function getChoices()
     {
         return function (Options $options) {
             $question = $options->get('question');
+
             $choices = [];
             foreach ($question->getAnswers() as $answer) {
                 $choices[Calculator::getHash($question->getCategory(), $question, $answer)] = $answer->getLabel();
             }
 
-            return new SimpleChoiceList($choices);
+            return $choices;
         };
     }
 
