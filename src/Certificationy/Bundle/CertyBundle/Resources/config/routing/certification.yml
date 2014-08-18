@@ -4,7 +4,7 @@ certification_guidelines:
         _controller: CertificationyCertyBundle:Certy:guidelines
     requirements:
         _method: GET|POST
-        name: "[a-z0-9]+"
+        name: "[a-z0-9-]+"
 
 certification_test:
     path: /{name}/test
@@ -12,7 +12,7 @@ certification_test:
         _controller: CertificationyCertyBundle:Certy:test
     requirements:
         _method: GET|POST
-        name: "[a-z0-9]+"
+        name: "[a-z0-9-]+"
 
 certification_report:
     path: /{name}/report
@@ -20,4 +20,4 @@ certification_report:
         _controller: CertificationyCertyBundle:Certy:report
     requirements:
         _method: GET
-        name: "[a-z0-9]+"
+        name: "[a-z0-9-]+"
