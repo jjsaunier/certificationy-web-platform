@@ -68,7 +68,7 @@ class ReviewerBot extends Bot
     }
 
     /**
-     * @param string         $eventName
+     * @param string   $eventName
      * @param Request  $request
      * @param array    $data
      * @param Response $response

@@ -12,7 +12,6 @@ namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\GitLocaleCloneAction;
 use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 
 class GitLocaleCloneReaction implements LoggableReactionInterface
@@ -70,7 +69,7 @@ class GitLocaleCloneReaction implements LoggableReactionInterface
             $content['pull_request']['head']['repo']['clone_url']
         );
 
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf('Start command %s', implode(' && ', $cmd)));
         }
 

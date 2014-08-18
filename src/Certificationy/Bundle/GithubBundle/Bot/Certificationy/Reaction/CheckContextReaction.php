@@ -12,7 +12,6 @@ namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\CheckAction;
 use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser;

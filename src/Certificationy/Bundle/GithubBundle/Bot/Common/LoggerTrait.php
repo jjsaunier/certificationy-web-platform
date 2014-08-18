@@ -27,4 +27,4 @@ trait LoggerTrait
     {
         $this->logger = $logger;
     }
-} 
+}
