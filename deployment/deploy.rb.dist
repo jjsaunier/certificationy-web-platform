@@ -1,0 +1,18 @@
+set :application, 'my_app'
+set :repo_url, 'my_git_repo'
+server 'my_server_addr', user: 'user', roles: %w{web app db}
+set :format, :pretty
+set :log_level, :info
+set :keep_releases, 2
+
+set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
+set :linked_files, %w{app/config/parameters.yml}
+set :linked_dirs, %w{app/logs web/uploads}
+
+before 'deploy:starting', 'symfony2:parameters'
+after 'deploy:updated', 'symfony2:assets'
+after 'deploy:updated', 'symfony2:migration'
+before 'deploy:publishing', 'symfony2:cache'
+before 'deploy:publishing', 'symfony2:permissions'
+after 'deploy:finishing', 'deploy:cleanup'
+after 'deploy:published', 'symfony2:apc'

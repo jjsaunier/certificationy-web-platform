@@ -1,0 +1,8 @@
+namespace :symfony2 do
+	desc 'Running database migrations'
+	task :migration do
+		on roles(:app) do
+			execute :php, "#{fetch(:release_path)}/app/console doctrine:schema:update --env=prod --force"
+		end
+	end
+end

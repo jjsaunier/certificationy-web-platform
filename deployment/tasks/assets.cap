@@ -1,0 +1,8 @@
+namespace :symfony2 do
+	desc 'Dumping assets'
+	task :assets do
+		on roles(:app) do
+			execute :php, "#{fetch(:release_path)}/app/console assetic:dump --env=prod"
+		end
+	end
+end

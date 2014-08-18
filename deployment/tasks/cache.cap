@@ -1,0 +1,9 @@
+namespace :symfony2 do
+	desc 'Clearing cache'
+	task :cache do
+		on roles(:app) do
+			execute :php , "#{fetch(:release_path)}/app/console cache:clear --env=prod"
+			execute :php , "#{fetch(:release_path)}/app/console cache:warmup --env=prod"
+		end
+	end
+end

@@ -1,0 +1,12 @@
+namespace :symfony2 do
+	desc 'Install parameters.yml'
+	task :parameters do
+		on roles(:web) do
+			if test("[ -f #{shared_path}/app/config/parameters.yml ]")
+				info "parameters.yml already exists on server!"
+			else
+				upload! "app/config/parameters.yml", "#{shared_path}/app/config/parameters.yml"
+			end
+		end
+	end
+end

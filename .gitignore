@@ -7,11 +7,12 @@
 
 /app/config/parameters.yml
 
-/app/logs/*
+/app/logs/*/*
+!/app/logs/*/.gitkeep
+
 /app/cache/*
 
 !app/cache/.gitkeep
-!app/logs/.gitkeep
 
 /build/
 /vendor/
@@ -22,3 +23,4 @@
 
 web/analyze/*
 app/Resources/certificationy-data
+deployment/deploy.rb
