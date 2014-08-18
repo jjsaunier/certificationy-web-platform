@@ -19,6 +19,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 abstract class Bot implements BotInterface
 {
@@ -43,6 +44,11 @@ abstract class Bot implements BotInterface
     protected $logger;
 
     /**
+     * @var \Symfony\Component\Stopwatch\Stopwatch
+     */
+    protected $stopwatch;
+
+    /**
      * @param Client   $client
      * @param Security $security
      */
@@ -51,6 +57,8 @@ abstract class Bot implements BotInterface
         $this->client = $client;
         $this->security = $security;
         $this->actionDispatcher = new EventDispatcher();
+        $this->stopwatch = new Stopwatch();
+        $this->stopwatch->start('bot');
     }
 
     /**
@@ -99,6 +107,8 @@ abstract class Bot implements BotInterface
      */
     public function handle(Request $request)
     {
+        $this->stopwatch->start('bot');
+
         $data = $this->security->handleRequest($request);
 
         if ($data['event'] === Events::PING) {
@@ -116,7 +126,7 @@ abstract class Bot implements BotInterface
                 ));
             }
 
-            throw new HttpException(Response::HTTP_NOT_FOUND);
+            throw new HttpException(Response::HTTP_ACCEPTED); //We accept the request, but we do nothing (202).
         }
 
         $this->doHandle($data['event'], $request, $data, $response = $this->createResponse());

@@ -61,70 +61,96 @@ class ReviewerBot extends Bot
     protected function doHandle($eventName, Request $request, array $data, Response $response)
     {
         if (Events::PULL_REQUEST === $eventName) {
-            try {
-                return parent::doHandle($eventName, $request, $data, $response);
-            } catch ( \Exception $e) {
-
-                if (null !== $this->logger) {
-                    $this->logger->error(sprintf(
-                        'An error has been throw during the task for event %s, %s',
-                        $eventName,
-                        $e->getMessage()
-                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
-
-                    $this->logger->debug(sprintf(
-                        'Set commit status failed on github',
-                        $eventName
-                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
-                }
-
-                $this->actionDispatcher->dispatch(
-                    BotActions::SET_COMMIT_STATUS_FAILURE,
-                    new SwitchCommitStatusAction(
-                        $this->client,
-                        $data,
-                        'The Certificationy CI build could not complete due to an error'
-                    )
-                );
-
-                if (null !== $this->logger) {
-                    $this->logger->debug(sprintf(
-                        'Set commit status finished on certificationy'
-                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
-                }
-
-                //Save in db (mongo)
-                $this->actionDispatcher->dispatch(
-                    ReviewerBotActions::PERSIST,
-                    new PersistenceAction($this->client, $data, ['total' => 0], PersistenceAction::TASK_END)
-                );
-
-                if (null !== $this->logger) {
-                    $this->logger->debug(sprintf(
-                        'Perform clean'
-                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
-                }
-
-                //Clean up
-                $this->actionDispatcher->dispatch(
-                    ReviewerBotActions::CLEAN,
-                    new RemoveFolderAction($this->client, $data)
-                );
-
-                if (true === $data['debug']) {
-
-                    if (null !== $this->logger) {
-                        $this->logger->debug(sprintf(
-                            'debug mode activated, throwing exception'
-                        ), [ 'delivery_uuid' => $data['delivery_uuid']]);
-                    }
-
-                    throw $e;
-                }
-            }
+            $this->closureEvent($eventName, $request, $data, $response);
         }
 
-        return parent::doHandle($eventName, $response, $data, $response);
+        return parent::doHandle($eventName, $request, $data, $response);
+    }
+
+    /**
+     * @param string         $eventName
+     * @param Request  $request
+     * @param array    $data
+     * @param Response $response
+     *
+     * @return Response
+     * @throws \Exception
+     */
+    protected function closureEvent($eventName, Request $request, array $data, Response $response)
+    {
+        try {
+            return parent::doHandle($eventName, $request, $data, $response);
+        } catch ( \Exception $e) {
+
+            if (null !== $this->logger) {
+                $this->logger->error(sprintf(
+                    'An error has been throw during the task for event %s, %s',
+                    $eventName,
+                    $e->getMessage()
+                ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+
+                $this->logger->debug(sprintf(
+                    'Set commit status failed on github',
+                    $eventName
+                ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+            }
+
+            $this->actionDispatcher->dispatch(
+                BotActions::SET_COMMIT_STATUS_FAILURE,
+                new SwitchCommitStatusAction(
+                    $this->client,
+                    $data,
+                    'The Certificationy CI build could not complete due to an error'
+                )
+            );
+
+            if (null !== $this->logger) {
+                $this->logger->debug(sprintf(
+                    'Set commit status finished on certificationy'
+                ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+            }
+
+            //Save in db (mongo)
+            $this->actionDispatcher->dispatch(
+                ReviewerBotActions::PERSIST,
+                new PersistenceAction($this->client, $data, ['total' => -1], PersistenceAction::TASK_END)
+            );
+
+            if (null !== $this->logger) {
+                $this->logger->debug(sprintf(
+                    'Perform clean'
+                ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+            }
+
+            //Clean up
+            $this->actionDispatcher->dispatch(
+                ReviewerBotActions::CLEAN,
+                new RemoveFolderAction($this->client, $data)
+            );
+
+            if (true === $data['debug']) {
+
+                if (null !== $this->logger) {
+                    $this->logger->debug(sprintf(
+                        'debug mode activated, throwing exception'
+                    ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+                }
+
+                throw $e;
+            }
+        }
+    }
+
+    /**
+     * @param Request  $request
+     * @param array    $data
+     * @param Response $response
+     *
+     * @return Response
+     */
+    protected function onPullRequest(Request $request, array $data, Response $response)
+    {
+        return $this->doReview($request, $data, $response);
     }
 
     /**
@@ -141,7 +167,7 @@ class ReviewerBot extends Bot
      *
      * @return Response
      */
-    protected function onPullRequest(Request $request, array $data, Response $response)
+    protected function doReview(Request $request, array $data, Response $response)
     {
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(
@@ -186,6 +212,8 @@ class ReviewerBot extends Bot
             $data['content']['pull_request']['head']['repo']['name']
         );
 
+        throw new \Exception('lol');
+
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Check specification'
@@ -204,10 +232,12 @@ class ReviewerBot extends Bot
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
         }
 
+        $stopwatchEvent = $this->stopwatch->stop('bot');
+
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(
             ReviewerBotActions::PERSIST,
-            new PersistenceAction($this->client, $data, $checkAction->getErrors(), PersistenceAction::TASK_END)
+            new PersistenceAction($this->client, $data, $checkAction->getErrors(), PersistenceAction::TASK_END, $stopwatchEvent)
         );
 
         if (0 === $checkAction->getErrors()['total']) {
@@ -255,5 +285,7 @@ class ReviewerBot extends Bot
             ReviewerBotActions::CLEAN,
             new RemoveFolderAction($this->client, $data)
         );
+
+        return $response;
     }
 }

@@ -10,11 +10,13 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\CheckAction;
+use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
+use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
 use Symfony\Component\Yaml\Parser;
 
-class CheckUniquenessReaction
+class CheckUniquenessReaction implements LoggableReactionInterface
 {
-    use CheckReactionTrait;
+    use CheckReactionTrait, LoggerTrait;
 
     /**
      * @param CheckAction $action

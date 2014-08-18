@@ -10,11 +10,14 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\PersistenceAction;
+use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
+use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
 use Certificationy\Bundle\GithubBundle\Document\InspectionReport;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
-class PersistenceReaction
+class PersistenceReaction implements LoggableReactionInterface
 {
+    use CheckReactionTrait, LoggerTrait;
     /**
      * @var DocumentManager
      */
@@ -69,9 +72,31 @@ class PersistenceReaction
         }
 
         if ($action->getStatus() === PersistenceAction::TASK_END) {
+
+            if(null === $this->currentTaskHash){
+
+                if(null !== $this->logger){
+                    $this->logger->warning('Unable to retrieve current hash of task to update it');
+                }
+
+                return;
+            }
+
             $inspectionRepository = $this->documentManager->getRepository('CertificationyGithubBundle:InspectionReport');
 
             $inspection = $inspectionRepository->find($this->currentTaskHash);
+
+            if(null !== $this->logger){
+                $this->logger->debug(sprintf(
+                   'Update task %s to %s',
+                    $this->currentTaskHash,
+                    $action->getStatus()
+                ));
+            }
+
+            if(null !== $event = $action->getStopwatchEvent()){
+                $inspection->setDuration($event->getDuration() / 1000);
+            }
 
             $inspection->setErrors($action->getErrors());
             $inspection->setStatus(PersistenceAction::TASK_END);

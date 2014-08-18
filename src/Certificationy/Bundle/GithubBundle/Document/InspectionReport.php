@@ -37,6 +37,9 @@ class InspectionReport
     /** @ODM\String */
     protected $status;
 
+    /** @ODM\String */
+    protected $duration;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -152,5 +155,21 @@ class InspectionReport
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param string $duration
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDuration()
+    {
+        return $this->duration;
     }
 }

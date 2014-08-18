@@ -3,7 +3,13 @@
         {% if inspection.status == 'task_start' %}
             warning
         {% else %}
-            {{ inspection.errors.total == 0  ? 'success' : 'danger'}}
+            {% if inspection.errors.total == 0 %}
+                success
+            {% elseif inspection.errors.total == -1 %}
+                info
+            {% else %}
+                danger
+            {% endif %}
         {% endif %}
     {% endspaceless %}
 {%- endmacro %}

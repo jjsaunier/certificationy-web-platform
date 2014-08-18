@@ -10,23 +10,14 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\RemoveFolderAction;
+use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
+use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 
-class RemoveFolderReaction
+class RemoveFolderReaction implements LoggableReactionInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger = null)
-    {
-        $this->logger = $logger;
-    }
+    use CheckReactionTrait, LoggerTrait;
 
     /**
      * @param RemoveFolderAction $action

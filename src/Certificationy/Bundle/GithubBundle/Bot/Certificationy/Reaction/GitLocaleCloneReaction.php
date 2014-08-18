@@ -10,15 +10,14 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\GitLocaleCloneAction;
+use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
+use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 
-class GitLocaleCloneReaction
+class GitLocaleCloneReaction implements LoggableReactionInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
+    use CheckReactionTrait, LoggerTrait;
 
     /**
      * @var string
@@ -40,14 +39,6 @@ class GitLocaleCloneReaction
     ) {
         $this->login = $login;
         $this->password = $password;
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger = null)
-    {
-        $this->logger = $logger;
     }
 
     /**
@@ -78,6 +69,10 @@ class GitLocaleCloneReaction
             $content['pull_request']['head']['ref'],
             $content['pull_request']['head']['repo']['clone_url']
         );
+
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf('Start command %s', implode(' && ', $cmd)));
+        }
 
         $process = new Process(implode(' && ', $cmd));
         $process->setTimeout(360);

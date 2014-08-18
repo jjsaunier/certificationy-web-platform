@@ -11,6 +11,7 @@ namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action;
 
 use Certificationy\Bundle\GithubBundle\Api\Client;
 use Certificationy\Bundle\GithubBundle\Bot\Common\Action\GenericAction;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class PersistenceAction extends GenericAction
 {
@@ -24,22 +25,29 @@ class PersistenceAction extends GenericAction
      */
     protected $status;
 
+    /**
+     * @var \Symfony\Component\Stopwatch\StopwatchEvent
+     */
+    protected $stopwatchEvent;
+
     const TASK_START = 'task_start';
 
     const TASK_END = 'task_end';
 
     /**
-     * @param Client $client
-     * @param array  $data
-     * @param array  $errors
-     * @param string $status
+     * @param Client         $client
+     * @param array          $data
+     * @param array          $errors
+     * @param            string    $status
+     * @param StopwatchEvent $stopwatchEvent
      */
-    public function __construct(Client $client, array $data, array $errors, $status)
+    public function __construct(Client $client, array $data, array $errors, $status, StopwatchEvent $stopwatchEvent = null)
     {
         parent::__construct($client, $data);
 
         $this->errors = $errors;
         $this->status = $status;
+        $this->stopwatchEvent = $stopwatchEvent;
     }
 
     /**
@@ -56,5 +64,13 @@ class PersistenceAction extends GenericAction
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return StopwatchEvent
+     */
+    public function getStopwatchEvent()
+    {
+        return $this->stopwatchEvent;
     }
 }
