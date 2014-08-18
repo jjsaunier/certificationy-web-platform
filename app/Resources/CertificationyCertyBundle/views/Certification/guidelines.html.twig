@@ -1,7 +1,7 @@
 {% extends 'CertificationyCertyBundle:Certification:layout.html.twig' %}
 
 {% block certy_content %}
-    <div class="col-lg-3 hidden-xs hidden-sm hidden-md">
+    <aside class="col-lg-3 hidden-xs hidden-sm hidden-md">
         {% embed 'CertificationyCertyBundle:Certification/Embed:CategoryList.html.twig' %}
             {% block list_attr %}class="list-group"{% endblock %}
             {% block li_attr %}class="list-group-item"{% endblock %}
@@ -10,7 +10,7 @@
                 {{ parent() }}
             {% endblock category_line %}
         {% endembed %}
-    </div>
+    </aside>
 
     <div class="col-lg-9 col-md-12">
         <div class="text-center">
