@@ -36,10 +36,10 @@
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
         "guzzlehttp/guzzle": "~4.0",
-        "vorillaz/devicons": "*"
+        "vorillaz/devicons": "*",
+        "sensio/generator-bundle": "~2.3"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "~4.1"
     },
     "repositories" : [
