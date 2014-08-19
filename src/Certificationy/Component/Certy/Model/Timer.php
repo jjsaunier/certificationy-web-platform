@@ -48,4 +48,12 @@ class Timer
             's' => $diff->s
         ];
     }
+
+    /**
+     * @param array $data
+     */
+    public static function __set_state(Array $data)
+    {
+        return new self;
+    }
 }
