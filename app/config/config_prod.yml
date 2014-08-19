@@ -37,7 +37,7 @@ monolog:
             from_email: logger@certificationy.com
             to_email: johann_27@hotmail.fr
             subject: "[certificationy-web-platform][logger]"
-            level: debug
+            level: error
         github:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%/github.log"

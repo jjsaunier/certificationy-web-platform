@@ -38,3 +38,10 @@ services:
         scope: request
         tags:
             - { name: knp_menu.menu, alias: web }
+
+    monolog.processor.user:
+        class: Certificationy\Bundle\WebBundle\Log\Processor\UserProcessor
+        arguments:
+            - @service_container
+        tags:
+            - { name: monolog.processor, method: postRecord }
