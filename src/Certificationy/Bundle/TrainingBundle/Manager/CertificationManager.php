@@ -14,6 +14,7 @@ use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
 use JMS\Serializer\Serializer;
 use Predis\Client;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 
@@ -50,21 +51,29 @@ class CertificationManager
     protected $serializer;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param CertificationFactory $factory
      * @param Builder              $builder
      * @param Client               $redisClient
      * @param Serializer           $serializer
+     * @param LoggerInterface      $logger
      */
     public function __construct(
         CertificationFactory $factory,
         Builder $builder,
         Client $redisClient,
-        Serializer $serializer
+        Serializer $serializer,
+        LoggerInterface $logger
     ) {
         $this->factory = $factory;
         $this->builder = $builder;
         $this->redisClient = $redisClient;
         $this->serializer = $serializer;
+        $this->logger = $logger;
     }
 
     /**
@@ -91,6 +100,7 @@ class CertificationManager
         $key = 'available_training';
 
         if (!$this->redisClient->exists($key)) {
+
             $finder = new Finder();
             $files = $finder->files()->in($this->basePath.'/*')->name('context.yml');
             $yaml = new Parser();
@@ -102,25 +112,47 @@ class CertificationManager
                 $names[$context['name']] = $context['label'];
             }
 
+            $this->logger->info(sprintf(
+                'load available trainings, available : [%s]',
+                implode(', ', $names)
+            ));
+
             $this->redisClient->set($key, json_encode($names));
         }
+
+        $this->logger->debug('Load available trainings from redis server', array('key' => $key));
 
         return json_decode($this->redisClient->get($key), true);
     }
 
     /**
-     * @param string                     $name
+     * @param string $name
      * @param CertificationContext $certificationContext
      *
      * @return \Certificationy\Component\Certy\Model\Certification
+     * @throws \Exception
      */
     public function getCertification($name, CertificationContext $certificationContext = null)
     {
-        return $this->factory->createNamed(
-            $name,
-            null === $certificationContext ? $this->getContext($name) : $certificationContext,
-            ['yaml']
-        );
+        $this->logger->info(sprintf('Certification %s requested', $name));
+
+        try{
+            return $this->factory->createNamed(
+                $name,
+                null === $certificationContext ? $this->getContext($name) : $certificationContext,
+                ['yaml']
+            );
+        } catch( \Exception $e) {
+
+            $this->logger->critical(sprintf(
+                'An error has been raised when creating certification %s, error : %s inside %s',
+                $name,
+                $e->getMessage(),
+                $e->getFile()
+            ));
+
+            throw $e;
+        }
     }
 
     /**
@@ -163,12 +195,18 @@ class CertificationManager
                 $context->setIcons($contextConfig['icons']);
             }
 
+            $this->logger->info(
+                sprintf('Parse context for certification %s', $name, array('key' =>  $key))
+            );
+
             $this->redisClient->set($key, $this->serializer->serialize($context, 'json'));
         }
 
-        $serializedContext = $this->redisClient->get($key);
+        $this->logger->debug(
+            sprintf('Load certification context %s from redis server', $name, array('key' =>  $key))
+        );
 
-        /** @PHP|5.5. */
+        $serializedContext = $this->redisClient->get($key);
 
         return $this->serializer->deserialize($serializedContext, CertificationContext::class, 'json');
     }

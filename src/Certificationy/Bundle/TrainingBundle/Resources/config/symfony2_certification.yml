@@ -6,6 +6,7 @@ services:
             - @certy.certification.builder
             - @snc_redis.default
             - @jms_serializer
+            - @monolog.logger.certy
         calls:
             - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
             - [ "setKernelDebug", [ %kernel.debug% ] ]
