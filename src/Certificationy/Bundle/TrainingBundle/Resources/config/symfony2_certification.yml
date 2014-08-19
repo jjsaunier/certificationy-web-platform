@@ -1,16 +1,14 @@
-parameters:
-
 services:
     certificationy.certification.manager:
         class: Certificationy\Bundle\TrainingBundle\Manager\CertificationManager
         arguments:
             - @certy.certification.factory
             - @certy.certification.builder
-            - %kernel.debug%
             - @snc_redis.default
             - @jms_serializer
         calls:
             - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
+            - [ "setKernelDebug", [ %kernel.debug% ] ]
 
     certificationy.report.persister:
         class: Certificationy\Bundle\TrainingBundle\EventListener\StoreCertificationReportListener
