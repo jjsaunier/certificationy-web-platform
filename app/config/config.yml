@@ -224,18 +224,17 @@ snc_redis:
         default:
             type: predis
             alias: default
-            dsn: %redis_dsn%/1
+            dsn: %redis_dsn%/%redis_default_client%
 
         session:
             type: predis
             alias: session
-            dsn: %redis_dsn%/2
+            dsn: %redis_dsn%/%redis_session_client%
 
         counter:
             type: predis
             alias: counter
-            dsn: %redis_dsn%/4
-
+            dsn: %redis_dsn%/%redis_counter_client%
     session:
         client: session
         prefix: session:main
