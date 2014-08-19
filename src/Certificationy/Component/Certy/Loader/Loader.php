@@ -9,16 +9,30 @@
 
 namespace Certificationy\Component\Certy\Loader;
 
+use Certificationy\Component\Certy\Exception\NotAlreadyDumpedException;
 use Certificationy\Component\Certy\Model\Certification;
 
 abstract class Loader implements LoaderInterface
 {
     /**
-     * @param $certificationName
+     * @param string $certificationName
+     *
+     * @return Certification
+     */
+    protected abstract function doLoad($certificationName);
+
+    /**
+     * @param string $certificationName
      */
     public function load($certificationName)
     {
+        $certification = $this->doLoad($certificationName);
 
+        if ($this->validate($certification)) {
+            return $certification;
+        } else {
+            throw new NotAlreadyDumpedException($certificationName);
+        }
     }
 
     /**

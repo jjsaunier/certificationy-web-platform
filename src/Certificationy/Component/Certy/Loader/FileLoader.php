@@ -52,19 +52,17 @@ class FileLoader extends Loader implements FileTransportInterface
      * @return mixed
      * @throws \Exception
      */
-    public function load($certificationName)
+    public function doLoad($certificationName)
     {
         $this->certificationName = $certificationName;
 
         if (true === $this->exists($filename = $this->getFilePath($this->getFileName()))) {
             $certification = include $filename;
 
-            if ($this->validate($certification)) {
-                return $certification;
-            } else {
-                throw new \Exception('You must return Certificationy\Component\Certy\Model\Certification object');
-            }
+            return $certification;
         }
+
+        return null;
     }
 
     /**
