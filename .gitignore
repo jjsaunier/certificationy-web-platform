@@ -20,7 +20,7 @@
 
 /composer.phar
 
-
 web/analyze/*
+!web/analyze/.gitkeep
 app/Resources/certificationy-data
 deployment/deploy.rb
