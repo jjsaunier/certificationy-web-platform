@@ -52,30 +52,35 @@ class CertificationManager
     /**
      * @param CertificationFactory $factory
      * @param Builder              $builder
-     * @param bool                 $kernelDebug
      * @param Client               $redisClient
      * @param Serializer           $serializer
      */
     public function __construct(
         CertificationFactory $factory,
         Builder $builder,
-        $kernelDebug,
         Client $redisClient,
         Serializer $serializer
     ) {
         $this->factory = $factory;
         $this->builder = $builder;
-        $this->kernelDebug = $kernelDebug;
         $this->redisClient = $redisClient;
         $this->serializer = $serializer;
     }
 
     /**
-     * @param $basePath
+     * @param string $basePath
      */
     public function setBasePath($basePath)
     {
         $this->basePath = $basePath;
+    }
+
+    /**
+     * @param string $kernelDebug
+     */
+    public function setKernelDebug($kernelDebug)
+    {
+        $this->kernelDebug = $kernelDebug;
     }
 
     /**
@@ -140,6 +145,7 @@ class CertificationManager
             $context->setDebug($this->kernelDebug);
             $context->setNumberOfQuestions($contextConfig['defaults']['questions_peer_category']);
             $context->setAllowCustomNumberOfQuestions($contextConfig['customize']['number_of_questions']);
+            $context->setDebug($this->kernelDebug);
 
             $context->setAllowExcludeCategories($contextConfig['customize']['exclude_categories']);
 
