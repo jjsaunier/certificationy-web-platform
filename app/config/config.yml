@@ -2,6 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+parameters:
+    assets_version: v1.0.1
+
 framework:
     esi: ~
     fragments:

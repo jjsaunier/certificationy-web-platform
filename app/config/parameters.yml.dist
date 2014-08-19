@@ -48,5 +48,3 @@ parameters:
     debug_redirects: false
     use_assetic_controller: true
     domain: .certificationy.dev
-
-    assets_version: v1.0.0
