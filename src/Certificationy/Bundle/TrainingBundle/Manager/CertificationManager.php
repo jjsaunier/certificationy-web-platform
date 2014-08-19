@@ -109,7 +109,8 @@ class CertificationManager
     }
 
     /**
-     * @param $name
+     * @param string                     $name
+     * @param CertificationContext $certificationContext
      *
      * @return \Certificationy\Component\Certy\Model\Certification
      */
