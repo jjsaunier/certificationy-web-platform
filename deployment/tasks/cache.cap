@@ -3,6 +3,7 @@ namespace :symfony2 do
 	task :cache do
 		on roles(:app) do
 			execute :php , "#{fetch(:release_path)}/app/console cache:clear --env=prod"
+			execute :php , "#{fetch(:release_path)}/app/console redis:flushdb --client=default --no-interaction --env=prod"
 			execute :php , "#{fetch(:release_path)}/app/console cache:warmup --env=prod"
 		end
 	end
