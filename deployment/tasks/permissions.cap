@@ -2,7 +2,7 @@ namespace :symfony2 do
 	desc 'Install parameters.yml'
 	task :permissions do
 		on roles(:app) do
-			execute "chmod 777 #{fetch(:release_path)}/app/logs/"
+			execute "chmod -R 777 #{fetch(:release_path)}/app/logs/"
 			execute "chmod -R 777 #{fetch(:release_path)}/app/cache/"
 			execute "chmod -R 777 #{fetch(:release_path)}/web/uploads/"
 			execute "chmod -R 777 #{fetch(:release_path)}/web/analyze/"
