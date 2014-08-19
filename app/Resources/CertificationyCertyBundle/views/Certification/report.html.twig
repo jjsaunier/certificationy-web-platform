@@ -53,7 +53,9 @@
 
         <div class="col-sm-9 col-md-9">
             <div class="text-center">
-                <img src="{{ asset('images/logo_symfony.png')}}">
+                {% if certification.context.icons is not null %}
+                    <i class="devicons {{ certification.context.icons }}" style="font-size: 20em;"></i>
+                {% endif %}
                 <h2> {{ 'headline'|trans({'%certification%' : certification.context.label|capitalize}, 'report') }}</h2>
             </div>
 
