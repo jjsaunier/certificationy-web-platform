@@ -3,6 +3,7 @@ namespace :symfony2 do
 	task :migration do
 		on roles(:app) do
 			execute :php, "#{fetch(:release_path)}/app/console doctrine:schema:update --env=prod --force"
+			execute :php, "#{fetch(:release_path)}/app/console doctrine:mongodb:schema:update --env=prod"
 		end
 	end
 end
