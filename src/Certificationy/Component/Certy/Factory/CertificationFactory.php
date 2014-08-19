@@ -13,6 +13,7 @@ use Certificationy\Component\Certy\Builder\BuilderInterface;
 use Certificationy\Component\Certy\Builder\ProviderBuilderPass;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Dumper\DumperInterface;
+use Certificationy\Component\Certy\Exception\NotAlreadyDumpedException;
 use Certificationy\Component\Certy\Loader\LoaderInterface;
 use Certificationy\Component\Certy\Model\Certification;
 use Certificationy\Component\Certy\Provider\ProviderInterface;
@@ -65,7 +66,11 @@ class CertificationFactory
 
         //Avoid to regenerate certification previously generated
         if (null !== $this->loader && false === $context->getDebug()) {
-            return $this->loader->load($name);
+            try{
+                return $this->loader->load($name);
+            } catch (NotAlreadyDumpedException $e){
+
+            }
         }
 
         //Check if required provider are loads
