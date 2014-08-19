@@ -9,14 +9,12 @@
 
 namespace Certificationy\Bundle\CertyBundle\Controller;
 
-use Certificationy\Bundle\CertyBundle\Exception\CheaterException;
 use Certificationy\Component\Certy\Events\CertificationEvent;
 use Certificationy\Component\Certy\Events\CertificationEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CertyController extends Controller
 {
@@ -61,7 +59,7 @@ class CertyController extends Controller
         $certification = $request->getSession()->get('certification');
 
         if (null === $certification) {
-            throw new HttpException(Response::HTTP_NOT_FOUND);
+            return $this->forward('CertificationyCertyBundle:Certy:guidelines', [ $request, $name ]);
         }
 
         $certificationHandler = $this->container->get('certy.certification.form_handler');
@@ -91,18 +89,20 @@ class CertyController extends Controller
      * @param Request $request
      *
      * @return Response
-     * @throws \Certificationy\Bundle\CertyBundle\Exception\CheaterException
      */
     public function reportAction(Request $request)
     {
-        $certification = $request->getSession()->get('certification');
-
-        //Prevent sneaky people.
-        $request->getSession()->remove('certification');
+        $session = $request->getSession();
+        $certification = $session->get('certification');
 
         if (null === $certification) {
-            throw new CheaterException();
+            $router = $this->get('router');
+
+            return new RedirectResponse($router->generate('fos_user_profile_show'));
         }
+
+        //Prevent sneaky people.
+        $session->remove('certification');
 
         return $this->render('CertificationyCertyBundle:Certification:report.html.twig', [
             'certification' => $certification
