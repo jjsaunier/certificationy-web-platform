@@ -32,13 +32,17 @@ monolog:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%/doctrine.log"
             channels: [ 'doctrine' ]
-#        swift:
-#            type: swift_mailer
-#            from_email: logger@certificationy.com
-#            to_email: johann_27@hotmail.fr
-#            subject: "[certificationy-web-platform][logger]"
-#            level: debug
+        swift:
+            type: swift_mailer
+            from_email: logger@certificationy.com
+            to_email: johann_27@hotmail.fr
+            subject: "[certificationy-web-platform][logger]"
+            level: debug
         github:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%/github.log"
             channels: [ 'github' ]
+        certy:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/certy.log"
+            channels: [ 'certy' ]
