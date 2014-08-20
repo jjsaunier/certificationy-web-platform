@@ -38,7 +38,7 @@ class CertificationManager
     /**
      * @var bool
      */
-    protected $kernelDebug;
+    protected $debug;
 
     /**
      * @var Client
@@ -87,9 +87,9 @@ class CertificationManager
     /**
      * @param string $kernelDebug
      */
-    public function setKernelDebug($kernelDebug)
+    public function setDebug($debug)
     {
-        $this->kernelDebug = $kernelDebug;
+        $this->debug = $debug;
     }
 
     /**
@@ -175,10 +175,9 @@ class CertificationManager
             $context->setLabel($contextConfig['label']);
             $context->setAvailableLanguages($contextConfig['availableLanguages']);
             $context->setLanguage($contextConfig['defaults']['language']);
-            $context->setDebug($this->kernelDebug);
             $context->setNumberOfQuestions($contextConfig['defaults']['questions_peer_category']);
             $context->setAllowCustomNumberOfQuestions($contextConfig['customize']['number_of_questions']);
-            $context->setDebug($this->kernelDebug);
+            $context->setDebug($this->debug);
 
             $context->setAllowExcludeCategories($contextConfig['customize']['exclude_categories']);
 

@@ -9,7 +9,7 @@ services:
             - @monolog.logger.certy
         calls:
             - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
-            - [ "setKernelDebug", [ %kernel.debug% ] ]
+            - [ "setDebug", [ %certy_debug% ] ]
 
     certificationy.report.persister:
         class: Certificationy\Bundle\TrainingBundle\EventListener\StoreCertificationReportListener
