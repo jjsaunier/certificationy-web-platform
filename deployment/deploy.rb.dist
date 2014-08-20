@@ -1,18 +1,35 @@
 set :application, 'my_app'
 set :repo_url, 'my_git_repo'
-server 'my_server_addr', user: 'user', roles: %w{web app db}
+server 'certificationy.com', user: 'root', roles: %w{web app db}
 set :format, :pretty
 set :log_level, :info
-set :keep_releases, 2
-
+set :keep_releases, 5
 set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
-set :linked_files, %w{app/config/parameters.yml}
-set :linked_dirs, %w{app/logs web/uploads}
+set :symfony_env,  "prod"
+set :app_path,              "app"
+set :web_path,              "web"
+set :log_path,              fetch(:app_path) + "/logs"
+set :cache_path,            fetch(:app_path) + "/cache"
+set :analyze_path,          fetch(:web_path) + "/analyze"
+set :app_config_path,       fetch(:app_path) + "/config"
+set :linked_files, [ fetch(:app_config_path) + "/parameters.yml" ]
+set :linked_dirs, [fetch(:log_path), fetch(:web_path) + "/uploads", fetch(:web_path) + "/analyze" ]
+set :file_permissions_paths,         [fetch(:log_path), fetch(:cache_path), fetch(:analyze_path)]
+set :webserver_user,        "www-data"
+set :permission_method,     :chmod
+set :file_permissions_roles, :all
+set :controllers_to_clear, ["app_*.php"]
+set :file_permissions_chmod_mode, "777"
+set :use_set_permissions, true
+set :symfony_console_path, fetch(:app_path) + "/console"
+set :symfony_console_flags, "--no-debug"
+set :assets_install_path,   fetch(:web_path)
+set :assets_install_flags,  '--symlink'
+set :assetic_dump_flags,  '--no-debug'
 
-before 'deploy:starting', 'symfony2:parameters'
-after 'deploy:updated', 'symfony2:assets'
-after 'deploy:updated', 'symfony2:migration'
-before 'deploy:publishing', 'symfony2:cache'
-before 'deploy:publishing', 'symfony2:permissions'
-after 'deploy:finishing', 'deploy:cleanup'
-after 'deploy:published', 'symfony2:apc'
+fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
+
+after 'deploy:updated',   'symfony:assets:install'
+after 'deploy:published',  'symfony:permissions:apply'
+after 'deploy:published', 'symfony:redis:clear_cache'
+after 'deploy:published', 'apache:apc:clear'
