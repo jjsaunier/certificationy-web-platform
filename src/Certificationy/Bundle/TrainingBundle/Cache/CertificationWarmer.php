@@ -32,6 +32,8 @@ class CertificationWarmer implements CacheWarmerInterface
      */
     public function warmUp($cacheDir)
     {
+        $this->certificationManager->setDebug(false);
+
         foreach ($this->certificationManager->getCertifications() as $name => $label) {
             $this->certificationManager->getCertification($name);
         }
