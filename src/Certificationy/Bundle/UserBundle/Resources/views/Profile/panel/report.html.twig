@@ -3,11 +3,9 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ 'profile.report.hash'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.date'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.tech'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.language'|trans({}, 'profile') }}</th>
-            <th>{{ 'profile.report.level'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.score'|trans({}, 'profile') }}</th>
             <th>{{ 'profile.report.timing'|trans({}, 'profile') }}</th>
         </tr>
@@ -15,7 +13,6 @@
     <tbody>
         {% for report in pagination %}
             <tr class="{{ report.score >= report.maxScore ? 'success' : 'danger' }}">
-                <td> {{ report.id }} </td>
                 <td> {{ report.createdAt|date }} </td>
                 <td>
                     <a href="{{ path('certification_guidelines', { 'name': report.name }) }}">
@@ -23,7 +20,6 @@
                     </a>
                 </td>
                 <td> {{ report.language }} </td>
-                <td> {{ report.level }} </td>
                 <td> {{ report.score }} / {{ report.maxScore }}</td>
                 <td> {{ report.elapsedTime|elapsed }}</td>
             </tr>
