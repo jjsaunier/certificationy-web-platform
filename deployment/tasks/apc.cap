@@ -1,8 +1,0 @@
-namespace :symfony2 do
-    desc 'Clearing APC cache'
-    task :apc do
-        on roles(:app) do
-            execute "sudo apache2ctl graceful"
-        end
-    end
-end

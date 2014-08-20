@@ -3,6 +3,7 @@ set :stage_config_path, "deployment/stages/"
 
 require 'capistrano/setup'
 require 'capistrano/deploy'
+require 'capistrano/symfony'
 require 'capistrano/composer'
 
 Dir.glob('deployment/tasks/*.cap').each { |r| import r }

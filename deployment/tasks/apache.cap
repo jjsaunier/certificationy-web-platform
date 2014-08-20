@@ -1,0 +1,10 @@
+namespace :apache do
+    namespace :apc do
+        desc 'Clearing APC cache'
+        task :clear do
+            on roles(:app) do
+                execute "sudo apache2ctl graceful"
+            end
+        end
+    end
+end

@@ -1,0 +1,45 @@
+module Capistrano
+    class FileNotFound < StandardError
+    end
+end
+
+def absolute_writable_paths
+    linked_dirs = fetch(:linked_dirs)
+    fetch(:file_permissions_paths).map do |d|
+        Array(linked_dirs).include?(d) ? shared_path.join(d) : release_path.join(d)
+    end
+end
+
+namespace :symfony do
+    namespace :redis do
+    	desc 'Flush volatile cache'
+    	task :clear_cache do
+    		on roles(:app) do
+    			execute :php , "#{fetch(:release_path)}/app/console redis:flushdb --client=default --no-interaction --env=prod"
+    		end
+    	end
+    end
+
+    namespace :permissions do
+        desc 'Check file permission capistrano'
+        task :check do
+            on roles fetch(:file_permissions_roles) do
+                absolute_writable_paths.each do |path|
+                    unless test "[ -d #{path} ]" or test "[ -e #{path} ]"
+                        msg = "Cannot change permissions: #{path} is not a file or directory"
+                        error msg
+                        fail Capistrano::FileNotFound, msg
+                    end
+                end
+            end
+        end
+
+        desc 'Fix file permissions capistrano'
+        task :apply => [:check] do
+            next unless any? :file_permissions_paths
+            on roles fetch(:file_permissions_roles) do |host|
+                execute :chmod, "-Rf", fetch(:file_permissions_chmod_mode), *absolute_writable_paths
+            end
+        end
+    end
+end
