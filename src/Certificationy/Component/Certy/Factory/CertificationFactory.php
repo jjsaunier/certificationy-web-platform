@@ -18,6 +18,7 @@ use Certificationy\Component\Certy\Loader\LoaderInterface;
 use Certificationy\Component\Certy\Model\Certification;
 use Certificationy\Component\Certy\Provider\ProviderInterface;
 use Certificationy\Component\Certy\Provider\ProviderRegistryInterface;
+use Psr\Log\LoggerInterface;
 
 class CertificationFactory
 {
@@ -47,6 +48,11 @@ class CertificationFactory
     protected $providers = [];
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param string               $name
      * @param CertificationContext $context
      * @param string[]             $providers
@@ -57,30 +63,75 @@ class CertificationFactory
     public function createNamed($name, CertificationContext $context, array $providers)
     {
         if (empty($providers)) {
-            throw new \Exception('You must define at least one provider');
+            $exception = new \Exception('You must define at least one provider');
+
+            if(null !== $this->logger){
+                $this->logger->critical(sprintf(
+                    'Impossible to generate certification %s, following error : "%s"',
+                    $name,
+                    $exception->getMessage()
+                ));
+            }
+
+            throw $exception;
         }
 
         if ($name !== $context->getName()) {
-            throw new \Exception(sprintf('The current certification context is not for certification call %s', $name));
+            $exception = new \Exception(sprintf('The current certification context is not for certification call %s', $name));
+
+            if(null !== $this->logger){
+                $this->logger->critical(sprintf(
+                    'Impossible to generate certification %s, following error : "%s"',
+                    $name,
+                    $exception->getMessage()
+                ));
+            }
+
+            throw $exception;
         }
 
         //Avoid to regenerate certification previously generated
         if (null !== $this->loader && false === $context->getDebug()) {
             try{
+
+                if(null !== $this->logger){
+                    $this->logger->debug(sprintf(
+                        'Certification %s loaded from previous dump via %s',
+                        $name,
+                        get_class($this->loader)
+                    ));
+                }
+
                 return $this->loader->load($name);
             } catch (NotAlreadyDumpedException $e){
-
+                if(null !== $this->logger){
+                    $this->logger->debug(sprintf(
+                        'Certification %s will be fully generated',
+                        $name
+                    ));
+                }
             }
         }
 
         //Check if required provider are loads
         foreach ($providers as $provider) {
             if (!$this->providerRegistry->isRegister($provider)) {
-                throw new \Exception(sprintf(
+
+                $exception =  new \Exception(sprintf(
                     'Provider %s is not registered. Did you mean %s',
                     $provider,
                     implode(', ', $this->providerRegistry->getRegistered())
                 ));
+
+                if(null !== $this->logger){
+                    $this->logger->critical(sprintf(
+                        'Impossible to generate certification %s, following error : "%s"',
+                        $name,
+                        $exception->getMessage()
+                    ));
+                }
+
+                throw $exception;
             }
 
             $this->builder->addBuilderPass(new ProviderBuilderPass($this->providerRegistry->getProvider($provider)));
@@ -90,6 +141,15 @@ class CertificationFactory
 
         //Dump for next usage
         if (false === $context->getDebug() && null !== $this->dumper) {
+
+            if(null !== $this->logger){
+                $this->logger->debug(sprintf(
+                    'Dump certification %s via : %s',
+                    $name,
+                    get_class($this->dumper)
+                ));
+            }
+
             $this->dumper->dump($certification, $context);
         }
 
@@ -142,5 +202,13 @@ class CertificationFactory
         $this->dumper = $dumper;
 
         return $this;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
     }
 }

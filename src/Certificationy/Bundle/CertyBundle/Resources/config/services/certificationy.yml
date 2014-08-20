@@ -62,6 +62,7 @@ services:
             - [ "setDumper", [ @certy.certification.dumper.php ] ]
             - [ "setLoader", [ @certy.certification.loader.php ] ]
             - [ "setProviderRegistry", [ @certy.certification.provider_registry ] ]
+            - [ "setLogger", [ @?monolog.logger.certy ] ]
 
     certy.certification.collection.handler:
         class: %certy_certification_collection_handler%
