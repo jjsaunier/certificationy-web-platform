@@ -91,7 +91,7 @@ class CheckAction extends GenericAction
     }
 
     /**
-     * @param $type
+     * @param string $type
      * @param $identifier
      */
     public function addSkip($type, $identifier)
@@ -100,7 +100,7 @@ class CheckAction extends GenericAction
     }
 
     /**
-     * @param $type
+     * @param string $type
      *
      * @return mixed
      */

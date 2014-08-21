@@ -126,7 +126,7 @@ class CertificationManager
     }
 
     /**
-     * @param string $name
+     * @param string               $name
      * @param CertificationContext $certificationContext
      *
      * @return \Certificationy\Component\Certy\Model\Certification
@@ -136,13 +136,13 @@ class CertificationManager
     {
         $this->logger->info(sprintf('Certification %s requested', $name));
 
-        try{
+        try {
             return $this->factory->createNamed(
                 $name,
                 null === $certificationContext ? $this->getContext($name) : $certificationContext,
                 ['yaml']
             );
-        } catch( \Exception $e) {
+        } catch ( \Exception $e) {
 
             $this->logger->critical(sprintf(
                 'An error has been raised when creating certification %s, error : %s inside %s',

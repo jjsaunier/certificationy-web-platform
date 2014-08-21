@@ -65,7 +65,7 @@ class CertificationFactory
         if (empty($providers)) {
             $exception = new \Exception('You must define at least one provider');
 
-            if(null !== $this->logger){
+            if (null !== $this->logger) {
                 $this->logger->critical(sprintf(
                     'Impossible to generate certification %s, following error : "%s"',
                     $name,
@@ -79,7 +79,7 @@ class CertificationFactory
         if ($name !== $context->getName()) {
             $exception = new \Exception(sprintf('The current certification context is not for certification call %s', $name));
 
-            if(null !== $this->logger){
+            if (null !== $this->logger) {
                 $this->logger->critical(sprintf(
                     'Impossible to generate certification %s, following error : "%s"',
                     $name,
@@ -92,9 +92,9 @@ class CertificationFactory
 
         //Avoid to regenerate certification previously generated
         if (null !== $this->loader && false === $context->getDebug()) {
-            try{
+            try {
 
-                if(null !== $this->logger){
+                if (null !== $this->logger) {
                     $this->logger->debug(sprintf(
                         'Certification %s loaded from previous dump via %s',
                         $name,
@@ -103,8 +103,8 @@ class CertificationFactory
                 }
 
                 return $this->loader->load($name);
-            } catch (NotAlreadyDumpedException $e){
-                if(null !== $this->logger){
+            } catch (NotAlreadyDumpedException $e) {
+                if (null !== $this->logger) {
                     $this->logger->debug(sprintf(
                         'Certification %s will be fully generated',
                         $name
@@ -123,7 +123,7 @@ class CertificationFactory
                     implode(', ', $this->providerRegistry->getRegistered())
                 ));
 
-                if(null !== $this->logger){
+                if (null !== $this->logger) {
                     $this->logger->critical(sprintf(
                         'Impossible to generate certification %s, following error : "%s"',
                         $name,
@@ -142,7 +142,7 @@ class CertificationFactory
         //Dump for next usage
         if (false === $context->getDebug() && null !== $this->dumper) {
 
-            if(null !== $this->logger){
+            if (null !== $this->logger) {
                 $this->logger->debug(sprintf(
                     'Dump certification %s via : %s',
                     $name,
