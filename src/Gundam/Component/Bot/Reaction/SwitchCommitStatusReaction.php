@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Common\Reaction;
+namespace Gundam\Component\Bot\Reaction;
 
-use Certificationy\Bundle\GithubBundle\Api\Status\Status;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Action\SwitchCommitStatusAction;
-use Certificationy\Bundle\GithubBundle\Bot\Common\BotActions;
+use Gundam\Component\Github\Status\Status;
+use Gundam\Component\Bot\Action\SwitchCommitStatusAction;
+use Gundam\Component\Bot\BotActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;

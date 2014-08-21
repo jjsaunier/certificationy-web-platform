@@ -9,8 +9,8 @@
 
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action;
 
-use Certificationy\Bundle\GithubBundle\Api\Client;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Action\GenericAction;
+use Gundam\Component\Github\Client;
+use Gundam\Component\Bot\Action\GenericAction;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class PersistenceAction extends GenericAction

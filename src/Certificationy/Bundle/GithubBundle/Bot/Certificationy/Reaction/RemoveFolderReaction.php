@@ -10,8 +10,8 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\RemoveFolderAction;
-use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
+use Gundam\Component\Bot\LoggerTrait;
+use Gundam\Component\Bot\Reaction\LoggableReactionInterface;
 use Symfony\Component\Process\Process;
 
 class RemoveFolderReaction implements LoggableReactionInterface

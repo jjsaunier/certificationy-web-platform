@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Common\Action;
+namespace Gundam\Component\Bot\Action;
 
-use Certificationy\Bundle\GithubBundle\Api\Client;
+use Gundam\Component\Github\Client;
 use Symfony\Component\EventDispatcher\Event;
 
 class GenericAction extends Event
 {
     /**
-     * @var \Certificationy\Bundle\GithubBundle\Api\Client
+     * @var \Gundam\Component\Github\Client
      */
     protected $client;
 
@@ -34,7 +34,7 @@ class GenericAction extends Event
     }
 
     /**
-     * @return \Certificationy\Bundle\GithubBundle\Api\Client
+     * @return \Gundam\Component\Github\Client
      */
     public function getClient()
     {

@@ -1,6 +1,6 @@
 services:
     github.client:
-        class: Certificationy\Bundle\GithubBundle\Api\Client
+        class: Gundam\Component\Github\Client
         arguments:
             - %github_login%
             - %github_password%
@@ -8,10 +8,10 @@ services:
             - [ "setLogger", [ @?monolog.logger.github ] ]
 
     github.security:
-        class: Certificationy\Bundle\GithubBundle\Api\Security
+        class: Gundam\Component\Github\Security
         calls:
             - [ "setSecret", [ %kernel.secret% ] ]
             - [ "setLogger", [ @?monolog.logger.github ] ]
 
     github.status:
-        class: Certificationy\Bundle\GithubBundle\Api\Status\Status
+        class: Gundam\Component\Github\Status\Status

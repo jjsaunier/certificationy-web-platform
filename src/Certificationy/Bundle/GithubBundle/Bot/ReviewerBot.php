@@ -9,15 +9,15 @@
 
 namespace Certificationy\Bundle\GithubBundle\Bot;
 
-use Certificationy\Bundle\GithubBundle\Api\Events;
+use Gundam\Component\Github\Events;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\CheckAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\GitLocaleCloneAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\PersistenceAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\RemoveFolderAction;
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\ReviewerBotActions;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Action\SwitchCommitStatusAction;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Bot;
-use Certificationy\Bundle\GithubBundle\Bot\Common\BotActions;
+use Gundam\Component\Bot\Action\SwitchCommitStatusAction;
+use Gundam\Component\Bot\Bot;
+use Gundam\Component\Bot\BotActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -211,8 +211,6 @@ class ReviewerBot extends Bot
             $data['content']['pull_request']['head']['sha'],
             $data['content']['pull_request']['head']['repo']['name']
         );
-
-        throw new \Exception('lol');
 
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(

@@ -10,8 +10,8 @@
 namespace Certificationy\Bundle\GithubBundle\Bot\Certificationy\Reaction;
 
 use Certificationy\Bundle\GithubBundle\Bot\Certificationy\Action\PersistenceAction;
-use Certificationy\Bundle\GithubBundle\Bot\Common\LoggerTrait;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
+use Gundam\Component\Bot\LoggerTrait;
+use Gundam\Component\Bot\Reaction\LoggableReactionInterface;
 use Certificationy\Bundle\GithubBundle\Document\InspectionReport;
 use Doctrine\ODM\MongoDB\DocumentManager;
 

@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Api;
+namespace Gundam\Component\Github;
 
-use Certificationy\Bundle\GithubBundle\Api\Common\RequestableInterface;
+use Gundam\Component\Github\Common\RequestableInterface;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Log\LoggerInterface;
 
@@ -42,6 +42,9 @@ class Client
     }
 
     /**
+     * @param RequestableInterface $apiRequest
+     *
+     * @return bool|\GuzzleHttp\Message\ResponseInterface
      */
     public function send(RequestableInterface $apiRequest)
     {

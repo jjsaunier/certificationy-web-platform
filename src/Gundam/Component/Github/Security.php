@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Api;
+namespace Gundam\Component\Github;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;

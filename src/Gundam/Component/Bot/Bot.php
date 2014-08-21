@@ -7,12 +7,12 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Common;
+namespace Gundam\Component\Bot;
 
-use Certificationy\Bundle\GithubBundle\Api\Client;
-use Certificationy\Bundle\GithubBundle\Api\Events;
-use Certificationy\Bundle\GithubBundle\Api\Security;
-use Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\LoggableReactionInterface;
+use Gundam\Component\Github\Client;
+use Gundam\Component\Github\Events;
+use Gundam\Component\Github\Security;
+use Gundam\Component\Bot\Reaction\LoggableReactionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -24,12 +24,12 @@ use Symfony\Component\Stopwatch\Stopwatch;
 abstract class Bot implements BotInterface
 {
     /**
-     * @var \Certificationy\Bundle\GithubBundle\Api\Client
+     * @var \Gundam\Component\Github\Client
      */
     protected $client;
 
     /**
-     * @var \Certificationy\Bundle\GithubBundle\Api\Security
+     * @var \Gundam\Component\Github\Security
      */
     protected $security;
 

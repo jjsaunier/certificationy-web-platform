@@ -1,6 +1,6 @@
 services:
     github.bot:
-        class: Certificationy\Bundle\GithubBundle\Bot\Common\Bot
+        class: Gundam\Component\Bot\Bot
         abstract: true
         calls:
             - [ "setLogger", [ @?monolog.logger.github ] ]
@@ -23,7 +23,7 @@ services:
             - [ "registerActionListener", [ @github.reviewer.remove_folder.reaction, 'remove_folder' ] ]
 
     github.reviewer.status_push.reaction:
-        class: Certificationy\Bundle\GithubBundle\Bot\Common\Reaction\SwitchCommitStatusReaction
+        class: Gundam\Component\Bot\Reaction\SwitchCommitStatusReaction
         arguments:
             - @router
 

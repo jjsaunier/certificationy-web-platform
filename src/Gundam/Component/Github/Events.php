@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Api;
+namespace Gundam\Component\Github;
 
 final class Events
 {

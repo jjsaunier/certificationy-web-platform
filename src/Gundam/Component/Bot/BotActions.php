@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Common;
+namespace Gundam\Component\Bot;
 
 final class BotActions
 {

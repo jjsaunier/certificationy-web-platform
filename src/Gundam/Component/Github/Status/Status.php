@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Api\Status;
+namespace Gundam\Component\Github\Status;
 
-use Certificationy\Bundle\GithubBundle\Api\Common\RequestableInterface;
+use Gundam\Component\Github\Common\RequestableInterface;
 
 class Status implements RequestableInterface
 {

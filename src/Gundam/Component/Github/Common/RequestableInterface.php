@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Api\Common;
+namespace Gundam\Component\Github\Common;
 
 interface RequestableInterface
 {

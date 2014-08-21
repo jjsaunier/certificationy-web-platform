@@ -7,16 +7,12 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Common\Reaction;
+namespace Gundam\Component\Bot;
 
-use Psr\Log\LoggerInterface;
-
-interface LoggableReactionInterface
+interface BotInterface
 {
     /**
-     * @param LoggerInterface $logger
-     *
-     * @return mixed
+     * @return string[]
      */
-    public function setLogger(LoggerInterface $logger = null);
+    public function getGithubEvents();
 }

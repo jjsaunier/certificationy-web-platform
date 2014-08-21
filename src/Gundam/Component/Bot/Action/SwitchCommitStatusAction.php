@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  **/
 
-namespace Certificationy\Bundle\GithubBundle\Bot\Common\Action;
+namespace Gundam\Component\Bot\Action;
 
-use Certificationy\Bundle\GithubBundle\Api\Client;
+use Gundam\Component\Github\Client;
 
 class SwitchCommitStatusAction extends GenericAction
 {
