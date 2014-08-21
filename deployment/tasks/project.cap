@@ -1,11 +1,11 @@
-namespace :project do
+namespace :deploy do
     namespace :database do
         desc 'Init database of certificationy'
         task :init do
             on roles(:db) do
-			    invoke 'symfony:console', 'doctrine:database:create'
-			    invoke 'symfony:console', 'doctrine:schema:create'
-			    invoke 'symfony:console', 'doctrine:mongodb:schema:create'
+			    execute :php, "#{fetch(:release_path)}/app/console doctrine:database:create"
+			    execute :php, "#{fetch(:release_path)}/app/console doctrine:schema:create"
+			    execute :php, "#{fetch(:release_path)}/app/console doctrine:mongodb:schema:create"
             end
         end
     end
