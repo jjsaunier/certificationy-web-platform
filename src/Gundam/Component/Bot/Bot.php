@@ -80,7 +80,7 @@ abstract class Bot implements BotInterface
     }
 
     /**
-     * @param string $content
+     * @param  string   $content
      * @return Response
      */
     protected function createResponse($content = null)
