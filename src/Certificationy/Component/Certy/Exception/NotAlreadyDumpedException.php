@@ -12,6 +12,9 @@ namespace Certificationy\Component\Certy\Exception;
 
 class NotAlreadyDumpedException extends Exception
 {
+    /**
+     * @param string $certificationyName
+     */
     public function __construct($certificationyName)
     {
         parent::__construct(sprintf('Certification %s is not already dumped', $certificationyName));

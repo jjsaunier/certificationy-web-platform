@@ -19,7 +19,7 @@ abstract class Loader implements LoaderInterface
      *
      * @return Certification
      */
-    protected abstract function doLoad($certificationName);
+    abstract protected function doLoad($certificationName);
 
     /**
      * @param string $certificationName
@@ -36,7 +36,7 @@ abstract class Loader implements LoaderInterface
     }
 
     /**
-     * @param mixed $certification
+     * @param Certification $certification
      */
     protected function validate($certification)
     {

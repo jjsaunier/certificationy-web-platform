@@ -12,7 +12,6 @@ namespace Certificationy\Bundle\WebBundle\Log\Processor;
 use Certificationy\Bundle\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class UserProcessor
 {
@@ -36,8 +35,8 @@ class UserProcessor
     {
         $securityContext = $this->container->get('security.context');
 
-        try{
-            if($securityContext->isGranted('IS_AUTHENTICATED_FULLY')){
+        try {
+            if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 
                 /** @var User $user */
                 $user = $securityContext->getToken()->getUser();
@@ -45,10 +44,11 @@ class UserProcessor
                 $record['extra']['user']['name'] = $user->getRealName();
                 $record['extra']['user']['email'] = $user->getEmailCanonical();
                 $record['extra']['user']['id'] = $user->getId();
+
                 return $record;
             }
-        } catch (AuthenticationCredentialsNotFoundException $e){}
+        } catch (AuthenticationCredentialsNotFoundException $e) {}
 
         return $record;
     }
-} 
+}
