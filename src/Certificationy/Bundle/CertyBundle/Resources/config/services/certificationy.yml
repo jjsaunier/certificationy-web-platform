@@ -16,6 +16,8 @@ parameters:
 services:
     certy.certification.builder:
         class: %certy_certification_builder_class%
+        calls:
+            - [ "setLogger", [ @?monolog.logger.certy ] ]
 
     certy.certification.context:
         class: %certy_certification_context_class%

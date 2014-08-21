@@ -64,7 +64,7 @@ class Collector implements CollectorInterface
     /**
      * @param $certificationName
      *
-     * @return array|\Resource[]
+     * @return Resource[]
      */
     public function getFlattenResources($certificationName)
     {

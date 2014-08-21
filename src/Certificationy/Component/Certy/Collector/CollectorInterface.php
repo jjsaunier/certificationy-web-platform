@@ -16,7 +16,7 @@ interface CollectorInterface extends \Countable
      * @param string     $certificationName
      * @param resource[] $resources
      *
-*@return void
+     * @return void
      */
     public function addResource($providerName, $certificationName, array $resources);
 
@@ -32,7 +32,7 @@ interface CollectorInterface extends \Countable
 
     /**
      * @param  string            $certificationName
-     * @return array|\Resource[]
+     * @return Resource[]
      */
     public function getFlattenResources($certificationName);
 }

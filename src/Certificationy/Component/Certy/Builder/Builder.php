@@ -96,13 +96,33 @@ class Builder implements BuilderInterface
         $certification = static::createCertification();
         $certification->setContext($context);
 
+        if(null !== $this->logger){
+            $this->logger->debug(sprintf('Normalize %s', $context->getName()));
+        }
+
         $metrics = $certification->getMetrics();
 
         foreach ($this->collector->getFlattenResources($context->getName()) as $resource) {
+
+            if($resource->getCertificationName() !== $context->getName()){
+                continue;
+            }
+
             $resourceContent = $resource->getContent();
 
             if (empty($resourceContent)) {
                 continue;
+            }
+
+            if(null !== $this->logger){
+                $this->logger->debug(
+                    sprintf(
+                        'Adding resource %s on certification %s',
+                        $resource->getResourceName(),
+                        $resource->getCertificationName()
+                    ),
+                    $resource->getContent()
+                );
             }
 
             $category = new Category();
