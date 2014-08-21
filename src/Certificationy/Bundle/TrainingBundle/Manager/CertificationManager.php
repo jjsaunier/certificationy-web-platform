@@ -120,7 +120,7 @@ class CertificationManager
             $this->redisClient->set($key, json_encode($names));
         }
 
-        $this->logger->debug('Load available trainings from redis server', array('key' => $key));
+        $this->logger->debug('Load available trainings from redis server', ['key' => $key]);
 
         return json_decode($this->redisClient->get($key), true);
     }
@@ -195,14 +195,14 @@ class CertificationManager
             }
 
             $this->logger->info(
-                sprintf('Parse context for certification %s', $name, array('key' =>  $key))
+                sprintf('Parse context for certification %s', $name, ['key' =>  $key])
             );
 
             $this->redisClient->set($key, $this->serializer->serialize($context, 'json'));
         }
 
         $this->logger->debug(
-            sprintf('Load certification context %s from redis server', $name, array('key' =>  $key))
+            sprintf('Load certification context %s from redis server', $name, ['key' =>  $key])
         );
 
         $serializedContext = $this->redisClient->get($key);

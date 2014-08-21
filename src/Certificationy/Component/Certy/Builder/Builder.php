@@ -96,7 +96,7 @@ class Builder implements BuilderInterface
         $certification = static::createCertification();
         $certification->setContext($context);
 
-        if(null !== $this->logger){
+        if (null !== $this->logger) {
             $this->logger->debug(sprintf('Normalize %s', $context->getName()));
         }
 
@@ -104,7 +104,7 @@ class Builder implements BuilderInterface
 
         foreach ($this->collector->getFlattenResources($context->getName()) as $resource) {
 
-            if($resource->getCertificationName() !== $context->getName()){
+            if ($resource->getCertificationName() !== $context->getName()) {
                 continue;
             }
 
@@ -114,7 +114,7 @@ class Builder implements BuilderInterface
                 continue;
             }
 
-            if(null !== $this->logger){
+            if (null !== $this->logger) {
                 $this->logger->debug(
                     sprintf(
                         'Adding resource %s on certification %s',
@@ -164,7 +164,7 @@ class Builder implements BuilderInterface
      */
     public function build(CertificationContextInterface $context)
     {
-        if($this->collector->isDirty()){
+        if ($this->collector->isDirty()) {
             $this->collector->release();
         }
 

@@ -52,8 +52,8 @@ class Timer
     /**
      * @param array $data
      */
-    public static function __set_state(Array $data)
+    public static function __set_state(array $data)
     {
-        return new self;
+        return new self();
     }
 }
