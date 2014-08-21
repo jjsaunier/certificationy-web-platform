@@ -164,6 +164,10 @@ class Builder implements BuilderInterface
      */
     public function build(CertificationContextInterface $context)
     {
+        if($this->collector->isDirty()){
+            $this->collector->release();
+        }
+
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Build certification %s',

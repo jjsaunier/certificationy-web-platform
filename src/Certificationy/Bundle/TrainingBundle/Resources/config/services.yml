@@ -39,10 +39,3 @@ services:
             - [ addCertificationTemplateDir, [ @certificationy.certification.manager ] ]
         tags:
             - { name: twig.extension }
-
-    certificationy.certification.cache_warmer:
-        class: Certificationy\Bundle\TrainingBundle\Cache\CertificationWarmer
-        arguments:
-            - @certificationy.certification.manager
-        tags:
-            - { name: kernel.cache_warmer }

@@ -27,7 +27,7 @@ interface CollectorInterface extends \Countable
 
     /**
      * @return string[]
-     *
+     */
     public function getCollectedProviders();
 
     /**
@@ -35,4 +35,11 @@ interface CollectorInterface extends \Countable
      * @return Resource[]
      */
     public function getFlattenResources($certificationName);
+
+    /**
+     * @return bool
+     */
+    public function isDirty();
+
+    public function release();
 }

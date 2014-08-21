@@ -105,4 +105,18 @@ class Collector implements CollectorInterface
     {
         return $this->collectedProviders;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDirty()
+    {
+        return null !== $this->resources;
+    }
+
+    public function release()
+    {
+        $this->resources = null;
+        $this->collectedProviders = [];
+    }
 }
