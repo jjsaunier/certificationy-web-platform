@@ -103,7 +103,7 @@ class Builder implements BuilderInterface
         $flattenResources = $this->collector->getFlattenResources($context->getName());
 
         //Should I throw Exception like NoResourcesCollectedException ?
-        if(empty($flattenResources)){
+        if (empty($flattenResources)) {
             return $certification;
         }
 

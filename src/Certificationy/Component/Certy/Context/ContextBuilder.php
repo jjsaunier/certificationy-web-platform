@@ -29,7 +29,7 @@ class ContextBuilder implements ContextBuilderInterface
      *
      * @return CertificationContext
      */
-    public function build(Array $conf)
+    public function build(array $conf)
     {
         $context = new CertificationContext($conf['name']);
         $context->setLabel($conf['label']);
@@ -56,4 +56,4 @@ class ContextBuilder implements ContextBuilderInterface
 
         return $context;
     }
-} 
+}

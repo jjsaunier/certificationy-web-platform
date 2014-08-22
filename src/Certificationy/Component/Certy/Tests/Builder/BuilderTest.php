@@ -17,7 +17,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateCertification()
     {
-        $this->assertInstanceOf(Certification::CLASS, Builder::createCertification());
+        $this->assertInstanceOf(Certification::class, Builder::createCertification());
     }
 
     public function testBuild()
@@ -35,7 +35,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $builderPass->expects($this->once())
             ->method('setCollector')
-            ->with($this->callback(function($arg){
+            ->with($this->callback(function ($arg) {
                 return $arg instanceof CollectorInterface;
             }))
         ;
@@ -48,7 +48,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         $builder->addBuilderPass($builderPass);
         $certification = $builder->build($context);
 
-        $this->assertInstanceOf(Certification::CLASS, $certification);
+        $this->assertInstanceOf(Certification::class, $certification);
     }
 
     public function testAddBuilderPass()

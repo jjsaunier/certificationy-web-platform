@@ -9,7 +9,6 @@
 
 namespace Certificationy\Component\Certy\Tests\Builder;
 
-
 use Certificationy\Component\Certy\Builder\ProviderBuilderPass;
 
 class ProviderBuilderPassTest extends \PHPUnit_Framework_TestCase
@@ -37,7 +36,7 @@ class ProviderBuilderPassTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testSetCollector
      */
-    public function testExecute(Array $previousTestData)
+    public function testExecute(array $previousTestData)
     {
         list($providerBuilderPass, $provider, $collector, $context) = $previousTestData;
 
@@ -55,7 +54,7 @@ class ProviderBuilderPassTest extends \PHPUnit_Framework_TestCase
 
         $provider->expects($this->any())
             ->method('getResources')
-            ->will($this->returnValue(array()))
+            ->will($this->returnValue([]))
         ;
 
         $provider->expects($this->once())
@@ -65,7 +64,7 @@ class ProviderBuilderPassTest extends \PHPUnit_Framework_TestCase
 
         $collector->expects($this->once())
             ->method('addResource')
-            ->with($this->equalTo('Bar'), $this->equalTo('Foo'), $this->equalTo(array()))
+            ->with($this->equalTo('Bar'), $this->equalTo('Foo'), $this->equalTo([]))
         ;
 
         $providerBuilderPass->execute($builder, $context);
