@@ -10,6 +10,7 @@
 namespace Certificationy\Component\Certy\Builder;
 
 use Certificationy\Component\Certy\Context\CertificationContext;
+use Certificationy\Component\Certy\Context\CertificationContextInterface;
 use Certificationy\Component\Certy\Provider\ProviderInterface;
 
 class ProviderBuilderPass extends AbstractBuilderPass
@@ -28,10 +29,10 @@ class ProviderBuilderPass extends AbstractBuilderPass
     }
 
     /**
-     * @param Builder              $builder
-     * @param CertificationContext $certificationContext
+     * @param BuilderInterface              $builder
+     * @param CertificationContextInterface $certificationContext
      */
-    public function execute(Builder $builder, CertificationContext $certificationContext)
+    public function execute(BuilderInterface $builder, CertificationContextInterface $certificationContext)
     {
         $this->provider->load($certificationContext->getName());
         $this->collector->addResource($this->provider->getName(), $certificationContext->getName(), $this->provider->getResources());

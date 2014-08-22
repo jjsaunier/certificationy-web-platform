@@ -11,7 +11,6 @@ namespace Certificationy\Component\Certy\Tests\Builder;
 
 use Certificationy\Component\Certy\Builder\Builder;
 use Certificationy\Component\Certy\Collector\CollectorInterface;
-use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Model\Certification;
 
 class BuilderTest extends \PHPUnit_Framework_TestCase
@@ -25,10 +24,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     {
         $collector = $this->getMock('Certificationy\Component\Certy\Collector\CollectorInterface');
 
-        $context = $this->getMockBuilder(CertificationContext::CLASS)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $context = $this->getMock('Certificationy\Component\Certy\Context\CertificationContextInterface');
 
         $builder = new Builder($collector);
 
