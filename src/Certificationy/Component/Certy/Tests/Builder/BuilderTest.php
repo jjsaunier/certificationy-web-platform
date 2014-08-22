@@ -10,6 +10,7 @@
 namespace Certificationy\Component\Certy\Tests\Builder;
 
 use Certificationy\Component\Certy\Builder\Builder;
+use Certificationy\Component\Certy\Collector\CollectorInterface;
 use Certificationy\Component\Certy\Context\CertificationContext;
 use Certificationy\Component\Certy\Model\Certification;
 
@@ -31,6 +32,24 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $builder = new Builder($collector);
 
+        $builderPass = $this->getMockBuilder('Certificationy\Component\Certy\Builder\BuilderPassInterface')
+            ->setMethods(['setCollector', 'execute'])
+            ->getMock()
+        ;
+
+        $builderPass->expects($this->once())
+            ->method('setCollector')
+            ->with($this->callback(function($arg){
+                return $arg instanceof CollectorInterface;
+            }))
+        ;
+
+        $builderPass->expects($this->once())
+            ->method('execute')
+            ->with($this->identicalTo($builder), $this->identicalTo($context))
+        ;
+
+        $builder->addBuilderPass($builderPass);
         $certification = $builder->build($context);
 
         $this->assertInstanceOf(Certification::CLASS, $certification);
