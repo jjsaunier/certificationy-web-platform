@@ -100,6 +100,13 @@ class Builder implements BuilderInterface
             $this->logger->debug(sprintf('Normalize %s', $context->getName()));
         }
 
+        $flattenResources = $this->collector->getFlattenResources($context->getName());
+
+        //Should I throw Exception like NoResourcesCollectedException ?
+        if(empty($flattenResources)){
+            return $certification;
+        }
+
         $metrics = $certification->getMetrics();
 
         foreach ($this->collector->getFlattenResources($context->getName()) as $resource) {
