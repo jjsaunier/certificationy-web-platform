@@ -12,8 +12,14 @@ parameters:
     certy_certification_collection_handler: Certificationy\Component\Certy\Model\Serializer\ModelCollectionHandler
     certy_certification_collection_deserialize: Certificationy\Component\Certy\Model\Serializer\CertificationBuildSubscriber
     certy_certification_context_class: Certificationy\Component\Certy\Context\CertificationContext
+    certy_certification_context_builder_class: Certificationy\Component\Certy\Context\ContextBuilder
 
 services:
+    certy.certification.context.builder:
+        class: %certy_certification_context_builder_class%
+        calls:
+            - [ "setDebug", [ %certy_debug% ] ]
+
     certy.certification.builder:
         class: %certy_certification_builder_class%
         calls:
@@ -22,7 +28,7 @@ services:
     certy.certification.context:
         class: %certy_certification_context_class%
         calls:
-            - [ "setDebug", [ %kernel.debug% ] ]
+            - [ "setDebug", [ %certy_debug% ] ]
 
     certy.certification.provider_registry:
         class: %certy_certification_provider_registry_class%

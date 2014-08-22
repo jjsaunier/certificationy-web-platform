@@ -10,7 +10,10 @@
 namespace Certificationy\Bundle\TrainingBundle\Manager;
 
 use Certificationy\Component\Certy\Builder\Builder;
+use Certificationy\Component\Certy\Builder\BuilderInterface;
 use Certificationy\Component\Certy\Context\CertificationContext;
+use Certificationy\Component\Certy\Context\ContextBuilder;
+use Certificationy\Component\Certy\Context\ContextBuilderInterface;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
 use JMS\Serializer\Serializer;
 use Predis\Client;
@@ -36,11 +39,6 @@ class CertificationManager
     protected $basePath;
 
     /**
-     * @var bool
-     */
-    protected $debug;
-
-    /**
      * @var Client
      */
     protected $redisClient;
@@ -56,24 +54,32 @@ class CertificationManager
     protected $logger;
 
     /**
-     * @param CertificationFactory $factory
-     * @param Builder              $builder
-     * @param Client               $redisClient
-     * @param Serializer           $serializer
-     * @param LoggerInterface      $logger
+     * @var ContextBuilder
+     */
+    protected $contextBuilder;
+
+    /**
+     * @param CertificationFactory    $factory
+     * @param BuilderInterface        $builder
+     * @param Client                  $redisClient
+     * @param Serializer              $serializer
+     * @param LoggerInterface         $logger
+     * @param ContextBuilderInterface $contextBuilder
      */
     public function __construct(
         CertificationFactory $factory,
-        Builder $builder,
+        BuilderInterface $builder,
         Client $redisClient,
         Serializer $serializer,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ContextBuilderInterface $contextBuilder
     ) {
         $this->factory = $factory;
         $this->builder = $builder;
         $this->redisClient = $redisClient;
         $this->serializer = $serializer;
         $this->logger = $logger;
+        $this->contextBuilder = $contextBuilder;
     }
 
     /**
@@ -82,14 +88,6 @@ class CertificationManager
     public function setBasePath($basePath)
     {
         $this->basePath = $basePath;
-    }
-
-    /**
-     * @param string $kernelDebug
-     */
-    public function setDebug($debug)
-    {
-        $this->debug = $debug;
     }
 
     /**
@@ -171,28 +169,7 @@ class CertificationManager
             $yaml = new Parser();
             $contextConfig = $yaml->parse($content);
 
-            $context = new CertificationContext($contextConfig['name']);
-            $context->setLabel($contextConfig['label']);
-            $context->setAvailableLanguages($contextConfig['availableLanguages']);
-            $context->setLanguage($contextConfig['defaults']['language']);
-            $context->setNumberOfQuestions($contextConfig['defaults']['questions_peer_category']);
-            $context->setAllowCustomNumberOfQuestions($contextConfig['customize']['number_of_questions']);
-            $context->setDebug($this->debug);
-
-            $context->setAllowExcludeCategories($contextConfig['customize']['exclude_categories']);
-
-            if (null !== $availableContext = $contextConfig['availableLevels']) {
-                $context->setAvailableLevels($availableContext);
-                $context->setLevel($contextConfig['defaults']['level']);
-            }
-
-            if (null !== $contextConfig['threshold']) {
-                $context->setThreshold($contextConfig['threshold']);
-            }
-
-            if (null !== $contextConfig['icons']) {
-                $context->setIcons($contextConfig['icons']);
-            }
+            $context = $this->contextBuilder->build($contextConfig);
 
             $this->logger->info(
                 sprintf('Parse context for certification %s', $name, ['key' =>  $key])

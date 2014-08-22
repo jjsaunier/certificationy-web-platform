@@ -7,9 +7,9 @@ services:
             - @snc_redis.default
             - @jms_serializer
             - @monolog.logger.certy
+            - @certy.certification.context.builder
         calls:
             - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
-            - [ "setDebug", [ %certy_debug% ] ]
 
     certificationy.report.persister:
         class: Certificationy\Bundle\TrainingBundle\EventListener\StoreCertificationReportListener
