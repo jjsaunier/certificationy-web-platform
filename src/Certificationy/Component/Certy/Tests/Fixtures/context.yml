@@ -1,0 +1,18 @@
+name: foo
+label: foo
+icons: fooclass
+availableLanguages: [ en ]
+availableLevels: ~
+customize:
+    exclude_categories: true
+    number_of_questions: true
+threshold:
+    newbie: 30
+    beginner: 45
+    good: 75
+    very_good: 85
+    expert: 95
+    god: 100
+defaults:
+    language: en
+    questions_peer_category: 5
