@@ -18,7 +18,7 @@ before_install:
     - sudo apt-get update
 
 before_script:
-    - echo "no" | pecl install apcu-beta
+    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm-nightly" ]; then echo "no" | pecl install apcu-beta; fi;'
     - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
