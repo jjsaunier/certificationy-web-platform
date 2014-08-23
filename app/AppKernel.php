@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
+            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
 
             //Certificationy
             new Certificationy\Bundle\UserBundle\CertificationyUserBundle(),
