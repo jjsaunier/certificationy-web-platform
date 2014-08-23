@@ -19,6 +19,7 @@ before_install:
 
 before_script:
     - echo "no" | pecl install apcu-beta
+    - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
     - php app/console doctrine:database:create
