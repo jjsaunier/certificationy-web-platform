@@ -36,6 +36,22 @@ class Timer
     }
 
     /**
+     * @param \DateTime $start
+     */
+    public function setStart(\DateTime $start = null)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * @param \DateTime $stop
+     */
+    public function setStop(\DateTime $stop = null)
+    {
+        $this->stop = $stop;
+    }
+
+    /**
      * @return integer[]
      */
     public function elapsed()
@@ -54,6 +70,8 @@ class Timer
      */
     public static function __set_state(array $data)
     {
-        return new self();
+        $timer = new self();
+        $timer->setStart($data['start']);
+        $timer->setStop($data['stop']);
     }
 }
