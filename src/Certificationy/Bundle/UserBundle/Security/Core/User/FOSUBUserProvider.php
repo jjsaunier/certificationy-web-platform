@@ -71,11 +71,19 @@ class FOSUBUserProvider extends BaseClass
 
             //I have set all requested data with the user's username modify here with relevant data
             $user->setUsername($username);
-            $user->setEmail($data['email']);
+
+            if(isset($data['email'])){
+                $user->setEmail($data['email']);
+            }
+
             $user->setPlainPassword($data['id']);
             $user->setAvatarUrl($data['avatar_url']);
             $user->setGravatarId($data['gravatar_id']);
-            $user->setRealName($data['name']);
+
+            if(isset($data['name'])){
+                $user->setRealName($data['name']);
+            }
+
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
 
