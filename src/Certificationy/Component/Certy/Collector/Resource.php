@@ -9,7 +9,7 @@
 
 namespace Certificationy\Component\Certy\Collector;
 
-class Resource
+class Resource implements ResourceInterface
 {
     /**
      * @var string

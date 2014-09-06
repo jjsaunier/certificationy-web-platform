@@ -1,10 +1,11 @@
 parameters:
     certificationy.user.provider.fosub_bridge.class: Certificationy\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
+    complete_registration_form_name: certificationy_complete_registration
 
 services:
     certificationy.user.provider.fosub_bridge:
         class: %certificationy.user.provider.fosub_bridge.class%
-        arguments: [ @fos_user.user_manager, { github: githubID } ]
+        arguments: [ @fos_user.user_manager, { github: githubID }, @snc_redis.default ]
 
     certificationy.user.menu_builder:
         class: Certificationy\Bundle\UserBundle\Menu\UserBuilder
@@ -35,3 +36,26 @@ services:
         class: Certificationy\Bundle\UserBundle\Form\Type\RegistrationType
         tags:
             - { name: form.type, alias: 'certificationy_user_registration' }
+
+    certificationy.user.complete_registration.listener:
+        class: Certificationy\Bundle\UserBundle\EventListener\CompleteUserRegistrationListener
+        arguments:
+            - @security.context
+            - @router
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    certificationy.user.complete_registration_form.type:
+        class: Certificationy\Bundle\UserBundle\Form\Type\CompleteRegistrationType
+        arguments:
+            - %fos_user.model.user.class%
+        tags:
+            - { name: form.type, alias: %complete_registration_form_name%  }
+
+    certificationy.user.complete_registration_form.handler:
+        class: Certificationy\Bundle\UserBundle\Form\Handler\CompleteRegistrationFormHandler
+        parent: certy.form.handler
+        arguments:
+            - @fos_user.user_manager
+        calls:
+            - [ "setName", [ %complete_registration_form_name% ] ]

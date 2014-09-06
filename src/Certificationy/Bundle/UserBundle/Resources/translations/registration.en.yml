@@ -2,3 +2,7 @@ registration:
     title: "Registration"
     form:
         real_name: "Real name"
+
+complete_registration:
+    title: "Complete registration"
+    submit: "Submit"

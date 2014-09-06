@@ -32,6 +32,8 @@ class CertificationHandler extends Handler
 
     /**
      * @param Certification $certification
+     *
+     * @return bool
      */
     public function process(Certification $certification)
     {
@@ -42,7 +44,9 @@ class CertificationHandler extends Handler
     }
 
     /**
-     * @param ResultCertification $data
+     * @param $data
+     *
+     * @return bool|Certification
      */
     public function onSuccess($data)
     {

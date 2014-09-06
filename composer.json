@@ -24,7 +24,7 @@
         "twbs/bootstrap": "~3.0",
         "components/jquery": "~2.0",
         "knplabs/knp-paginator-bundle": "~2.4",
-        "knplabs/knp-menu-bundle": "~1.1",
+        "knplabs/knp-menu-bundle": "~2.0",
         "FortAwesome/Font-Awesome": "*",
         "snc/redis-bundle": "~1.1",
         "predis/predis": "~0.8",

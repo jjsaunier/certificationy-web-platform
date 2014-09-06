@@ -15,7 +15,12 @@ use FOS\UserBundle\Entity\User as BaseUser;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
- */
+ *
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(type="string", name="email", length=255, unique=false, nullable=true)),
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false, nullable=true))
+ * })
+ **/
 class User extends BaseUser
 {
     /**
@@ -30,31 +35,31 @@ class User extends BaseUser
      *
      * @ORM\Column(name="github_id", type="string", nullable=true)
      */
-    private $githubID;
+    protected $githubID;
 
     /**
      * @var string
      * @ORM\Column(name="github_access_token", type="string", length=255, nullable=true)
      */
-    private $githubAccessToken;
+    protected $githubAccessToken;
 
     /**
      * @var string
      * @ORM\Column(name="real_name", type="string", length=255, nullable=true)
      */
-    private $realName;
+    protected $realName;
 
     /**
      * @var string
      * @ORM\Column(name="avatar_url", type="string", length=255, nullable=true)
      */
-    private $avatarUrl;
+    protected $avatarUrl;
 
     /**
      * @var string
      * @ORM\Column(name="gravatar_id", type="string", length=255, nullable=true)
      */
-    private $gravatarId;
+    protected $gravatarId;
 
     /**
      * @param string $githubID
@@ -134,5 +139,13 @@ class User extends BaseUser
     public function getRealName()
     {
         return $this->realName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIncomplete()
+    {
+        return null === $this->getRealName() || null === $this->getEmail();
     }
 }

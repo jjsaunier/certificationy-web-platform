@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1e2bed5a72171be5bb38614e07c7bd23",
+    "hash": "079719c036eaa23a36f68a4686538802",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -48,17 +48,17 @@
         },
         {
             "name": "braincrafted/bootstrap-bundle",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "target-dir": "Braincrafted/Bundle/BootstrapBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/braincrafted/bootstrap-bundle.git",
-                "reference": "dc6169b1e29d8668cda960aa663fcc4bbd602bd4"
+                "reference": "56231594bfce2b4fd293592662f508becc4c494e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/dc6169b1e29d8668cda960aa663fcc4bbd602bd4",
-                "reference": "dc6169b1e29d8668cda960aa663fcc4bbd602bd4",
+                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/56231594bfce2b4fd293592662f508becc4c494e",
+                "reference": "56231594bfce2b4fd293592662f508becc4c494e",
                 "shasum": ""
             },
             "require": {
@@ -97,15 +97,14 @@
                 {
                     "name": "Florian Eckerstorfer",
                     "email": "florian@eckerstorfer.co",
-                    "homepage": "http://florian.ec",
-                    "role": "Developer"
+                    "homepage": "http://florian.ec"
                 }
             ],
             "description": "BraincraftedBootstrapBundle integrates Bootstrap into Symfony2 by providing templates, Twig extensions, services and commands.",
             "keywords": [
                 "bootstrap"
             ],
-            "time": "2014-04-03 16:59:23"
+            "time": "2014-08-31 10:47:30"
         },
         {
             "name": "components/jquery",
@@ -773,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "66b78196b53d2984d6ed389806224823cd6b9b12"
+                "reference": "10e7e22a200b6d1e1565651486534b12267dd9f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/66b78196b53d2984d6ed389806224823cd6b9b12",
-                "reference": "66b78196b53d2984d6ed389806224823cd6b9b12",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/10e7e22a200b6d1e1565651486534b12267dd9f0",
+                "reference": "10e7e22a200b6d1e1565651486534b12267dd9f0",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +837,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2014-08-05 15:33:21"
+            "time": "2014-09-04 19:16:50"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1039,16 +1038,16 @@
         },
         {
             "name": "fortawesome/font-awesome",
-            "version": "4.1.0",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "2649d91d18629bab071449b3bc4cb02761037a57"
+                "reference": "a65bd93d81e9e6bd5ebfa41757a4474960b973b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/2649d91d18629bab071449b3bc4cb02761037a57",
-                "reference": "2649d91d18629bab071449b3bc4cb02761037a57",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a65bd93d81e9e6bd5ebfa41757a4474960b973b4",
+                "reference": "a65bd93d81e9e6bd5ebfa41757a4474960b973b4",
                 "shasum": ""
             },
             "require-dev": {
@@ -1083,21 +1082,21 @@
                 "font",
                 "icon"
             ],
-            "time": "2014-05-14 20:37:30"
+            "time": "2014-08-26 16:36:44"
         },
         {
             "name": "friendsofsymfony/user-bundle",
-            "version": "v1.3.4",
+            "version": "v1.3.5",
             "target-dir": "FOS/UserBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "2deeca89551c28ae27c19bad36861d732e69217e"
+                "reference": "d66890ad3489e18be153502c5ccc3f2bf5cce442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/2deeca89551c28ae27c19bad36861d732e69217e",
-                "reference": "2deeca89551c28ae27c19bad36861d732e69217e",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/d66890ad3489e18be153502c5ccc3f2bf5cce442",
+                "reference": "d66890ad3489e18be153502c5ccc3f2bf5cce442",
                 "shasum": ""
             },
             "require": {
@@ -1137,13 +1136,12 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Thibault Duplessis",
-                    "email": "thibault.duplessis@gmail.com",
-                    "homepage": "http://ornicar.github.com"
-                },
-                {
                     "name": "FriendsOfSymfony Community",
                     "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+                },
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com"
                 }
             ],
             "description": "Symfony FOSUserBundle",
@@ -1151,7 +1149,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-06-13 14:51:01"
+            "time": "2014-09-04 12:28:43"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1776,23 +1774,23 @@
         },
         {
             "name": "knplabs/knp-menu",
-            "version": "v1.1.2",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenu.git",
-                "reference": "f8e867268f63f561c1adadd6cbb5d8524f921873"
+                "reference": "5758d0026d7ed00c8dd4727e413918cf2dc74c1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/f8e867268f63f561c1adadd6cbb5d8524f921873",
-                "reference": "f8e867268f63f561c1adadd6cbb5d8524f921873",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/5758d0026d7ed00c8dd4727e413918cf2dc74c1a",
+                "reference": "5758d0026d7ed00c8dd4727e413918cf2dc74c1a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "pimple/pimple": "*",
+                "pimple/pimple": "1.0.*",
                 "silex/silex": "1.0.*",
                 "twig/twig": ">=1.2,<2.0-dev"
             },
@@ -1804,7 +1802,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -1822,7 +1820,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -1836,28 +1834,33 @@
                 "menu",
                 "tree"
             ],
-            "time": "2012-06-10 16:20:40"
+            "time": "2014-08-01 09:50:16"
         },
         {
             "name": "knplabs/knp-menu-bundle",
-            "version": "v1.1.2",
+            "version": "v2.0.0",
             "target-dir": "Knp/Bundle/MenuBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "2fecac02614e5a006f674dd5dd754eeaeca060b9"
+                "reference": "bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/2fecac02614e5a006f674dd5dd754eeaeca060b9",
-                "reference": "2fecac02614e5a006f674dd5dd754eeaeca060b9",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088",
+                "reference": "bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088",
                 "shasum": ""
             },
             "require": {
-                "knplabs/knp-menu": "~1.1",
+                "knplabs/knp-menu": "~2.0",
                 "symfony/framework-bundle": "~2.0"
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Knp\\Bundle\\MenuBundle": ""
@@ -1885,7 +1888,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2013-05-25 10:20:03"
+            "time": "2014-08-01 09:57:23"
         },
         {
             "name": "knplabs/knp-paginator-bundle",
@@ -2366,17 +2369,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "df82b1ee2b833be97677c0b95fca27e68fd4a344"
+                "reference": "ad10123f2532f6e311e583cce203ef368eedc469"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/df82b1ee2b833be97677c0b95fca27e68fd4a344",
-                "reference": "df82b1ee2b833be97677c0b95fca27e68fd4a344",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ad10123f2532f6e311e583cce203ef368eedc469",
+                "reference": "ad10123f2532f6e311e583cce203ef368eedc469",
                 "shasum": ""
             },
             "require": {
@@ -2415,7 +2418,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-08-06 09:24:35"
+            "time": "2014-08-26 13:14:47"
         },
         {
             "name": "sensio/generator-bundle",
@@ -2970,16 +2973,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.3",
+            "version": "v2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "f077a238c781f845487a7c81fea8033ccd0e6a02"
+                "reference": "3a369dddea56596df91977d8c2083e70784852f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f077a238c781f845487a7c81fea8033ccd0e6a02",
-                "reference": "f077a238c781f845487a7c81fea8033ccd0e6a02",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/3a369dddea56596df91977d8c2083e70784852f2",
+                "reference": "3a369dddea56596df91977d8c2083e70784852f2",
                 "shasum": ""
             },
             "require": {
@@ -3037,7 +3040,7 @@
                 "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": "~2.2",
                 "doctrine/orm": "~2.2,>=2.2.3",
-                "egulias/email-validator": "1.1.0",
+                "egulias/email-validator": "~1.2",
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.3",
                 "ocramius/proxy-manager": ">=0.3.1,<0.6-dev",
@@ -3080,7 +3083,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-08-06 07:03:01"
+            "time": "2014-09-03 09:51:48"
         },
         {
             "name": "twbs/bootstrap",
@@ -3440,16 +3443,16 @@
     "packages-dev": [
         {
             "name": "ocramius/instantiator",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/Instantiator.git",
-                "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435"
+                "reference": "e24a12178906ff2e7471b8aaf3a0eb789b59f881"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/a7abbb5fc9df6e7126af741dd6c140d1a7369435",
-                "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435",
+                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/e24a12178906ff2e7471b8aaf3a0eb789b59f881",
+                "reference": "e24a12178906ff2e7471b8aaf3a0eb789b59f881",
                 "shasum": ""
             },
             "require": {
@@ -3491,7 +3494,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-08-14 15:10:55"
+            "time": "2014-08-25 14:48:16"
         },
         {
             "name": "ocramius/lazy-map",
@@ -3553,29 +3556,29 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.10",
+            "version": "2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6d196af48e8c100a3ae881940123e693da5a9217"
+                "reference": "53603b3c995f5aab6b59c8e08c3a663d2cc810b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6d196af48e8c100a3ae881940123e693da5a9217",
-                "reference": "6d196af48e8c100a3ae881940123e693da5a9217",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/53603b3c995f5aab6b59c8e08c3a663d2cc810b7",
+                "reference": "53603b3c995f5aab6b59c8e08c3a663d2cc810b7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "phpunit/php-file-iterator": "~1.3.1",
-                "phpunit/php-text-template": "~1.2.0",
-                "phpunit/php-token-stream": "~1.2.2",
-                "sebastian/environment": "~1.0.0",
-                "sebastian/version": "~1.0.3"
+                "phpunit/php-file-iterator": "~1.3",
+                "phpunit/php-text-template": "~1.2",
+                "phpunit/php-token-stream": "~1.3",
+                "sebastian/environment": "~1.0",
+                "sebastian/version": "~1.0"
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
-                "phpunit/phpunit": "~4.0.14"
+                "phpunit/phpunit": "~4.1"
             },
             "suggest": {
                 "ext-dom": "*",
@@ -3614,7 +3617,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-08-06 06:39:42"
+            "time": "2014-08-31 06:33:04"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3751,45 +3754,44 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32"
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/ad4e1e23ae01b483c16f600ff1bebec184588e32",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/f8d5d08c56de5cfd592b3340424a81733259a876",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
                 "classmap": [
-                    "PHP/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sb@sebastian-bergmann.de",
-                    "role": "lead"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Wrapper around PHP's tokenizer extension.",
@@ -3797,20 +3799,20 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03 05:10:30"
+            "time": "2014-08-31 06:12:13"
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.2.2",
+            "version": "4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a33fa68ece9f8c68589bfc2da8d2794e27b820bc"
+                "reference": "f0c2d374ad06ec1e56c721f4ed87c59ff35f440e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a33fa68ece9f8c68589bfc2da8d2794e27b820bc",
-                "reference": "a33fa68ece9f8c68589bfc2da8d2794e27b820bc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f0c2d374ad06ec1e56c721f4ed87c59ff35f440e",
+                "reference": "f0c2d374ad06ec1e56c721f4ed87c59ff35f440e",
                 "shasum": ""
             },
             "require": {
@@ -3871,7 +3873,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-08-18 05:12:30"
+            "time": "2014-08-31 06:46:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

@@ -9,12 +9,31 @@
 
 namespace Certificationy\Bundle\UserBundle\Security\Core\User;
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use Predis\Client;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProvider extends BaseClass
 {
+    /**
+     * @var Client
+     */
+    protected $redisClient;
+
+    /**
+     * @param UserManagerInterface $userManager
+     * @param array                $properties
+     * @param Client               $redisClient
+     */
+    public function __construct(UserManagerInterface $userManager, array $properties, Client $redisClient)
+    {
+        $this->userManager = $userManager;
+        $this->properties  = $properties;
+        $this->redisClient = $redisClient;
+    }
+
     /**
      * @param UserInterface         $user
      * @param UserResponseInterface $response
@@ -69,20 +88,22 @@ class FOSUBUserProvider extends BaseClass
             $user->{$setterId}($data['id']);
             $user->{$setterToken}($response->getAccessToken());
 
-            //I have set all requested data with the user's username modify here with relevant data
-            $user->setUsername($username);
+            unset($data['name']);
+            unset($data['email']);
+
+            if(isset($data['name'])){
+                $user->setRealName($data['name']);
+            }
 
             if(isset($data['email'])){
                 $user->setEmail($data['email']);
             }
 
+            //I have set all requested data with the user's username modify here with relevant data
+            $user->setUsername($username);
             $user->setPlainPassword($data['id']);
             $user->setAvatarUrl($data['avatar_url']);
             $user->setGravatarId($data['gravatar_id']);
-
-            if(isset($data['name'])){
-                $user->setRealName($data['name']);
-            }
 
             $user->setEnabled(true);
             $this->userManager->updateUser($user);

@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/capistrano/symfony.git
-  revision: a962b2a3840ad73e7ebe1f82ffcf82c80ec5ae9c
+  remote: git://github.com/capistrano/capistrano.git
+  revision: 2a291169dffc672eaa3ca79eca13b60dd66b19a3
   specs:
-    capistrano-symfony (0.2.0)
-      capistrano (~> 3.1)
-      capistrano-composer (~> 0.0.3)
-      capistrano-file-permissions (~> 0.1.0)
+    capistrano (3.2.1)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
 
 GIT
   remote: git://github.com/capistrano/composer.git
-  revision: 7e18122dce15c12c0755a0aa2c85166b123c1d33
+  revision: d4426d58c573d911a9c2a96038a391a6fae9b0b7
   specs:
     capistrano-composer (0.0.4)
       capistrano (>= 3.0.0.pre)
@@ -22,13 +22,13 @@ GIT
       capistrano (>= 3.0.0)
 
 GIT
-  remote: git://github.com/capistrano/capistrano.git
-  revision: b372e58ffc279de8f782cb2d85160d7a47ee38b8
+  remote: git://github.com/capistrano/symfony.git
+  revision: a962b2a3840ad73e7ebe1f82ffcf82c80ec5ae9c
   specs:
-    capistrano (3.2.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (~> 1.3)
+    capistrano-symfony (0.2.0)
+      capistrano (~> 3.1)
+      capistrano-composer (~> 0.0.3)
+      capistrano-file-permissions (~> 0.1.0)
 
 GEM
   specs:

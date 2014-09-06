@@ -1,0 +1,19 @@
+{% extends "@CertificationyUser/layout.html.twig" %}
+
+{% block title %}
+    {{ 'complete_registration.title'|trans({}, 'registration') }}
+{% endblock %}
+
+{% block user_panel_title %}
+    <strong>{{ block('title') }}</strong>
+{% endblock %}
+
+{% block user_panel_content %}
+    <form action="{{ path('certificationy_complete_registration') }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+
+        <div>
+            <input class="btn btn-sm btn-default" type="submit" value="{{ 'complete_registration.submit'|trans({}, 'registration') }}" />
+        </div>
+    </form>
+{% endblock %}

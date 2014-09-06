@@ -47,3 +47,8 @@ certificationy_github:
     resource: @CertificationyGithubBundle/Resources/config/routing.yml
     prefix: /github
 
+certificationy_complete_registration:
+    path: /register/complete
+    defaults: { _controller: CertificationyUserBundle:Registration:completeRegistration }
+
+
