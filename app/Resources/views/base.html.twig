@@ -53,7 +53,7 @@
         {% block footer %}
             <div id="footer">
                 <div class="container">
-                    {{ render_esi(controller('certificationy.web.site_controller:footerAction', {}, {'standalone': true}))}}
+                    {{ render(controller('certificationy.web.site_controller:footerAction', {}, {'standalone': true}))}}
                 </div>
             </div>
         {% endblock %}

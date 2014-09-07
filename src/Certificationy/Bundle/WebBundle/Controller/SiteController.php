@@ -91,6 +91,8 @@ class SiteController extends AbstractController
 
     /**
      * @param Request $request
+     *
+     * @return Response
      */
     public function footerAction(Request $request)
     {
