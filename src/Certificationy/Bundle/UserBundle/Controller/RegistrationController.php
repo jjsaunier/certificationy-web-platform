@@ -33,8 +33,9 @@ class RegistrationController extends BaseController
 
         $formHandler = $this->container->get('certificationy.user.complete_registration_form.handler');
 
-        if($formHandler->process($user)){
+        if ($formHandler->process($user)) {
             $router = $this->container->get('router');
+
             return new RedirectResponse($router->generate('homepage'));
         }
 
@@ -42,4 +43,4 @@ class RegistrationController extends BaseController
             'form' => $formHandler->createView(),
         ));
     }
-} 
+}

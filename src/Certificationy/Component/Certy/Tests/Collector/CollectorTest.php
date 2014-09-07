@@ -31,7 +31,6 @@ class CollectorTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-
     public function testAddResources()
     {
         $resource = $this->getMock('Certificationy\Component\Certy\Collector\ResourceInterface');
@@ -51,7 +50,7 @@ class CollectorTest extends \PHPUnit_Framework_TestCase
             [ 'bazProvider', 'fooCertification', [ $resource ] ]
         ];
 
-        foreach($resources as $resourceNode){
+        foreach ($resources as $resourceNode) {
             list($providerName, $certificationName, $resources) = $resourceNode;
 
             $this->collector->addResource($providerName, $certificationName, $resources);

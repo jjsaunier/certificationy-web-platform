@@ -40,9 +40,9 @@ class Collector implements CollectorInterface
     }
 
     /**
-     * @param string $providerName
-     * @param string $certificationName
-     * @param ResourceInterface[]  $resources
+     * @param string              $providerName
+     * @param string              $certificationName
+     * @param ResourceInterface[] $resources
      */
     public function addResource($providerName, $certificationName, array $resources)
     {

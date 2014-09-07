@@ -43,30 +43,30 @@ class CompleteUserRegistrationListener
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if(HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()){
+        if (HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }
 
         $token = $this->securityContext->getToken();
 
-        if(null === $token || $token instanceof AnonymousToken){
+        if (null === $token || $token instanceof AnonymousToken) {
             return;
         }
 
         $user = $token->getUser();
 
-        if(!$user instanceof User){
+        if (!$user instanceof User) {
             return;
         }
 
         $request = $event->getRequest();
 
-        if('certificationy_complete_registration' === $request->attributes->get('_route')){
+        if ('certificationy_complete_registration' === $request->attributes->get('_route')) {
             return;
         }
 
-        if(null === $user->getRealName() || null === $user->getEmail()){
+        if (null === $user->getRealName() || null === $user->getEmail()) {
             $event->setResponse(new RedirectResponse($this->router->generate('certificationy_complete_registration')));
         }
     }
-} 
+}

@@ -29,6 +29,7 @@ class CompleteRegistrationFormHandler extends Handler
     public function process(User $user)
     {
         $this->createForm($user);
+
         return $this->handle('POST');
     }
 
@@ -43,4 +44,4 @@ class CompleteRegistrationFormHandler extends Handler
 
         return true;
     }
-} 
+}

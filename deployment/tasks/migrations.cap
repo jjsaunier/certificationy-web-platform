@@ -1,9 +1,0 @@
-namespace :deploy do
-	desc 'Running database migrations'
-	task :migrate do
-		on roles(:db) do
-			invoke 'symfony:console', 'doctrine:schema:update', '--force'
-			invoke 'symfony:console', 'doctrine:mongodb:schema:update'
-		end
-	end
-end

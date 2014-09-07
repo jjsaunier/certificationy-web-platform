@@ -91,11 +91,11 @@ class FOSUBUserProvider extends BaseClass
             unset($data['name']);
             unset($data['email']);
 
-            if(isset($data['name'])){
+            if (isset($data['name'])) {
                 $user->setRealName($data['name']);
             }
 
-            if(isset($data['email'])){
+            if (isset($data['email'])) {
                 $user->setEmail($data['email']);
             }
 

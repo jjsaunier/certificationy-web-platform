@@ -1,0 +1,9 @@
+namespace :migration do
+	desc 'Running database migrations'
+	task :db do
+		on roles(:db) do
+            execute :php, "#{fetch(:release_path)}/app/console doctrine:schema:update --force"
+            execute :php, "#{fetch(:release_path)}/app/console doctrine:mongodb:schema:update"
+		end
+	end
+end

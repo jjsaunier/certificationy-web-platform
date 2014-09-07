@@ -34,4 +34,4 @@ interface ResourceInterface
      * @return string
      */
     public function getCertificationName();
-} 
+}
