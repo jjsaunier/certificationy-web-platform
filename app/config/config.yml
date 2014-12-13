@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
 
 parameters:
-    assets_version: v1.0.2
+    assets_version: v1.0.3
 
 framework:
     esi: ~
