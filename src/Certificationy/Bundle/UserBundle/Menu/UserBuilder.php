@@ -12,7 +12,7 @@ namespace Certificationy\Bundle\UserBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class UserBuilder
 {
@@ -22,7 +22,7 @@ class UserBuilder
     protected $factory;
 
     /**
-     * @var \Symfony\Component\Translation\Translator
+     * @var \Symfony\Component\Translation\TranslatorInterface
      */
     protected $translator;
 
@@ -33,12 +33,12 @@ class UserBuilder
 
     /**
      * @param FactoryInterface $factory
-     * @param Translator       $translator
+     * @param TranslatorInterface       $translator
      * @param SecurityContext  $securityContext
      */
     public function __construct(
         FactoryInterface $factory,
-        Translator $translator,
+        TranslatorInterface $translator,
         SecurityContext $securityContext
     ) {
         $this->translator = $translator;

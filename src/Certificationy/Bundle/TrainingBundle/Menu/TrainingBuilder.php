@@ -12,7 +12,7 @@ namespace Certificationy\Bundle\TrainingBundle\Menu;
 use Certificationy\Bundle\TrainingBundle\Manager\CertificationManager;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TrainingBuilder
 {
@@ -22,7 +22,7 @@ class TrainingBuilder
     protected $factory;
 
     /**
-     * @var \Symfony\Component\Translation\Translator
+     * @var \Symfony\Component\Translation\TranslatorInterface
      */
     protected $translator;
 
@@ -33,12 +33,12 @@ class TrainingBuilder
 
     /**
      * @param FactoryInterface     $factory
-     * @param Translator           $translator
+     * @param TranslatorInterface           $translator
      * @param CertificationManager $certificationManager
      */
     public function __construct(
         FactoryInterface $factory,
-        Translator $translator,
+        TranslatorInterface $translator,
         CertificationManager $certificationManager
     ) {
         $this->translator = $translator;

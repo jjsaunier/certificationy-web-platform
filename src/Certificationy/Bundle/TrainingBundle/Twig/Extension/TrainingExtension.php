@@ -9,19 +9,19 @@
 
 namespace Certificationy\Bundle\TrainingBundle\Twig\Extension;
 
-use Symfony\Bundle\FrameworkBundle\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TrainingExtension extends \Twig_Extension
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Translation\Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
     /**
-     * @param Translator $translator
+     * @param TranslatorInterface $translator
      */
-    public function __construct(Translator $translator)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
@@ -38,6 +38,8 @@ class TrainingExtension extends \Twig_Extension
 
     /**
      * @param array $elapsed
+     *
+     * @return string
      */
     public function elapsed(array $elapsed)
     {

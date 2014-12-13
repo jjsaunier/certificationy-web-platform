@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
 
 parameters:
-    assets_version: v1.0.3
+    assets_version: v1.0.4
 
 framework:
     esi: ~
@@ -32,6 +32,7 @@ framework:
         cookie_lifetime: 31536000
         cookie_domain: %domain%
         name: certificationy
+        save_path: null
 
 # Twig Configuration
 twig:
@@ -41,7 +42,7 @@ twig:
         ga_tracking: %google_analytics_id%
     form:
         resources:
-            - 'BraincraftedBootstrapBundle::layout.html.twig'
+            - '::form_layout.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -204,7 +205,7 @@ braincrafted_bootstrap:
             variables_file: %kernel.root_dir%/../src/Certificationy/Bundle/WebBundle/Resources/private/less/variable.less
     auto_configure:
         assetic: true
-        twig: true
+        twig: false
         knp_menu: true
         knp_paginator: true
 
