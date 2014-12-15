@@ -286,8 +286,8 @@ certificationy_certy:
 ekino_new_relic:
     enabled: %kernel.debug%
     application_name: Certificationy
-    api_key: ba724ff8a57cb8a8f06d9b81d9417aba0dc47e1aaa66b1a
-    license_key: 6c2cff064dbc3d4787d255954453e7709aa66b1a
+    api_key: %new_relic_api_key%
+    license_key: %new_relic_license_key%
     xmit: false                           # if you want to record the metric data up to the point newrelic_set_appname is called, set this to true
     logging: false                        # If true, logs all New Relic interactions to the Symfony log
     instrument: true                     # If true, uses enhanced New Relic RUM instrumentation (see below)
