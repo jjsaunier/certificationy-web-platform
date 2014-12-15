@@ -48,3 +48,7 @@ parameters:
     debug_redirects: false
     use_assetic_controller: true
     domain: .certificationy.dev
+
+    #new relic
+    new_relic_api_key: XXXXXXXXXXXXXXXXXXXXXX
+    new_relic_license_key: XXXXXXXXXXXXXXXXXXXXXX
