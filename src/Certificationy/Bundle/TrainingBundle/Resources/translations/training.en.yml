@@ -1,5 +1,5 @@
 training:
-    menu: "Trainning"
+    menu: "Training"
     new_session: "New session"
     symfony2: "Symfony2 framework"
 
