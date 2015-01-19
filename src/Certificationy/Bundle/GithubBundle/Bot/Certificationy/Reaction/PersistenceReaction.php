@@ -101,7 +101,7 @@ class PersistenceReaction implements LoggableReactionInterface
             $inspection->setErrors($action->getErrors());
             $inspection->setStatus(PersistenceAction::TASK_END);
 
-            $this->documentManager->persist($inspection);
+            $this->documentManager->merge($inspection);
             $this->documentManager->flush();
         }
     }
