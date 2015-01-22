@@ -10,6 +10,8 @@
 namespace Certificationy\Bundle\CertyBundle\Form\Type;
 
 use Certificationy\Component\Certy\Calculator\Calculator;
+use Certificationy\Component\Certy\Model\Answer;
+use Certificationy\Component\Certy\Model\Question;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -45,10 +47,15 @@ class AnswerType extends AbstractType
     public function getChoices()
     {
         return function (Options $options) {
+            /** @var Question $question */
             $question = $options->get('question');
 
             $choices = [];
-            foreach ($question->getAnswers() as $answer) {
+            $answers = $question->getAnswers()->toArray();
+            shuffle($answers);
+
+            /** @var Answer $answer */
+            foreach ($answers as $answer) {
                 $choices[Calculator::getHash($question->getCategory(), $question, $answer)] = $answer->getLabel();
             }
 

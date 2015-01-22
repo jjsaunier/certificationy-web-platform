@@ -9,6 +9,9 @@
 
 namespace Certificationy\Bundle\CertyBundle\Form\Type;
 
+use Certificationy\Component\Certy\Model\Category;
+use Certificationy\Component\Certy\Model\Certification;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -21,10 +24,16 @@ class CertificationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Certification $certification */
         $certification = $options['certification'];
 
+        /** @var Category $category */
         foreach ($certification->getCategories() as $category) {
-            foreach ($category->getQuestions() as $question) {
+            $questions = $category->getQuestions()->toArray();
+            shuffle($questions);
+
+            /** @var Question $question */
+            foreach ($questions as $question) {
                 $builder->add($question->getName(), 'certification_answer', ['question' => $question]);
             }
         }
