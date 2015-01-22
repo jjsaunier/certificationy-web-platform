@@ -26,6 +26,11 @@ class PersistenceAction extends GenericAction
     protected $status;
 
     /**
+     * @var int
+     */
+    protected $taskId;
+
+    /**
      * @var \Symfony\Component\Stopwatch\StopwatchEvent
      */
     protected $stopwatchEvent;
@@ -41,13 +46,34 @@ class PersistenceAction extends GenericAction
      * @param string         $status
      * @param StopwatchEvent $stopwatchEvent
      */
-    public function __construct(Client $client, array $data, array $errors, $status, StopwatchEvent $stopwatchEvent = null)
-    {
+    public function __construct(
+        Client $client,
+        array $data,
+        array $errors,
+        $status,
+        StopwatchEvent $stopwatchEvent = null
+    ) {
         parent::__construct($client, $data);
 
         $this->errors = $errors;
         $this->status = $status;
         $this->stopwatchEvent = $stopwatchEvent;
+    }
+
+    /**
+     * @param int $taskId
+     */
+    public function setTaskId($taskId)
+    {
+        $this->taskId = $taskId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaskId()
+    {
+        return $this->taskId;
     }
 
     /**

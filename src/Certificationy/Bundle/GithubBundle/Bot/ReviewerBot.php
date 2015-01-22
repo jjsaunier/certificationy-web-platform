@@ -175,11 +175,17 @@ class ReviewerBot extends Bot
             ), [ 'delivery_uuid' => $data['delivery_uuid']]);
         }
 
-        //Save in db (mongo)
-        $this->actionDispatcher->dispatch(
-            ReviewerBotActions::PERSIST,
-            new PersistenceAction($this->client, $data, ['total' => 0], PersistenceAction::TASK_START)
+        $persistenceAction = new PersistenceAction(
+            $this->client,
+            $data,
+            ['total' => 0],
+            PersistenceAction::TASK_START
         );
+
+        //Save in db (mongo)
+        $this->actionDispatcher->dispatch(ReviewerBotActions::PERSIST, $persistenceAction);
+
+        $taskId = $persistenceAction->getTaskId();
 
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(
@@ -235,7 +241,14 @@ class ReviewerBot extends Bot
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(
             ReviewerBotActions::PERSIST,
-            new PersistenceAction($this->client, $data, $checkAction->getErrors(), PersistenceAction::TASK_END, $stopwatchEvent)
+            new PersistenceAction(
+                $this->client,
+                $data,
+                $checkAction->getErrors(),
+                PersistenceAction::TASK_END,
+                $stopwatchEvent,
+                $taskId
+            )
         );
 
         if (0 === $checkAction->getErrors()['total']) {

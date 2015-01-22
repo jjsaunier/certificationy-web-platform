@@ -68,15 +68,15 @@ class PersistenceReaction implements LoggableReactionInterface
             $this->documentManager->persist($inspection);
             $this->documentManager->flush();
 
-            $this->currentTaskHash = $inspection->getId();
+            $action->setTaskId($inspection->getId());
         }
 
         if ($action->getStatus() === PersistenceAction::TASK_END) {
 
-            if (null === $this->currentTaskHash) {
+            if (null === $taskId = $action->getTaskId()) {
 
                 if (null !== $this->logger) {
-                    $this->logger->warning('Unable to retrieve current hash of task to update it');
+                    $this->logger->warning('Unable to retrieve current task id to update it');
                 }
 
                 return;
@@ -84,12 +84,12 @@ class PersistenceReaction implements LoggableReactionInterface
 
             $inspectionRepository = $this->documentManager->getRepository('CertificationyGithubBundle:InspectionReport');
 
-            $inspection = $inspectionRepository->find($this->currentTaskHash);
+            $inspection = $inspectionRepository->find($taskId);
 
             if (null !== $this->logger) {
                 $this->logger->debug(sprintf(
                    'Update task %s to %s',
-                    $this->currentTaskHash,
+                    $taskId,
                     $action->getStatus()
                 ));
             }
@@ -101,7 +101,7 @@ class PersistenceReaction implements LoggableReactionInterface
             $inspection->setErrors($action->getErrors());
             $inspection->setStatus(PersistenceAction::TASK_END);
 
-            $this->documentManager->merge($inspection);
+            $this->documentManager->persist($inspection);
             $this->documentManager->flush();
         }
     }
