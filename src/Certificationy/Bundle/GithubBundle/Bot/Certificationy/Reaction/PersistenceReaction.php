@@ -42,8 +42,13 @@ class PersistenceReaction implements LoggableReactionInterface
     public function perform(PersistenceAction $action)
     {
         $content = $action->getData()['content'];
+        $inspectionRepository = $this->documentManager->getRepository('CertificationyGithubBundle:InspectionReport');
 
-        if ($action->getStatus() === PersistenceAction::TASK_START) {
+        /** @var InspectionReport $inspection */
+        $inspection = $inspectionRepository->findOneByChecksum($content['pull_request']['head']['sha']);
+
+        if ($action->getStatus() === PersistenceAction::TASK_START && null === $inspection) {
+
             $sender = [
                 'login' => $content['sender']['login'],
                 'avatar_url' => $content['sender']['avatar_url'],
@@ -67,29 +72,25 @@ class PersistenceReaction implements LoggableReactionInterface
 
             $this->documentManager->persist($inspection);
             $this->documentManager->flush();
-
-            $action->setTaskId($inspection->getId());
         }
 
         if ($action->getStatus() === PersistenceAction::TASK_END) {
+            $inspection = $inspectionRepository->findOneByChecksum($content['pull_request']['head']['sha']);
 
-            if (null === $taskId = $action->getTaskId()) {
-
+            if (null === $inspection) {
                 if (null !== $this->logger) {
                     $this->logger->warning('Unable to retrieve current task id to update it');
+
+                    throw new \Exception;
                 }
 
                 return;
             }
 
-            $inspectionRepository = $this->documentManager->getRepository('CertificationyGithubBundle:InspectionReport');
-
-            $inspection = $inspectionRepository->find($taskId);
-
             if (null !== $this->logger) {
                 $this->logger->debug(sprintf(
                    'Update task %s to %s',
-                    $taskId,
+                    $inspection->getChecksum(),
                     $action->getStatus()
                 ));
             }

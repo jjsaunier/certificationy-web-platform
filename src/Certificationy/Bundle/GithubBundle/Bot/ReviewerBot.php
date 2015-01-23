@@ -113,7 +113,12 @@ class ReviewerBot extends Bot
             //Save in db (mongo)
             $this->actionDispatcher->dispatch(
                 ReviewerBotActions::PERSIST,
-                new PersistenceAction($this->client, $data, ['total' => -1], PersistenceAction::TASK_END)
+                new PersistenceAction(
+                    $this->client,
+                    $data,
+                    ['total' => -1],
+                    PersistenceAction::TASK_END
+                )
             );
 
             if (null !== $this->logger) {
@@ -185,8 +190,6 @@ class ReviewerBot extends Bot
         //Save in db (mongo)
         $this->actionDispatcher->dispatch(ReviewerBotActions::PERSIST, $persistenceAction);
 
-        $taskId = $persistenceAction->getTaskId();
-
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Set commit status pending on github'
@@ -202,7 +205,7 @@ class ReviewerBot extends Bot
         if (null !== $this->logger) {
             $this->logger->debug(sprintf(
                 'Clone locally'
-            ), [ 'delivery_uuid' => $data['delivery_uuid']]);
+            ), [ 'delivery_uuid' => $data['delivery_uuid'] ]);
         }
 
         //Clone locally last commit on pull request
@@ -246,8 +249,7 @@ class ReviewerBot extends Bot
                 $data,
                 $checkAction->getErrors(),
                 PersistenceAction::TASK_END,
-                $stopwatchEvent,
-                $taskId
+                $stopwatchEvent
             )
         );
 

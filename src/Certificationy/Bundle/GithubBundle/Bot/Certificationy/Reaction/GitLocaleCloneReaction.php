@@ -50,9 +50,7 @@ class GitLocaleCloneReaction implements LoggableReactionInterface
         if (true === $action->getData()['debug']) {
 
             $url = sprintf(
-                'https://%s:%s@github.com/%s/test-hook.git',
-                $this->login,
-                $this->password,
+                'https://github.com/%s/test-hook.git',
                 $this->login
             );
 
