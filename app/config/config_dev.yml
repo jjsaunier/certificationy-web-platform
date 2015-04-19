@@ -44,6 +44,3 @@ monolog:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%/certy.log"
             channels: [ 'certy' ]
-
-assetic:
-    use_controller: %use_assetic_controller%

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "079719c036eaa23a36f68a4686538802",
+    "hash": "79f2cc3cd0e71816c56212aadb322c8b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2905,6 +2905,7 @@
             "time": "2015-03-14 06:06:39"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/assetic-bundle",
             "version": "v2.6.1",
             "source": {
@@ -2970,6 +2971,8 @@
             "time": "2015-01-27 12:45:16"
         },
         {
+=======
+>>>>>>> add grunt and bower
             "name": "symfony/monolog-bundle",
             "version": "v2.7.1",
             "source": {

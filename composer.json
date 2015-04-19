@@ -13,7 +13,6 @@
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.1",
-        "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
@@ -21,11 +20,8 @@
         "friendsofsymfony/user-bundle": "~1.3",
         "hwi/oauth-bundle": "~0.3",
         "braincrafted/bootstrap-bundle": "~2.0",
-        "twbs/bootstrap": "~3.0",
-        "components/jquery": "~2.0",
         "knplabs/knp-paginator-bundle": "~2.4",
         "knplabs/knp-menu-bundle": "~2.0",
-        "FortAwesome/Font-Awesome": "*",
         "snc/redis-bundle": "~1.1",
         "predis/predis": "~0.8",
         "whatthejeff/nyancat-phpunit-resultprinter": "~1.2",
@@ -36,44 +32,11 @@
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
         "guzzlehttp/guzzle": "~4.0",
-        "vorillaz/devicons": "*",
         "sensio/generator-bundle": "~2.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1"
     },
-    "repositories" : [
-        {
-            "type" : "package",
-            "package" : {
-                "name": "vorillaz/devicons",
-                "type": "project",
-                "version": "1.5.0",
-                "dist": {
-                    "url": "https://github.com/vorillaz/devicons/archive/master.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/vorillaz/devicons.git",
-                    "type": "git",
-                    "reference": "1.5.0"
-                },
-                "extra": {
-                    "component": {
-                        "styles": [
-                            "css/*"
-                        ],
-                        "files" : [
-                            "fonts/*"
-                        ]
-                    }
-                },
-                "require": {
-                    "robloach/component-installer": "~0.0.12"
-                }
-            }
-        }
-    ],
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",

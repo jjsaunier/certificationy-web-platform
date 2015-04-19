@@ -1,0 +1,28 @@
+{
+  "name": "Certificationy",
+  "version": "1.0.0",
+  "description": "Training platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProPheT777/certificationy-web-platform.git"
+  },
+  "author": "Johann Saunier <johann_27@hotmail.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ProPheT777/certificationy-web-platform/issues"
+  },
+  "homepage": "https://github.com/ProPheT777/certificationy-web-platform",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.6.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "load-grunt-tasks": "^0.6.0"
+  }
+}

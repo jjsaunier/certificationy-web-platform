@@ -1,0 +1,26 @@
+{
+  "name": "Certificationy",
+  "version": "0.1.0-beta1",
+  "homepage": "https://github.com/ProPheT777/certificationy-web-platform",
+  "authors": [
+    "prophet777 <johann_27@hotmail.fr>"
+  ],
+  "description": "Training platform",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/Resources/assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.1",
+    "bootstrap": "~3.3.4",
+    "components-font-awesome": "~4.3.0",
+    "devicons": "~1.7.0",
+    "bootstrap-social": "~4.8.0",
+    "open-sans-fontface": "~1.4.0"
+  }
+}

@@ -2,8 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
-parameters:
-    assets_version: v1.0.4
+    assets_version: v2.0.0
 
 framework:
     esi: ~
@@ -43,104 +42,6 @@ twig:
     form:
         resources:
             - '::form_layout.html.twig'
-
-# Assetic Configuration
-assetic:
-    debug: "%kernel.debug%"
-    use_controller: false
-    bundles: [ ]
-    filters:
-        yui_js:
-            jar: '%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar'
-            apply_to: '\.js$'
-            preserve_comments: false
-        yui_css:
-            jar: '%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar'
-            apply_to: '\.css$'
-            preserve_comments: false
-        closure:
-             jar: '%kernel.root_dir%/Resources/java/compiler.jar'
-             apply_to: '\.js$'
-        less:
-            node: /usr/bin/nodejs
-            node_paths: [ /usr/lib/node_modules ]
-            apply_to: "\.less$"
-        cssrewrite: ~
-    assets:
-        report_css:
-            inputs:
-                - %kernel.root_dir%/Resources/CertificationyCertyBundle/private/less/report.less
-            filters:
-                - less
-                - cssrewrite
-                - yui_css
-            output: css/report.css
-        user_css:
-            inputs:
-                - @CertificationyUserBundle/Resources/private/less/user.less
-            filters:
-                - less
-                - yui_css
-            output: css/user.css
-        bootstrap_css:
-            inputs:
-                - %kernel.root_dir%/Resources/less/bootstrap.less
-                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
-            filters:
-                - less
-                - cssrewrite
-                - yui_css
-            output: css/bootstrap.css
-        font_awesome_css:
-            inputs:
-                - %kernel.root_dir%/../vendor/fortawesome/font-awesome/less/font-awesome.less
-            filters:
-                - less
-                - cssrewrite
-                - yui_css
-            output: css/font-awesome.css
-        bootstrap_theme_css:
-            inputs:
-                - @CertificationyWebBundle/Resources/public/css/fonts.css
-                - %kernel.root_dir%/../web/components/devicons/css/devicons.css
-                - @CertificationyWebBundle/Resources/private/less/global.less
-            filters:
-                - less
-                - yui_css
-            output: css/bootstrap-theme.css
-        bootstrap_social_css:
-            inputs:
-                - @CertificationyWebBundle/Resources/private/less/bootstrap-social.less
-            filters:
-                - less
-                - yui_css
-            output: css/bootstrap-social.css
-        bootstrap_js:
-            inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/alert.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/button.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/carousel.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/collapse.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/modal.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tooltip.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/popover.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/scrollspy.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js
-                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
-            filters:
-                - yui_js
-                - closure
-            output: js/bootstrap.js
-        jquery:
-            inputs:
-                - %kernel.root_dir%/../web/components/jquery/jquery.js
-            filters:
-                - yui_js
-                - closure
-            output: js/jquery.js
 
 monolog:
     channels: [ "github", "certy" ]
@@ -197,14 +98,14 @@ hwi_oauth:
             github: githubID
 
 braincrafted_bootstrap:
-    output_dir:
-    assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.js
+    output_dir: %kernel.root_dir%/Resources/bootstrap-custom/bootstrap.less
+    assets_dir: %kernel.root_dir%/Resources/assets/bootstrap/less/bootstrap.less
+    jquery_path: %kernel.root_dir%/Resources/assets/jquery/jquery.js
     less_filter: less
     customize:
             variables_file: %kernel.root_dir%/../src/Certificationy/Bundle/WebBundle/Resources/private/less/variable.less
     auto_configure:
-        assetic: true
+        assetic: false
         twig: false
         knp_menu: true
         knp_paginator: true
@@ -288,17 +189,17 @@ ekino_new_relic:
     application_name: Certificationy
     api_key: %new_relic_api_key%
     license_key: %new_relic_license_key%
-    xmit: false                           # if you want to record the metric data up to the point newrelic_set_appname is called, set this to true
-    logging: false                        # If true, logs all New Relic interactions to the Symfony log
-    instrument: true                     # If true, uses enhanced New Relic RUM instrumentation (see below)
-    log_exceptions: true                 # If true, sends exceptions to New Relic
-    log_commands: true                    # If true, logs CLI commands to New Relic as Background jobs (>2.3 only)
-    using_symfony_cache: false            # Symfony HTTP cache (see below)
-    transaction_naming: route             # route, controller or service (see below)
-    transaction_naming_service: ~         # Transaction naming service (see below)
-    ignored_routes: []                    # No transaction recorded for this routes
-    ignored_paths: []                     # No transaction recorded for this paths
-    ignored_commands: []                  # No transaction recorded for this commands (background tasks)
+    xmit: false
+    logging: false
+    instrument: true
+    log_exceptions: true
+    log_commands: true
+    using_symfony_cache: false
+    transaction_naming: controller
+    transaction_naming_service: ~
+    ignored_routes: []
+    ignored_paths: []
+    ignored_commands: []
 
 services:
     twig.extension.i18n:
