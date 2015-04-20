@@ -49,7 +49,7 @@ class Question
      */
     public function setName($name)
     {
-        $this->name = Transliterator::urlize($name);
+        $this->name = Transliterator::urlize($name).'_'.sha1($name);
     }
 
     /**

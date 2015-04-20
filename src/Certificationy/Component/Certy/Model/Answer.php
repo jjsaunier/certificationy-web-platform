@@ -54,11 +54,7 @@ class Answer
      */
     public function setName($name)
     {
-        $this->name = Transliterator::urlize($name);
-
-        if (empty($this->name)) { //Prevent answer label = '<?php', '!', '**' etc
-            $this->name = md5($name);
-        }
+        $this->name = Transliterator::urlize($name).'_'.sha1($name);
     }
 
     /**

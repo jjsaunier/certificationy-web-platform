@@ -12,6 +12,7 @@ namespace Certificationy\Bundle\TrainingBundle\Manager;
 use Certificationy\Component\Certy\Builder\Builder;
 use Certificationy\Component\Certy\Builder\BuilderInterface;
 use Certificationy\Component\Certy\Context\CertificationContext;
+use Certificationy\Component\Certy\Context\CertificationContextInterface;
 use Certificationy\Component\Certy\Context\ContextBuilder;
 use Certificationy\Component\Certy\Context\ContextBuilderInterface;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
@@ -58,6 +59,9 @@ class CertificationManager
      */
     protected $contextBuilder;
 
+    /** @var bool */
+    protected $debug;
+
     /**
      * @param CertificationFactory    $factory
      * @param BuilderInterface        $builder
@@ -65,6 +69,7 @@ class CertificationManager
      * @param Serializer              $serializer
      * @param LoggerInterface         $logger
      * @param ContextBuilderInterface $contextBuilder
+     * @param bool                    $debug
      */
     public function __construct(
         CertificationFactory $factory,
@@ -72,7 +77,8 @@ class CertificationManager
         Client $redisClient,
         Serializer $serializer,
         LoggerInterface $logger,
-        ContextBuilderInterface $contextBuilder
+        ContextBuilderInterface $contextBuilder,
+        $debug
     ) {
         $this->factory = $factory;
         $this->builder = $builder;
@@ -80,6 +86,7 @@ class CertificationManager
         $this->serializer = $serializer;
         $this->logger = $logger;
         $this->contextBuilder = $contextBuilder;
+        $this->debug = $debug;
     }
 
     /**
@@ -184,6 +191,10 @@ class CertificationManager
 
         $serializedContext = $this->redisClient->get($key);
 
-        return $this->serializer->deserialize($serializedContext, CertificationContext::class, 'json');
+        /** @var CertificationContextInterface $context */
+        $context = $this->serializer->deserialize($serializedContext, CertificationContext::class, 'json');
+        $context->setDebug($this->debug);
+
+        return $context;
     }
 }

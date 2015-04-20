@@ -8,6 +8,7 @@ services:
             - @jms_serializer
             - @monolog.logger.certy
             - @certy.certification.context.builder
+            - %certy_debug%
         calls:
             - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
 
