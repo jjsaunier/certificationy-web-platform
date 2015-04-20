@@ -5,14 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         {% block stylesheets %}
-            <!-- Bootstrap -->
-            <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
-
-            <!-- Font Awesome -->
-            <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" media="screen">
-
-            <!-- Bootstrap Theme -->
-            <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet" media="screen">
+            <link href="{{ asset('css/main.css') }}" rel="stylesheet" media="screen">
         {% endblock stylesheets %}
 
         <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
@@ -60,16 +53,8 @@
 
         {% block javascripts %}
             <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
-            <script src="{{ asset('js/jquery.js') }}"></script>
-
-            <!-- Include all JavaScripts, compiled by Assetic -->
-            <script src="{{ asset('js/bootstrap.js') }}"></script>
-
-            {% javascripts filter='yui_js, closure'
-                '@CertificationyWebBundle/Resources/public/js/scroll.js'
-            %}
-                <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+            <script src="{{ asset('js/app.min.js') }}"></script>
+            <script src="{{ asset('js/scroll.min.js') }}"></script>
 
             <script type="text/javascript">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
