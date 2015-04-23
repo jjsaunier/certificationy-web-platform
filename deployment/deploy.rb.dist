@@ -1,6 +1,11 @@
-set :application, 'my_app'
-set :repo_url, 'my_git_repo'
-server 'certificationy.com', user: 'root', roles: %w{web app db}
+set :repo_url, 'https://github.com/ProPheT777/certificationy-web-platform.git'
+server 'certificationy.com', roles: %w{web app db}, primary: true, ssh_options: {
+     user: 'XXX',
+     forward_agent: true,
+     auth_methods: %w('publickey'),
+     keys: %w(~/.ssh/id_rsa)
+ }
+
 set :format, :pretty
 set :log_level, :info
 set :keep_releases, 5
@@ -25,11 +30,20 @@ set :symfony_console_path, fetch(:app_path) + "/console"
 set :symfony_console_flags, "--no-debug"
 set :assets_install_path,   fetch(:web_path)
 set :assets_install_flags,  '--symlink'
-set :assetic_dump_flags,  '--no-debug'
+set :grunt_tasks, %w{css js cp}
+set :deployer, 'prophet777'
+set :bower_flags, '--quiet --allow-root --config.interactive=false'
+set :bower_roles, :web
+set :grunt_file, -> { release_path.join('Gruntfile.js') }
+set :grunt_target_path, deploy_path
 
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 
-after 'deploy:updated',   'symfony:assets:install'
-after 'deploy:published',  'symfony:permissions:apply'
+after 'deploy:updated', 'composer:install'
+after 'deploy:updated', 'npm:install'
+after 'deploy:updated', 'grunt'
+after 'deploy:updated', 'symfony:assets:install'
+after 'deploy:published', 'symfony:permissions:apply'
 after 'deploy:published', 'symfony:redis:clear_cache'
 after 'deploy:published', 'apache:apc:clear'
+after 'deploy:published', 'newrelic:deployment'
