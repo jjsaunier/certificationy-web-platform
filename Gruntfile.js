@@ -62,10 +62,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'web/js/app.min.js': [
-                        'app/Resources/assets/jquery/dist/jquery.js',
-                        'app/Resources/assets/bootstrap/dist/js/bootstrap.js'
-                    ],
+                    'web/js/jquery.min.js': 'app/Resources/assets/jquery/dist/jquery.js',
+                    'web/js/bootstrap.min.js': 'app/Resources/assets/bootstrap/dist/js/bootstrap.js',
                     'web/js/scroll.min.js': 'src/Certificationy/Bundle/WebBundle/Resources/public/js/scroll.js',
                     'web/css/ie7.css': 'src/Certificationy/Bundle/WebBundle/Resources/public/ie7/ie7.js'
                 }

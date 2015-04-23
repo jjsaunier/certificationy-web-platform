@@ -16,11 +16,11 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.0.1",
     "bootstrap": "~3.3.4",
     "components-font-awesome": "~4.3.0",
     "devicons": "~1.7.0",
     "bootstrap-social": "~4.8.0",
-    "open-sans-fontface": "~1.4.0"
+    "open-sans-fontface": "~1.4.0",
+    "jquery": "~2.1.3"
   }
 }
