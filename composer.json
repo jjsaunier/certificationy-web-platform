@@ -25,7 +25,6 @@
         "snc/redis-bundle": "~1.1",
         "predis/predis": "~0.8",
         "whatthejeff/nyancat-phpunit-resultprinter": "~1.2",
-        "ekino/newrelic-bundle": "master-dev",
         "behat/transliterator": "~1.0",
         "swarrot/swarrot-bundle": "@stable",
         "jms/serializer-bundle": "~0.13",
