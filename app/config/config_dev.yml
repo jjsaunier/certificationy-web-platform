@@ -7,6 +7,10 @@ framework:
         strict_requirements: true
     profiler: { only_exceptions: false }
 
+debug:
+   max_items: 250
+   max_string_length: -1
+
 web_profiler:
     toolbar: %debug_toolbar%
     intercept_redirects: %debug_redirects%

@@ -10,6 +10,8 @@
 namespace Certificationy\Bundle\WebBundle\Controller;
 
 use Certificationy\Bundle\TrainingBundle\Manager\CertificationManager;
+use Certificationy\Bundle\UserBundle\Repository\UserRepository;
+use Predis\Client;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Parser;
@@ -27,13 +29,29 @@ class SiteController extends AbstractController
     protected $certificationManager;
 
     /**
+     * @var UserRepository
+     */
+    protected $userRepository;
+
+    /** @var  Client */
+    protected $redisClient;
+
+    /**
      * @param string               $rootDir
      * @param CertificationManager $certificationManager
+     * @param UserRepository       $userRepository
+     * @param Client               $redisClient
      */
-    public function __construct($rootDir, CertificationManager $certificationManager)
-    {
+    public function __construct(
+        $rootDir,
+        CertificationManager $certificationManager,
+        UserRepository $userRepository,
+        Client $redisClient
+    ) {
         $this->kernelRootDir = $rootDir;
         $this->certificationManager = $certificationManager;
+        $this->userRepository = $userRepository;
+        $this->redisClient = $redisClient;
     }
 
     /**
@@ -43,8 +61,20 @@ class SiteController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $response = $this->engine->renderResponse('@CertificationyWeb/Site/homepage.html.twig', [
+        $certificationCounter = [];
 
+        foreach($this->certificationManager->getCertifications() as $cn => $label){
+            $certificationCounter[$cn] = [
+                'metrics' => (int) $this->redisClient->get($cn),
+                'label' => $label,
+                'icon' => $this->certificationManager->getContext($cn)->getIcons()
+            ];
+        }
+
+        $response = $this->engine->renderResponse('@CertificationyWeb/Site/homepage.html.twig', [
+            'count_members' => (int) $this->userRepository->countMembers(),
+            'certification_done' => (int) $this->redisClient->get('total'),
+            'certification_counters' => $certificationCounter
         ]);
 
         return $response;

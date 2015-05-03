@@ -18,6 +18,8 @@ services:
         arguments:
             - %kernel.root_dir%
             - @certificationy.certification.manager
+            - @certificationy.user.repository
+            - @snc_redis.counter
 
     certificationy.web.help.controller:
         class: Certificationy\Bundle\WebBundle\Controller\HelpController

@@ -7,6 +7,12 @@ services:
         class: %certificationy.user.provider.fosub_bridge.class%
         arguments: [ @fos_user.user_manager, { github: githubID }, @snc_redis.default ]
 
+    certificationy.user.repository:
+        class: Certificationy\Bundle\UserBundle\Repository\UserRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [ 'CertificationyUserBundle:User']
+
     certificationy.user.menu_builder:
         class: Certificationy\Bundle\UserBundle\Menu\UserBuilder
         arguments:

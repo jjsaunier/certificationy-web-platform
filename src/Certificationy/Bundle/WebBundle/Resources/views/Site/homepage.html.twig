@@ -51,6 +51,39 @@
     <hr>
 
     <div class="row">
+        <div class="col-md-4">
+            <h2 style="text-align: center;">
+                Members
+            </h2>
+            <p class="" style="font-size: 40px;padding-top: 30px;text-align: center;font-weight: bold;">
+                {{ count_members }}
+
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2 style="text-align: center;">
+                Training done
+            </h2>
+            <p class="" style="font-size: 40px;padding-top: 30px;text-align: center;font-weight: bold;">
+                {{ certification_done }}
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2 style="text-align: center;">
+                Training metrics
+            </h2>
+            <ul class="list-unstyled" style="font-size: 40px;line-height: 40px;text-align: center;">
+                {% for counter in certification_counters %}
+                    <li><i class="{{ counter.icon }}"> </i> {{ counter.metrics }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div class="row">
         <div class="col-md-4 hidden-xs hidden-sm">
             {{ render_esi(controller('certificationy.web.site_controller:changelogAction', {}, {'standalone': true})) }}
         </div>
