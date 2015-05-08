@@ -74,12 +74,11 @@
             </h2>
             <ul class="list-unstyled" style="font-size: 40px;line-height: 40px;text-align: center;">
                 {% for counter in certification_counters %}
-                    <li><span class="{{ counter.icon }}"></span> {{ counter.metrics }}</li>
+                    <li><i class="devicons {{ counter.icon }}"></i> {{ counter.metrics }}</li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-
 
     <hr>
 
