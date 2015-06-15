@@ -65,7 +65,7 @@ abstract class AbstractFileProvider extends AbstractProvider implements FileProv
         }
 
         $finder = new Finder();
-        $finder->files()->in($options['path']);
+        $finder->files()->in($options['path'])->sortByName();
 
         foreach ($finder as $file) {
             $this->loadFile($file, $certificationName);
