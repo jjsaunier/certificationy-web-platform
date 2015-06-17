@@ -24,15 +24,12 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        name: 'Certificationy'
-        cookie_domain: %domain%
-        handler_id:  ~
-    http_method_override: true
-    session:
         cookie_lifetime: 31536000
         cookie_domain: %domain%
-        name: certificationy
+        name: 'Certificationy'
         save_path: null
+        handler_id:  ~
+    http_method_override: true
 
 # Twig Configuration
 twig:
@@ -70,15 +67,14 @@ swiftmailer:
     delivery_address: no-reply@certificationy.com
 
 fos_user:
-    registration:
-        form:
-            type: certificationy_user_registration
     db_driver: orm
     firewall_name: main
     user_class: Certificationy\Bundle\UserBundle\Entity\User
     registration:
         confirmation:
             enabled: false
+        form:
+            type: certificationy_user_registration
 
 hwi_oauth:
     firewall_name: main
@@ -104,7 +100,7 @@ braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/Resources/assets/jquery/jquery.js
     less_filter: less
     customize:
-            variables_file: %kernel.root_dir%/../src/Certificationy/Bundle/WebBundle/Resources/private/less/variable.less
+        variables_file: %kernel.root_dir%/../src/Certificationy/Bundle/WebBundle/Resources/private/less/variable.less
     auto_configure:
         assetic: false
         twig: false
