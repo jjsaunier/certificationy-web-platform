@@ -5,7 +5,7 @@ parameters:
     database_port: null
     database_name: certificationy
     database_user: XXXXXXXXXXXXXXXXXXXXXX
-    database_password: XXXXXXXXXXXXXXXXXXXXXX
+    database_password:
 
     #SMTP
     mailer_transport: smtp

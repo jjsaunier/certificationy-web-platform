@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1571bb3eda302a28da6c03cca7fb88d",
+    "hash": "8d32cee4df778c9b644b8c8753228c60",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -862,7 +862,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/0de70ab260a7d0e5b872bb65e79e8ebc1c033b85",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/9addf539dfbdbe83799abbf90f70503eb36ef3e3",
                 "reference": "0de70ab260a7d0e5b872bb65e79e8ebc1c033b85",
                 "shasum": ""
             },
@@ -940,7 +940,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/428c21fd3bea9e27281784bcae2db9b7516b318e",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/9e98fd9def517c68c8b8db43333545faef9a94b6",
                 "reference": "428c21fd3bea9e27281784bcae2db9b7516b318e",
                 "shasum": ""
             },
