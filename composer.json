@@ -62,7 +62,11 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "symlink",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_user": "MYSQL_DATABASE_USER",
+                "database_password": "MYSQL_DATABASE_PASSWORD"
+            }
         },
         "branch-alias": {
             "dev-master": "1.0.x-dev"
