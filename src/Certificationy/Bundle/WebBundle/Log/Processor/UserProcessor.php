@@ -33,13 +33,14 @@ class UserProcessor
      */
     public function postRecord($record)
     {
-        $securityContext = $this->container->get('security.context');
+        $auth = $this->container->get('security.authorization_checker');
+        $token = $this->container->get('security.token_storage');
 
         try {
-            if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+            if ($auth->isGranted('IS_AUTHENTICATED_FULLY')) {
 
                 /** @var User $user */
-                $user = $securityContext->getToken()->getUser();
+                $user = $token->getToken()->getUser();
 
                 $record['extra']['user']['name'] = $user->getRealName();
                 $record['extra']['user']['email'] = $user->getEmailCanonical();
