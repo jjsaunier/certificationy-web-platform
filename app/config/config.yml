@@ -29,6 +29,7 @@ framework:
         name: 'Certificationy'
         save_path: null
         handler_id:  ~
+        gc_probability: 0
     http_method_override: true
 
 # Twig Configuration
