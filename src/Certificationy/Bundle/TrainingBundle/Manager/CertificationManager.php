@@ -16,8 +16,8 @@ use Certificationy\Component\Certy\Context\CertificationContextInterface;
 use Certificationy\Component\Certy\Context\ContextBuilder;
 use Certificationy\Component\Certy\Context\ContextBuilderInterface;
 use Certificationy\Component\Certy\Factory\CertificationFactory;
+use Doctrine\Common\Cache\Cache;
 use JMS\Serializer\Serializer;
-use Predis\Client;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
@@ -40,9 +40,9 @@ class CertificationManager
     protected $basePath;
 
     /**
-     * @var Client
+     * @var Cache
      */
-    protected $redisClient;
+    protected $cache;
 
     /**
      * @var Serializer
@@ -62,10 +62,12 @@ class CertificationManager
     /** @var bool */
     protected $debug;
 
+    private static $CACHE_KEY_CERTIFICATIONS = 'available_training';
+
     /**
      * @param CertificationFactory    $factory
      * @param BuilderInterface        $builder
-     * @param Client                  $redisClient
+     * @param Cache                   $cache
      * @param Serializer              $serializer
      * @param LoggerInterface         $logger
      * @param ContextBuilderInterface $contextBuilder
@@ -74,7 +76,7 @@ class CertificationManager
     public function __construct(
         CertificationFactory $factory,
         BuilderInterface $builder,
-        Client $redisClient,
+        Cache $cache,
         Serializer $serializer,
         LoggerInterface $logger,
         ContextBuilderInterface $contextBuilder,
@@ -82,7 +84,7 @@ class CertificationManager
     ) {
         $this->factory = $factory;
         $this->builder = $builder;
-        $this->redisClient = $redisClient;
+        $this->cache = $cache;
         $this->serializer = $serializer;
         $this->logger = $logger;
         $this->contextBuilder = $contextBuilder;
@@ -102,9 +104,7 @@ class CertificationManager
      */
     public function getCertifications()
     {
-        $key = 'available_training';
-
-        if (!$this->redisClient->exists($key)) {
+        if (!$this->cache->contains(self::$CACHE_KEY_CERTIFICATIONS)) {
 
             $finder = new Finder();
             $files = $finder->files()->in($this->basePath.'/*')->name('context.yml');
@@ -122,12 +122,12 @@ class CertificationManager
                 implode(', ', $names)
             ));
 
-            $this->redisClient->set($key, json_encode($names));
+            $this->cache->save(self::$CACHE_KEY_CERTIFICATIONS, json_encode($names));
         }
 
-        $this->logger->debug('Load available trainings from redis server', ['key' => $key]);
+        $this->logger->debug('Load available trainings from redis server', ['key' => self::$CACHE_KEY_CERTIFICATIONS]);
 
-        return json_decode($this->redisClient->get($key), true);
+        return json_decode($this->cache->fetch(self::$CACHE_KEY_CERTIFICATIONS), true);
     }
 
     /**
@@ -169,10 +169,10 @@ class CertificationManager
      */
     public function getContext($name)
     {
-        $content = file_get_contents($this->basePath.'/'.$name.'/context.yml');
-        $key = 'context_'.$name.'::'.sha1($content);
+        $content = $this->getContextContent($name);
+        $key = $this->getContextCacheKey($name, $content);
 
-        if (!$this->redisClient->exists($key)) {
+        if (!$this->cache->contains($key)) {
             $yaml = new Parser();
             $contextConfig = $yaml->parse($content);
 
@@ -182,19 +182,40 @@ class CertificationManager
                 sprintf('Parse context for certification %s', $name, ['key' =>  $key])
             );
 
-            $this->redisClient->set($key, $this->serializer->serialize($context, 'json'));
+            $this->cache->save($key, $this->serializer->serialize($context, 'json'));
         }
 
         $this->logger->debug(
             sprintf('Load certification context %s from redis server', $name, ['key' =>  $key])
         );
 
-        $serializedContext = $this->redisClient->get($key);
+        $serializedContext = $this->cache->fetch($key);
 
         /** @var CertificationContextInterface $context */
         $context = $this->serializer->deserialize($serializedContext, CertificationContext::class, 'json');
         $context->setDebug($this->debug);
 
         return $context;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    private function getContextContent($name)
+    {
+        return file_get_contents($this->basePath.'/'.$name.'/context.yml');
+    }
+
+    /**
+     * @param string $name
+     * @param string $content
+     *
+     * @return string
+     */
+    private function getContextCacheKey($name, $content)
+    {
+        return 'context_'.$name.'::'.sha1($content);
     }
 }
