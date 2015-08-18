@@ -4,13 +4,20 @@ services:
         arguments:
             - @certy.certification.factory
             - @certy.certification.builder
-            - @snc_redis.default
+            - @certificationy.certification.manager_cache
             - @jms_serializer
             - @monolog.logger.certy
             - @certy.certification.context.builder
             - %certy_debug%
         calls:
             - [ "setBasePath", [ %certy_file_provider_root_dir% ] ]
+
+    certificationy.certification.manager_cache:
+        class: Certificationy\Bundle\TrainingBundle\Manager\CertificationManagerCache
+        arguments:
+            - @snc_redis.default
+        tags:
+            - { name: kernel.cache_clearer }
 
     certificationy.report.persister:
         class: Certificationy\Bundle\TrainingBundle\EventListener\StoreCertificationReportListener
