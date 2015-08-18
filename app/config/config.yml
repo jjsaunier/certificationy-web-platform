@@ -27,8 +27,7 @@ framework:
         cookie_lifetime: 31536000
         cookie_domain: %domain%
         name: 'Certificationy'
-        save_path: null
-        handler_id:  ~
+        handler_id:  snc_redis.session.handler
         gc_probability: 0
     http_method_override: true
 
