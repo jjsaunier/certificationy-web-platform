@@ -5,7 +5,7 @@
 
     <h4>{{ category.label }}
         {% if metrics %}
-            [{{ metrics.valid }} / {{ metrics.invalid }}]
+            [{{ metrics.valid }} / {{ metrics.valid + metrics.invalid }}]
         {% else %}
             [0 / 0]
         {% endif %}
