@@ -34,6 +34,4 @@ php ./app/console doctrine:schema:create --env=$SF2_ENV
 php ./app/console doctrine:mongodb:schema:create --env=$SF2_ENV
 
 # Web folder
-sudo php ./app/console assets:install
-php ./app/console assetic:dump --env=$SF2_ENV
-
+php ./app/console assets:install
