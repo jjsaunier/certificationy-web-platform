@@ -21,17 +21,12 @@ Installation
 Installation
 -------------
 
-Go to the root of project and
+Clone the project and launch the installation script:
 
 ```shell
 git clone https://github.com/ProPheT777/certificationy-web-platform.git
 cd certificationy-web-platform
-composer install -o
-php app/console doctrine:database:create
-php app/console doctrine:schema:create
-php app/console assets:install
-php app/console doctrine:mongodb:schema:create
-php app/console assetic:dump --env="prod" #assets prod are versionned so it's not required
+./install.sh prod
 ```
 
 Development
