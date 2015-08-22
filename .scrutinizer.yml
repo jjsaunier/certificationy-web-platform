@@ -9,7 +9,6 @@ tools:
     # Code Sniffer
     php_code_sniffer:
         enabled:              true
-        command:              phpcs
         config:
             standard:         PSR2
         filter:
@@ -22,7 +21,6 @@ tools:
     # Copy/Paste Detector
     php_cpd:
         enabled:              true
-        command:              phpcpd
         excluded_dirs:
             - 'bin/*'
             - 'vendor/*'
@@ -31,7 +29,6 @@ tools:
     # PHP CS Fixer (http://http://cs.sensiolabs.org/).
     php_cs_fixer:
         enabled:              true
-        command:              php-cs-fixer
         config:
             level:            all
         filter:
@@ -43,7 +40,6 @@ tools:
     # Analyzes the size and structure of a PHP project.
     php_loc:
         enabled:              true
-        command:              phploc
         excluded_dirs:
             - bin
             - vendor
@@ -53,7 +49,6 @@ tools:
     # PHP Mess Detector (http://phpmd.org).
     php_mess_detector:
         enabled:              true
-        command:              phpmd
         filter:
             excluded_paths:
                 - 'bin/*'
@@ -64,7 +59,6 @@ tools:
     # Analyzes the size and structure of a PHP project.
     php_pdepend:
         enabled:              true
-        command:              pdepend
         excluded_dirs:
             - bin
             - vendor
