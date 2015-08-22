@@ -107,7 +107,13 @@ class CertificationManager
         if (!$this->cache->contains(self::$CACHE_KEY_CERTIFICATIONS)) {
 
             $finder = new Finder();
-            $files = $finder->files()->in($this->basePath.'/*')->name('context.yml');
+
+            try {
+                $files = $finder->files()->in($this->basePath.'/*')->name('context.yml');
+            } catch(\Exception $e) {
+                throw new \Exception('certificationy data folder seems to be empty or malformed.');
+            }
+
             $yaml = new Parser();
 
             $names = [];
