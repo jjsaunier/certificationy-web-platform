@@ -3,8 +3,7 @@ FROM ubuntu:14.04
 RUN apt-get update && apt-get install -y nginx
 
 ADD nginx.conf /etc/nginx/
-ADD notification.conf /etc/nginx/sites-available/
-ADD ssl /etc/nginx/ssl
+ADD certificationy.conf /etc/nginx/sites-available/
 
 RUN ln -s /etc/nginx/sites-available/certificationy.conf /etc/nginx/sites-enabled/certificationy
 RUN rm /etc/nginx/sites-enabled/default

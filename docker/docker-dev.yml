@@ -9,12 +9,8 @@ mariadb:
   build: mariadb
   ports:
     - 3306:3306
-  environment:
-    - MYSQL_ROOT_PASSWORD=root
-    - MYSQL_DATABASE=notification
-    - MYSQL_USER=root
-    - MYSQL_PASSWORD=root
-
+  volumes:
+    - data/mariadb/:/var/lib/mysql
 php:
   build: php
   ports:
@@ -28,8 +24,8 @@ php:
     - mariadb
     - redis
     - mongodb
-  environment:
-    - PHP_SECRET=sjoidf9763klmdflfoegfihk676430jjghuj876vbth543
+  env_file:
+    - env/dev.env
 
 nginx:
   build: nginx
@@ -43,11 +39,14 @@ nginx:
     - logs/nginx/:/var/log/nginx
 
 redis:
-  build: redis
+  image: tutum/redis
   ports:
     - 6379:6379
   volumes:
     - logs/redis/:/var/log/redis
+    - data/redis/:/data
+  env_file:
+    - env/dev.env
 
 mongodb:
   image: tutum/mongodb
@@ -56,9 +55,5 @@ mongodb:
     - 28017:28017
   volumes:
     - logs/mongodb/:/var/log/mongodb
-  environment:
-    - MONGODB_PASS=root
-
-
-
-
+  env_file:
+    - env/dev.env
