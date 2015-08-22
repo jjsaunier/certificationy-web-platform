@@ -39,6 +39,10 @@ class ContributingExtension extends \Twig_Extension
      */
     public function addCertificationTemplateDir(CertificationManager $certificationManager)
     {
+        if (!is_dir($this->baseDir)) {
+            throw new \RuntimeException('certification-data folder not found: did you install the certifications ?');
+        }
+
         foreach (array_keys($certificationManager->getCertifications()) as $certificationName) {
             $this->loader->addPath($this->baseDir.'/'.$certificationName, $certificationName);
         }
