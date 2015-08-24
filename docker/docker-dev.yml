@@ -11,6 +11,10 @@ mariadb:
     - 3306:3306
   volumes:
     - data/mariadb/:/var/lib/mysql
+  env_file:
+    - env/dev.env
+  hostname: sql.certificationy
+
 php:
   build: php
   ports:
@@ -37,6 +41,7 @@ nginx:
     - application
   volumes:
     - logs/nginx/:/var/log/nginx
+  hostname: web.certificationy
 
 redis:
   image: tutum/redis
@@ -47,6 +52,7 @@ redis:
     - data/redis/:/data
   env_file:
     - env/dev.env
+  hostname: redis.certificationy
 
 mongodb:
   image: tutum/mongodb
@@ -57,3 +63,4 @@ mongodb:
     - logs/mongodb/:/var/log/mongodb
   env_file:
     - env/dev.env
+  hostname: mongo.certificationy

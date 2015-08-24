@@ -23,13 +23,13 @@
         "knplabs/knp-paginator-bundle": "~2.4",
         "knplabs/knp-menu-bundle": "~2.0",
         "snc/redis-bundle": "~1.1",
-        "predis/predis": "~1.0",
         "behat/transliterator": "~1.0",
         "jms/serializer-bundle": "~1.0",
         "doctrine/mongodb-odm": "1.0.0-BETA13",
         "doctrine/mongodb-odm-bundle": "~3.0",
         "guzzlehttp/guzzle": "~4.0",
-        "sensio/generator-bundle": "~2.5"
+        "sensio/generator-bundle": "~2.5",
+        "umpirsky/composer-permissions-handler": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1"
@@ -41,7 +41,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -59,12 +60,13 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "symfony-assets-install": "symlink",
+        "writable-dirs": ["app/cache", "app/logs"],
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
             "env-map": {
-                "database_user": "MYSQL_USER",
-                "database_password": "MYSQL_PASSWORD",
-                "database_name": "MYSQL_DATABASE",
+                "database_user": "MARIADB_USER",
+                "database_password": "MARIADB_PASSWORD",
+                "database_name": "MARIADB_DATABASE",
                 "secret": "PHP_SECRET",
                 "redis_password": "REDIS_PASS",
                 "mongodb_password" : "MONGODB_PASS",

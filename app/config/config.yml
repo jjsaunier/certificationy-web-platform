@@ -125,19 +125,19 @@ doctrine_mongodb:
 snc_redis:
     clients:
         default:
-            type: predis
+            type: %redis_driver%
             alias: default
-            dsn: %redis_dsn%/%redis_default_client%
+            dsn: %redis_default_client%
 
         session:
-            type: predis
+            type: %redis_driver%
             alias: session
-            dsn: %redis_dsn%/%redis_session_client%
+            dsn: %redis_session_client%
 
         counter:
-            type: predis
+            type: %redis_driver%
             alias: counter
-            dsn: %redis_dsn%/%redis_counter_client%
+            dsn: %redis_counter_client%
     session:
         client: session
         prefix: session:main

@@ -14,10 +14,10 @@ RUN sudo service supervisor stop
 RUN mkdir -p /var/log/php/
 RUN touch /var/log/php/php5-fpm.log
 
-COPY php-fpm.ini /etc/php5/fpm/php.ini
-COPY php-cli.ini /etc/php5/cli/php.ini
-COPY certificationy.pool.conf /etc/php5/fpm/pool.d/certificationy.conf
-COPY php-fpm.conf /etc/php5/fpm/php-fpm.conf
+ADD php-fpm.ini /etc/php5/fpm/php.ini
+ADD php-cli.ini /etc/php5/cli/php.ini
+ADD certificationy.pool.conf /etc/php5/fpm/pool.d/certificationy.conf
+ADD php-fpm.conf /etc/php5/fpm/php-fpm.conf
 
 ADD supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD supervisord/php.conf /etc/supervisor/conf.d/php.conf

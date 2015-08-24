@@ -14,6 +14,7 @@ parameters:
     mailer_password: XXXXXXXXXX
 
     #Redis
+    redis_driver: phpredis
     redis_password: XXXXXXXXXX
     redis_dsn: redis://%redis_password%@127.0.0.1
     redis_default_client: 1
