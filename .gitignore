@@ -1,3 +1,4 @@
+/docker/env/prod.env
 /app/bootstrap.php.cache
 /app/config/parameters.yml
 /app/logs/
@@ -14,4 +15,6 @@ deployment/deploy.rb
 /web/fonts/*
 /web/css/*
 /web/js/*
+/docker/logs
+/docker/data
 /web/bundles/*

@@ -115,7 +115,8 @@ doctrine_mongodb:
     connections:
         default:
             server: %mongodb_server%
-            options: {}
+            options:
+                password: %mongodb_password%
     default_database: %mongodb_collection%
     document_managers:
         default:
@@ -124,53 +125,23 @@ doctrine_mongodb:
 snc_redis:
     clients:
         default:
-            type: predis
+            type: %redis_driver%
             alias: default
             dsn: %redis_dsn%/%redis_default_client%
 
         session:
-            type: predis
+            type: %redis_driver%
             alias: session
             dsn: %redis_dsn%/%redis_session_client%
 
         counter:
-            type: predis
+            type: %redis_driver%
             alias: counter
             dsn: %redis_dsn%/%redis_counter_client%
     session:
         client: session
         prefix: session:main
         use_as_default: true
-
-#swarrot:
-#    provider: pecl
-#    default_connection: rabbitmq
-#    default_command: swarrot.command.base
-#    processors_stack:
-#        signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
-#        ack: 'Swarrot\Processor\Ack\AckProcessor'
-#        retry: 'Swarrot\Processor\Retry\RetryProcessor'
-#        exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
-#    connections:
-#        rabbitmq:
-#            host: %rabbitmq_host%
-#            port: %rabbitmq_port%
-#            login: %rabbitmq_login%
-#            password: %rabbitmq_password%
-#            vhost: '/'
-#    consumers:
-#        certification:
-#            processor: certy.certification.result_processor
-#            extras:
-#                retry_exchange: certification
-#                retry_attempts: 3
-#                retry_routing_key_pattern: 'retry_%%attempt%%'
-#                max_messages: 2
-#    messages_types:
-#        compute_certification:
-#            connection: rabbitmq
-#            exchange: certification
-#            routing_key: ~
 
 certificationy_certy:
     debug: %kernel.debug%

@@ -1,0 +1,64 @@
+application:
+  build: application
+  volumes:
+    - ../:/var/www/certificationy
+    - logs/app/:/var/www/certificationy/app/logs
+  tty: true
+
+mariadb:
+  image: tutum/mariadb
+  ports:
+    - 3306:3306
+  env_file:
+    - env/dev.env
+  hostname: sql.certificationy
+
+php:
+  build: php
+  ports:
+    - 9000:9000
+    - 9001:9001
+  volumes:
+    - logs/php/:/var/log/php
+  volumes_from:
+    - application
+  links:
+    - mariadb
+    - redis
+    - mongodb
+  env_file:
+    - env/dev.env
+
+nginx:
+  build: nginx
+  ports:
+    - 8080:80
+  links:
+    - php
+  volumes_from:
+    - application
+  volumes:
+    - logs/nginx/:/var/log/nginx
+  hostname: web.certificationy
+
+redis:
+  image: tutum/redis
+  ports:
+    - 6379:6379
+  volumes:
+    - logs/redis/:/var/log/redis
+    - data/redis/:/data
+  env_file:
+    - env/dev.env
+  hostname: redis.certificationy
+
+mongodb:
+  image: tutum/mongodb
+  ports:
+    - 27017:27017
+    - 28017:28017
+  volumes:
+    - logs/mongodb/:/var/log/mongodb
+  env_file:
+    - env/dev.env
+  hostname: mongo.certificationy
