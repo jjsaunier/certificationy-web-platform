@@ -65,7 +65,7 @@
             "file": "app/config/parameters.yml",
             "env-map": {
                 "database_user": "MARIADB_USER",
-                "database_password": "MARIADB_PASSWORD",
+                "database_password": "MARIADB_PASS",
                 "database_name": "MARIADB_DATABASE",
                 "secret": "PHP_SECRET",
                 "redis_password": "REDIS_PASS",

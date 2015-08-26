@@ -6,11 +6,9 @@ application:
   tty: true
 
 mariadb:
-  build: mariadb
+  image: tutum/mariadb
   ports:
     - 3306:3306
-  volumes:
-    - data/mariadb/:/var/lib/mysql
   env_file:
     - env/dev.env
   hostname: sql.certificationy

@@ -17,13 +17,16 @@ composer-dump-autoload:
 #                                              SYMFONY                                                #
 # ################################################################################################### #
 sf:
-		docker exec -t -d $(docker ps -q -f name=docker_application_1) php app/console
+		docker exec -ti $(shell docker ps -aq -f name=docker_php_1) php app/console
 
 # ################################################################################################### #
 #                                               UTILS                                                 #
 # ################################################################################################### #
 file-permission:
-		sudo chmod 777 -Rf app/logs app/cache
+		sudo chown -Rf $$USER:$$USER \
+			app/config/parameters.yml \
+			docker/logs docker/data \
+			app/logs app/cache
 
 # ################################################################################################### #
 #                                            DOCKER-COMPOSE                                           #
@@ -54,8 +57,11 @@ dc-start:
 
 dc-reload: dc-kill dc-rm dc-build dc-up dc-ps
 
+dc-stats:
+		docker stats $(shell docker ps -q -f name=docker_)
+
 # ################################################################################################### #
 #                                                  GIT                                                #
 # ################################################################################################### #
 submodule:
-		@git submodule update --init --recursive
+		git submodule update --init --recursive

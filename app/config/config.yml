@@ -127,17 +127,17 @@ snc_redis:
         default:
             type: %redis_driver%
             alias: default
-            dsn: %redis_default_client%
+            dsn: %redis_dsn%/%redis_default_client%
 
         session:
             type: %redis_driver%
             alias: session
-            dsn: %redis_session_client%
+            dsn: %redis_dsn%/%redis_session_client%
 
         counter:
             type: %redis_driver%
             alias: counter
-            dsn: %redis_counter_client%
+            dsn: %redis_dsn%/%redis_counter_client%
     session:
         client: session
         prefix: session:main

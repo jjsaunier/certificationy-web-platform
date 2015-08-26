@@ -3,9 +3,7 @@
 namespace Certificationy\Bundle\WebBundle\Log\Processor;
 
 use Certificationy\Bundle\UserBundle\Entity\User;
-use Doctrine\DBAL\Exception\ConnectionException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class UserProcessor
 {
@@ -42,11 +40,7 @@ class UserProcessor
 
                 return $record;
             }
-        } catch (AuthenticationCredentialsNotFoundException $e) {
-
-        } catch (ConnectionException $e) { //Don't block cli if database is not setup
-
-        }
+        } catch (\Exception $e) {}
 
         return $record;
     }
